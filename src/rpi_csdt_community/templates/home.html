@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% if not user.is_authenticated %}
+        <div class="span4">
+            <form method="post" class="form-signin" action="{% url 'django.contrib.auth.views.login' %}" style="margin: 0 0 20px;">
+                {% csrf_token %}
+    
+            <h2 class="form-signin-heading">Login</h2>
+            {% if form.errors %}
+                <p>{{ form.non_field_errors.as_text }}</p>
+            {% endif %}
+            <input type="text" class="input-block-level" name="{{ form.username.html_name }}" placeholder="{{ form.username.label }}">
+            {{ form.username.errors }}
+            <input type="password" class="input-block-level" name="{{ form.password.name }}" placeholder="{{ form.password.label }}">
+            {{ form.password.errors }}
+            <button class="btn btn-large btn-primary" type="submit">Login</button>
+            or <a href="{% url 'registration_register' %}">Register</a>
+            </form>
+        </div>
+    {% endif %}
+{% endblock %}

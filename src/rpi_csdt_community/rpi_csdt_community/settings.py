@@ -132,9 +132,15 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     'django.contrib.admindocs',
     'taggit',
+    'registration',
+    'captcha',
     'django_bootstrap',
     'project_share',
+    'rpi_csdt_community',
 )
+
+CAPTCHA_CHALLENGE_FUNCT = 'captcha.helpers.math_challenge'
+CAPTCHA_NOISE_FUNCTIONS = ()
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to

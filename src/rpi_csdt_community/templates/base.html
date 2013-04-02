@@ -42,10 +42,11 @@
           <a class="brand" href="#">Project name</a>
           <div class="nav-collapse collapse">
             <ul class="nav">
-              <li class="active"><a href="#">Home</a></li>
+              <li class="active"><a href="{% url 'home' %}">Home</a></li>
               <li><a href="{% url 'project-list' %}">Projects</a></li>
               {% if user.is_authenticated %}
                 <li><a href="{% url 'project-create' %}">Upload a project</a></li>
+                <li><a href="{% url 'auth_logout' %}">Log out</a></li>
               {% endif %}
             </ul>
           </div><!--/.nav-collapse -->
