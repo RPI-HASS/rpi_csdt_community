@@ -1,0 +1,101 @@
+\documentclass[titlepage]{report}
+
+
+% Preamble
+
+%% Packages to deal with images and links
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{color}
+\usepackage{xcolor}
+\usepackage{parskip}
+\usepackage[hyphens]{url}
+\usepackage[hypertexnames=false, bookmarks=true, bookmarksnumbered=true, breaklinks=true, linkbordercolor={1 1 1}]{hyperref}
+\usepackage{listings}
+\usepackage{standalone}
+%% Chapter titles
+\usepackage[T1]{fontenc}
+\usepackage{titlesec, blindtext, color}
+\definecolor{gray75}{gray}{0.75}
+\newcommand{\hsp}{\hspace{20pt}}
+\titleformat{\chapter}[hang]{\Huge\bfseries}{\thechapter\hsp\textcolor{gray75}{|}\hsp}{0pt}{\Huge\bfseries}
+
+% Formatting options
+\renewcommand{\chaptername}{}
+\newcommand{\theTitle}{RPI CSDT Community Site}
+\newcommand{\filename}[1]{\texttt{#1}}
+
+% Footnote stuff
+\newcommand{\savefootnote}[2]{\footnote{\label{#1}#2}}
+\newcommand{\repeatfootnote}[1]{\textsuperscript{\ref{#1}}}
+
+\usepackage{acronym}
+
+% And this labels it nicely
+\usepackage{caption}
+\DeclareCaptionFont{white}{\color{white}}
+\DeclareCaptionFormat{listing}{\colorbox{gray}{\parbox{\textwidth}{#1#2#3}}}
+\captionsetup[table]{format=listing,labelfont=white,textfont=white}
+
+
+\begin{document}
+
+% Title and authors
+\title{Collected Requirements for RPI's\CSDT Community Site}
+\author{
+  Charles Hathaway\\
+  \texttt{chathaway@logrit.com}
+}
+\maketitle
+
+
+
+\setcounter{page}{1}
+\pagenumbering{roman}
+
+% Revision/Versioning Table
+
+\begin{table}
+\caption{Revision History}
+    \begin{tabular}{|p{50pt}|p{50pt}|p{200pt}|p{50pt}|}
+	\hline
+	Date & Version & Description & Author\\  \hline
+	2013-03-31 & <1.0> & First few requirements from meeting with members of the GK12 team & \\  \hline
+    \end{tabular}
+
+\end{table}
+\newpage
+
+% Table of contents
+\tableofcontents
+\newpage
+
+
+\listoffigures
+\textbf{\addcontentsline{toc}{chapter}{List of Figures}}
+\newpage
+
+\listoftables
+\textbf{\addcontentsline{toc}{chapter}{List of Tables}}
+\newpage
+
+\setcounter{page}{1}
+\pagenumbering{arabic}
+
+% Introduction and some basic things
+\input{Introduction}
+
+\chapter{Acronyms and Definitions}
+
+\newpage
+
+\input{introduction}
+
+\input{functional-requirements}
+\input{non-functional-requirements}
+
+% References
+\bibliographystyle{plain}
+\bibliography{biblo}
+
+\end{document}

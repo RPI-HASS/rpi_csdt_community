@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% for object in object_list %}
+        <div class="row">
+            <div class="span4">
+                <img src="{{ MEDIA_URL }}{{ object.screenshot }}">
+            </div><!-- /.span4 -->
+            <div class="span8">
+                <div class="row">
+                    <div class=span8">
+                        <a href="{% url 'project-detail' pk=object.id %}">{{ object }}</a>
+                    </div><!-- /.span8 -->
+                    <div class="span4">
+                        by {{ object.owner }}
+                    </div><!-- /.span4 -->
+                </div><!-- /.row -->
+                <div class="row">
+                    <div class="span12">
+                        {{ object.description }}
+                    </div>
+                </div>
+            </div><!-- /.span8 -->
+        </div><!-- /.row -->
+    {% endfor %}
+{% endblock %}

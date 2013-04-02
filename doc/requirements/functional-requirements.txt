@@ -1,0 +1,16 @@
+\section{Functional Requirements}
+
+Functional requirements are organized as follows:
+\begin{itemize}
+  \item All requirements are listed in a table at the end of this section, which includes an ID for the requirement and a brief description
+  \item There are several sub categories, immediately following this introduction, which help to organize the requirements in an easy to follow system
+  \item One requirements may belong to multiple categories, but will only appear once in the index
+\end{itemize}
+
+\subsection{Functional Requirements Index}
+
+\begin{table}[t]
+  \centering
+  \begin{tabular}
+  \end{tabular}
+\end{table}
