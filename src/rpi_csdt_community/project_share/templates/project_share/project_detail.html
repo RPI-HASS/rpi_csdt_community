@@ -2,7 +2,18 @@
 
 {% block content %}
     <h1>{{ object }}</h1>
-    <object type="application/x-java-applet" width=950 height=600>
+    <h3>By <a href="#">{{ object.owner }}</a></h3>
+    <div class="row">
+        <div class="span4">
+            <img class="img-polaroid" src="{{ object.screenshot.url }}" style="width: 100%" />
+        </div>
+        <div class="span6 offset1">
+            <p class="lead">{{ object.description }}</p>
+        </div>
+    </div><!-- /.row -->
+
+    <h4><a href="{{ object.project.url }}">Download this project</a></h4>
+    <!-- <object type="application/x-java-applet" width=950 height=600>
       <param name="code" value="org.jdesktop.applet.util.JNLPAppletLauncher">
       <param name="archive" value="applet-launcher.jar">
       <param name="codebase_lookup" value="true">
@@ -16,5 +27,5 @@
             <param name="{{ param.name }}" value="{{ param.value }}" />
         {% endfor %}
         Applet failed to run.  No Java plug-in was found.
-    </object>
+    </object> -->
 {% endblock %}
