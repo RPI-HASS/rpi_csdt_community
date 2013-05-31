@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load comments comments_xtd %}
 
 {% block content %}
     <h1>{{ object }}</h1>
@@ -13,6 +14,9 @@
     </div><!-- /.row -->
 
     <h4><a href="{{ object.project.url }}">Download this project</a></h4>
+
+    {% render_comment_list for object %}
+    {% render_comment_form for object %}
     <!-- <object type="application/x-java-applet" width=950 height=600>
       <param name="code" value="org.jdesktop.applet.util.JNLPAppletLauncher">
       <param name="archive" value="applet-launcher.jar">

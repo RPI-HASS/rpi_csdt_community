@@ -25,6 +25,8 @@ urlpatterns = patterns('',
     url(r'^accounts/', include('registration.backends.simple.urls')),
     url(r'^users/', RedirectView.as_view(url='/')),
     url(r'^accounts/profile/', RedirectView.as_view(url='/')),
+
+    url(r'^comments/', include('django_comments_xtd.urls')),
 )
 
 if settings.DEBUG:

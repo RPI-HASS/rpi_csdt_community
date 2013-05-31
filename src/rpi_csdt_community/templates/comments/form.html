@@ -1,0 +1,21 @@
+{% load comments comments_xtd %}
+{% if user.is_authenticated %}
+    {% get_comment_form for comment as form %}
+    <form class="form-horizontal" action="{% comment_form_target %}" method="POST">
+        <h2>Comment</h2>
+        {% csrf_token %}
+        <div style="margin-bottom: 20px">
+            {{ form.comment }}
+            {{ form.honeypot }}
+            {{ form.content_type }}
+            {{ form.object_pk }}
+            {{ form.timestamp }}
+            {{ form.security_hash }}
+        </div>
+        <input type="hidden" name="next" value="/" />
+        <button class="btn btn-large btn-primary" type="submit">Comment!</button>
+    </form>
+{% else %}
+    <p>Please <a href="{% url 'auth_login' %}">log in</a> to leave a comment.</p>
+{% endif %}
+
