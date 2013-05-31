@@ -1,20 +1,29 @@
 {% load comments comments_xtd %}
+{% load comments i18n %}
 {% if user.is_authenticated %}
-    {% get_comment_form for comment as form %}
-    <form class="form-horizontal" action="{% comment_form_target %}" method="POST">
-        <h2>Comment</h2>
-        {% csrf_token %}
-        <div style="margin-bottom: 20px">
-            {{ form.comment }}
-            {{ form.honeypot }}
-            {{ form.content_type }}
-            {{ form.object_pk }}
-            {{ form.timestamp }}
-            {{ form.security_hash }}
-        </div>
-        <input type="hidden" name="next" value="/" />
-        <button class="btn btn-large btn-primary" type="submit">Comment!</button>
-    </form>
+<form action="{% comment_form_target %}" method="post">{% csrf_token %}
+  {% if next %}<div><input type="hidden" name="next" value="{{ next }}" /></div>{% endif %}
+  {% for field in form %}
+    {% with name=field.name %}
+    {% if name != "email" and name != "name" and name != "url" and name != "followup" %}
+        {% if field.is_hidden %}
+          <div>{{ field }}</div>
+        {% else %}
+          {% if field.errors %}{{ field.errors }}{% endif %}
+          <p
+            {% if field.errors %} class="error"{% endif %}
+            {% ifequal field.name "honeypot" %} style="display:none;"{% endifequal %}>
+            {{ field.label_tag }} {{ field }}
+          </p>
+        {% endif %}
+    {% endif %}
+    {% endwith %}
+  {% endfor %}
+  <p class="submit">
+    <input class="btn" type="submit" name="post" class="submit-post" value="{% trans "Post" %}" />
+    <input class="btn" type="submit" name="preview" class="submit-preview" value="{% trans "Preview" %}" />
+  </p>
+</form>
 {% else %}
     <p>Please <a href="{% url 'auth_login' %}">log in</a> to leave a comment.</p>
 {% endif %}

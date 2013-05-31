@@ -147,7 +147,14 @@ CAPTCHA_CHALLENGE_FUNCT = 'captcha.helpers.math_challenge'
 CAPTCHA_NOISE_FUNCTIONS = ()
 
 COMMENTS_APP = "django_comments_xtd"
-COMMENTS_XTD_MAX_THREAD_LEVEL = 10
+COMMENTS_XTD_MAX_THREAD_LEVEL = 8
+COMMENTS_XTD_CONFIRM_EMAIL = True
+
+from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS as TCP
+
+TEMPLATE_CONTEXT_PROCESSORS = TCP + (
+    'django.core.context_processors.request',
+)
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
