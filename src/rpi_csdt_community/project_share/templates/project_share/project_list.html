@@ -5,7 +5,7 @@
         <div class="row" style="margin-top: 10px; margin-bottom: 10px;">
             <div class="span4">
                 <div class="row">
-                    <img src="{{ MEDIA_URL }}{{ object.screenshot }}">
+                    <img class="img-polaroid" src="{{ MEDIA_URL }}{{ object.screenshot }}">
                 </div><!-- /.row -->
             </div><!-- /.span4 -->
             <div class="span8" style="height: 100%">
@@ -14,7 +14,7 @@
                         <h3><a href="{% url 'project-detail' pk=object.id %}">{{ object }}</a></h3>
                     </div><!-- /.span8 -->
                     <div class="span4">
-                        by {{ object.owner }}
+                        <h4>by {{ object.owner }}</h4>
                     </div><!-- /.span4 -->
                 </div><!-- /.row -->
                 <div class="row">
