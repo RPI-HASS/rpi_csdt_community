@@ -1,0 +1,19 @@
+<jnlp spec="1.0+">
+    <information>
+        <title>{{ object }}</title>
+        <vendor>CSDT</vendor>
+        <description>{{ object.description }}</description>
+        <description kind="short">{{ object.description|truncatewords:10 }}</description>
+    </information>
+    <resources>
+        <!--${JNLP.RESOURCES.RUNTIME}-->
+        <!--${JNLP.RESOURCES.MAIN.JAR}-->
+        <!--${JNLP.RESOURCES.JARS}-->
+        <!--${JNLP.RESOURCES.EXTENSIONS}-->
+    </resources>
+    <applet-desc main-class="CC.CCGui" name="Cornrow Curves"
+        width="1024" height="768">
+        <!--${JNLP.APPLET.PARAMS}-->
+    </applet-desc>
+</jnlp>
+

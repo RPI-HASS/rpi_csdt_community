@@ -8,6 +8,13 @@ from project_share.forms import ProjectForm
 class ApplicationList(ListView):
     model = Application
 
+class ApplicationDetail(DetailView):
+    model = Application
+
+    def render_to_response(self, context, **response_kwargs):
+        response_kwargs.update({'content_type': 'application/x-java-jnlp-file'})
+        return super(ApplicationDetail, self).render_to_response(context, **response_kwargs)
+
 class ProjectList(ListView):
     model = Project
 

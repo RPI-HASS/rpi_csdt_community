@@ -7,6 +7,9 @@ from taggit.managers import TaggableManager
 def application_application(instance, filename):
     return "applications/" + filename
 
+def application_library(instance, filename):
+    return "applications/libraries/" + filename
+
 def project_project(instance, filename):
     return "projects/files/" + instance.owner.__unicode__() + "/" + instance.name
 
@@ -15,6 +18,7 @@ def project_screenshot(instance, filename):
 
 class Application(models.Model):
     name = models.CharField(max_length=255, unique=True)
+    version = models.CharField(max_length=10, blank=True, null=True)
     description = models.TextField(null=True, blank=True)
 
     APPLICATION_TYPES = (
@@ -24,6 +28,9 @@ class Application(models.Model):
     app_type = models.CharField(max_length=4, choices=APPLICATION_TYPES, default="jaws")
     application = models.FileField(upload_to=application_application)
 
+    extensions = models.ManyToManyField('Application', null=True, blank=True)
+    libraries = models.ManyToManyField('ApplicationLibrary', null=True, blank=True)
+
     def __unicode__(self):
         return self.name
 
@@ -31,6 +38,25 @@ class ApplicationParam(models.Model):
     application = models.ForeignKey(Application)
     name = models.CharField(max_length=255)
     value = models.CharField(max_length=4096)
+
+    def __unicode__(self):
+        return self.name
+
+class ApplicationLibrary(models.Model):
+    name = models.CharField(max_length=255)
+    version = models.CharField(max_length=10)
+
+    LIBRARY_TYPES = (
+        ('ext', 'Extension'),
+        ('jar', 'Generic Jar'),
+    )
+
+    type = models.CharField(max_length=3, choices=LIBRARY_TYPES, default='extension')
+
+    library = models.FileField(upload_to=application_library)
+
+    def __unicode__(self):
+        return self.name
 
 class Project(models.Model):
     name = models.CharField(max_length=255)
