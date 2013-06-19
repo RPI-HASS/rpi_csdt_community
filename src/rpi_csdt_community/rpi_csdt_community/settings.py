@@ -140,8 +140,8 @@ INSTALLED_APPS = (
     'project_share',
     'rpi_csdt_community',
 
-    'filer',
-    'easy_thumbnails',
+#    'filer',
+#    'easy_thumbnails',
 
     'attachments',
 
