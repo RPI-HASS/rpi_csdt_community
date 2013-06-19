@@ -1,6 +1,20 @@
 {% extends 'base.html' %}
 
 {% block content %}
+    <div>
+        <div class="btn-group">
+            <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+                Sort by...
+                <span class="caret"></span>
+            </a>
+            
+            <ul class="dropdown-menu">
+                <li><a href="{% url 'project-list' %}?o=by_id&ot=desc">Newest</a></li>
+                <li><a href="{% url 'project-list' %}?o=by_name&ot=asc">By name</a></li>
+                <li><a href="{% url 'project-list' %}?o=by_likes&ot=desc">By likes</a></li>
+            </ul>
+        </div>
+    </div>
     {% for object in object_list %}
         <div class="row" style="margin-top: 10px; margin-bottom: 10px;">
             <div class="span4">

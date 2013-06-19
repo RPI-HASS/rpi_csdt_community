@@ -2,6 +2,8 @@ from django.views.generic import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView
 
+from extra_views import SortableListMixin
+
 from project_share.models import Application, Project
 from project_share.forms import ProjectForm
 
@@ -15,7 +17,8 @@ class ApplicationDetail(DetailView):
         response_kwargs.update({'content_type': 'application/x-java-jnlp-file'})
         return super(ApplicationDetail, self).render_to_response(context, **response_kwargs)
 
-class ProjectList(ListView):
+class ProjectList(SortableListMixin, ListView):
+    sort_fields_aliases = [('name', 'by_name'), ('id', 'by_id'), ('votes', 'by_likes'), ]
     model = Project
 
 class ProjectDetail(DetailView):

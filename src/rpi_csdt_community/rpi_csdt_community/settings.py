@@ -144,6 +144,8 @@ INSTALLED_APPS = (
     'easy_thumbnails',
 
     'attachments',
+
+    'extra_views',
     
     'secretballot',
     'likes',
