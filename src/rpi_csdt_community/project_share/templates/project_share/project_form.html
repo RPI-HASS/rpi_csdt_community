@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
+{% load attachments_tags %}
 
 {% block content %}
     {% include 'generic_form.html' %}
+    {% attachment_form object %}
 {% endblock %}

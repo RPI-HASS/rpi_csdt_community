@@ -138,6 +138,11 @@ INSTALLED_APPS = (
     'project_share',
     'rpi_csdt_community',
 
+    'filer',
+    'easy_thumbnails',
+
+    'attachments',
+
     'django.contrib.comments',
     'django_comments_xtd',
     'django_markup',
@@ -154,6 +159,7 @@ from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS as TCP
 
 TEMPLATE_CONTEXT_PROCESSORS = TCP + (
     'django.core.context_processors.request',
+    'django.contrib.messages.context_processors.messages',
 )
 
 # A sample logging configuration. The only tangible logging

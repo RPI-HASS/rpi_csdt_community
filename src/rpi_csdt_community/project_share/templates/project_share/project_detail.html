@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load comments comments_xtd %}
+{% load attachments_tags %}
 
 {% block content %}
     <h1>{{ object }}</h1>
@@ -13,8 +14,22 @@
         </div>
     </div><!-- /.row -->
 
+    {% get_attachments_for object as "attachments_list" %}
+
+    <h3>Attachments</h3>
+    <ul>
+    {% for att in attachments_list %}
+        <li>
+            i<strong><a href="{{ att.attachment_file.url }}">{{ att.filename }}</a></strong> - <small>{% attachment_delete_link att %}</small>
+        </li>
+    {% endfor %}
+    </ul>
+
+    {% attachment_form object %}
+
     <h4><a href="{{ object.project.url }}">Download this project</a></h4>
 
+{% comment %}
     <!-- <object type="application/x-java-applet" width=950 height=600>
         <param name="codebase_lookup" value="false">
         <param name="code" value="org.jdesktop.applet.util.JNLPAppletLauncher">
@@ -41,6 +56,8 @@
    <param name="jnlpExtension1" value="http://jogamp.org/deployment/webstart/jogl-core.jnlp">
    <param name="jnlp_href" value="{% url 'application-detail' pk=object.application.id %}">
 </applet>
+
+{% endcomment %}
 
     {% render_comment_list for object %}
     {% with next=request.path %}

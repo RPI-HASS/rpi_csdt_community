@@ -26,7 +26,7 @@ class Application(models.Model):
     )
 
     app_type = models.CharField(max_length=4, choices=APPLICATION_TYPES, default="jaws")
-    application = models.FileField(upload_to=application_application)
+    file = models.FileField(upload_to=application_application)
 
     extensions = models.ManyToManyField('Application', null=True, blank=True)
     libraries = models.ManyToManyField('ApplicationLibrary', null=True, blank=True)

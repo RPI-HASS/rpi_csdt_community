@@ -27,6 +27,8 @@ urlpatterns = patterns('',
     url(r'^accounts/profile/', RedirectView.as_view(url='/')),
 
     url(r'^comments/', include('django_comments_xtd.urls')),
+
+    (r'^attachments/', include('attachments.urls')),
 )
 
 if settings.DEBUG:
