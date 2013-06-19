@@ -104,6 +104,8 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+
+    'likes.middleware.SecretBallotUserIpUseragentMiddleware',
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
@@ -142,6 +144,9 @@ INSTALLED_APPS = (
     'easy_thumbnails',
 
     'attachments',
+    
+    'secretballot',
+    'likes',
 
     'django.contrib.comments',
     'django_comments_xtd',

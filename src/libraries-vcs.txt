@@ -1,3 +1,4 @@
 git+git://github.com/chuck211991/django_boostrap.git
 hg+https://bitbucket.org/ubernostrum/django-registration
 git+https://github.com/bartTC/django-attachments.git
+git+https://github.com/chuck211991/django-likes.git

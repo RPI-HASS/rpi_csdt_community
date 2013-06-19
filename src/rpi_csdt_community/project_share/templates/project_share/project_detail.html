@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load comments comments_xtd %}
 {% load attachments_tags %}
+{% load likes_inclusion_tags %}
 
 {% block content %}
     <h1>{{ object }}</h1>
@@ -28,6 +29,7 @@
     {% attachment_form object %}
 
     <h4><a href="{{ object.project.url }}">Download this project</a></h4>
+    {% likes object %}
 
 {% comment %}
     <!-- <object type="application/x-java-applet" width=950 height=600>

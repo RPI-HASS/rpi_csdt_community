@@ -2,6 +2,8 @@ from django.db import models
 from django.core.urlresolvers import reverse
 from django.conf import settings
 
+import secretballot
+
 from taggit.managers import TaggableManager
 
 def application_application(instance, filename):
@@ -78,3 +80,5 @@ class Project(models.Model):
     class Meta:
         # Performance issue here?
         unique_together = (("name", "owner"),("project", "owner"),("screenshot", "owner"))
+
+secretballot.enable_voting_on(Project)

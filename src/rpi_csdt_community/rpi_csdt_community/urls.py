@@ -29,6 +29,7 @@ urlpatterns = patterns('',
     url(r'^comments/', include('django_comments_xtd.urls')),
 
     (r'^attachments/', include('attachments.urls')),
+    (r'^likes/', include('likes.urls')),
 )
 
 if settings.DEBUG:
