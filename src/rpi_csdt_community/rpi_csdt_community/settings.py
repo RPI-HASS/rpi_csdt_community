@@ -145,6 +145,8 @@ INSTALLED_APPS = (
 
     'attachments',
 
+    'sorl.thumbnail',
+
     'extra_views',
     
     'secretballot',
@@ -168,6 +170,14 @@ TEMPLATE_CONTEXT_PROCESSORS = TCP + (
     'django.core.context_processors.request',
     'django.contrib.messages.context_processors.messages',
 )
+
+# This should probably be defined in local_settings.py, since it is external
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'LOCATION': '127.0.0.1:11211',
+    }
+}
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to

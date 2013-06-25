@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load thumbnail %}
 
 {% block content %}
     <div>
@@ -19,7 +20,9 @@
         <div class="row" style="margin-top: 10px; margin-bottom: 10px;">
             <div class="span4">
                 <div class="row">
-                    <img class="img-polaroid" src="{{ MEDIA_URL }}{{ object.screenshot }}">
+                    {% thumbnail object.screenshot "400x400" as im %}
+                        <img class="img-polaroid" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
+                    {% endthumbnail %}
                 </div><!-- /.row -->
             </div><!-- /.span4 -->
             <div class="span8" style="height: 100%">

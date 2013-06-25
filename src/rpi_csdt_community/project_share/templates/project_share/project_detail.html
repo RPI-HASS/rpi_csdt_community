@@ -2,13 +2,16 @@
 {% load comments comments_xtd %}
 {% load attachments_tags %}
 {% load likes_inclusion_tags %}
+{% load thumbnail %}
 
 {% block content %}
     <h1>{{ object }}</h1>
     <h3>By <a href="#">{{ object.owner }}</a></h3>
     <div class="row">
         <div class="span4">
-            <img class="img-polaroid" src="{{ object.screenshot.url }}" style="width: 100%" />
+            {% thumbnail object.screenshot "1024x768" as im %}
+                <img class="img-polaroid" src="{{ im.url }}" style="width: 100%" />
+            {% endthumbnail %}
         </div>
         <div class="span6 offset1">
             <p class="lead">{{ object.description }}</p>

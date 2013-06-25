@@ -1,22 +1,73 @@
 {% extends 'base.html' %}
+{% load thumbnail %}
 
 {% block content %}
-    {% if not user.is_authenticated %}
-        <div class="span4">
-            <form method="post" class="form-signin" action="{% url 'django.contrib.auth.views.login' %}" style="margin: 0 0 20px;">
-                {% csrf_token %}
-    
-            <h2 class="form-signin-heading">Login</h2>
-            {% if form.errors %}
-                <p>{{ form.non_field_errors.as_text }}</p>
+    <div class="row">
+        <div class="span8">
+            <div class="row hero-unit">
+                <h2>Combine cultural education with STEM</h2>
+                <p class="lead">Using this site, share the things that you create.</p>
+            </div>  
+            {% if not user.is_authenticated %}
+                <div class="span4">
+                    <form method="post" class="form-signin" action="{% url 'django.contrib.auth.views.login' %}" style="margin: 0 0 20px;">
+                        {% csrf_token %}
+        
+                    <h2 class="form-signin-heading">Login</h2>
+                    {% if form.errors %}
+                        <p>{{ form.non_field_errors.as_text }}</p>
+                    {% endif %}
+                    <input type="text" class="input-block-level" name="{{ form.username.html_name }}" placeholder="{{ form.username.label }}">
+                    {{ form.username.errors }}
+                    <input type="password" class="input-block-level" name="{{ form.password.name }}" placeholder="{{ form.password.label }}">
+                    {{ form.password.errors }}
+                    <button class="btn btn-large btn-primary" type="submit">Login</button>
+                    or <a href="{% url 'registration_register' %}">Register</a>
+                    </form>
+                </div>
             {% endif %}
-            <input type="text" class="input-block-level" name="{{ form.username.html_name }}" placeholder="{{ form.username.label }}">
-            {{ form.username.errors }}
-            <input type="password" class="input-block-level" name="{{ form.password.name }}" placeholder="{{ form.password.label }}">
-            {{ form.password.errors }}
-            <button class="btn btn-large btn-primary" type="submit">Login</button>
-            or <a href="{% url 'registration_register' %}">Register</a>
-            </form>
+
         </div>
-    {% endif %}
+        <div class="span2">
+            <iframe width="420" height="315" src="http://www.youtube.com/embed/jdEFnnOFHXo" frameborder="0" allowfullscreen></iframe>
+        </div>
+    </div>
+    <div>
+        <h3>Most popular projects...</h3>
+    </div>
+    <ul class="thumbnails">
+        {% for project in projects_popular %}
+            <li class="span2">
+                <div class="thumbnail">
+                    {% thumbnail project.screenshot "400x400" crop="center" as im %}
+                        <a href="{% url 'project-detail' pk=project.id %}"><img src="{{ im.url }}" alt="Screenshot of {{ project.name }}"></a>
+                    {% endthumbnail %}
+                     <div class="caption">
+                        <h3>{{ project.name }}</h3>
+                        <p>{{ project.description|truncatewords:10 }}</p>
+                    </div>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <div id="span12">
+        <h3>Newest projects...</h3>
+    </div>
+    <ul class="thumbnails">
+        {% for project in projects_newest %}
+            <li class="span2">
+                <div class="thumbnail">
+                    {% thumbnail project.screenshot "400x400" crop="center" as im %}
+                        <a href="{% url 'project-detail' pk=project.id %}"><img src="{{ im.url }}" alt="Screenshot of {{ project.name }}"></a>
+                    {% endthumbnail %}
+                     <div class="caption">
+                        <h3>{{ project.name }}</h3>
+                        <p>{{ project.description|truncatewords:10 }}</p>
+                    </div>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+
 {% endblock %}
