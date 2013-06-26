@@ -34,6 +34,29 @@
     <h4><a href="{{ object.project.url }}">Download this project</a></h4>
     {% likes object %}
 
+    <applet width="950" height="600" archive="applet-launcher.jar" codebase=http://128.213.11.108:8000{{ object.application.codebase_url }}" code="org.jdesktop.applet.util.JNLPAppletLauncher">
+        <param value="true" name="codebase_lookup"></param>
+        <param value="CC.CCGui" name="subapplet.classname"></param>
+        <param value="CC Applet" name="subapplet.displayname"></param>
+        <param value="true" name="noddraw.check"></param>
+        <param value="true" name="progressbar"></param>
+        <param value="http://128.213.11.108:8000{% url 'project-jnlp' pk=object.id %}" name="jnlp_href"></param>
+    </applet>
+
+{% comment %}
+    <applet width="950" height="600" archive="applet-launcher.jar" codebase="{{ object.application.codebase_url }}" code="org.jdesktop.applet.util.JNLPAppletLauncher"> 
+
+
+      <param name="codebase_lookup" value="true">
+      <param name="subapplet.classname" value="CC.CCGui">
+      <param name="subapplet.displayname" value="{{ object.application.name }}">
+      <param name="noddraw.check" value="true">
+      <param name="progressbar" value="true">
+
+      <param name="jnlp_href" value="{% url 'project-jnlp' pk=object.id %}">
+    
+    </applet>
+
 {% comment %}
     <!-- <object type="application/x-java-applet" width=950 height=600>
         <param name="codebase_lookup" value="false">

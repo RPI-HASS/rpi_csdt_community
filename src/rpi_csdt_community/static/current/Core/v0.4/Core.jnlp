@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+<jnlp spec="1.0+" codebase="http://www.ccd.rpi.edu/eglash/csdt/pcsdt/Core/v1.0/">
+-->
+<jnlp>
+  <information>
+     <title>pCSDT Core 0.4</title>
+     <vendor>pCSDT team</vendor>
+     <homepage href="http://www.ccd.rpi.edu/eglash/csdt/pcsdt/"/>
+     <description>pCSDT Core Framework</description>
+     <offline-allowed/>
+  </information>
+
+  <security>
+    <all-permissions/>
+  </security>
+
+  <resources>
+    <jar href="applet-launcher.jar" download="eager"/>
+    <jar href="commons-codec-1.5.jar" download="eager"/>
+    <jar href="Core.jar" download="eager"/>
+    <jar href="Jama-1.0.2.jar" download="eager"/>
+    <jar href="jdom.jar" download="eager"/>
+    <jar href="swing-layout-1.0.3.jar" download="eager"/>
+  </resources>
+  
+  <component-desc />
+  
+ </jnlp>

@@ -24,6 +24,15 @@ class ProjectList(SortableListMixin, ListView):
 class ProjectDetail(DetailView):
     model = Project
 
+class ProjectJNLP(DetailView):
+    model = Project
+    template_name = "project_share/project_jnlp.xml"
+
+
+    def render_to_response(self, context, **response_kwargs):
+        response_kwargs.update({'content_type': 'application/x-java-jnlp-file'})
+        return super(ProjectJNLP, self).render_to_response(context, **response_kwargs)
+
 class ProjectCreate(CreateView):
     model = Project
     form_class = ProjectForm

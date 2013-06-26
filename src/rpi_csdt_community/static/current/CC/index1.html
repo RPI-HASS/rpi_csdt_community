@@ -1,0 +1,25 @@
+<!-- Ref: https://jogl-demos.dev.java.net/applettest.html -->
+<html>
+<title>pCSDT Testing</title>
+<color=blue>
+<body>
+
+<script language="javascript">
+var d = document;
+var winWidth, WinHeight;
+if(typeof window.innerWidth!='undefined'){winWidth = window.innerWidth;
+var winHeight = window.innerHeight;}else
+if(d.documentElement && typedef d.documentElement.clientWidth!='undefined' &&
+d.documentElement.clientWidth!=0) {winWidth = d.documentElement.clientWidth;
+winHeight = d.documentElement.clientHeight;}
+else
+if(d.body && typedef d.body.clientWidth!='undefined')
+{winWidth = d.body.clientWidth; winHeight = d.body.clientHeight;}else {winWidth=150; winHeight = 150;}
+</script></color>
+<color=blue>
+<script language="javascript">
+var attributes = {id:'CC.CCGui', code: '\v0.4\CC.jar', width:Math.round(winWidth/2), height:Math.round(winWidth/2)};
+var parameters = {codebase_lookup: 'true', noddraw_check: 'true', progressbar: 'true', jnlp_href: 'app.jnlp'} ;
+deployJava.runApplet(attributes, parameters, '1.6');
+</script> 
+
