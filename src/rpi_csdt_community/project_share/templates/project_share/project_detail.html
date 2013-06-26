@@ -34,14 +34,19 @@
     <h4><a href="{{ object.project.url }}">Download this project</a></h4>
     {% likes object %}
 
+    {% with 'http://'|add:request.META.HTTP_HOST as proto %}{% with proto|add:object.application.codebase_url as codebase_url %}
     <applet width="950" height="600" archive="applet-launcher.jar" codebase=http://128.213.11.108:8000{{ object.application.codebase_url }}" code="org.jdesktop.applet.util.JNLPAppletLauncher">
         <param value="true" name="codebase_lookup"></param>
-        <param value="CC.CCGui" name="subapplet.classname"></param>
-        <param value="CC Applet" name="subapplet.displayname"></param>
+        <param value="{{ object.application.classname }}" name="subapplet.classname"></param>
+        <param value="{{ object.application.name }}" name="subapplet.displayname"></param>
         <param value="true" name="noddraw.check"></param>
         <param value="true" name="progressbar"></param>
-        <param value="http://128.213.11.108:8000{% url 'project-jnlp' pk=object.id %}" name="jnlp_href"></param>
+        <param value="http://128.213.11.108:8000{{ object.application.url }}" name="jnlp_href"></param>
+        <param name="SingleDemoXmlUrl" value="{{ proto }}{{ object.project.url }}">
+        <param name="DemoUrls" value="Default, {{ proto }}{{ object.project.url }}">
+
     </applet>
+    {% endwith %}{% endwith %}
 
 {% comment %}
     <applet width="950" height="600" archive="applet-launcher.jar" codebase="{{ object.application.codebase_url }}" code="org.jdesktop.applet.util.JNLPAppletLauncher"> 
