@@ -2,22 +2,23 @@ from django.db import models
 from django.core.urlresolvers import reverse
 from django.conf import settings
 from django.contrib.auth.models import AbstractUser
+from django.template.defaultfilters import slugify
 
 import secretballot
 
 from taggit.managers import TaggableManager
 
 def application_application(instance, filename):
-    return "applications/" + filename
+    return slugify("applications/" + filename)
 
 def application_library(instance, filename):
-    return "applications/libraries/" + filename
+    return slugify("applications/libraries/" + filename)
 
 def project_project(instance, filename):
-    return "projects/files/" + instance.owner.__unicode__() + "/" + instance.name + ".xml"
+    return slugify("projects/files/" + instance.owner.__unicode__() + "/" + instance.name + ".xml")
 
 def project_screenshot(instance, filename):
-    return "projects/screenshots/" + instance.owner.__unicode__() + "/" + instance.name
+    return slugify("projects/screenshots/" + instance.owner.__unicode__() + "/" + instance.name)
 
 class Classroom(models.Model):
     name = models.CharField(max_length=255)
@@ -80,7 +81,9 @@ class Project(models.Model):
 
 class ExtendedUser(AbstractUser):
     def __unicode__(self):
-        return "%s %s" % (self.first_name, self.last_name)
+        if self.first_name != "":   
+            return "%s %s" % (self.first_name, self.last_name)
+        return self.username
 
 secretballot.enable_voting_on(Project, base_manager=ProjectManager)
 

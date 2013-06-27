@@ -46,4 +46,10 @@
     </applet>
     {% endwith %}{% endwith %}
 
+
+    {% render_comment_list for object %}
+    {% with next=request.path %}
+    {% render_comment_form for object %}
+    {% endwith %}
+
 {% endblock %}
