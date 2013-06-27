@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <form class="form-horizontal" method="post" action="{{ action }}">
+        {% csrf_token %}
+        <p class="lead">After submitting your project for publication, you will NOT be able to edit it. If you are sure you're ready to submit it, click the submit button below.</p>
+        <button type="submit" class="btn btn-primary">Publish</button>
+        <button type="button" class="btn" onclick="javascript:history.go(-1)">Cancel</button>
+    </form>
+{% endblock %}

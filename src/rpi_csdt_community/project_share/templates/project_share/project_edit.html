@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load attachments_tags %}
+
+{% block content %}
+    <h3>Editing {{ object }}</h3>
+    <p class="lead">When you are sure everything is how you want it, click publish to publish (down at the bottom) your project<p>
+    {% include 'generic_form.html' %}
+    {% get_attachments_for object as "attachments_list" %}
+
+    <h3>Attachments</h3>
+    <ul>
+    {% for att in attachments_list %}
+        <li>
+            i<strong><a href="{{ att.attachment_file.url }}">{{ att.filename }}</a></strong> - <small>{% attachment_delete_link att %}</small>
+        </li>
+    {% endfor %}
+    </ul>
+
+    {% attachment_form object %}
+
+    <a href="{% url 'approval-create' project_pk=object.id %}" class="btn btn-large btn-primary">Publish Project</a>
+
+{% endblock %}

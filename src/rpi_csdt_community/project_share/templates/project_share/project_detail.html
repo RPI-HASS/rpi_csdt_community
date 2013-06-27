@@ -29,8 +29,6 @@
     {% endfor %}
     </ul>
 
-    {% attachment_form object %}
-
     <h4><a href="{{ object.project.url }}">Download this project</a></h4>
     {% likes object %}
 
@@ -48,67 +46,4 @@
     </applet>
     {% endwith %}{% endwith %}
 
-{% comment %}
-    <applet width="950" height="600" archive="applet-launcher.jar" codebase="{{ object.application.codebase_url }}" code="org.jdesktop.applet.util.JNLPAppletLauncher"> 
-
-
-      <param name="codebase_lookup" value="true">
-      <param name="subapplet.classname" value="CC.CCGui">
-      <param name="subapplet.displayname" value="{{ object.application.name }}">
-      <param name="noddraw.check" value="true">
-      <param name="progressbar" value="true">
-
-      <param name="jnlp_href" value="{% url 'project-jnlp' pk=object.id %}">
-    
-    </applet>
-
-{% comment %}
-    <!-- <object type="application/x-java-applet" width=950 height=600>
-        <param name="codebase_lookup" value="false">
-        <param name="code" value="org.jdesktop.applet.util.JNLPAppletLauncher">
-        <param name="archive" value="{{ object.application.application.url }}, http://jogamp.org/deployment/util/applet-launcher.jar, http://jogamp.org/deployment/webstart/nativewindow.all.jar, http://jogamp.org/deployment/webstart/jogl.all.jar, http://jogamp.org/deployment/webstart/gluegen-rt.jar" />
-        <param name="jnlpExtension1" value="http://jogamp.org/deployment/webstart/jogl-core.jnlp">
-        <param name="subapplet.classname" VALUE="CC.CCGui">
-        <param name="subapplet.displayname" VALUE="CC Applet">
-        <param name="noddraw.check" value="true">
-        <param name="progressbar" value="true">
-        <param name="jnlp_href" value="{% url 'application-detail' pk=object.application.id %}"> -->
-        <!-- <param name="SingleDemoXmlUrl" value="{{ object.project.url }}"/>
-        <param name="DemoUrls" value="Default, {{ object.project.url }}"/> -->
-    <!-- </object> -->
-
-<applet code="org.jdesktop.applet.util.JNLPAppletLauncher"
-      width=600
-      height=400
-      archive="{{ object.application.application.url }},http://jogamp.org/deployment/util/applet-launcher.jar,http://jogamp.org/deployment/webstart/nativewindow.all.jar,http://jogamp.org/deployment/webstart/jogl.all.jar,http://jogamp.org/deployment/webstart/gluegen-rt.jar, http://jogamp.org/deployment/webstart/jogl-demos.jar">
-   <param name="codebase_lookup" value="false">
-   <param name="subapplet.classname" value="CC.CCGui">
-   <param name="subapplet.displayname" value="JOGL Gears Applet">
-   <param name="progressbar" value="true">
-   <param name="jnlpNumExtensions" value="1">
-   <param name="jnlpExtension1" value="http://jogamp.org/deployment/webstart/jogl-core.jnlp">
-   <param name="jnlp_href" value="{% url 'application-detail' pk=object.application.id %}">
-</applet>
-
-{% endcomment %}
-
-    {% render_comment_list for object %}
-    {% with next=request.path %}
-    {% render_comment_form for object %}
-    {% endwith %}
-    <!-- <object type="application/x-java-applet" width=950 height=600>
-      <param name="code" value="org.jdesktop.applet.util.JNLPAppletLauncher">
-      <param name="archive" value="applet-launcher.jar">
-      <param name="codebase_lookup" value="true">
-      <param name="subapplet.classname" VALUE="SB.SBGui">
-      <param name="subapplet.displayname" VALUE="SB Applet">
-      <param name="noddraw.check" value="true">
-      <param name="progressbar" value="true">
-
-      <param name="jnlp_href" value="http://community.csdt.rpi.edu/uploads/projects/SB/jnlp/12.moorthy.jnlp">
-        {% for param in object.applicationparam_set %}
-            <param name="{{ param.name }}" value="{{ param.value }}" />
-        {% endfor %}
-        Applet failed to run.  No Java plug-in was found.
-    </object> -->
 {% endblock %}

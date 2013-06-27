@@ -171,6 +171,8 @@ TEMPLATE_CONTEXT_PROCESSORS = TCP + (
     'django.contrib.messages.context_processors.messages',
 )
 
+AUTH_USER_MODEL = 'project_share.ExtendedUser'
+
 # This should probably be defined in local_settings.py, since it is external
 CACHES = {
     'default': {
