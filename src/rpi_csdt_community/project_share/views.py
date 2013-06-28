@@ -1,7 +1,10 @@
 from django.views.generic import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView
+from django.shortcuts import get_object_or_404
 from django.core.urlresolvers import reverse
+
+from taggit.models import Tag
 
 from extra_views import SortableListMixin
 
@@ -22,6 +25,11 @@ class ProjectList(SortableListMixin, ListView):
     sort_fields_aliases = [('name', 'by_name'), ('id', 'by_id'), ('votes', 'by_likes'), ]
     model = Project
     queryset = Project.approved_objects.all()
+
+class ProjectTagList(ProjectList):
+    def get_queryset(self):
+        self.tag = get_object_or_404(Tag, pk=self.kwargs['tag_pk'])
+        return Project.approved_objects.filter(tags__in=[self.tag])
 
 class ProjectDetail(DetailView):
     model = Project

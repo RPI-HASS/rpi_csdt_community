@@ -3,6 +3,7 @@ from django.core.urlresolvers import reverse
 from django.conf import settings
 from django.contrib.auth.models import AbstractUser
 from django.template.defaultfilters import slugify
+from taggit.models import TaggedItemBase, GenericTaggedItemBase
 
 import secretballot
 
@@ -52,6 +53,13 @@ class Application(models.Model):
 class ProjectManager(models.Manager):
     def get_query_set(self):
         return super(ProjectManager, self).get_query_set().filter(approved=True)
+
+class TaggedObjectManager(models.Manager):
+    def get_query_set(self):
+        return super(TaggedObjectManager, self).get_query_set().filter(content_object__approved=True)
+
+class TaggedProject(GenericTaggedItemBase):
+    objects = TaggedObjectManager()
 
 class Project(models.Model):
     name = models.CharField(max_length=255)

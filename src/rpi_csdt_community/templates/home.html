@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load taggit_extras %}
 {% load thumbnail %}
 
 {% block content %}
@@ -69,5 +70,13 @@
             </li>
         {% endfor %}
     </ul>
+
+    <h3>Catacloud <small>A cloud of categories</small></h3>
+    <div class="container" style="margin-bottom: 20px;">
+    {% get_tagcloud as tags for 'project_share.Project' %}
+    {% for tag in tags %}
+        <font size="{{tag.weight|floatformat:0}}"><a href="{% url 'project-tag-list' tag_pk=tag.id %}">{{ tag }}</a></font>
+    {% endfor %}
+    </div>
 
 {% endblock %}
