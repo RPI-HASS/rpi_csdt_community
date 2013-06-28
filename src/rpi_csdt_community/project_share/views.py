@@ -48,6 +48,9 @@ class ProjectCreate(CreateView):
     model = Project
     form_class = ProjectForm
 
+    def get_success_url(self):
+	return reverse('project-update', kwargs={'pk': self.object.id})
+
     def dispatch(self, request, *args, **kwargs):
       self.kwargs = kwargs
       self.request = request

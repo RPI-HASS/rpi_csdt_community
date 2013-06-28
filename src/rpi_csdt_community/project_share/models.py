@@ -81,7 +81,7 @@ class Project(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse('project-update', kwargs={'pk': self.pk})
+        return reverse('project-detail', kwargs={'pk': self.pk})
 
     class Meta:
         # Performance issue here?
