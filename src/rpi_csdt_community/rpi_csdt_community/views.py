@@ -3,6 +3,7 @@ from django.template import RequestContext
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.comments.views.comments import post_comment
 from django.http import HttpResponse
+from django.db.models import Count
 
 from project_share.models import Project
 
@@ -17,7 +18,7 @@ def comment_post_wrapper(request):
 
 def home(request):
     # Get the 10 most popular projects
-    projects_popular = Project.objects.all().order_by('-votes')[:10]
+    projects_popular = Project.objects.all().annotate(num_votes=Count('votes')).order_by('-num_votes')[:10]
     # Get the 10 newest
     projects_newest = Project.objects.all().order_by('-id')[:10]
     return render_to_response('home.html', {
