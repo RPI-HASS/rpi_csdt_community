@@ -9,8 +9,8 @@ To deploy this project, you will need the following packages installed:
 * Python Virtualenv
 * Python setup tools
 * Everything you need to compile python-pil
-** This can be done (on debian-based systems) by running apt-get build-dep python-pil
-** libz, libjpeg, libfreetype2
+    * This can be done (on debian-based systems) by running apt-get build-dep python-pil
+    * libz, libjpeg, libfreetype2
 * git, subversion, and mercurial (I know... but several of the packages I need haven't yet been updated in pypy)
 
 Now, the howto
