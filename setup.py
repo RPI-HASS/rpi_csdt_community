@@ -8,6 +8,10 @@ from setuptools import setup
 def read(fname):
     return open(os.path.join(os.path.dirname(__file__), fname)).read()
 
+def read_requirements(fname):
+    f = open(os.path.join(os.path.dirname(__file__), fname))
+    return filter(lambda f: f != '', map(lambda f: f.strip(), f.readlines()))
+
 setup(
     name = "rpi_csdt_community",
     version = "1.0.0",
@@ -27,4 +31,5 @@ setup(
                                          '../static/current/*/*.jnlp'],
                   'project_share': ['templates/project_share/*.html']},
     long_description=read('README.md'),
+    install_requires = read_requirements('src/libraries.txt'),
 )
