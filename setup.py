@@ -19,6 +19,12 @@ setup(
     url = "http://community.csdt.rpi.edu/",
     package_dir = {'': 'src/rpi_csdt_community'},
     packages=['rpi_csdt_community', 'project_share'],
-    package_data={'rpi_csdt_community': ['../templates/*']},
+    package_data={'rpi_csdt_community': ['../templates/*.html',
+                                         '../templates/*/*.html',
+                                         '../static/bootstrap/css/bootstrap.css',
+                                         '../static/current/*/*.jar',
+                                         '../static/current/*/*/*.jar',
+                                         '../static/current/*/*.jnlp'],
+                  'project_share': ['templates/project_share/*.html']},
     long_description=read('README.md'),
 )
