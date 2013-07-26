@@ -1,5 +1,21 @@
-import os
-from setuptools import setup
+import os, sys
+
+try:
+    from setuptools import setup
+except:
+    from distutils.core import setup
+
+from setuptools.command.test import test
+
+def run_tests(*args):
+    import subprocess
+    errors = subprocess.Popen(["coverage", "run", "src/rpi_csdt_community/tests/runtests.py"]).wait()
+    if errors:
+        sys.exit(1)
+    else:
+        sys.exit(0)
+
+test.run_tests = run_tests
 
 # Utility function to read the README file.
 # Used for the long_description.  It's nice, because now 1) we have a top level
@@ -13,6 +29,7 @@ def read_requirements(fname):
     return filter(lambda f: f != '', map(lambda f: f.strip(), f.readlines()))
 
 setup(
+    zip_safe = False,
     name = "rpi_csdt_community",
     version = "1.0.0",
     author = "Charles Hathaway",
@@ -32,4 +49,5 @@ setup(
                   'project_share': ['templates/project_share/*.html']},
     long_description=read('README.md'),
     install_requires = read_requirements('src/libraries.txt'),
+    test_suite = "dummy",
 )
