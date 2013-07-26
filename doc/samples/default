@@ -1,0 +1,14 @@
+<VirtualHost *:80>
+        DocumentRoot /var/www/src/rpi_csdt_community
+        ErrorLog  /var/www/error.log
+        SetEnv APPLICATION_ENV "development"
+
+        # Use the WSGI file given to us by Django
+        WSGIScriptAlias / /var/www/src/rpi_csdt_community/rpi_csdt_community/wsgi.py
+        WSGIDaemonProcess community python-path=/var/www/src/rpi_csdt_community:/var/www/src/python/lib/python2.7/site-packages
+        WSGIProcessGroup community
+#   WSGIPythonPath /var/www/src/python/bin/python
+
+        Alias /static/ /var/www/src/rpi_csdt_community/collected_static/
+        Alias /media/ /var/www/src/rpi_csdt_community/media/
+</VirtualHost>
