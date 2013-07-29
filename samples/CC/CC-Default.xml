@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pCSDT>
+  <JNLPInfo>
+    <project codename="CC" version="0.41" />
+    <JNLP>
+      <resources>
+        <j2se version="1.5+" />
+        <property name="sun.java2d.noddraw" value="true" />
+        <jar href="v0.41/CC.jar" main="true" />
+        <extension name="java3d-latest" href="../media/java3d/webstart/release/java3d-latest.jnlp" />
+        <extension name="jogl" href="../media/jogl/builds/archive/jsr-231-1.x-webstart-current/jogl.jnlp" />
+        <extension name="gluegen-rt" href="../media/gluegen/webstart/gluegen-rt.jnlp" />
+        <extension name="pCSDT-Core" href="../Core/v0.41/Core.jnlp" />
+      </resources>
+      <applet-desc name="pCSDT CC Applet" main-class="CC.CCGui" width="1000" height="600" />
+    </JNLP>
+  </JNLPInfo>
+  <Engine type="CC.CCEngine" selected="Plait">
+    <Properties>
+      <Property name="scale">50.0</Property>
+      <Property name="x range">12.0</Property>
+      <Property name="y range">12.0</Property>
+      <Property name="x interval">1.0</Property>
+      <Property name="y interval">1.0</Property>
+      <Property name="Draw Grid?">true</Property>
+      <Property name="Pixel Allowance (x)">6</Property>
+      <Property name="Pixel Allowance (y)">6</Property>
+      <Property name="Grid Color">217,217,217</Property>
+      <Property name="Grid Number Color">255,0,0</Property>
+      <Property name="Grid Number Precision">0</Property>
+      <Property name="Background image path">bgImg/white.png</Property>
+      <Property name="Background image binary" />
+      <Property name="Thumbnail image binary">iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAIAAABt+uBvAAACF0lEQVR42u3bz0oCURTH8SHa9wDt2+f0AD5AgqjP0EP0BrVt5apdRdBCoshFUZsMisIiIgrJ/kqFFk1ko6MdmpBKU6Mpz9j38GO4KOjwYe656J0xqlTTMiAACCCAAAIIIIAAogACCCCAAAIIIIAogAAC6K+Ayk5FVRynogvo6LygKteFR1VGxsTk3Mz8qp7MpzLPJad7gFY30rMLax4CTS0fFO0yV5B/gPLKSjvQ0s6FV8leWxL5zNHxeJvxAVAgMCTHUCj082vBLjsSF8g0B+2SI3kq2u7ANE051jTlVOQVHwAtbl96NVkOL+4lb0Aj8f2zO0k6e+cO5Ivk6D8gD6fYyt6VpNt6EE1a9W8xgAAC6LeB+gPDADUD6hsIAtQCyOjpBahFDzJeC6AWTVqDEasYQN0N1PFZBhBA9CCAAGoK1NlZxhVEkwaIKQaQZiB2NQD6GVAymYxGo+FwOJFIvD9R9+1IJGKaZvV125Mp9qHav+PAw/gJyMM96HZyemNJNALFYrEaSi6Xy2Qy9Vgyv4LBoDtIpVK/0nsenv1x80Knauv4VgIQyzxA36qvVqvsjdUw/w7IXaGk+35asx6LJUn+3nIHtfxToPrsnuQbhh5ED+o+oLHpTVVZ37+0VT2rUXgoqor1ZKv6i8qoVKqqoq144hAggAACCCCAAAKIAggggAACCCCAAKIAAggggAACCCCAKIBa1Qu2VzR/Ydt2gAAAAABJRU5ErkJggg==</Property>
+      <Property name="Texture Start X">-6.0</Property>
+      <Property name="Texture Start Y">-6.0</Property>
+      <Property name="Texture Length">12.0</Property>
+      <Property name="Texture Height">12.0</Property>
+      <Property name="Texture Alpha">0.5</Property>
+      <Property name="Better graphics?">true</Property>
+      <Property name="Speedup Factor">1.6</Property>
+      <Property name="Name">Stage</Property>
+      <Property name="Description">The Stage</Property>
+      <Property name="Time elapsed">0.0</Property>
+      <Property name="Draw Order">1</Property>
+    </Properties>
+    <EventLists>
+      <EventList name="On Begin" />
+      <EventList name="On Get Msg" />
+      <EventList name="On Get Msg From" />
+    </EventLists>
+    <Objects>
+      <Object name="Plait" desc="The Plait" type="CC.Plait">
+        <EventLists>
+          <EventList name="On Begin">
+            <Event name="On Begin" x="25" y="82" z="1">
+              <Listener type="list">
+                <Statement type="repeat-n">
+                  <Value type="const">20</Value>
+                  <Do type="list">
+                    <Statement type="method" obj="CC.Plait" name="Plait" method="Duplicate" />
+                    <Statement type="method" obj="CC.Plait" name="Plait" method="Rotate">
+                      <Arg type="const">-7</Arg>
+                    </Statement>
+                    <Statement type="method" obj="CC.Plait" name="Plait" method="Dilate by percent">
+                      <Arg type="const">90</Arg>
+                    </Statement>
+                    <Statement type="method" obj="CC.Plait" name="Plait" method="Translate by percent">
+                      <Arg type="const">60</Arg>
+                    </Statement>
+                  </Do>
+                </Statement>
+              </Listener>
+            </Event>
+          </EventList>
+          <EventList name="On Get Msg" />
+          <EventList name="On Get Msg From" />
+        </EventLists>
+        <Properties>
+          <Property name="X">1.0182374</Property>
+          <Property name="Y">-0.4179149</Property>
+          <Property name="Angle (Degrees)">-130.0</Property>
+          <Property name="Red">0.0</Property>
+          <Property name="Green">0.0</Property>
+          <Property name="Blue">0.0</Property>
+          <Property name="Translation">60.0</Property>
+          <Property name="Dilation">90.0</Property>
+          <Property name="Size">12.15766</Property>
+          <Property name="Color">0,0,0</Property>
+          <Property name="icon">img/plaitColor.png</Property>
+          <Property name="Vector">false</Property>
+          <Property name="Initial X, Y">-2,2</Property>
+          <Property name="Starting Angle">10.0</Property>
+          <Property name="Starting Size">100.0</Property>
+          <Property name="saying?">false</Property>
+          <Property name="init say?">false</Property>
+          <Property name="init words to say">Hello</Property>
+          <Property name="words to say">Hello</Property>
+          <Property name="Name">Plait</Property>
+          <Property name="Description">The Plait</Property>
+          <Property name="Time elapsed">0.0</Property>
+          <Property name="Draw Order">0</Property>
+        </Properties>
+      </Object>
+    </Objects>
+  </Engine>
+</pCSDT>
+
