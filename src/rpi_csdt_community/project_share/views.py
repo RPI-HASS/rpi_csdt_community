@@ -49,16 +49,16 @@ class ProjectCreate(CreateView):
     form_class = ProjectForm
 
     def get_success_url(self):
-	return reverse('project-update', kwargs={'pk': self.object.id})
+        return reverse('project-update', kwargs={'pk': self.object.id})
 
     def dispatch(self, request, *args, **kwargs):
-      self.kwargs = kwargs
-      self.request = request
-      return super(ProjectCreate, self).dispatch(request, *args, **kwargs)
+        self.kwargs = kwargs
+        self.request = request
+        return super(ProjectCreate, self).dispatch(request, *args, **kwargs)
 
     def form_valid(self, form):
-      form.instance.owner = self.request.user
-      return super(ProjectCreate, self).form_valid(form)
+        form.instance.owner = self.request.user
+        return super(ProjectCreate, self).form_valid(form)
 
 class ProjectUpdate(UpdateView):
     model = Project
