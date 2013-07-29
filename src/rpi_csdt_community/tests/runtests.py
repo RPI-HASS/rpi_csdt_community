@@ -16,7 +16,7 @@ def run_tests():
 
     TestRunner = get_runner(settings)
     test_suite = TestRunner(verbosity=2, interactive=True, failfast=False)
-    return test_suite.run_tests(["project_share"])
+    return test_suite.run_tests(["rpi_csdt_community", "project_share"])
 
 
 if __name__ == "__main__":

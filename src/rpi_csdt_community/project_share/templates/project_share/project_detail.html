@@ -32,6 +32,7 @@
     <h4><a href="{{ object.project.url }}">Download this project</a></h4>
     {% likes object %}
 
+    {% if 'HTTP_HOST' in request.META %}
     {% with 'http://'|add:request.META.HTTP_HOST as proto %}{% with proto|add:object.application.codebase_url as codebase_url %}
     <applet width="950" height="600" archive="applet-launcher.jar" codebase="{{ codebase_url }}" code="org.jdesktop.applet.util.JNLPAppletLauncher">
         <param value="true" name="codebase_lookup"></param>
@@ -45,6 +46,7 @@
 
     </applet>
     {% endwith %}{% endwith %}
+    {% endif %}
 
 
     {% render_comment_list for object %}
