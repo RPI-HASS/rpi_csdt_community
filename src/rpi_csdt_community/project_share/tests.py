@@ -32,8 +32,6 @@ class ApprovalTests(TestCase):
             'tags': 'CC, Default'
         }, follow=True)
 
-        print result.content
-        
         self.assertEqual(result.status_code, 200)
 
         # There should only be the one approved project in the list of project
