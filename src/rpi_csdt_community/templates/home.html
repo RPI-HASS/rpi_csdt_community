@@ -2,6 +2,11 @@
 {% load taggit_extras %}
 {% load thumbnail %}
 
+{% block extra-head %}
+{{ block.super }}
+<link href="{{ STATIC_URL }}css/style.css" rel="stylesheet">
+{% endblock %}
+
 {% block content %}
     <div class="row">
         <div class="span8">
@@ -54,7 +59,7 @@
                         <a href="{% url 'project-detail' pk=project.id %}"><img src="{{ im.url }}" alt="Screenshot of {{ project.name }}"></a>
                     {% endthumbnail %}
                      <div class="caption">
-                        <h3>{{ project.name }}</h3>
+                        <h4>{{ project.name }}</h4>
                         <p>{{ project.description|truncatewords:10 }}</p>
                     </div>
                 </div>
@@ -73,7 +78,7 @@
                         <a href="{% url 'project-detail' pk=project.id %}"><img src="{{ im.url }}" alt="Screenshot of {{ project.name }}"></a>
                     {% endthumbnail %}
                      <div class="caption">
-                        <h3>{{ project.name }}</h3>
+                        <h4>{{ project.name }}</h4>
                         <p>{{ project.description|truncatewords:10 }}</p>
                     </div>
                 </div>

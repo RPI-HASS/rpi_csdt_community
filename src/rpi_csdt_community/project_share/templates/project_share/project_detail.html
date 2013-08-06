@@ -5,49 +5,38 @@
 {% load thumbnail %}
 
 {% block content %}
-    <h1>{{ object }}</h1>
-    <h3>By <a href="#">{{ object.owner }}</a></h3>
-    <div class="row">
-        <div class="span4">
-            {% thumbnail object.screenshot "1024x768" as im %}
-                <img class="img-polaroid" src="{{ im.url }}" style="width: 100%" />
-            {% endthumbnail %}
-        </div>
-        <div class="span6 offset1">
-            <p class="lead">{{ object.description }}</p>
-        </div>
-    </div><!-- /.row -->
+    {% if 'HTTP_HOST' in request.META %}
+    {% with 'http://'|add:request.META.HTTP_HOST as proto %}{% with proto|add:object.application.codebase_url as codebase_url %}
+    <!--<applet width="950" height="600" archive="applet-launcher.jar" codebase="{{ codebase_url }}" code="org.jdesktop.applet.util.JNLPAppletLauncher">
+        <param value="true" name="codebase_lookup">
+        <param value="{{ object.application.class_name }}" name="subapplet.classname">
+        <param value="{{ object.application.name }}" name="subapplet.displayname">
+        <param value="true" name="noddraw.check">
+        <param value="true" name="progressbar">
+        <param value="{{ proto }}{{ object.application.url }}" name="jnlp_href">
+        <param name="SingleDemoXmlUrl" value="{{ proto }}{{ object.project.url }}">
+        <param name="DemoUrls" value="Default, {{ proto }}{{ object.project.url }}">
+
+    </applet> -->
+    {% endwith %}{% endwith %}
+    {% endif %}
 
     {% get_attachments_for object as "attachments_list" %}
+
+    {% if attachments_list.count > 0 %}
 
     <h3>Attachments</h3>
     <ul>
     {% for att in attachments_list %}
         <li>
-            i<strong><a href="{{ att.attachment_file.url }}">{{ att.filename }}</a></strong> - <small>{% attachment_delete_link att %}</small>
+            <strong><a href="{{ att.attachment_file.url }}">{{ att.filename }}</a></strong> - <small>{% attachment_delete_link att %}</small>
         </li>
     {% endfor %}
     </ul>
 
-    <h4><a href="{{ object.project.url }}">Download this project</a></h4>
-    {% likes object %}
-
-    {% if 'HTTP_HOST' in request.META %}
-    {% with 'http://'|add:request.META.HTTP_HOST as proto %}{% with proto|add:object.application.codebase_url as codebase_url %}
-    <applet width="950" height="600" archive="applet-launcher.jar" codebase="{{ codebase_url }}" code="org.jdesktop.applet.util.JNLPAppletLauncher">
-        <param value="true" name="codebase_lookup"></param>
-        <param value="{{ object.application.class_name }}" name="subapplet.classname"></param>
-        <param value="{{ object.application.name }}" name="subapplet.displayname"></param>
-        <param value="true" name="noddraw.check"></param>
-        <param value="true" name="progressbar"></param>
-        <param value="{{ proto }}{{ object.application.url }}" name="jnlp_href"></param>
-        <param name="SingleDemoXmlUrl" value="{{ proto }}{{ object.project.url }}">
-        <param name="DemoUrls" value="Default, {{ proto }}{{ object.project.url }}">
-
-    </applet>
-    {% endwith %}{% endwith %}
     {% endif %}
 
+    {% likes object %}
 
     {% render_comment_list for object %}
     {% with next=request.path %}

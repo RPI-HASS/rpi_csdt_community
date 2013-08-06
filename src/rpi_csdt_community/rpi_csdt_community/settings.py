@@ -156,6 +156,7 @@ INSTALLED_APPS = (
     'django.contrib.comments',
     'django_comments_xtd',
     'django_markup',
+    'csdt_web_deploy',
 )
 
 CAPTCHA_CHALLENGE_FUNCT = 'captcha.helpers.math_challenge'

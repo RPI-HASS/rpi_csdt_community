@@ -39,7 +39,6 @@
                         {{ object.description }}
                     </div><!-- /.span8 -->
                 </div><!-- /.row -->
-                <div><h4><a href="{{ object.project.url }}">Download this project</a></h4></div>
                 <!-- This is probably slow, serverside. Investigate -->
                 {% with count=object.votes.count %}
                 <div>{{ count }} like{{ count|pluralize }}</div>
