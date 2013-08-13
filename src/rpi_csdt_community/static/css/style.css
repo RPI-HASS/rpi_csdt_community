@@ -18,3 +18,7 @@
     width: 100%;
     height: 100%;
 }
+
+td.post-info {
+    width: 200px;
+}

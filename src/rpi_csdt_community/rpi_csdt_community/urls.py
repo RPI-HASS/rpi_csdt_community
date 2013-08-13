@@ -32,6 +32,7 @@ urlpatterns = patterns('',
 
     (r'^attachments/', include('attachments.urls')),
     (r'^likes/', include('likes.urls')),
+    (r'^forum/', include('pybb.urls', namespace='pybb')),
 )
 
 if settings.DEBUG:

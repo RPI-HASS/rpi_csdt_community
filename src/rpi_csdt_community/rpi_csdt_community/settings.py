@@ -106,6 +106,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
 
     'likes.middleware.SecretBallotUserIpUseragentMiddleware',
+    'pybb.middleware.PybbMiddleware',
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
@@ -156,6 +157,7 @@ INSTALLED_APPS = (
     'django.contrib.comments',
     'django_comments_xtd',
     'django_markup',
+    'pybb',
 )
 
 CAPTCHA_CHALLENGE_FUNCT = 'captcha.helpers.math_challenge'
@@ -170,6 +172,7 @@ from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS as TCP
 TEMPLATE_CONTEXT_PROCESSORS = TCP + (
     'django.core.context_processors.request',
     'django.contrib.messages.context_processors.messages',
+    'pybb.context_processors.processor',
 )
 
 AUTH_USER_MODEL = 'project_share.ExtendedUser'
@@ -181,6 +184,9 @@ CACHES = {
         'LOCATION': '127.0.0.1:11211',
     }
 }
+
+PYBB_TEMPLATE = 'base_forum.html'
+PYBB_PREMODERATION = lambda u, x: True
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
