@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load thumbnail %}
+
+{% block content %}
+    <div class="page-header">
+        <h1>My Profile <small><a href="{% url 'change_password' %}">Change password</a></h1>
+    </div>
+
+    <div id="span12">
+        <h3>My Projects</h3>
+    </div>
+    <ul class="thumbnails">
+        {% for project in object.project_set.all %}
+            {% if project.approved %}
+            <li class="span2">
+                <div class="thumbnail">
+                    {% thumbnail project.screenshot "400x400" crop="center" as im %}
+                        <a href="{% url 'project-detail' pk=project.id %}"><img src="{{ im.url }}" alt="Screenshot of {{ project.name }}"></a>
+                    {% endthumbnail %}
+                     <div class="caption">
+                        <h4>{{ project.name }}</h4>
+                        <p>{{ project.description|truncatewords:10 }}</p>
+                    </div>
+                    <a class="btn btn-large btn-block btn-danger" type="button" href="{% url 'project-delete' pk=project.id %}">Delete</a>
+                </div>
+            </li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+
+    <div id="span12">
+        <h3>Projects pending approval</h3>
+    </div>
+    <ul class="thumbnails">
+        {% for project in object.project_set.all %}
+            {% if not project.approved %}
+            <li class="span2">
+                <div class="thumbnail">
+                    {% thumbnail project.screenshot "400x400" crop="center" as im %}
+                        <a href="{% url 'project-detail' pk=project.id %}"><img src="{{ im.url }}" alt="Screenshot of {{ project.name }}"></a>
+                    {% endthumbnail %}
+                     <div class="caption">
+                        <h4>{{ project.name }}</h4>
+                        <p>{{ project.description|truncatewords:10 }}</p>
+                    </div>
+                    <a class="btn btn-large btn-block btn-danger" type="button" href="{% url 'project-delete' pk=project.id %}">Delete</a>
+                </div>
+            </li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+
+
+{% endblock %}

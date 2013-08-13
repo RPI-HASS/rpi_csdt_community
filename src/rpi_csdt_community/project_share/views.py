@@ -1,8 +1,9 @@
 from django.views.generic import ListView
 from django.views.generic.detail import DetailView
-from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.shortcuts import get_object_or_404
 from django.core.urlresolvers import reverse
+from django.core.urlresolvers import reverse_lazy
 
 from taggit.models import Tag
 
@@ -10,6 +11,13 @@ from extra_views import SortableListMixin
 
 from project_share.models import Application, Project, Classroom, Approval
 from project_share.forms import ProjectForm, ApprovalForm
+
+try:
+    from django.contrib.auth import get_user_model
+except ImportError: # django < 1.5
+    from django.contrib.auth.models import User
+else:
+    User = get_user_model()
 
 class ApplicationList(ListView):
     model = Application
@@ -66,6 +74,10 @@ class ProjectUpdate(UpdateView):
     
     template_name = "project_share/project_edit.html"
 
+class ProjectDelete(DeleteView):
+    model = Project
+    success_url = reverse_lazy('project-delete-success')
+
 class ApprovalCreate(CreateView):
     model = Approval
     form_class = ApprovalForm
@@ -82,3 +94,8 @@ class ApprovalCreate(CreateView):
 
     def get_success_url(self):
         return reverse('approval-confirm')
+
+
+class UserDetail(DetailView):
+    model = User
+    template_name = "project_share/user_detail.html"

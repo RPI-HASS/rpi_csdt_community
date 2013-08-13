@@ -21,6 +21,8 @@ urlpatterns = patterns('',
 
     url(r'^login/$', 'django.contrib.auth.views.login', {'template_name': 'home.html'}),
     url(r'^accounts/register/$', RegistrationView.as_view(form_class=CaptchaRegistrationForm), name='registration_register'),
+    url(r'^accounts/chpasswd/done/?', 'django.contrib.auth.views.password_change_done', {'template_name':'password_change_done.html'}),
+    url(r'^accounts/change/password/?', 'django.contrib.auth.views.password_change', {'template_name':'change_password.html', 'post_change_redirect': '/accounts/chpasswd/done/' }, name="change_password"),
     url(r'^captcha/', include('captcha.urls')),
     url(r'^accounts/', include('registration.backends.simple.urls')),
     url(r'^users/', RedirectView.as_view(url='/')),
