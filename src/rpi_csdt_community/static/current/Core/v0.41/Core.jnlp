@@ -13,12 +13,12 @@
   </security>
 
   <resources>
-    <jar href="../../lib/applet-launcher.jar" download="eager"/>
-    <jar href="../../lib/commons-codec-1.5.jar" download="eager"/>
+    <jar href="../lib/applet-launcher.jar" download="eager"/>
+    <jar href="../lib/commons-codec-1.5.jar" download="eager"/>
     <jar href="Core.jar" download="eager"/>
-    <jar href="../../lib/Jama-1.0.2.jar" download="eager"/>
-    <jar href="../../lib/jdom.jar" download="eager"/>
-    <jar href="../../lib/swing-layout-1.0.3.jar" download="eager"/>
+    <jar href="../lib/Jama-1.0.2.jar" download="eager"/>
+    <jar href="../lib/jdom.jar" download="eager"/>
+    <jar href="../lib/swing-layout-1.0.3.jar" download="eager"/>
   </resources>
   
   <component-desc />
