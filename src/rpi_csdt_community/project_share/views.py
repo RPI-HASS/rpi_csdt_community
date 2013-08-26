@@ -25,10 +25,6 @@ class ApplicationList(ListView):
 class ApplicationDetail(DetailView):
     model = Application
 
-    def render_to_response(self, context, **response_kwargs):
-        response_kwargs.update({'content_type': 'application/x-java-jnlp-file'})
-        return super(ApplicationDetail, self).render_to_response(context, **response_kwargs)
-
 class ProjectList(SortableListMixin, ListView):
     sort_fields_aliases = [('name', 'by_name'), ('id', 'by_id'), ('votes', 'by_likes'), ]
     model = Project

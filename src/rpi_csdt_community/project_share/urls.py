@@ -1,7 +1,7 @@
 from django.conf.urls import patterns, url
 from django.views.generic.base import TemplateView
 
-from project_share.views import ProjectList, ProjectTagList
+from project_share.views import ProjectList, ProjectTagList, ApplicationList
 from project_share.views import ProjectDetail, ApplicationDetail
 from project_share.views import ProjectCreate, ApprovalCreate
 from project_share.views import ProjectUpdate
@@ -22,7 +22,8 @@ urlpatterns = patterns('',
     url(r'projects/(?P<project_pk>\d+)/publish$', ApprovalCreate.as_view(), name='approval-create'),
     url(r'approval/confirm$', TemplateView.as_view(template_name='project_share/approval_confirm.html'), name='approval-confirm'),
 
-    url(r'applications/(?P<pk>\d+)/jnlp$', ApplicationDetail.as_view(), name='application-detail'),
+    url(r'applications/$', ApplicationList.as_view(), name='application-list'),
+    url(r'applications/(?P<pk>\d+)$', ApplicationDetail.as_view(), name='application-detail'),
 
     url(r'users/(?P<pk>\d+)$', UserDetail.as_view(), name='user-detail'),
 )

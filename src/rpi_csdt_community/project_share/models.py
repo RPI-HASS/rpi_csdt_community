@@ -47,6 +47,8 @@ class Application(models.Model):
     codebase_url = models.CharField(max_length=255)
     class_name = models.CharField(max_length=255)
 
+    more_info_url = models.URLField(null=True, blank=True)
+
     def __unicode__(self):
         return self.name
 

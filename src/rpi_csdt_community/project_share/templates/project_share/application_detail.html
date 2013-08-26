@@ -1,19 +1,16 @@
-<jnlp spec="1.0+">
-    <information>
-        <title>{{ object }}</title>
-        <vendor>CSDT</vendor>
-        <description>{{ object.description }}</description>
-        <description kind="short">{{ object.description|truncatewords:10 }}</description>
-    </information>
-    <resources>
-        <!--${JNLP.RESOURCES.RUNTIME}-->
-        <!--${JNLP.RESOURCES.MAIN.JAR}-->
-        <!--${JNLP.RESOURCES.JARS}-->
-        <!--${JNLP.RESOURCES.EXTENSIONS}-->
-    </resources>
-    <applet-desc main-class="CC.CCGui" name="Cornrow Curves"
-        width="1024" height="768">
-        <!--${JNLP.APPLET.PARAMS}-->
-    </applet-desc>
-</jnlp>
+{% extends 'base.html' %}
 
+{% block content %}
+    {% if 'HTTP_HOST' in request.META %}
+    {% with 'http://'|add:request.META.HTTP_HOST as proto %}{% with proto|add:object.codebase_url as codebase_url %}
+    <applet width="100%" height="640" archive="applet-launcher.jar" codebase="{{ codebase_url }}" code="org.jdesktop.applet.util.JNLPAppletLauncher">
+        <param value="true" name="codebase_lookup">
+        <param value="{{ object.class_name }}" name="subapplet.classname">
+        <param value="{{ object.name }}" name="subapplet.displayname">
+        <param value="true" name="noddraw.check">
+        <param value="true" name="progressbar">
+        <param value="{{ proto }}{{ object.url }}" name="jnlp_href">
+    </applet>
+    {% endwith %}{% endwith %}
+    {% endif %}
+{% endblock %}

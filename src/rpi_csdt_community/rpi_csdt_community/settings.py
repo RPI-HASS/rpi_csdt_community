@@ -158,6 +158,7 @@ INSTALLED_APPS = (
     'django_comments_xtd',
     'django_markup',
     'pybb',
+    'south',
 )
 
 CAPTCHA_CHALLENGE_FUNCT = 'captcha.helpers.math_challenge'

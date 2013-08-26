@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Applications</h1>
+    {% for object in object_list %}
+        <h3><a href="{% url 'application-detail' pk=object.id %}">{{ object }}</a></h3>
+        <p>{{ object.description|safe }}</p>
+        {% if object.more_info_url %}
+            <a href="{{ object.more_info_url }}">More information...</a>
+        {% endif %}
+    {% endfor %}
+{% endblock %}
