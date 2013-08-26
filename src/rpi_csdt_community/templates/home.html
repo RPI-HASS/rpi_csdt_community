@@ -7,7 +7,7 @@
         <div class="span7">
             <div class="row hero-unit">
                 <h2>Combine cultural education with STEM</h2>
-                <p class="lead">Using this site, share the things that you create.</p>
+                <p class="lead">Learn, create, and share your work with Culturally Situated Design Tools.</p>
             </div>  
             <div class="row">
                 {% if not user.is_authenticated %}
@@ -27,21 +27,16 @@
                         or <a href="{% url 'registration_register' %}">Register</a>
                         </form>
                     </div>
-                {% endif %}
-                <div class="span4">
-                    <h3>Catacloud <small>A cloud of categories</small></h3>
-                    <div class="container" style="margin-bottom: 20px;">
-                    {% get_tagcloud as tags for 'project_share.Project' %}
-                    {% for tag in tags %}
-                        <font size="{{tag.weight|floatformat:0}}"><a href="{% url 'project-tag-list' tag_pk=tag.id %}">{{ tag }}</a></font>
-                    {% endfor %}
+                    <div class="span2">
+                        <h3>New Users</h3>
+                        <a class="btn btn-large btn-primary" href="{% url 'registration_register' %}">Register</a>
                     </div>
-                </div>
+                {% endif %}
             </div>
         </div>
         <div class="span5">
             <div class="videoWrapper">
-                <iframe width="420" height="315" src="http://www.youtube.com/embed/jdEFnnOFHXo" frameborder="0" allowfullscreen></iframe>
+                <iframe width="420" height="315" src="//www.youtube.com/embed/pFfZVJsTbKA?rel=0" frameborder="0" allowfullscreen></iframe>
             </div>
         </div>
     </div>
@@ -82,5 +77,16 @@
             </li>
         {% endfor %}
     </ul>
+
+    <div class="span12">
+        <h3>Catacloud <small>A cloud of categories</small></h3>
+        <div class="container" style="margin-bottom: 20px;">
+        {% get_tagcloud as tags for 'project_share.Project' %}
+        {% for tag in tags %}
+            <font size="{{tag.weight|floatformat:0}}"><a href="{% url 'project-tag-list' tag_pk=tag.id %}">{{ tag }}</a></font>
+        {% endfor %}
+        </div>
+    </div>
+
 
 {% endblock %}
