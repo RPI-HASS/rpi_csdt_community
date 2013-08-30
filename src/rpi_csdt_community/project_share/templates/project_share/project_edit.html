@@ -11,7 +11,7 @@
     <ul>
     {% for att in attachments_list %}
         <li>
-            i<strong><a href="{{ att.attachment_file.url }}">{{ att.filename }}</a></strong> - <small>{% attachment_delete_link att %}</small>
+            <strong><a href="{{ att.attachment_file.url }}">{{ att.filename }}</a></strong> - <small>{% attachment_delete_link att %}</small>
         </li>
     {% endfor %}
     </ul>

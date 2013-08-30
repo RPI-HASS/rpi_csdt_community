@@ -3,6 +3,7 @@ from django.core.urlresolvers import reverse
 from django.conf import settings
 from django.contrib.auth.models import AbstractUser
 from django.template.defaultfilters import slugify
+from django.contrib.comments.moderation import CommentModerator, moderator
 from taggit.models import TaggedItemBase, GenericTaggedItemBase
 
 import secretballot
@@ -10,16 +11,16 @@ import secretballot
 from taggit.managers import TaggableManager
 
 def application_application(instance, filename):
-    return slugify("applications/" + filename)
+    return "applications/" + slugify(filename.split('.')[:-1]) + "." + slugify(filename.split('.')[-1])
 
 def application_library(instance, filename):
-    return slugify("applications/libraries/" + filename)
+    return "applications/libraries/" + slugify(filename.split('.')[:-1]) + "." + slugify(filename.split('.')[-1])
 
 def project_project(instance, filename):
-    return slugify("projects/files/" + instance.owner.__unicode__() + "/" + instance.name + ".xml")
+    return "applications/files/" + slugify(instance.owner.__unicode__() + '/' + '.'.join(filename.split('.')[:-1])) + "." + slugify(filename.split('.')[-1])
 
 def project_screenshot(instance, filename):
-    return slugify("projects/screenshots/" + instance.owner.__unicode__() + "/" + instance.name)
+    return "applications/screenshots/" + slugify(instance.owner.__unicode__() + '/' + '.'.join(filename.split('.')[:-1])) + "." + slugify(filename.split('.')[-1])
 
 class Classroom(models.Model):
     name = models.CharField(max_length=255)
@@ -89,5 +90,10 @@ class ExtendedUser(AbstractUser):
         return self.username
 
 secretballot.enable_voting_on(Project, base_manager=ProjectManager)
+
+class ProjectModerator(CommentModerator):
+    moderate_after = -1
+
+moderator.register(Project, ProjectModerator)
 
 import project_share.signals

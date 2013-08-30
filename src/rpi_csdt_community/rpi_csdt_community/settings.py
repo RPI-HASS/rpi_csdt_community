@@ -187,7 +187,9 @@ CACHES = {
 }
 
 PYBB_TEMPLATE = 'base_forum.html'
-PYBB_PREMODERATION = lambda u, x: True
+def require_moderation(user, post):
+    return False
+PYBB_PREMODERATION = require_moderation
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to

@@ -37,7 +37,7 @@
             <li class="span2">
                 <div class="thumbnail">
                     {% thumbnail project.screenshot "400x400" crop="center" as im %}
-                        <a href="{% url 'project-detail' pk=project.id %}"><img src="{{ im.url }}" alt="Screenshot of {{ project.name }}"></a>
+                        <a href="{% url 'project-update' pk=project.id %}"><img src="{{ im.url }}" alt="Screenshot of {{ project.name }}"></a>
                     {% endthumbnail %}
                      <div class="caption">
                         <h4>{{ project.name }}</h4>
