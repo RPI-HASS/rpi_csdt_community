@@ -9,6 +9,11 @@ from rpi_csdt_community.forms import CaptchaRegistrationForm
 from django.contrib import admin
 admin.autodiscover()
 
+from rpi_csdt_community.viewsets import ProjectViewSet
+from rest_framework import routers
+router = routers.DefaultRouter()
+router.register(r'projects', ProjectViewSet)
+
 urlpatterns = patterns('',
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     url(r'^admin/', include(admin.site.urls)),
@@ -33,6 +38,9 @@ urlpatterns = patterns('',
     (r'^attachments/', include('attachments.urls')),
     (r'^likes/', include('likes.urls')),
     (r'^forum/', include('pybb.urls', namespace='pybb')),
+
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    url(r'^api/', include(router.urls)),
 )
 
 if settings.DEBUG:

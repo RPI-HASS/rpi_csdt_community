@@ -5,20 +5,10 @@
 {% load thumbnail %}
 
 {% block content %}
-    {% if 'HTTP_HOST' in request.META %}
-    {% with 'http://'|add:request.META.HTTP_HOST as proto %}{% with proto|add:object.application.codebase_url as codebase_url %}
-    <applet width="100%" height="640" archive="applet-launcher.jar" codebase="{{ codebase_url }}" code="org.jdesktop.applet.util.JNLPAppletLauncher">
-        <param value="true" name="codebase_lookup">
-        <param value="{{ object.application.class_name }}" name="subapplet.classname">
-        <param value="{{ object.application.name }}" name="subapplet.displayname">
-        <param value="true" name="noddraw.check">
-        <param value="true" name="progressbar">
-        <param value="{{ proto }}{{ object.application.url }}" name="jnlp_href">
-        <param name="SingleDemoXmlUrl" value="{{ proto }}{{ object.project.url }}">
-        <param name="DemoUrls" value="Default, {{ proto }}{{ object.project.url }}">
-
-    </applet>
-    {% endwith %}{% endwith %}
+    {% if project.application.application_type.name == "pCSDT" %}
+        {% include "project_share/application_pcsdt.html" %}
+    {% elif project.application.application_type.name == "cSNAP" %}
+        {% include "project_share/application_csnap.html" %}
     {% endif %}
 
     {% get_attachments_for object as "attachments_list" %}

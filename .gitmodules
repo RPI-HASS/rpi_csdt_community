@@ -1,0 +1,3 @@
+[submodule "src/rpi_csdt_community/static/csnap"]
+	path = src/rpi_csdt_community/static/csnap
+	url = git@github.com:GK-12/Snap--Build-Your-Own-Blocks.git

@@ -26,4 +26,5 @@ urlpatterns = patterns('',
     url(r'applications/(?P<pk>\d+)$', ApplicationDetail.as_view(), name='application-detail'),
 
     url(r'users/(?P<pk>\d+)$', UserDetail.as_view(), name='user-detail'),
+    url(r'users/(?P<pk>\d+)$', UserDetail.as_view(), name='extendeduser-detail'),
 )
