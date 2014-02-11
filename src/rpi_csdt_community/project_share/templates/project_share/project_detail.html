@@ -8,7 +8,9 @@
     {% if project.application.application_type.name == "pCSDT" %}
         {% include "project_share/application_pcsdt.html" %}
     {% elif project.application.application_type.name == "cSNAP" %}
-        {% include "project_share/application_csnap.html" %}
+        {% with url=project.application.application_file.url %}
+            {% include "project_share/application_csnap.html" %}
+        {% endwith %}
     {% endif %}
 
     {% get_attachments_for object as "attachments_list" %}

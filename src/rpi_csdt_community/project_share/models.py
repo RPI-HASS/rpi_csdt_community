@@ -11,7 +11,7 @@ import secretballot
 from taggit.managers import TaggableManager
 
 def application_application(instance, filename):
-    return "applications/" + slugify(filename.split('.')[:-1]) + "." + slugify(filename.split('.')[-1])
+    return "applications/" + slugify(instance.name) + "." + slugify(filename.split('.')[-1])
 
 def application_library(instance, filename):
     return "applications/libraries/" + slugify(filename.split('.')[:-1]) + "." + slugify(filename.split('.')[-1])
@@ -51,13 +51,14 @@ class Application(models.Model):
     version = models.CharField(max_length=10, blank=True, null=True)
     description = models.TextField(null=True, blank=True)
 
-    url = models.CharField(max_length=255)
-    codebase_url = models.CharField(max_length=255)
-    class_name = models.CharField(max_length=255)
+    url = models.CharField(max_length=255, null=True, blank=True)
+    codebase_url = models.CharField(max_length=255, null=True, blank=True)
+    class_name = models.CharField(max_length=255, null=True, blank=True)
 
     more_info_url = models.URLField(null=True, blank=True)
 
     application_type = models.ForeignKey('project_share.ApplicationType', null=True, blank=True)
+    application_file = models.FileField(upload_to=application_application, null=True, blank=True)
 
     def __unicode__(self):
         return self.name
