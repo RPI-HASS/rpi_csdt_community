@@ -9,10 +9,11 @@ from rpi_csdt_community.forms import CaptchaRegistrationForm
 from django.contrib import admin
 admin.autodiscover()
 
-from rpi_csdt_community.viewsets import ProjectViewSet
+from rpi_csdt_community.viewsets import ProjectViewSet, DemosViewSet
 from rest_framework import routers
 router = routers.DefaultRouter()
-router.register(r'projects', ProjectViewSet)
+router.register(r'projects', ProjectViewSet, base_name='api-projects')
+router.register(r'demos', DemosViewSet, base_name='api-demos')
 
 urlpatterns = patterns('',
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),

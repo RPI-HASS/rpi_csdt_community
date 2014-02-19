@@ -13,6 +13,9 @@ from taggit.managers import TaggableManager
 def application_application(instance, filename):
     return "applications/" + slugify(instance.name) + "." + slugify(filename.split('.')[-1])
 
+def application_application_demo(instance, filename):
+    return "applications/demos/" + slugify(instance.application.__unicode__()) + "/" + slugify(filename.split('.')[:-1]) + "." + slugify(filename.split('.')[-1])
+
 def application_library(instance, filename):
     return "applications/libraries/" + slugify(filename.split('.')[:-1]) + "." + slugify(filename.split('.')[-1])
 
@@ -59,6 +62,16 @@ class Application(models.Model):
 
     application_type = models.ForeignKey('project_share.ApplicationType', null=True, blank=True)
     application_file = models.FileField(upload_to=application_application, null=True, blank=True)
+
+    def __unicode__(self):
+        return self.name
+
+class ApplicationDemo(models.Model):
+    name = models.CharField(max_length=255)
+    description = models.TextField(null=True, blank=True)
+    application = models.ForeignKey('project_share.Application')
+
+    zipfile = models.FileField(upload_to=application_application_demo)
 
     def __unicode__(self):
         return self.name
