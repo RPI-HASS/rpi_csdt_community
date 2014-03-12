@@ -139,6 +139,7 @@ INSTALLED_APPS = (
     'registration',
     'captcha',
     'django_bootstrap',
+    'django_extensions',
     'project_share',
     'rpi_csdt_community',
 
