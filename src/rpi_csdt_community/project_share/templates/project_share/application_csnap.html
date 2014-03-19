@@ -1,1 +1,51 @@
-    <iframe style="width: 100%; height: 640px" src="{{ STATIC_URL }}csnap/snap.html#import={{ url }}"></iframe>
+    <canvas id="world" tabindex="1" style="position: absolute; top: 64px; left: 0px; width:100%; height: 100%" />
+    <script type="text/javascript">
+        var config = {
+          'modules': [
+              '{{ url }}'
+          ],
+          'urls': {
+            'demos_url': '{% url 'api-demos-list' %}?format=json&application={{ application }}',
+          },
+          'asset_path': '{{ STATIC_URL }}csnap/'
+        };
+    </script>
+
+    <script type="text/javascript" src="{{ STATIC_URL }}csnap/lib/jszip.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}csnap/lib/jszip-load.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}csnap/lib/jszip-deflate.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}csnap/lib/jszip-inflate.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}csnap/module-loader.js"></script>
+
+    <script type="text/javascript" src="{{ STATIC_URL }}csnap/morphic.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}csnap/widgets.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}csnap/blocks.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}csnap/threads.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}csnap/objects.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}csnap/gui.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}csnap/paint.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}csnap/lists.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}csnap/byob.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}csnap/xml.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}csnap/store.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}csnap/locale.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}csnap/cloud.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}csnap/sha512.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}csnap/Charles_Changes_To_IDE_Morph.js"></script>
+		
+    <script type="text/javascript">
+        <!-- Ugly hack to make it appear app is fullscreen -->
+        $('.navbar').css('display', 'none');
+
+        var world;
+        window.onload = function () {
+            world = new WorldMorph(document.getElementById('world'));
+            new IDE_Morph().openIn(world);
+            setInterval(loop, 1);
+        };
+        function loop() {
+            world.doOneCycle();
+        };
+    </script>
+
+
