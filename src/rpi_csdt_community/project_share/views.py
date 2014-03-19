@@ -8,6 +8,7 @@ from django.core.urlresolvers import reverse_lazy
 from taggit.models import Tag
 
 from extra_views import SortableListMixin
+from extra_views import SearchableListMixin
 
 from project_share.models import Application, Project, Classroom, Approval
 from project_share.forms import ProjectForm, ApprovalForm
@@ -25,10 +26,15 @@ class ApplicationList(ListView):
 class ApplicationDetail(DetailView):
     model = Application
 
-class ProjectList(SortableListMixin, ListView):
+class ProjectList(SearchableListMixin, SortableListMixin, ListView):
     sort_fields_aliases = [('name', 'by_name'), ('id', 'by_id'), ('votes', 'by_likes'), ]
+    search_fields = [('application__name','iexact')]
     model = Project
-    queryset = Project.approved_objects.all()
+    queryset = Project.objects.all()
+    
+    def render_to_response(self, context, **response_kwargs):
+      context['application_list'] = Application.objects.all()
+      return super(ProjectList, self).render_to_response(context, **response_kwargs)
 
 class ProjectTagList(ProjectList):
     def get_queryset(self):

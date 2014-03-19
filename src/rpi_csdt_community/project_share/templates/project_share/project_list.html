@@ -15,35 +15,49 @@
                 <li><a href="{% url 'project-list' %}?o=by_likes&ot=desc">By likes</a></li>
             </ul>
         </div>
+          
+        <div class="btn-group">
+            <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+                Filter by...
+                <span class="caret"></span>
+            </a>
+            
+            <ul class="dropdown-menu">
+                <li><a href="{% url 'project-list' %}">No filtering</a></li>
+                {% for application in application_list %}
+                   <li><a href="{% url 'project-list' %}?q={{ application.name }}">{{application.name}}</a></li>
+                {% endfor %}
+            </ul>
+      </div>
     </div>
     {% for object in object_list %}
         <div class="row" style="margin-top: 10px; margin-bottom: 10px;">
-            <div class="span4">
-                <div class="row">
-                    {% thumbnail object.screenshot "400x400" as im %}
-                        <img class="img-polaroid" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
-                    {% endthumbnail %}
-                </div><!-- /.row -->
-            </div><!-- /.span4 -->
-            <div class="span8" style="height: 100%">
-                <div class="row">
-                    <div class=span8">
-                        <h3><a href="{% url 'project-detail' pk=object.id %}">{{ object }}</a></h3>
-                    </div><!-- /.span8 -->
-                    <div class="span4">
-                        <h4>by {{ object.owner }}</h4>
-                    </div><!-- /.span4 -->
-                </div><!-- /.row -->
-                <div class="row">
-                    <div class="span8">
-                        {{ object.description }}
-                    </div><!-- /.span8 -->
-                </div><!-- /.row -->
-                <!-- This is probably slow, serverside. Investigate -->
-                {% with count=object.votes.count %}
-                <div>{{ count }} like{{ count|pluralize }}</div>
-                {% endwith %}
-            </div><!-- /.span8 -->
+          <div class="span4">
+            <div class="row">
+              {% thumbnail object.screenshot "400x400" as im %}
+              <img class="img-polaroid" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
+              {% endthumbnail %}
+            </div><!-- /.row -->
+          </div><!-- /.span4 -->
+          <div class="span8" style="height: 100%">
+            <div class="row">
+              <div class="span8">
+                <h3><a href="{% url 'project-detail' pk=object.id %}">{{ object }}</a></h3>
+              </div><!-- /.span8 -->
+              <div class="span4">
+                <h4>by {{ object.owner }}</h4>
+              </div><!-- /.span4 -->
+            </div><!-- /.row -->
+            <div class="row">
+              <div class="span8">
+                {{ object.description }}
+              </div><!-- /.span8 -->
+            </div><!-- /.row -->
+            <!-- This is probably slow, serverside. Investigate -->
+            {% with count=object.votes.count %}
+            <div>{{ count }} like{{ count|pluralize }}</div>
+            {% endwith %}
+          </div><!-- /.span8 -->
         </div><!-- /.row -->
     {% endfor %}
 {% endblock %}
