@@ -2,9 +2,9 @@ from django.conf.urls import patterns, include, url
 from django.views.generic import TemplateView, RedirectView
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
-from registration.backends.simple.views import RegistrationView
-
 from rpi_csdt_community.forms import CaptchaRegistrationForm
+
+from rpi_csdt_community.views import RedirectRegistrationView
 
 from django.contrib import admin
 admin.autodiscover()
@@ -26,7 +26,7 @@ urlpatterns = patterns('',
     url(r'', include('project_share.urls')),
 
     url(r'^login/$', 'django.contrib.auth.views.login', {'template_name': 'home.html'}),
-    url(r'^accounts/register/$', RegistrationView.as_view(form_class=CaptchaRegistrationForm), name='registration_register'),
+    url(r'^accounts/register/$', RedirectRegistrationView.as_view(form_class=CaptchaRegistrationForm), name='registration_register'),
     url(r'^accounts/chpasswd/done/?', 'django.contrib.auth.views.password_change_done', {'template_name':'password_change_done.html'}),
     url(r'^accounts/change/password/?', 'django.contrib.auth.views.password_change', {'template_name':'change_password.html', 'post_change_redirect': '/accounts/chpasswd/done/' }, name="change_password"),
     url(r'^captcha/', include('captcha.urls')),

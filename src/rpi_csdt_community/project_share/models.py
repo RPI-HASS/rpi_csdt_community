@@ -119,4 +119,15 @@ class ProjectModerator(CommentModerator):
 
 moderator.register(Project, ProjectModerator)
 
+class Address(models.Model):
+    school = models.CharField(max_length=255)
+    town = models.CharField(max_length=255)
+    state = models.CharField(max_length=255, verbose_name = 'State or Province')
+    country = models.CharField(max_length=255)
+    phone = models.CharField(max_length=255)
+    teacher = models.OneToOneField(settings.AUTH_USER_MODEL, primary_key=True)
+    
+    class Meta:
+      verbose_name_plural = "Addresses"
+
 import project_share.signals

@@ -3,7 +3,11 @@
 
 {% block content %}
     <div class="page-header">
-        <h1>My Profile <small><a href="{% url 'change_password' %}">Change password</a></h1>
+        <h1>My Profile <small><br><a href="{% url 'change_password' %}">Change password</a>
+          {% if object.address %}
+            <br><a href="{% url 'address-update' pk=object.id %}">Change address</a>
+          {% endif %}
+        </h1>
     </div>
 
     <div id="span12">

@@ -2,5 +2,31 @@
 {% load url from future %}
 
 {% block content %}
-    {% include 'generic_form.html' %}
+    {% if form.is_multipart %}
+        <form class="form-horizontal" method="post" action="{{ action }}" enctype="multipart/form-data">
+    {% else %}
+        <form class="form-horizontal" method="post" action="{{ action }}">
+    {% endif %}
+        {% csrf_token %}
+        {% for field in form %}
+            <div class="control-group">
+                <b style="color: red">{{ field.errors }}</b>
+                <label for="id_{{ field.html_name }}" class="control-label">{{ field.label }}</label>
+                <div class="controls">
+                    {{ field }}
+                </div>
+                {% if field.help_text %}
+                        <span class="help-inline">{{ field.help_text }}</span>
+                {% endif %}
+            </div>
+        {% endfor %}
+         <div class="control-group">
+             <label for="is_teacher" class="control-label">Are you a teacher?</label>
+             <div class="controls">
+                <input type="checkbox" name="is_teacher">
+             </div>
+         </div>
+         <button type="submit" class="btn btn-primary" >Save changes</button>
+        <button type="button" class="btn" onclick="javascript:history.go(-1)">Cancel</button>
+    </form>
 {% endblock %}

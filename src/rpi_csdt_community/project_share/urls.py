@@ -3,7 +3,8 @@ from django.views.generic.base import TemplateView
 
 from project_share.views import ProjectList, ProjectTagList, ApplicationList
 from project_share.views import ProjectDetail, ApplicationDetail
-from project_share.views import ProjectCreate, ApprovalCreate
+from project_share.views import ProjectCreate, ApprovalCreate, AddressCreate
+from project_share.views import AddressUpdate
 from project_share.views import ProjectUpdate
 from project_share.views import ProjectDelete
 from project_share.views import ProjectJNLP
@@ -27,4 +28,8 @@ urlpatterns = patterns('',
 
     url(r'users/(?P<pk>\d+)$', UserDetail.as_view(), name='user-detail'),
     url(r'users/(?P<pk>\d+)$', UserDetail.as_view(), name='extendeduser-detail'),
+    
+    url(r'address/create$', AddressCreate.as_view(), name='address-create'),
+    url(r'address/confirm$', TemplateView.as_view(template_name='project_share/address_confirm.html'), name='address-confirm'),
+    url(r'address/(?P<pk>.*)$', AddressUpdate.as_view(), name='address-update'),
 )

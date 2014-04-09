@@ -2,6 +2,7 @@ from django.views.generic import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.shortcuts import get_object_or_404
+from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse
 from django.core.urlresolvers import reverse_lazy
 
@@ -10,8 +11,8 @@ from taggit.models import Tag
 from extra_views import SortableListMixin
 from extra_views import SearchableListMixin
 
-from project_share.models import Application, Project, Classroom, Approval
-from project_share.forms import ProjectForm, ApprovalForm
+from project_share.models import Application, Project, Classroom, Approval, Address
+from project_share.forms import ProjectForm, ApprovalForm, AddressForm
 
 try:
     from django.contrib.auth import get_user_model
@@ -101,3 +102,28 @@ class ApprovalCreate(CreateView):
 class UserDetail(DetailView):
     model = User
     template_name = "project_share/user_detail.html"
+
+class AddressCreate(CreateView):
+    model = Address
+    form_class = AddressForm
+    
+    def form_valid(self, form):
+        form.instance.teacher = self.request.user
+        return super(AddressCreate, self).form_valid(form)
+      
+    def get_success_url(self):
+        return u'/'
+      
+class AddressUpdate(UpdateView):
+    model = Address
+    form_class = AddressForm
+    
+    template_name = "project_share/address_form.html"
+    
+    def dispatch(self, request, *args, **kwargs):
+      if(not request.user.id == int(self.kwargs['pk'])):
+         raise PermissionDenied
+      return super(AddressUpdate, self).dispatch(request, *args, **kwargs)
+    
+    def get_success_url(self):
+        return reverse('address-confirm')
