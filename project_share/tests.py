@@ -21,8 +21,8 @@ class ApprovalTests(TestCase):
         self.client.login(username='temporary', password='temporary')
 
     def test_new_project_needs_approval(self):
-        project_file = settings.PROJECT_ROOT + '/../../samples/CC/CC-Default.xml'
-        screenshot_file = settings.PROJECT_ROOT + '/../../samples/CC/CC-Default.png'
+        project_file = settings.PROJECT_ROOT + '/samples/CC/CC-Default.xml'
+        screenshot_file = settings.PROJECT_ROOT + '/samples/CC/CC-Default.png'
         result = self.client.post(reverse('project-create'), {
             'name': 'TestProject',
             'description': 'Test description',

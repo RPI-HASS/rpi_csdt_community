@@ -7,3 +7,4 @@ eclipse/
 *.pyc
 *.sqlite3
 python/
+media/
