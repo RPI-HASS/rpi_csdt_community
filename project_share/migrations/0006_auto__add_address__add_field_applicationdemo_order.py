@@ -10,20 +10,27 @@ class Migration(SchemaMigration):
     def forwards(self, orm):
         # Adding model 'Address'
         db.create_table(u'project_share_address', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('school', self.gf('django.db.models.fields.CharField')(max_length=255)),
             ('town', self.gf('django.db.models.fields.CharField')(max_length=255)),
             ('state', self.gf('django.db.models.fields.CharField')(max_length=255)),
             ('country', self.gf('django.db.models.fields.CharField')(max_length=255)),
             ('phone', self.gf('django.db.models.fields.CharField')(max_length=255)),
-            ('teacher', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['project_share.ExtendedUser'])),
+            ('teacher', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['project_share.ExtendedUser'], unique=True, primary_key=True)),
         ))
         db.send_create_signal(u'project_share', ['Address'])
+
+        # Adding field 'ApplicationDemo.order'
+        db.add_column(u'project_share_applicationdemo', 'order',
+                      self.gf('django.db.models.fields.IntegerField')(default=1000, blank=True),
+                      keep_default=False)
 
 
     def backwards(self, orm):
         # Deleting model 'Address'
         db.delete_table(u'project_share_address')
+
+        # Deleting field 'ApplicationDemo.order'
+        db.delete_column(u'project_share_applicationdemo', 'order')
 
 
     models = {
@@ -50,11 +57,10 @@ class Migration(SchemaMigration):
         u'project_share.address': {
             'Meta': {'object_name': 'Address'},
             'country': ('django.db.models.fields.CharField', [], {'max_length': '255'}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'phone': ('django.db.models.fields.CharField', [], {'max_length': '255'}),
             'school': ('django.db.models.fields.CharField', [], {'max_length': '255'}),
             'state': ('django.db.models.fields.CharField', [], {'max_length': '255'}),
-            'teacher': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['project_share.ExtendedUser']"}),
+            'teacher': ('django.db.models.fields.related.OneToOneField', [], {'to': u"orm['project_share.ExtendedUser']", 'unique': 'True', 'primary_key': 'True'}),
             'town': ('django.db.models.fields.CharField', [], {'max_length': '255'})
         },
         u'project_share.application': {
@@ -76,6 +82,7 @@ class Migration(SchemaMigration):
             'description': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '255'}),
+            'order': ('django.db.models.fields.IntegerField', [], {'default': '1000', 'blank': 'True'}),
             'zipfile': ('django.db.models.fields.files.FileField', [], {'max_length': '100'})
         },
         u'project_share.applicationtype': {
