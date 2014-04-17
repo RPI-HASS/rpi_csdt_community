@@ -70,6 +70,7 @@ class ApplicationDemo(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField(null=True, blank=True)
     application = models.ForeignKey('project_share.Application')
+    order = models.IntegerField(blank=True, default=1000)
 
     zipfile = models.FileField(upload_to=application_application_demo)
 
