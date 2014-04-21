@@ -5,6 +5,8 @@ from django.shortcuts import get_object_or_404
 
 from project_share.models import Project, ApplicationDemo, ExtendedUser, FileUpload
 from rpi_csdt_community.serializers import DemoSerializer
+from django.conf import settings
+import os
 
 class ProjectViewSet(viewsets.ModelViewSet):
     model = Project
@@ -33,10 +35,11 @@ class FileUploadView(views.APIView):
     parser_class = (FileUploadParser,)
     model = FileUpload
 
-    def put(self, request, filename, format=None):
+    def post(self, request, format=None):
         file_object = request.FILES['file']
-        f = FileUpload(f=file_object).save()
-        print FileUpload.objects.all()
-        return Response(status=204)
+        f = FileUpload(f=file_object)
+        f.save()
+        path = os.path.join(settings.MEDIA_URL, f.f.url)
+        return Response(status=201, data={'url':path})
 
 # Don't forgot to register your API in the rpi_csdt_community.urls!

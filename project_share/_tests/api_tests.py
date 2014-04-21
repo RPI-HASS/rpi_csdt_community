@@ -19,8 +19,7 @@ class ProjectTests(APITestCase):
 
         with open(screenshot_file) as f:
             self.client.login(username='test', password='test')
-            response = self.client.put(url, {'file': f})
-            print response
+            response = self.client.post(url, {'file': f})
             self.assertEqual(response.status_code, status.HTTP_201_CREATED)
             self.client.logout()
 
@@ -33,7 +32,7 @@ class ProjectTests(APITestCase):
         url = reverse('file-create')
 
         with open(screenshot_file) as f:
-            response = self.client.put(url, {'file': f})
+            response = self.client.post(url, {'file': f})
             self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
     def test_create_project(self):
