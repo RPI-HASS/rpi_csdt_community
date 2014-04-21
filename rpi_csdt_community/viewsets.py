@@ -16,6 +16,7 @@ class DemosViewSet(viewsets.ReadOnlyModelViewSet):
         application = self.request.QUERY_PARAMS.get('application', None)
         if application is not None:
             queryset = queryset.filter(application__name=application)
+        queryset = queryset.order_by('order')
         return queryset
 
 # Don't forgot to register your API in the rpi_csdt_community.urls!
