@@ -87,8 +87,8 @@ class Project(models.Model):
     application = models.ForeignKey(Application)
     owner = models.ForeignKey(settings.AUTH_USER_MODEL)
 
-    project = models.FileField(upload_to=project_project)
-    screenshot = models.FileField(upload_to=project_screenshot)
+    project = models.FileField(upload_to=project_project, null=True, blank=True)
+    screenshot = models.FileField(upload_to=project_screenshot, null=True, blank=True)
 
     tags = TaggableManager(blank=True)
 
@@ -112,6 +112,9 @@ class ExtendedUser(AbstractUser):
         if self.first_name != "":   
             return "%s %s" % (self.first_name, self.last_name)
         return self.username
+
+class FileUpload(models.Model):
+    f = models.FileField(upload_to='files/')
 
 secretballot.enable_voting_on(Project, base_manager=ProjectManager)
 

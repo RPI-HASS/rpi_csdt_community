@@ -5,10 +5,84 @@ from rest_framework.test import APITestCase, APILiveServerTestCase
 from rest_framework.reverse import reverse as api_reverse
 
 from django.core.files import File
+from project_share.models import Project
 
-class ProjectTests(APILiveServerTestCase):
+class ProjectTests(APITestCase):
     fixtures = ['test_data.json']
+    def test_upload_file(self):
+        """
+        Verifies that we can upload a file and get back the URL
+          of the uploaded file
+        """
+        screenshot_file = settings.PROJECT_ROOT + '/samples/CC/CC-Default.png'
+        url = reverse('file-create')
+
+        with open(screenshot_file) as f:
+            self.client.login(username='test', password='test')
+            response = self.client.put(url, {'file': f})
+            print response
+            self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+            self.client.logout()
+
+    def test_upload_file_requires_login(self):
+        """
+        Verifies that we can upload a file and get back the URL
+          of the uploaded file
+        """
+        screenshot_file = settings.PROJECT_ROOT + '/samples/CC/CC-Default.png'
+        url = reverse('file-create')
+
+        with open(screenshot_file) as f:
+            response = self.client.put(url, {'file': f})
+            self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
     def test_create_project(self):
+        """
+        Verify that we can create a project using the REST API
+        """
+        project_file = settings.PROJECT_ROOT + '/samples/CC/CC-Default.xml'
+        screenshot_file = settings.PROJECT_ROOT + '/samples/CC/CC-Default.png'
+        
+        self.client.login(username='test', password='test')
+
+        project_count = Project.objects.all().count()
+
+        url = reverse('api-projects-list')
+        data = {
+            'name': 'TestProject',
+            'description': 'Test description',
+            'application': '1',
+            'tags': 'CC, Default',
+            'owner': 'http://testserver' + reverse('extendeduser-detail', kwargs={'pk':1}),
+            'application': 'http://testserver' + reverse('application-detail', kwargs={'pk':1})
+        }
+        response = self.client.post(url, data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.client.logout()
+
+    def test_can_create_project_and_upload_project(self):
+        project_file = settings.PROJECT_ROOT + '/samples/CC/CC-Default.xml'
+        screenshot_file = settings.PROJECT_ROOT + '/samples/CC/CC-Default.png'
+        self.client.login(username='test', password='test')
+
+        url = reverse('api-projects-list')
+        data = {
+            'name': 'TestProject',
+            'description': 'Test description',
+            'application': '1',
+            'tags': 'CC, Default',
+            'owner': 'http://testserver' + reverse('extendeduser-detail', kwargs={'pk':1}),
+            'application': 'http://testserver' + reverse('application-detail', kwargs={'pk':1})
+        }
+        response = self.client.post(url, data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+
+        # Try uploading the screenshot
+
+        # Logout
+        self.client.logout()
+
+    def test_create_requires_authentication_project(self):
         """
         Verify that we can create a project using the REST API
         """
@@ -20,13 +94,11 @@ class ProjectTests(APILiveServerTestCase):
             'name': 'TestProject',
             'description': 'Test description',
             'application': '1',
-            'project': File(open(project_file)),
-            'screenshot': File(open(screenshot_file)),
             'tags': 'CC, Default'
         }
         response = self.client.post(url, data, format='json')
-        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-        self.assertEqual(response.data, data)
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
     def test_get_projects(self):
         """
         Verify that we can get a list of projects for this user using the REST API

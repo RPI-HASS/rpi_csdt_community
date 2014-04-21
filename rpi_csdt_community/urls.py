@@ -9,7 +9,7 @@ from rpi_csdt_community.views import RedirectRegistrationView
 from django.contrib import admin
 admin.autodiscover()
 
-from rpi_csdt_community.viewsets import ProjectViewSet, DemosViewSet
+from rpi_csdt_community.viewsets import ProjectViewSet, DemosViewSet, FileUploadView
 from rest_framework import routers
 router = routers.DefaultRouter()
 router.register(r'projects', ProjectViewSet, base_name='api-projects')
@@ -42,6 +42,7 @@ urlpatterns = patterns('',
 
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^api/', include(router.urls)),
+    url(r'^api/files/', FileUploadView.as_view(), name='file-create'),
 )
 
 if settings.DEBUG:
