@@ -21,6 +21,7 @@ class ApprovalTests(TestCase):
         self.client.login(username='temporary', password='temporary')
 
     def test_new_project_needs_approval(self):
+        original_approved = Project.approved_objects.count()
         project_file = settings.PROJECT_ROOT + '/samples/CC/CC-Default.xml'
         screenshot_file = settings.PROJECT_ROOT + '/samples/CC/CC-Default.png'
         result = self.client.post(reverse('project-create'), {
@@ -35,6 +36,6 @@ class ApprovalTests(TestCase):
         self.assertEqual(result.status_code, 200)
 
         # There should only be the one approved project in the list of project
-        self.assertEquals(Project.approved_objects.count(), 1)
+        self.assertEquals(Project.approved_objects.count(), original_approved)
 
 from _tests.api_tests import *

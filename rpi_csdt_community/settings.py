@@ -207,6 +207,10 @@ REST_FRAMEWORK = {
 }
 
 SOUTH_TESTS_MIGRATE = False
+SOUTH_MIGRATION_MODULES = {
+    'taggit': 'taggit.south_migrations',
+}
+
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to

@@ -1,10 +1,18 @@
 from rest_framework import viewsets, routers
+from django.shortcuts import get_object_or_404
 
-from project_share.models import Project, ApplicationDemo
+from project_share.models import Project, ApplicationDemo, ExtendedUser
 from rpi_csdt_community.serializers import DemoSerializer
 
 class ProjectViewSet(viewsets.ModelViewSet):
     model = Project
+
+    def get_queryset(self):
+        queryset = super(ProjectViewSet, self).get_queryset()
+        user = self.request.QUERY_PARAMS.get('owner', None)
+        if user is not None:
+          queryset = queryset.filter(owner=get_object_or_404(ExtendedUser, pk=user))
+        return queryset
 
 class DemosViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = ApplicationDemo.objects.all()
