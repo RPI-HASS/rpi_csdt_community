@@ -36,3 +36,5 @@ class ApprovalTests(TestCase):
 
         # There should only be the one approved project in the list of project
         self.assertEquals(Project.approved_objects.count(), 1)
+
+from _tests.api_tests import *
