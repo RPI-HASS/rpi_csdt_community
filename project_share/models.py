@@ -87,8 +87,8 @@ class Project(models.Model):
     application = models.ForeignKey(Application)
     owner = models.ForeignKey(settings.AUTH_USER_MODEL)
 
-    project = models.FileField(upload_to=project_project, null=True, blank=True)
-    screenshot = models.FileField(upload_to=project_screenshot, null=True, blank=True)
+    project = models.ForeignKey('project_share.FileUpload', null=True, blank=True, related_name='+')
+    screenshot = models.ForeignKey('project_share.FileUpload', null=True, blank=True, related_name='+')
 
     tags = TaggableManager(blank=True)
 
@@ -102,10 +102,6 @@ class Project(models.Model):
 
     def get_absolute_url(self):
         return reverse('project-detail', kwargs={'pk': self.pk})
-
-    class Meta:
-        # Performance issue here?
-        unique_together = (("name", "owner"),("project", "owner"),("screenshot", "owner"))
 
 class ExtendedUser(AbstractUser):
     def __unicode__(self):
