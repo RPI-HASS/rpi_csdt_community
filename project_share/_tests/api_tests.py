@@ -63,6 +63,21 @@ class ProjectTests(APITestCase):
         screenshot_file = settings.PROJECT_ROOT + '/samples/CC/CC-Default.png'
         self.client.login(username='test', password='test')
 
+        # Try uploading the screenshot
+        image_id = -1
+        with open(screenshot_file) as f:
+            response = self.client.post(reverse('file-create'), {'file':f})
+            self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+            image_id = response.data['id']
+
+        # Upload the XML file
+        xml_id = -1
+        with open(project_file) as f:
+            response = self.client.post(reverse('file-create'), {'file':f})
+            self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+            xml_id = response.data['id']
+
+        # Upload the project
         url = reverse('api-projects-list')
         data = {
             'name': 'TestProject',
@@ -70,12 +85,13 @@ class ProjectTests(APITestCase):
             'application': 1,
             'tags': 'CC, Default',
             'owner': 1,
-            'application': 1
+            'application': 1,
+            'project': xml_id,
+            'screenshot': image_id
         }
         response = self.client.post(url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
-        # Try uploading the screenshot
 
         # Logout
         self.client.logout()

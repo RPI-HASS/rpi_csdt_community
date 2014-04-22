@@ -41,6 +41,6 @@ class FileUploadView(views.APIView):
         f = FileUpload(f=file_object)
         f.save()
         path = os.path.join(settings.MEDIA_URL, f.f.url)
-        return Response(status=201, data={'url':path})
+        return Response(status=201, data={'url':path, 'id':f.id})
 
 # Don't forgot to register your API in the rpi_csdt_community.urls!
