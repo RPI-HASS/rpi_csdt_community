@@ -34,7 +34,7 @@
         <div class="row" style="margin-top: 10px; margin-bottom: 10px;">
           <div class="span4">
             <div class="row">
-              {% thumbnail object.screenshot "400x400" as im %}
+              {% thumbnail object.screenshot.f "400x400" as im %}
               <img class="img-polaroid" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
               {% endthumbnail %}
             </div><!-- /.row -->

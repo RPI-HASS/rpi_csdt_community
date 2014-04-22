@@ -10,13 +10,25 @@
           'urls': {
             'demos_url': '{% url 'api-demos-list' %}?format=json&application={{ application }}',
             'create_project_url': '{% url 'api-projects-list' %}',
+            'list_project_url': '{% url 'api-projects-list' %}',
             'create_file_url': '{% url 'file-create' %}',
             'login_url': '{% url 'django.contrib.auth.views.login' %}',
             {% if user.is_authenticated %}
             'user_detail_url': '{% url 'extendeduser-detail' pk=user.id %}'
             {% endif %}
           },
-          'asset_path': '{{ STATIC_URL }}csnap/'
+          'asset_path': '{{ STATIC_URL }}csnap/',
+          'user_id': {{ user.id }},
+          'application_id': {{ application_id }},
+          {% if project %}
+          'project': {
+            'id': {{ project.id }},
+            'name': '{{ project.name }}',
+            'application': {{ project.application.id }},
+            'approved': {{ project.approved|lower }},
+            'project_url': '{{ project.project.f.url }}'
+          }
+          {% endif %}
         };
     </script>
 

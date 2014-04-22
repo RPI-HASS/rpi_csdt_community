@@ -7,7 +7,7 @@ from rest_framework.reverse import reverse as api_reverse
 from django.core.files import File
 from project_share.models import Project
 
-class ProjectTests(APITestCase):
+class ProjectTests(APILiveServerTestCase):
     fixtures = ['default.json']
     def test_upload_file(self):
         """
@@ -57,6 +57,31 @@ class ProjectTests(APITestCase):
         response = self.client.post(url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.client.logout()
+    
+    def test_can_update_project(self):
+        self.client.login(username='test', password='test')
+
+        project_count = Project.objects.all().count()
+
+        url = reverse('api-projects-list')
+        data = {
+            'name': 'TestProject',
+            'description': 'Test description',
+            'application': 1,
+            'tags': 'CC, Default',
+            'owner': 1
+        }
+        response = self.client.post(url, data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(Project.objects.all().count(), project_count+1)
+
+        # Try updating it
+        data['id'] = response.data.id
+        response = self.client.put(url+data['id'], data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(Project.objects.all().count(), project_count+1)
+
+        self.client.logout()
 
     def test_can_create_project_and_upload_project(self):
         project_file = settings.PROJECT_ROOT + '/samples/CC/CC-Default.xml'
@@ -85,7 +110,6 @@ class ProjectTests(APITestCase):
             'application': 1,
             'tags': 'CC, Default',
             'owner': 1,
-            'application': 1,
             'project': xml_id,
             'screenshot': image_id
         }

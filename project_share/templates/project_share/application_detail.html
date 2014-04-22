@@ -4,7 +4,7 @@
     {% if object.application_type.name == "pCSDT" %}
         {% include "project_share/application_pcsdt.html" %}
     {% elif object.application_type.name == "cSNAP" %}
-        {% with url=object.application_file.url application=object.name %}
+        {% with url=object.application_file.url application=object.name application_id=object.id %}
             {% include "project_share/application_csnap.html" %}
         {% endwith %}
     {% endif %}
