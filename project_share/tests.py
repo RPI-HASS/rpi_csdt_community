@@ -14,7 +14,7 @@ except ImportError:
 
 
 class ApprovalTests(TestCase):
-    fixtures = ['test_data.json']
+    fixtures = ['default.json']
     def setUp(self):
         user = User.objects.create_user('temporary', 'temporary@gmail.com', 'temporary')
         self.client = Client()

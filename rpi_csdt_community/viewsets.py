@@ -4,12 +4,13 @@ from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
 
 from project_share.models import Project, ApplicationDemo, ExtendedUser, FileUpload
-from rpi_csdt_community.serializers import DemoSerializer
+from rpi_csdt_community.serializers import DemoSerializer, ProjectSerializer
 from django.conf import settings
 import os
 
 class ProjectViewSet(viewsets.ModelViewSet):
     model = Project
+    serializer_class = ProjectSerializer
 
     def get_queryset(self):
         queryset = super(ProjectViewSet, self).get_queryset()

@@ -3,7 +3,7 @@ from django.contrib.auth.admin import UserAdmin
 from django.utils.translation import ugettext_lazy as _
 from attachments.admin import AttachmentInlines
 
-from project_share.models import Application, ApplicationDemo, ApplicationType, Address, Project, Approval
+from project_share.models import Application, ApplicationDemo, ApplicationType, Address, Project, Approval, FileUpload
 from project_share.models import Classroom
 from project_share.models import ExtendedUser
 
@@ -58,3 +58,4 @@ admin.site.register(Project, ProjectAdmin)
 #admin.site.register(Approval, ApprovalAdmin)
 admin.site.register(Classroom, ClassroomAdmin)
 admin.site.register(ExtendedUser, UserAdmin)
+admin.site.register(FileUpload)

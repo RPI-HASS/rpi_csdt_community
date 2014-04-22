@@ -8,7 +8,7 @@ from django.core.files import File
 from project_share.models import Project
 
 class ProjectTests(APITestCase):
-    fixtures = ['test_data.json']
+    fixtures = ['default.json']
     def test_upload_file(self):
         """
         Verifies that we can upload a file and get back the URL
@@ -50,10 +50,9 @@ class ProjectTests(APITestCase):
         data = {
             'name': 'TestProject',
             'description': 'Test description',
-            'application': '1',
+            'application': 1,
             'tags': 'CC, Default',
-            'owner': 'http://testserver' + reverse('extendeduser-detail', kwargs={'pk':1}),
-            'application': 'http://testserver' + reverse('application-detail', kwargs={'pk':1})
+            'owner': 1
         }
         response = self.client.post(url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
@@ -68,10 +67,10 @@ class ProjectTests(APITestCase):
         data = {
             'name': 'TestProject',
             'description': 'Test description',
-            'application': '1',
+            'application': 1,
             'tags': 'CC, Default',
-            'owner': 'http://testserver' + reverse('extendeduser-detail', kwargs={'pk':1}),
-            'application': 'http://testserver' + reverse('application-detail', kwargs={'pk':1})
+            'owner': 1,
+            'application': 1
         }
         response = self.client.post(url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
@@ -111,6 +110,6 @@ class ProjectTests(APITestCase):
 
         # verify that all the given projects belong to the given user
         # This is a lazy way of getting absolute reverse URL... Not great
-        self_url = 'http://testserver' + reverse('extendeduser-detail', kwargs={'pk':1})
+        self_url = 1
         for project in response.data:
           self.assertEqual(project['owner'], self_url)
