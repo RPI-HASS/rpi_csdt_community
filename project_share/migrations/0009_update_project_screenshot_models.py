@@ -11,11 +11,10 @@ class Migration(DataMigration):
         # Note: Don't use "from appname.models import ModelName". 
         # Use orm.ModelName to refer to models in this application,
         # and orm['appname.ModelName'] for models in other applications.
-        from project_share.models import Project as old_Project, FileUpload as old_FileUpload
-        for project in old_Project.objects.all():
-            p = old_FileUpload(f=project.project)
+        for project in orm.Project.objects.all():
+            p = orm.FileUpload(f=project.project)
             p.save()
-            s = old_FileUpload(f=project.screenshot)
+            s = orm.FileUpload(f=project.screenshot)
             s.save()
             project.project2 = p
             project.screenshot2 = s
@@ -118,6 +117,7 @@ class Migration(DataMigration):
             'f': ('django.db.models.fields.files.FileField', [], {'max_length': '100'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'})
         },
+
         u'project_share.project': {
             'Meta': {'unique_together': "(('name', 'owner'), ('project', 'owner'), ('screenshot', 'owner'))", 'object_name': 'Project'},
             'application': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['project_share.Application']"}),
@@ -126,8 +126,10 @@ class Migration(DataMigration):
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '255'}),
             'owner': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['project_share.ExtendedUser']"}),
-            'project': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'+'", 'null': 'True', 'to': u"orm['project_share.FileUpload']"}),
-            'screenshot': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'+'", 'null': 'True', 'to': u"orm['project_share.FileUpload']"})
+            'project': ('django.db.models.fields.files.FileField', [], {'max_length': '100', 'null': 'True', 'blank': 'True'}),
+            'project2': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'+'", 'null': 'True', 'to': u"orm['project_share.FileUpload']"}),
+            'screenshot': ('django.db.models.fields.files.FileField', [], {'max_length': '100', 'null': 'True', 'blank': 'True'}),
+            'screenshot2': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'+'", 'null': 'True', 'to': u"orm['project_share.FileUpload']"})
         }
     }
 

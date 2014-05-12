@@ -9,29 +9,29 @@ class Migration(SchemaMigration):
 
     def forwards(self, orm):
         # Removing unique constraint on 'Project', fields ['name', 'owner']
-        db.delete_unique(u'project_share_project', ['name', 'owner_id'])
+        #db.delete_unique(u'project_share_project', ['name', 'owner_id'])
 
         # Removing unique constraint on 'Project', fields ['screenshot', 'owner']
-        db.delete_unique(u'project_share_project', ['screenshot_id', 'owner_id'])
+        #db.delete_unique(u'project_share_project', ['screenshot_id', 'owner_id'])
 
         # Removing unique constraint on 'Project', fields ['project', 'owner']
-        db.delete_unique(u'project_share_project', ['project_id', 'owner_id'])
+        #db.delete_unique(u'project_share_project', ['project_id', 'owner_id'])
 
         # Deleting field 'Project.project'
-        db.delete_column(u'project_share_project', 'project_id')
+        #db.delete_column(u'project_share_project', 'project')
 
         # Deleting field 'Project.screenshot'
-        db.delete_column(u'project_share_project', 'screenshot_id')
+        #db.delete_column(u'project_share_project', 'screenshot')
 
         # Adding field 'Project.project2'
-        db.add_column(u'project_share_project', 'project2',
+        """db.add_column(u'project_share_project', 'project2',
                       self.gf('django.db.models.fields.related.ForeignKey')(blank=True, related_name='+', null=True, to=orm['project_share.FileUpload']),
                       keep_default=False)
 
         # Adding field 'Project.screenshot2'
         db.add_column(u'project_share_project', 'screenshot2',
                       self.gf('django.db.models.fields.related.ForeignKey')(blank=True, related_name='+', null=True, to=orm['project_share.FileUpload']),
-                      keep_default=False)
+                      keep_default=False)"""
 
 
     def backwards(self, orm):
