@@ -4,13 +4,33 @@ from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
 
 from project_share.models import Project, ApplicationDemo, ExtendedUser, FileUpload
-from rpi_csdt_community.serializers import DemoSerializer, ProjectSerializer
+from rpi_csdt_community.serializers import DemoSerializer, ProjectSerializer, UserSerializer
 from django.conf import settings
 import os
+import sys
+
+try:
+    from django.contrib.auth import get_user_model
+except ImportError: # django < 1.5
+    from django.contrib.auth.models import User
+else:
+    User = get_user_model()
+
 
 class ProjectViewSet(viewsets.ModelViewSet):
     model = Project
     serializer_class = ProjectSerializer
+
+    def pre_save(self, obj):
+        super(ProjectViewSet, self).pre_save(obj)
+        if obj.owner != None and obj.owner != self.request.user:
+            original_pk = obj.pk
+            obj.pk = None
+            if original_pk != None:
+                sys.stdout.write("Updating parent")
+                obj.parent = Project.objects.get(pk=original_pk)
+            obj.save()
+        obj.owner = self.request.user
 
     def get_queryset(self):
         queryset = super(ProjectViewSet, self).get_queryset()
@@ -42,5 +62,11 @@ class FileUploadView(views.APIView):
         f.save()
         path = os.path.join(settings.MEDIA_URL, f.f.url)
         return Response(status=201, data={'url':path, 'id':f.id})
+
+class CurrentUserView(views.APIView):
+    model = User
+    def get(self, request):
+        serializer = UserSerializer(request.user)
+        return Response(serializer.data)
 
 # Don't forgot to register your API in the rpi_csdt_community.urls!

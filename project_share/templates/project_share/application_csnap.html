@@ -8,17 +8,23 @@
           'user': '{{ user }}',
           {% endif %}
           'urls': {
+            'user_api_detail_url': '{% url 'user-api-detail'%}',
             'demos_url': '{% url 'api-demos-list' %}?format=json&application={{ application }}',
             'create_project_url': '{% url 'api-projects-list' %}',
             'list_project_url': '{% url 'api-projects-list' %}',
             'create_file_url': '{% url 'file-create' %}',
             'login_url': '{% url 'django.contrib.auth.views.login' %}',
             {% if user.is_authenticated %}
-            'user_detail_url': '{% url 'extendeduser-detail' pk=user.id %}'
+            'user_detail_url': '{% url 'extendeduser-detail' pk=user.id %}',
             {% endif %}
+            {% with 'http://'|add:request.META.HTTP_HOST as proto %}
+              'project_url_root': '{{ proto }}/projects/'
+            {% endwith %}
           },
           'asset_path': '{{ STATIC_URL }}csnap/',
+          {% if user.is_authenticated %}
           'user_id': {{ user.id }},
+          {% endif %}
           'application_id': {{ application_id }},
           {% if project %}
           'project': {
@@ -113,7 +119,6 @@ $(function() {
 
     $.ajaxSetup({
         beforeSend: function(xhr, settings) {
-            console.log("in beforeSend");
             if (!csrfSafeMethod(settings.type) && sameOrigin(settings.url)) {
                 // Send the token to same-origin, relative URLs only.
                 // Send the token only if the method warrants CSRF protection

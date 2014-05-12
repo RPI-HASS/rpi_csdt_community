@@ -85,7 +85,7 @@ class Project(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField(null=True, blank=True)
     application = models.ForeignKey(Application)
-    owner = models.ForeignKey(settings.AUTH_USER_MODEL)
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, null=True)
 
     project = models.ForeignKey('project_share.FileUpload', null=True, blank=True, related_name='+')
     screenshot = models.ForeignKey('project_share.FileUpload', null=True, blank=True, related_name='+')
@@ -93,6 +93,8 @@ class Project(models.Model):
     tags = TaggableManager(blank=True)
 
     approved = models.BooleanField(default=False)
+
+    parent = models.ForeignKey('project_share.Project', null=True, blank=True, related_name="children")
 
     objects = models.Manager()
     approved_objects = ProjectManager()
