@@ -31,12 +31,19 @@ class ClassListFilter(admin.SimpleListFilter):
 
 class ApprovalInline(admin.TabularInline):
     model = Approval
-
+    
 class ProjectAdmin(admin.ModelAdmin):
     inlines = [AttachmentInlines, ApprovalInline]
     list_filter = (ClassListFilter,)
     list_display = ('name', 'owner', 'application', 'approved',)
     search_fields = ['owner__first_name', 'owner__last_name', 'name']
+
+    def approve(modeladmin, request, queryset):
+       Approval.objects.filter(project__in=queryset).update(approved_by=request.user)
+       queryset.update(approved=True)
+
+    approve.short_description = "Approve selected projects"
+    actions = [approve]
 
 class ApprovalAdmin(admin.ModelAdmin):
     pass
