@@ -30,9 +30,10 @@ class ApplicationDetail(DetailView):
 class ProjectList(SearchableListMixin, SortableListMixin, ListView):
     sort_fields_aliases = [('name', 'by_name'), ('id', 'by_id'), ('votes', 'by_likes'), ]
     search_fields = [('application__name','iexact')]
+    search_split = False
     model = Project
     queryset = Project.objects.all()
-    
+
     def render_to_response(self, context, **response_kwargs):
       context['application_list'] = Application.objects.all()
       return super(ProjectList, self).render_to_response(context, **response_kwargs)
