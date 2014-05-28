@@ -14,7 +14,7 @@ class DemoSerializer(serializers.ModelSerializer):
     project_url = serializers.Field('zipfile.url')
     class Meta:
         model = ApplicationDemo
-        fields = ('name', 'description', 'project_url')
+        fields = ('id', 'name', 'description', 'project_url')
 
 class ProjectSerializer(serializers.ModelSerializer):
     project_url = serializers.Field('project.f.url')

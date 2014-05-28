@@ -1,8 +1,8 @@
 from django.conf.urls import patterns, url
 from django.views.generic.base import TemplateView
 
-from project_share.views import ProjectList, ProjectTagList, ApplicationList
-from project_share.views import ProjectDetail, ApplicationDetail
+from project_share.views import ProjectList, ProjectTagList, ApplicationList, DemoList
+from project_share.views import ProjectDetail, ApplicationDetail, DemoDetail
 from project_share.views import ProjectCreate, ApprovalCreate, AddressCreate
 from project_share.views import AddressUpdate
 from project_share.views import ProjectUpdate
@@ -25,6 +25,9 @@ urlpatterns = patterns('',
 
     url(r'applications/$', ApplicationList.as_view(), name='application-list'),
     url(r'applications/(?P<pk>\d+)$', ApplicationDetail.as_view(), name='application-detail'),
+    
+    url(r'^demos/$', DemoList.as_view(), name='demo-list'),
+    url(r'^demos/(?P<pk>\d+)$', DemoDetail.as_view(), name='demo-detail'),
 
     #url(r'users/(?P<pk>\d+)$', UserDetail.as_view(), name='user-detail'),
     url(r'users/(?P<pk>\d+)$', UserDetail.as_view(), name='extendeduser-detail'),

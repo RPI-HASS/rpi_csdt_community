@@ -11,7 +11,7 @@ from taggit.models import Tag
 from extra_views import SortableListMixin
 from extra_views import SearchableListMixin
 
-from project_share.models import Application, Project, Classroom, Approval, Address
+from project_share.models import Application, Project, ApplicationDemo, Classroom, Approval, Address
 from project_share.forms import ProjectForm, ApprovalForm, AddressForm
 
 try:
@@ -81,6 +81,12 @@ class ProjectUpdate(UpdateView):
 class ProjectDelete(DeleteView):
     model = Project
     success_url = reverse_lazy('project-delete-success')
+    
+class DemoList(ListView):
+    model = ApplicationDemo
+    
+class DemoDetail(DetailView):
+    model = ApplicationDemo
 
 class ApprovalCreate(CreateView):
     model = Approval
