@@ -15,6 +15,9 @@ def application_application(instance, filename):
 
 def application_application_demo(instance, filename):
     return "applications/demos/" + slugify(instance.application.__unicode__()) + "/" + slugify(filename.split('.')[:-1]) + "." + slugify(filename.split('.')[-1])
+  
+def application_application_goal(instance, filename):
+    return "applications/goals/" + slugify(instance.application.__unicode__()) + "/" + slugify(filename.split('.')[:-1]) + "." + slugify(filename.split('.')[-1])
 
 def application_library(instance, filename):
     return "applications/libraries/" + slugify(filename.split('.')[:-1]) + "." + slugify(filename.split('.')[-1])
@@ -104,6 +107,14 @@ class Project(models.Model):
 
     def get_absolute_url(self):
         return reverse('project-detail', kwargs={'pk': self.pk})
+      
+class Goal(models.Model):
+    name = models.CharField(max_length=255)
+    description = models.TextField(null=True, blank=True)
+    application = models.ForeignKey(Application)
+    
+    thumbnail = models.FileField(upload_to=application_application_goal)
+    image = models.FileField(upload_to=application_application_goal)
 
 class ExtendedUser(AbstractUser):
     def __unicode__(self):
