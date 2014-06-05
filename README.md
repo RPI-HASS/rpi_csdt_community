@@ -16,11 +16,11 @@ To deploy this project, you will need the following packages installed:
 Now, the howto
 ```shell
 cd {{ Directory of this repo }}
-cd src
 . ./activate
-cd src
-python ./manage.py syncdb
-python ./manage.py runserver
+python ./manage.py syncdb --all
+python ./manage.py runserver --fake
+git submodule init
+git submodule update
 ```
 
 Then you should be able to see the project at http://127.0.0.1:8000/
