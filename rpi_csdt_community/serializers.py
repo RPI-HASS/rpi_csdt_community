@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from project_share.models import ApplicationDemo, Project
+from project_share.models import ApplicationDemo, Project, Goal
 
 try:
     from django.contrib.auth import get_user_model
@@ -15,6 +15,14 @@ class DemoSerializer(serializers.ModelSerializer):
     class Meta:
         model = ApplicationDemo
         fields = ('id', 'name', 'description', 'project_url')
+        
+class GoalSerializer(serializers.ModelSerializer):
+    thumb_url = serializers.Field('thumbnail.url')
+    img_url = serializers.Field('image.url')
+    
+    class Meta:
+        model = Goal
+        fields = ('description', 'name', 'thumb_url', 'img_url')
 
 class ProjectSerializer(serializers.ModelSerializer):
     project_url = serializers.Field('project.f.url')

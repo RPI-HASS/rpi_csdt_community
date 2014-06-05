@@ -4,6 +4,7 @@ from django.utils.translation import ugettext_lazy as _
 from attachments.admin import AttachmentInlines
 
 from project_share.models import Application, ApplicationDemo, ApplicationType, Address, Project, Approval, FileUpload
+from project_share.models import Goal
 from project_share.models import Classroom
 from project_share.models import ExtendedUser
 
@@ -59,6 +60,7 @@ class ClassroomAdmin(admin.ModelAdmin):
 
 admin.site.register(Application)
 admin.site.register(ApplicationDemo)
+admin.site.register(Goal)
 admin.site.register(ApplicationType)
 admin.site.register(Address)
 admin.site.register(Project, ProjectAdmin)

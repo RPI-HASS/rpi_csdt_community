@@ -21,6 +21,10 @@ python ./manage.py syncdb --all
 python ./manage.py runserver --fake
 git submodule init
 git submodule update
+
+# Every time you start to develop, start the server
+#  It should auto refresh when you change a file
+python ./manage.py runserver
 ```
 
 Then you should be able to see the project at http://127.0.0.1:8000/
