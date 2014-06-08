@@ -29,7 +29,7 @@ class UrlTests(TestCase):
 
         response = self.client.get(url)
 
-        self.assertEqual(response.status_code, 200)
+        self.assertTrue(response.status_code == 200 or response.status_code == 302)
 
         for link in BeautifulSoup(response.content, parseOnlyThese=SoupStrainer('a')):
             if any('href' in el for el in link.attrs):
