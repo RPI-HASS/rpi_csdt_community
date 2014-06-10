@@ -217,8 +217,6 @@ class ProjectTests(APILiveServerTestCase):
         response = self.client.get(url, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
-        # verify that all the given projects belong to the given user
-        # This is a lazy way of getting absolute reverse URL... Not great
         self_url = 1
         for project in response.data:
           self.assertEqual(project['owner'], self_url)

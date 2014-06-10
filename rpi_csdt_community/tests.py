@@ -34,3 +34,20 @@ class UrlTests(TestCase):
         for link in BeautifulSoup(response.content, parseOnlyThese=SoupStrainer('a')):
             if any('href' in el for el in link.attrs):
                 self.test_all_site_links(link['href'])
+    
+    def test_captcha_works(self):
+        url = '/accounts/register/'
+
+        response = self.client.get(url)
+
+        self.assertEqual(response.status_code, 200)
+
+        soup = BeautifulSoup(response.content)
+        images = soup.findAll(attrs={'class': 'captcha'})
+
+        for image in images:
+            import sys
+            sys.stdout.write(str(image))
+            sys.stdout.flush()
+            response = self.client.get(image.get('src'))
+            self.assertEqual(response.status_code, 200)
