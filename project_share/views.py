@@ -11,7 +11,7 @@ from taggit.models import Tag
 from extra_views import SortableListMixin
 from extra_views import SearchableListMixin
 
-from project_share.models import Application, Project, Classroom, Approval, Address
+from project_share.models import Application, Project, ApplicationDemo, Classroom, Approval, Address
 from project_share.forms import ProjectForm, ApprovalForm, AddressForm
 
 try:
@@ -30,9 +30,10 @@ class ApplicationDetail(DetailView):
 class ProjectList(SearchableListMixin, SortableListMixin, ListView):
     sort_fields_aliases = [('name', 'by_name'), ('id', 'by_id'), ('votes', 'by_likes'), ]
     search_fields = [('application__name','iexact')]
+    search_split = False
     model = Project
     queryset = Project.objects.all()
-    
+
     def render_to_response(self, context, **response_kwargs):
       context['application_list'] = Application.objects.all()
       return super(ProjectList, self).render_to_response(context, **response_kwargs)
@@ -80,6 +81,12 @@ class ProjectUpdate(UpdateView):
 class ProjectDelete(DeleteView):
     model = Project
     success_url = reverse_lazy('project-delete-success')
+    
+class DemoList(ListView):
+    model = ApplicationDemo
+    
+class DemoDetail(DetailView):
+    model = ApplicationDemo
 
 class ApprovalCreate(CreateView):
     model = Approval

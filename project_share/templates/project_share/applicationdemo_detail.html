@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% if object.application.application_type.name == "cSNAP" %}
+      {% with url=object.application.application_file.url application_id=object.application.id application=object.application %}
+          {% include "project_share/application_csnap.html" %}
+      {% endwith %}
+    {% endif %}
+{% endblock %}

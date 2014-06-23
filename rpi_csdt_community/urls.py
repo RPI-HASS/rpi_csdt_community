@@ -9,11 +9,12 @@ from rpi_csdt_community.views import RedirectRegistrationView
 from django.contrib import admin
 admin.autodiscover()
 
-from rpi_csdt_community.viewsets import ProjectViewSet, DemosViewSet, FileUploadView, CurrentUserView
+from rpi_csdt_community.viewsets import ProjectViewSet, DemosViewSet, GoalViewSet, FileUploadView, CurrentUserView
 from rest_framework import routers
 router = routers.DefaultRouter()
 router.register(r'projects', ProjectViewSet, base_name='api-projects')
 router.register(r'demos', DemosViewSet, base_name='api-demos')
+router.register(r'goals', GoalViewSet, base_name='api-goals')
 
 urlpatterns = patterns('',
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),

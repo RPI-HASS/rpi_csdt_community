@@ -1,6 +1,8 @@
 CSDT Community Site
 ========
 
+[![Build Status](https://drone.io/github.com/GK-12/rpi_csdt_community/status.png)](https://drone.io/github.com/GK-12/rpi_csdt_community/latest)
+
 This project is sponsered by Rensselaer Polytechnic Institute's GK-12 fellowship under Dr. Ron Eglash. The goal is the create a web platform for students to share projects, community, and in general create a community around the pCSDT's. More information about the pCSDT's can be found here: http://csdt.rpi.edu/
 
 ## How-to deploy for development
@@ -16,10 +18,14 @@ To deploy this project, you will need the following packages installed:
 Now, the howto
 ```shell
 cd {{ Directory of this repo }}
-cd src
 . ./activate
-cd src
-python ./manage.py syncdb
+python ./manage.py syncdb --all
+python ./manage.py runserver --fake
+git submodule init
+git submodule update
+
+# Every time you start to develop, start the server
+#  It should auto refresh when you change a file
 python ./manage.py runserver
 ```
 

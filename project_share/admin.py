@@ -4,6 +4,7 @@ from django.utils.translation import ugettext_lazy as _
 from attachments.admin import AttachmentInlines
 
 from project_share.models import Application, ApplicationDemo, ApplicationType, Address, Project, Approval, FileUpload
+from project_share.models import Goal
 from project_share.models import Classroom
 from project_share.models import ExtendedUser
 
@@ -31,12 +32,19 @@ class ClassListFilter(admin.SimpleListFilter):
 
 class ApprovalInline(admin.TabularInline):
     model = Approval
-
+    
 class ProjectAdmin(admin.ModelAdmin):
     inlines = [AttachmentInlines, ApprovalInline]
     list_filter = (ClassListFilter,)
     list_display = ('name', 'owner', 'application', 'approved',)
     search_fields = ['owner__first_name', 'owner__last_name', 'name']
+
+    def approve(modeladmin, request, queryset):
+       Approval.objects.filter(project__in=queryset).update(approved_by=request.user)
+       queryset.update(approved=True)
+
+    approve.short_description = "Approve selected projects"
+    actions = [approve]
 
 class ApprovalAdmin(admin.ModelAdmin):
     pass
@@ -52,6 +60,7 @@ class ClassroomAdmin(admin.ModelAdmin):
 
 admin.site.register(Application)
 admin.site.register(ApplicationDemo)
+admin.site.register(Goal)
 admin.site.register(ApplicationType)
 admin.site.register(Address)
 admin.site.register(Project, ProjectAdmin)
