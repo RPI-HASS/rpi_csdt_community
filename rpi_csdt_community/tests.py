@@ -23,11 +23,19 @@ class UrlTests(TestCase):
             return
         self.visited[url] = True
 
+        # Ignore URL's that point elsewhere
+        if url.startswith('http://') or url.startswith('http://') or url.startswith('//'):
+            return
+
         # Ignore URL that simply point to media...
         if url.startswith(settings.MEDIA_URL):
             return
 
         response = self.client.get(url)
+
+        #import sys
+        #sys.stdout.write(url + '->' + repr(response.status_code)+'\n')
+        #sys.stdout.flush()
 
         self.assertTrue(response.status_code == 200 or response.status_code == 302)
 
