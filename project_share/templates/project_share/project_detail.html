@@ -5,14 +5,19 @@
 {% load thumbnail %}
 
 {% block content %}
-    {% if project.application.application_type.name == "pCSDT" %}
-        {% include "project_share/application_pcsdt.html" %}
-    {% elif project.application.application_type.name == "cSNAP" %}
-        {% with url=project.application.application_file.url application_id=project.application.id %}
-            {% include "project_share/application_csnap.html" %}
-        {% endwith %}
-    {% endif %}
-
+    <h2>{{ object.name }}<small> by {{ object.owner }}</small></h2>
+    <div class="container row">
+        <div class="span4">
+            {% thumbnail project.screenshot.f "400x400" crop="center" as im %}
+              <a href="{% url 'project-detail' pk=project.id %}"><img src="{{ im.url }}" alt="Screenshot of {{ project.name }}"></a>
+            {% endthumbnail %}
+        </div>
+        <div class="span7 lead">
+          {{ object.description }}
+        </div>
+    </div>
+    <a href="{% url 'project-run-detail' pk=object.pk %}" class="btn btn-large btn-primary">Open</a>
+    <a href="{% url 'project-present-detail' pk=object.pk %}" class="btn btn-large btn-info">Open for Presentation</a>
     {% get_attachments_for object as "attachments_list" %}
 
     {% if attachments_list.count > 0 %}

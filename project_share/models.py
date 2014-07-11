@@ -116,6 +116,9 @@ class Goal(models.Model):
     thumbnail = models.FileField(upload_to=application_application_goal)
     image = models.FileField(upload_to=application_application_goal)
 
+    def __unicode__(self):
+        return self.name    
+    
 class ExtendedUser(AbstractUser):
     def __unicode__(self):
         if self.first_name != "":   
