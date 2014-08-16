@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    There should be in depth explanation about each application here
+  <h1>{{ object }}</h1>
+  <h3><a href="{% url 'application-run-detail' pk=object.id %}">run the {{ object }} application...</a></h3>
+  <p>{{ object.description }}</p>
 {% endblock %}
