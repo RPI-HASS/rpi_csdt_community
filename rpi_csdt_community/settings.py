@@ -212,6 +212,9 @@ SOUTH_MIGRATION_MODULES = {
     'taggit': 'taggit.south_migrations',
 }
 
+THUMBNAIL_DEBUG = False
+PYBB_ANONYMOUS_VIEWS_CACHE_BUFFER = 10
+
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to

@@ -58,9 +58,13 @@ class ClassroomAdmin(admin.ModelAdmin):
             return db_field.formfield(**kwargs)
         return super(ClassroomAdmin, self).formfield_for_foreignkey(db_field, request, **kwargs)
 
+class GoalAdmin(admin.ModelAdmin):
+    list_display = ('name', 'application')
+    list_filter = ('application',)
+
 admin.site.register(Application)
 admin.site.register(ApplicationDemo)
-admin.site.register(Goal)
+admin.site.register(Goal, GoalAdmin)
 admin.site.register(ApplicationType)
 admin.site.register(Address)
 admin.site.register(Project, ProjectAdmin)

@@ -27,6 +27,14 @@ class ApplicationList(ListView):
 class ApplicationDetail(DetailView):
     model = Application
 
+class ApplicationRunDetail(DetailView):
+    model = Application
+    context_object_name = 'application'
+    template_name = "project_share/application_csnap.html"
+
+    def render_to_response(self, context, **response_kwargs):
+        return super(ApplicationRunDetail, self).render_to_response(context, **response_kwargs)
+
 class ProjectList(SearchableListMixin, SortableListMixin, ListView):
     sort_fields_aliases = [('name', 'by_name'), ('id', 'by_id'), ('votes', 'by_likes'), ]
     search_fields = [('application__name','iexact')]
@@ -47,14 +55,20 @@ class ProjectDetail(DetailView):
     model = Project
     queryset = Project.approved_objects.all()
 
-class ProjectJNLP(DetailView):
+class ProjectRunDetail(DetailView):
     model = Project
-    template_name = "project_share/project_jnlp.xml"
-
+    queryset = Project.approved_objects.all()
+    template_name = "project_share/application_csnap.html"
+    context_object_name = 'project'
 
     def render_to_response(self, context, **response_kwargs):
-        response_kwargs.update({'content_type': 'application/x-java-jnlp-file'})
-        return super(ProjectJNLP, self).render_to_response(context, **response_kwargs)
+        context['application'] = context['project'].application
+        return super(ProjectRunDetail, self).render_to_response(context, **response_kwargs)
+
+class ProjectPresentDetail(ProjectRunDetail):
+    def render_to_response(self, context, **response_kwargs):
+        context['present'] = True
+        return super(ProjectPresentDetail, self).render_to_response(context, **response_kwargs)
 
 class ProjectCreate(CreateView):
     model = Project

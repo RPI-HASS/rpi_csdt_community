@@ -20,7 +20,7 @@ Now, the howto
 cd {{ Directory of this repo }}
 . ./activate
 python ./manage.py syncdb --all
-python ./manage.py runserver --fake
+python ./manage.py migrate --fake
 git submodule init
 git submodule update
 
