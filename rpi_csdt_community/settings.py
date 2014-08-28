@@ -161,6 +161,7 @@ INSTALLED_APPS = (
     'pybb',
     'south',
     'rest_framework',
+    'django_teams',
 )
 
 CAPTCHA_CHALLENGE_FUNCT = 'captcha.helpers.math_challenge'

@@ -22,3 +22,7 @@
 td.post-info {
     width: 20%;
 }
+
+div.user-list ul {
+    list-style-type: none;
+}

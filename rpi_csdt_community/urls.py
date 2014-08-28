@@ -25,6 +25,7 @@ urlpatterns = patterns('',
     url(r'^$', 'rpi_csdt_community.views.home', {}, 'home'),
 
     url(r'', include('project_share.urls')),
+    url(r'teams/', include('django_teams.urls')),
 
     url(r'^login/$', 'django.contrib.auth.views.login', {'template_name': 'home.html'}),
     url(r'^accounts/register/$', RedirectRegistrationView.as_view(form_class=CaptchaRegistrationForm), name='registration_register'),
