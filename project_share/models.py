@@ -66,8 +66,43 @@ class Application(models.Model):
     application_type = models.ForeignKey('project_share.ApplicationType', null=True, blank=True)
     application_file = models.FileField(upload_to=application_application, null=True, blank=True)
 
+    def get_context(self):
+        # Returns all context data ordered
+        ret = []
+        for item in self.applicationcontext_set.filter(parent=None).order_by('order'):
+            ret += [item]
+            l = self._get_context(item)
+            if len(l) > 0:
+                ret += l
+        return ret
+
+    def _get_context(self, parent):
+        ret = []
+        for item in parent.applicationcontext_set.all().order_by('order'):
+            ret += [item]
+            l = self._get_context(item)
+            if len(l) > 0:
+                ret += l
+        return ret
+
     def __unicode__(self):
         return self.name
+
+class ApplicationContext(models.Model):
+    application = models.ForeignKey('project_share.Application')
+    parent = models.ForeignKey('project_share.ApplicationContext', null=True, blank=True)
+    order = models.IntegerField(default=100)
+
+    title = models.TextField()
+    html_data = models.TextField(null=True, blank=True)
+
+    def level(self):
+        if self.parent != None:
+            return self.parent.level()+1
+        return 1
+
+    def __unicode__(self):
+        return self.application.__unicode__() + "/" + self.title
 
 class ApplicationDemo(models.Model):
     name = models.CharField(max_length=255)

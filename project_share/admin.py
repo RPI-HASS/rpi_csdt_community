@@ -4,6 +4,7 @@ from django.utils.translation import ugettext_lazy as _
 from attachments.admin import AttachmentInlines
 
 from project_share.models import Application, ApplicationDemo, ApplicationType, Address, Project, Approval, FileUpload
+from project_share.models import ApplicationContext
 from project_share.models import Goal
 from project_share.models import Classroom
 from project_share.models import ExtendedUser
@@ -63,6 +64,7 @@ class GoalAdmin(admin.ModelAdmin):
     list_filter = ('application',)
 
 admin.site.register(Application)
+admin.site.register(ApplicationContext)
 admin.site.register(ApplicationDemo)
 admin.site.register(Goal, GoalAdmin)
 admin.site.register(ApplicationType)
