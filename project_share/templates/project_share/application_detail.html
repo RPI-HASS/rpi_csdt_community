@@ -1,27 +1,33 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h1>{{ object }}</h1>
-  <h3><a href="{% url 'application-run-detail' pk=object.id %}">run the {{ object }} application...</a></h3>
-
-  <div class="navbar">
-      <div class="navbar-inner">
-          <a class="brand">{{ object }}</a>
-          <ul class="nav">
-              {% for context in object.get_context %}
-                  {% if context.level == 1 %}
-                      <li><a href="#{{ context.title|slugify }}">{{ context.title }}</a></li>
-                  {% endif %}
-              {% endfor %}
-          </ul>
+  <div class="row">
+      <div class="span2">
+          <div class="navbar">
+              <div class="navbar-inner">
+                  <a class="brand">{{ object }}</a>
+                  <ul class="nav">
+                      {% for context in object.get_context %}
+                          {% if context.level == 1 %}
+                              <li><a href="#{{ context.title|slugify }}">{{ context.title }}</a></li>
+                          {% endif %}
+                      {% endfor %}
+                  </ul>
+              </div>
+          </div>
+      </div>
+      <div class="span10">
+          <h1>{{ object }}</h1>
+          <h3><a href="{% url 'application-run-detail' pk=object.id %}">run the {{ object }} application...</a></h3>
+        
+        
+          {% for context in object.get_context %}
+              <h{{ context.level|add:1 }}><a name="{{ context.title|slugify }}">{{ context.title }}</a></h{{ context.level|add:1 }}>
+              <div>
+                  {{ context.html_data|safe }}
+              </div>
+          {% endfor %}
+          <p>{{ object.description }}</p>
       </div>
   </div>
-
-  {% for context in object.get_context %}
-      <h{{ context.level|add:1 }}><a name="{{ context.title|slugify }}">{{ context.title }}</a></h{{ context.level|add:1 }}>
-      <div>
-          {{ context.html_data|safe }}
-      </div>
-  {% endfor %}
-  <p>{{ object.description }}</p>
 {% endblock %}
