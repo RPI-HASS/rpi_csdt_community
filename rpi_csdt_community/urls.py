@@ -16,6 +16,9 @@ router.register(r'projects', ProjectViewSet, base_name='api-projects')
 router.register(r'demos', DemosViewSet, base_name='api-demos')
 router.register(r'goals', GoalViewSet, base_name='api-goals')
 
+# Import the default router for gis_csdt
+from gis_csdt.urls import router as gis_router
+
 urlpatterns = patterns('',
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     url(r'^admin/', include(admin.site.urls)),
@@ -45,7 +48,9 @@ urlpatterns = patterns('',
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^api/', include(router.urls)),
     url(r'^api/files/', FileUploadView.as_view(), name='file-create'),
-    url(r'^api/user', CurrentUserView.as_view(), name='user-api-detail')
+    url(r'^api/user', CurrentUserView.as_view(), name='user-api-detail'),
+
+    url(r'^api-gis/', include(gis_router.urls)),
 )
 
 urlpatterns += patterns('',

@@ -162,6 +162,8 @@ INSTALLED_APPS = (
     'south',
     'rest_framework',
     'django_teams',
+    'django.contrib.gis',
+    'gis_csdt',
 )
 
 CAPTCHA_CHALLENGE_FUNCT = 'captcha.helpers.math_challenge'
@@ -214,6 +216,8 @@ SOUTH_MIGRATION_MODULES = {
 
 THUMBNAIL_DEBUG = False
 PYBB_ANONYMOUS_VIEWS_CACHE_BUFFER = 10
+
+POSTGIS_VERSION = (2, 1, 2)
 
 
 # A sample logging configuration. The only tangible logging
