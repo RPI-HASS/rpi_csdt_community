@@ -106,7 +106,6 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
 
     'likes.middleware.SecretBallotUserIpUseragentMiddleware',
-    'pybb.middleware.PybbMiddleware',
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
@@ -136,7 +135,38 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
     'taggit',
     'taggit_templatetags',
-    'registration',
+
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    # ... include the providers you want to enable:
+    #'allauth.socialaccount.providers.amazon',
+    #'allauth.socialaccount.providers.angellist',
+    #'allauth.socialaccount.providers.bitbucket',
+    #'allauth.socialaccount.providers.bitly',
+    #'allauth.socialaccount.providers.coinbase',
+    #'allauth.socialaccount.providers.dropbox',
+    'allauth.socialaccount.providers.facebook',
+    #'allauth.socialaccount.providers.flickr',
+    'allauth.socialaccount.providers.github',
+    #'allauth.socialaccount.providers.feedly',
+    #'allauth.socialaccount.providers.google',
+    #'allauth.socialaccount.providers.hubic',
+    #'allauth.socialaccount.providers.instagram',
+    #'allauth.socialaccount.providers.linkedin',
+    #'allauth.socialaccount.providers.linkedin_oauth2',
+    #'allauth.socialaccount.providers.openid',
+    #'allauth.socialaccount.providers.persona',
+    #'allauth.socialaccount.providers.soundcloud',
+    #'allauth.socialaccount.providers.stackexchange',
+    #'allauth.socialaccount.providers.tumblr',
+    #'allauth.socialaccount.providers.twitch',
+    'allauth.socialaccount.providers.twitter',
+    #'allauth.socialaccount.providers.vimeo',
+    #'allauth.socialaccount.providers.vk',
+    #'allauth.socialaccount.providers.weibo',
+    #'allauth.socialaccount.providers.xing',
+
     'captcha',
     'django_bootstrap',
     'django_extensions',
@@ -151,15 +181,15 @@ INSTALLED_APPS = (
     'sorl.thumbnail',
 
     'extra_views',
-    
+
     'secretballot',
     'likes',
 
     'django.contrib.comments',
     'django_comments_xtd',
     'django_markup',
-    'pybb',
-    'south',
+#    'pybb',
+#    'south',
     'rest_framework',
     'django_teams',
 )
@@ -176,7 +206,13 @@ from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS as TCP
 TEMPLATE_CONTEXT_PROCESSORS = TCP + (
     'django.core.context_processors.request',
     'django.contrib.messages.context_processors.messages',
-    'pybb.context_processors.processor',
+    'allauth.account.context_processors.account',
+    'allauth.socialaccount.context_processors.socialaccount',
+)
+
+AUTHENTICATION_BACKENDS = (
+    "django.contrib.auth.backends.ModelBackend",
+    "allauth.account.auth_backends.AuthenticationBackend",
 )
 
 AUTH_USER_MODEL = 'project_share.ExtendedUser'
@@ -188,11 +224,6 @@ CACHES = {
         'LOCATION': '127.0.0.1:11211',
     }
 }
-
-PYBB_TEMPLATE = 'base_forum.html'
-def require_moderation(user, post):
-    return False
-PYBB_PREMODERATION = require_moderation
 
 REST_FRAMEWORK = {
     # Use hyperlinked styles by default.
@@ -213,8 +244,8 @@ SOUTH_MIGRATION_MODULES = {
 }
 
 THUMBNAIL_DEBUG = False
-PYBB_ANONYMOUS_VIEWS_CACHE_BUFFER = 10
 
+LOGIN_REDIRECT_URL = '/'
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to

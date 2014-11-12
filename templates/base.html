@@ -55,13 +55,12 @@
           <div class="nav-collapse collapse">
             <ul class="nav">
               <li><a href="{% url 'project-list' %}">Projects</a></li>
-              <li><a href="{% url 'pybb:index' %}">Discuss</a></li>
               <li><a href="{% url 'application-list' %}">Create</a></li>
               <li><a href="{% url 'team-list' %}">Classrooms</a></li>
               {% if user.is_authenticated %}
                 <li><a href="{% url 'team-create' %}">Create Classroom</a></li>
                 <li><a href="{% url 'extendeduser-detail' pk=user.id %}">My Profile</a></li>
-                <li><a href="{% url 'auth_logout' %}">Log out</a></li>
+                <li><a href="{% url 'account_logout' %}">Log out</a></li>
               {% endif %}
             </ul>
           </div><!--/.nav-collapse -->
@@ -100,4 +99,3 @@
 
   </body>
 </html>
-
