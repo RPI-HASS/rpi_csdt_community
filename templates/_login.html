@@ -1,0 +1,38 @@
+{% load socialaccount %}
+<form method="post" class="login-form" action="{% url 'account_login' %}">
+    {% csrf_token %}
+
+    <h2>Login</h2>
+    <p>Please sign in with one
+    of your existing third party accounts. Or, <a href="{{ signup_url }}">sign up</a>
+    for a CSDT Community account and sign in below:</p>
+    <div class="socialaccount_ballot">
+        <ul class="socialaccount_providers">
+        {% include "socialaccount/snippets/provider_list.html" with process="login" %}
+        </ul>
+        <div class="login-or">or</div>
+    </div>
+    {% if form.errors %}
+        <p>{{ form.non_field_errors.as_text }}</p>
+    {% endif %}
+    <div>
+        <label for="login">Username</label>
+        <div>
+            <input type="text" class="input-block-level" name="login" placeholder="{{ form.username.label }}">
+        </div>
+    </div>
+    {{ form.username.errors }}
+    <div>
+        <label for="password">Password</label>
+        <div>
+            <input type="password" class="input-block-level" name="password" placeholder="{{ form.password.label }}">
+        </div>
+    </div>
+    {{ form.password.errors }}
+    <div class="login-submit">
+        <div>
+            <button class="btn btn-large btn-primary" type="submit">Login</button>
+            or <a href="{% url 'account_signup' %}">Register</a>
+        </div>
+    </div>
+</form>

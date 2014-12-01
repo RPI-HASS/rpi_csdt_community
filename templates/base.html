@@ -1,3 +1,4 @@
+{% load pipeline %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -7,66 +8,47 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <!-- Le styles -->
-    <link href="{{ STATIC_URL }}bootstrap/css/bootstrap.css" rel="stylesheet">
-    <style>
-      body {
-        padding-top: 80px; /* 60px to make the container go all the way to the bottom of the topbar */
-      }
-      #id_honeypot {
-          display: none;
-          }
-    </style>
-    <link href="{{ STATIC_URL }}bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
-
-    <link href="{{ STATIC_URL }}css/style.css" rel="stylesheet">
+    {% stylesheet 'base_style' %}
 
     {% block extra_style %}{% endblock %}
 
     {% block extra_head %}{% endblock %}
-
-    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-      <script src="{{ STATIC_URL }}bootstrap/js/html5shiv.js"></script>
-    <![endif]-->
-
-    <!-- Fav and touch icons -->
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{ STATIC_URL }}bootstrap/ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{{ STATIC_URL }}bootstrap/ico/apple-touch-icon-114-precomposed.png">
-      <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{{ STATIC_URL }}bootstrap/ico/apple-touch-icon-72-precomposed.png">
-                    <link rel="apple-touch-icon-precomposed" href="{{ STATIC_URL }}bootstrap/ico/apple-touch-icon-57-precomposed.png">
-                                   <link rel="shortcut icon" href="{{ STATIC_URL }}bootstrap/ico/favicon.png">
-
-    <!-- This is needed. Just include it -->
-    <script src="{{ STATIC_URL }}bootstrap/js/jquery.js"></script>
   </head>
 
   <body>
 
-    <div class="navbar navbar-fixed-top">
-      <div class="navbar-inner">
+
+    <!-- Static navbar -->
+    <nav class="navbar navbar-default" role="navigation">
         <div class="container">
-          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="brand" href="{% url 'home' %}">CSDT Community</a>
-          <div class="nav-collapse collapse">
-            <ul class="nav">
-              <li><a href="{% url 'project-list' %}">Projects</a></li>
-              <li><a href="{% url 'application-list' %}">Create</a></li>
-              <li><a href="{% url 'team-list' %}">Classrooms</a></li>
-              {% if user.is_authenticated %}
-                <li><a href="{% url 'team-create' %}">Create Classroom</a></li>
-                <li><a href="{% url 'extendeduser-detail' pk=user.id %}">My Profile</a></li>
-                <li><a href="{% url 'account_logout' %}">Log out</a></li>
-              {% endif %}
-            </ul>
-          </div><!--/.nav-collapse -->
-        </div>
-      </div>
-    </div>
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="{% url 'home' %}">CSDT Community</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="{% url 'project-list' %}">Projects</a></li>
+                    <li><a href="{% url 'application-list' %}">Create</a></li>
+                    <li><a href="{% url 'team-list' %}">Classrooms</a></li>
+                    {% if user.is_authenticated %}
+                        <li><a href="{% url 'team-create' %}">Create Classroom</a></li>
+                        <li><a href="{% url 'extendeduser-detail' pk=user.id %}">My Profile</a></li>
+                    {% endif %}
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    {% if user.is_authenticated %}
+                        <li><a href="{% url 'account_logout' %}">Log out</a></li>
+                    {% endif %}
+                </ul>
+            </div><!--/.nav-collapse -->
+        </div><!--/.container-fluid -->
+    </nav>
 
     {% block pre-body %}
     {% endblock %}
@@ -77,22 +59,8 @@
         {% block content %}{% endblock %}
     </div> <!-- /container -->
 
-    <!-- Le javascript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="{{ STATIC_URL }}bootstrap/js/jquery.js"></script>
-    <script src="{{ STATIC_URL }}bootstrap/js/bootstrap-transition.js"></script>
-    <script src="{{ STATIC_URL }}bootstrap/js/bootstrap-alert.js"></script>
-    <script src="{{ STATIC_URL }}bootstrap/js/bootstrap-modal.js"></script>
-    <script src="{{ STATIC_URL }}bootstrap/js/bootstrap-dropdown.js"></script>
-    <script src="{{ STATIC_URL }}bootstrap/js/bootstrap-scrollspy.js"></script>
-    <script src="{{ STATIC_URL }}bootstrap/js/bootstrap-tab.js"></script>
-    <script src="{{ STATIC_URL }}bootstrap/js/bootstrap-tooltip.js"></script>
-    <script src="{{ STATIC_URL }}bootstrap/js/bootstrap-popover.js"></script>
-    <script src="{{ STATIC_URL }}bootstrap/js/bootstrap-button.js"></script>
-    <script src="{{ STATIC_URL }}bootstrap/js/bootstrap-collapse.js"></script>
-    <script src="{{ STATIC_URL }}bootstrap/js/bootstrap-carousel.js"></script>
-    <script src="{{ STATIC_URL }}bootstrap/js/bootstrap-typeahead.js"></script>
+    {% javascript 'jquery' %}
+    {% javascript 'bootstrap' %}
     {% block js %}
     {% endblock %}
     {% block extra_script %}{% endblock %}

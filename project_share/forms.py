@@ -6,7 +6,7 @@ from project_share.models import Project, Approval, Address
 class ProjectForm(ModelForm):
     class Meta:
         model = Project
-        exclude = ('owner', 'approved',)
+        exclude = ('owner', 'approved','application','project','screenshot','parent',)
 
 class ApprovalForm(ModelForm):
     class Meta:

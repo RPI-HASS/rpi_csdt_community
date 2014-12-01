@@ -4,41 +4,25 @@
 {% load socialaccount %}
 
 {% block content %}
-    <div class="row">
-        <div class="span7">
-            <div class="row hero-unit">
+    <div class="two-column-8-4">
+        <div class="column-left">
+            <div class="jumbotron">
                 <h2>Combine cultural education with STEM</h2>
                 <p class="lead">Learn, create, and share your work with Culturally Situated Design Tools.</p>
             </div>
-            <div class="row">
+            <div class="two-column-8-4">
                 {% if not user.is_authenticated %}
-                    <div class="span4">
-                        <form method="post" class="form-signin" action="{% url 'account_login' %}" style="margin: 0 0 20px;">
-                            {% csrf_token %}
-
-                        <h2 class="form-signin-heading">Login</h2>
-                        <a href="{% provider_login_url "twitter" process="connect" %}">Connect a Twitter account</a>
-                        <a href="{% provider_login_url "facebook" process="connect" %}">Connect a Facebook account</a>
-                        <a href="{% provider_login_url "github" process="connect" %}">Connect a Github account</a>
-                        {% if form.errors %}
-                            <p>{{ form.non_field_errors.as_text }}</p>
-                        {% endif %}
-                        <input type="text" class="input-block-level" name="login" placeholder="{{ form.username.label }}">
-                        {{ form.username.errors }}
-                        <input type="password" class="input-block-level" name="password" placeholder="{{ form.password.label }}">
-                        {{ form.password.errors }}
-                        <button class="btn btn-large btn-primary" type="submit">Login</button>
-                        or <a href="{% url 'account_signup' %}">Register</a>
-                        </form>
+                    <div class="column-left">
+                        {% include '_login.html' %}
                     </div>
-                    <div class="span2">
+                    <div class="column-right">
                         <h3>New Users</h3>
                         <a class="btn btn-large btn-primary" href="{% url 'account_signup' %}">Register</a>
                     </div>
                 {% endif %}
             </div>
         </div>
-        <div class="span5">
+        <div class="column-right">
             <div class="videoWrapper">
                 <iframe src="//player.vimeo.com/video/84150089" width="500" height="375" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> <p><a href="http://vimeo.com/84150089">A Kumasi-Albany Connection Hello</a> from <a href="http://vimeo.com/user15534824">Michael Lachney</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
             </div>
@@ -47,40 +31,18 @@
     <div>
         <h3>Most popular projects...</h3>
     </div>
-    <ul class="thumbnails">
-        {% for project in projects_popular %}
-            <li class="span2">
-                <div class="thumbnail">
-                    {% thumbnail project.screenshot.f "400x400" crop="center" as im %}
-                        <a href="{% url 'project-detail' pk=project.id %}"><img src="{{ im.url }}" alt="Screenshot of {{ project.name }}"></a>
-                    {% endthumbnail %}
-                     <div class="caption">
-                        <h4>{{ project.name }}</h4>
-                        <p>{{ project.description|truncatewords:10 }}</p>
-                    </div>
-                </div>
-            </li>
+    <div class="thumbnails">
+        {% for object in projects_popular %}
+            {% include "_project_thumbnail.html" %}
         {% endfor %}
-    </ul>
-
-    <div id="span12">
-        <h3>Newest projects...</h3>
     </div>
-    <ul class="thumbnails">
-        {% for project in projects_newest %}
-            <li class="span2">
-                <div class="thumbnail">
-                    {% thumbnail project.screenshot.f "400x400" crop="center" as im %}
-                        <a href="{% url 'project-detail' pk=project.id %}"><img src="{{ im.url }}" alt="Screenshot of {{ project.name }}"></a>
-                    {% endthumbnail %}
-                     <div class="caption">
-                        <h4>{{ project.name }}</h4>
-                        <p>{{ project.description|truncatewords:10 }}</p>
-                    </div>
-                </div>
-            </li>
+
+    <h3>Newest projects...</h3>
+    <div class="thumbnails">
+        {% for object in projects_newest %}
+            {% include "_project_thumbnail.html" %}
         {% endfor %}
-    </ul>
+    </div>
 
     <div class="span12">
         <h3>Catacloud <small>A cloud of categories</small></h3>

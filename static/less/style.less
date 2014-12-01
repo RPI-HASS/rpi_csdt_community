@@ -1,0 +1,113 @@
+@import "bootstrap.less";
+/* Include theme settings */
+@import "themes/spacelab/bootswatch.less";
+@import "themes/spacelab/variables.less";
+
+@icon-font-path: "/static/twitter_bootstrap/fonts/";
+
+.two-column {
+    .make-row();
+    .column-left {
+        .make-md-column(6);
+    }
+    .column-right {
+        .make-md-column(6);
+    }
+}
+
+.two-column-8-4 {
+    .make-row();
+    .column-left {
+        .make-md-column(8);
+    }
+    .column-right {
+        .make-md-column(4);
+    }
+}
+
+.thumbnails {
+    .make-row();
+
+    /*div {
+        .make-md-column(4);
+
+        div {
+            &:extend(.thumbnail);
+            div {
+                &:extend(.caption);
+            }
+        }
+    }*/
+}
+
+.thumbnail-long {
+    /* Each thumbnail takes up a complete row, but splits it into two columns
+        with the image on the left, description on the right */
+    &:extend(.panel);
+    &:extend(.panel-default);
+    div.heading {
+        &:extend(.panel-heading);
+        h3 {
+            &:extend(.panel-title);
+        }
+    }
+    div.body {
+        &:extend(.panel-body);
+        .make-row();
+        div.image {
+            .make-md-column(4);
+        }
+        div.description {
+            .make-md-column(8);
+        }
+    }
+    div.footer {
+        &:extend(.panel-footer);
+    }
+}
+
+a.liker {
+    &:extend(.btn, .btn-large, .btn-primary, .glyphicon);
+}
+
+.login-form {
+    &:extend(.form-horizontal);
+
+    h2 {
+        /* What should go here? */
+    }
+
+    div {
+        &:extend(.form-group);
+        label {
+            .make-sm-column(2);
+            &:extend(.control-label);
+        }
+        div {
+            .make-sm-column(10);
+            input {
+                &:extend(.form-control);
+            }
+        }
+    }
+
+    .login-submit {
+        &:extend(.form-group);
+        div {
+            .make-sm-column-offset(2);
+            .make-sm-column(10);
+        }
+    }
+
+    .twitter-logo {
+        /* Add twitter logo */
+    }
+
+    .facebook-logo {
+        /* Add facebook logo */
+    }
+
+    .github-logo {
+        /* Add github logo */
+    }
+}

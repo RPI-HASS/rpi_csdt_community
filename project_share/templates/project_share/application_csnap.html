@@ -21,11 +21,11 @@
             'user_api_detail_url': '{% url 'user-api-detail'%}',
             'demos_url': '{% url 'api-demos-list' %}?format=json&application={{ application }}',
             'demo_detail_url': '{% url 'demo-list' %}',
-            'goals_url': '{% url 'api-goals-list' %}?format=json&application={{ application }}', 
+            'goals_url': '{% url 'api-goals-list' %}?format=json&application={{ application }}',
             'create_project_url': '{% url 'api-projects-list' %}',
             'list_project_url': '{% url 'api-projects-list' %}',
             'create_file_url': '{% url 'file-create' %}',
-            'login_url': '{% url 'django.contrib.auth.views.login' %}',
+            'login_url': '{% url 'account_login' %}',
             {% if user.is_authenticated %}
             'user_detail_url': '{% url 'extendeduser-detail' pk=user.id %}',
             {% endif %}
@@ -77,7 +77,7 @@
     <script type="text/javascript" src="{{ STATIC_URL }}csnap/cloud.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}csnap/sha512.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}csnap/Charles_Changes_To_IDE_Morph.js"></script>
-		
+
     <script type="text/javascript">
         var world;
         window.onload = function () {
@@ -111,7 +111,7 @@ $(function() {
         return cookieValue;
     }
     var csrftoken = getCookie('csrftoken');
-    
+
     function csrfSafeMethod(method) {
         // these HTTP methods do not require CSRF protection
         return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));

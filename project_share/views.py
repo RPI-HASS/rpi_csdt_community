@@ -21,6 +21,20 @@ except ImportError: # django < 1.5
 else:
     User = get_user_model()
 
+class RestrictPermissionMixin(object):
+    def dispatch(self, request, *args, **kwargs):
+        self.kwargs = kwargs
+        self.request = request
+        return super(RestrictPermissionMixin, self).dispatch(request, *args, **kwargs)
+
+    def get_object(self):
+        o = super(RestrictPermissionMixin, self).get_object()
+
+        # If the object doesn't belong to this user and isn't published, throw a error 503
+        if ((not o.approved and o.owner != self.request.user) or o.approval != None) and not self.request.user.is_superuser:
+            raise PermissionDenied()
+        return o
+
 class ApplicationList(ListView):
     model = Application
 
@@ -51,13 +65,11 @@ class ProjectTagList(ProjectList):
         self.tag = get_object_or_404(Tag, pk=self.kwargs['tag_pk'])
         return Project.approved_objects.filter(tags__in=[self.tag])
 
-class ProjectDetail(DetailView):
+class ProjectDetail(RestrictPermissionMixin, DetailView):
     model = Project
-    queryset = Project.approved_objects.all()
 
-class ProjectRunDetail(DetailView):
+class ProjectRunDetail(RestrictPermissionMixin, DetailView):
     model = Project
-    queryset = Project.approved_objects.all()
     template_name = "project_share/application_csnap.html"
     context_object_name = 'project'
 
@@ -89,16 +101,30 @@ class ProjectCreate(CreateView):
 class ProjectUpdate(UpdateView):
     model = Project
     form_class = ProjectForm
-    
+
     template_name = "project_share/project_edit.html"
+
+
+    def dispatch(self, request, *args, **kwargs):
+        self.kwargs = kwargs
+        self.request = request
+        return super(ProjectUpdate, self).dispatch(request, *args, **kwargs)
+
+    def get_object(self):
+        o = super(ProjectUpdate, self).get_object()
+
+        # If the object doesn't belong to this user, throw a error 503
+        if o.owner != self.request.user or o.approval != None:
+            raise PermissionDenied()
+        return o
 
 class ProjectDelete(DeleteView):
     model = Project
     success_url = reverse_lazy('project-delete-success')
-    
+
 class DemoList(ListView):
     model = ApplicationDemo
-    
+
 class DemoDetail(DetailView):
     model = ApplicationDemo
 
@@ -127,24 +153,24 @@ class UserDetail(DetailView):
 class AddressCreate(CreateView):
     model = Address
     form_class = AddressForm
-    
+
     def form_valid(self, form):
         form.instance.teacher = self.request.user
         return super(AddressCreate, self).form_valid(form)
-      
+
     def get_success_url(self):
         return u'/'
-      
+
 class AddressUpdate(UpdateView):
     model = Address
     form_class = AddressForm
-    
+
     template_name = "project_share/address_form.html"
-    
+
     def dispatch(self, request, *args, **kwargs):
       if(not request.user.id == int(self.kwargs['pk'])):
          raise PermissionDenied
       return super(AddressUpdate, self).dispatch(request, *args, **kwargs)
-    
+
     def get_success_url(self):
         return reverse('address-confirm')

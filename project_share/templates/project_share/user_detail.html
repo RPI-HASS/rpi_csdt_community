@@ -3,7 +3,7 @@
 
 {% block content %}
     <div class="page-header">
-        <h1>My Profile <small><br><a href="{% url 'change_password' %}">Change password</a>
+        <h1>My Profile <small><br><a href="{% url 'account_change_password' %}">Change password</a>
           {% if object.address %}
             <br><a href="{% url 'address-update' pk=object.id %}">Change address</a>
           {% endif %}
@@ -13,46 +13,38 @@
     <div id="span12">
         <h3>My Projects</h3>
     </div>
-    <ul class="thumbnails">
-        {% for project in object.project_set.all %}
-            {% if project.approved %}
-            <li class="span2">
-                <div class="thumbnail">
-                    {% thumbnail project.screenshot.f "400x400" crop="center" as im %}
-                        <a href="{% url 'project-detail' pk=project.id %}"><img src="{{ im.url }}" alt="Screenshot of {{ project.name }}"></a>
-                    {% endthumbnail %}
-                     <div class="caption">
-                        <h4>{{ project.name }}</h4>
-                        <p>{{ project.description|truncatewords:10 }}</p>
-                    </div>
-                    <a class="btn btn-large btn-block btn-danger" type="button" href="{% url 'project-delete' pk=project.id %}">Delete</a>
-                </div>
-            </li>
+    <div class="thumbnails">
+        {% for object in object.project_set.all %}
+            {% if object.approved %}
+                {% include "_project_thumbnail.html" %}
             {% endif %}
         {% endfor %}
-    </ul>
+    </div>
 
     <div id="span12">
         <h3>Projects pending approval</h3>
     </div>
-    <ul class="thumbnails">
-        {% for project in object.project_set.all %}
-            {% if not project.approved %}
-            <li class="span2">
-                <div class="thumbnail">
-                    {% thumbnail project.screenshot.f "400x400" crop="center" as im %}
-                        <a href="{% url 'project-update' pk=project.id %}"><img src="{{ im.url }}" alt="Screenshot of {{ project.name }}"></a>
-                    {% endthumbnail %}
-                     <div class="caption">
-                        <h4>{{ project.name }}</h4>
-                        <p>{{ project.description|truncatewords:10 }}</p>
+    <div class="thumbnails">
+        {% for object in object.project_set.all %}
+            {% if not object.approved %}
+                <div class="col-sm-6 col-md-4">
+                    <div class="thumbnail">
+                        {% thumbnail object.screenshot.f "300x300" crop="center" as im %}
+                            <a href="{% url 'project-update' pk=object.id %}"><img src="{{ im.url }}" alt="Screenshot of {{ object.name }}"></a>
+                        {% endthumbnail %}
+                         <div class="caption">
+                            <h4>{{ object.name }}</h4>
+                            <p>{{ object.description|truncatewords:10 }}</p>
+                            <p>
+                                <a href="{% url 'project-run-detail' pk=object.pk %}" class="btn btn-large btn-primary">Open</a>
+                                <a href="{% url 'project-present-detail' pk=object.pk %}" class="btn btn-large btn-info">Open for Presentation</a>
+                            </p>
+                        </div>
                     </div>
-                    <a class="btn btn-large btn-block btn-danger" type="button" href="{% url 'project-delete' pk=project.id %}">Delete</a>
                 </div>
-            </li>
             {% endif %}
         {% endfor %}
-    </ul>
+    </div>
 
 
 {% endblock %}

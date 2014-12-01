@@ -15,7 +15,7 @@ def application_application(instance, filename):
 
 def application_application_demo(instance, filename):
     return "applications/demos/" + slugify(instance.application.__unicode__()) + "/" + slugify(filename.split('.')[:-1]) + "." + slugify(filename.split('.')[-1])
-  
+
 def application_application_goal(instance, filename):
     return "applications/goals/" + slugify(instance.application.__unicode__()) + "/" + slugify(filename.split('.')[:-1]) + "." + slugify(filename.split('.')[-1])
 
@@ -142,21 +142,21 @@ class Project(models.Model):
 
     def get_absolute_url(self):
         return reverse('project-detail', kwargs={'pk': self.pk})
-      
+
 class Goal(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField(null=True, blank=True)
     application = models.ForeignKey(Application)
-    
+
     thumbnail = models.FileField(upload_to=application_application_goal)
     image = models.FileField(upload_to=application_application_goal)
 
     def __unicode__(self):
-        return self.name    
-    
+        return self.name
+
 class ExtendedUser(AbstractUser):
     def __unicode__(self):
-        if self.first_name != "":   
+        if self.first_name != "":
             return "%s %s" % (self.first_name, self.last_name)
         return self.username
 
@@ -177,7 +177,7 @@ class Address(models.Model):
     country = models.CharField(max_length=255)
     phone = models.CharField(max_length=255)
     teacher = models.OneToOneField(settings.AUTH_USER_MODEL, primary_key=True)
-    
+
     class Meta:
       verbose_name_plural = "Addresses"
 

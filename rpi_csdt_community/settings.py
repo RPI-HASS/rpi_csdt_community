@@ -86,6 +86,7 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
     # 'django.contrib.staticfiles.finders.DefaultStorageFinder',
+    'pipeline.finders.PipelineFinder',
 )
 
 # Make this unique, and don't share it with anybody.
@@ -168,10 +169,13 @@ INSTALLED_APPS = (
     #'allauth.socialaccount.providers.xing',
 
     'captcha',
-    'django_bootstrap',
     'django_extensions',
     'project_share',
     'rpi_csdt_community',
+    'twitter_bootstrap',
+    'pipeline',
+    'jquery',
+
 
 #    'filer',
 #    'easy_thumbnails',
@@ -246,6 +250,72 @@ SOUTH_MIGRATION_MODULES = {
 THUMBNAIL_DEBUG = False
 
 LOGIN_REDIRECT_URL = '/'
+
+STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
+
+# Stuff related to the asset pipline
+PIPELINE_CSS = {
+    'bootstrap': {
+        'source_filenames': (
+            'twitter_bootstrap/less/bootstrap.less',
+        ),
+        'output_filename': 'css/b.css',
+        'extra_context': {
+            'media': 'screen,projection',
+        },
+    },
+    'base_style': {
+        'source_filenames': (
+            'less/style.less',
+        ),
+        'output_filename': 'css/s.css',
+        'extra_context': {
+            'media': 'screen,projection',
+        },
+    }
+}
+
+PIPELINE_JS = {
+    'bootstrap': {
+        'source_filenames': (
+          'twitter_bootstrap/js/transition.js',
+          'twitter_bootstrap/js/modal.js',
+          'twitter_bootstrap/js/dropdown.js',
+          'twitter_bootstrap/js/scrollspy.js',
+          'twitter_bootstrap/js/tab.js',
+          'twitter_bootstrap/js/tooltip.js',
+          'twitter_bootstrap/js/popover.js',
+          'twitter_bootstrap/js/alert.js',
+          'twitter_bootstrap/js/button.js',
+          'twitter_bootstrap/js/collapse.js',
+          'twitter_bootstrap/js/carousel.js',
+          'twitter_bootstrap/js/affix.js',
+        ),
+        'output_filename': 'js/b.js',
+    },
+    'jquery': {
+        'source_filenames': {
+            'js/jquery.js',
+        },
+        'output_filename': 'js/j.js',
+    },
+}
+
+PIPELINE_COMPILERS = (
+    'pipeline.compilers.less.LessCompiler',
+)
+
+
+# Track where my LESS things live
+BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+
+my_app_less = os.path.join(BASE_DIR, 'my_app', 'static', 'less')
+
+# For apps outside of your project, it's simpler to import them to find their root folders
+import twitter_bootstrap
+bootstrap_less = os.path.join(os.path.dirname(twitter_bootstrap.__file__), 'static', 'twitter_bootstrap', 'less')
+
+PIPELINE_LESS_ARGUMENTS = u'--include-path={}'.format(os.pathsep.join([bootstrap_less, my_app_less]))
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to

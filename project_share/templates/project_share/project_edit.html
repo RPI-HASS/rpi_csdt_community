@@ -3,6 +3,7 @@
 
 {% block content %}
     <h3>Editing {{ object }}</h3>
+    <h4><a href="{% url 'project-detail' pk=object.id %}">Preview Project</a></h4>
     <p class="lead">When you are sure everything is how you want it, click publish to publish (down at the bottom) your project<p>
     {% include 'generic_form.html' %}
     {% get_attachments_for object as "attachments_list" %}

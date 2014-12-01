@@ -1,0 +1,16 @@
+{% load thumbnail %}
+<div class="col-sm-6 col-md-4">
+    <div class="thumbnail">
+        {% thumbnail object.screenshot.f "300x300" crop="center" as im %}
+            <a href="{% url 'project-detail' pk=object.id %}"><img src="{{ im.url }}" alt="Screenshot of {{ object.name }}"></a>
+        {% endthumbnail %}
+         <div class="caption">
+            <h4>{{ object.name }}</h4>
+            <p>{{ object.description|truncatewords:10 }}</p>
+            <p>
+                <a href="{% url 'project-run-detail' pk=object.pk %}" class="btn btn-large btn-primary">Open</a>
+                <a href="{% url 'project-present-detail' pk=object.pk %}" class="btn btn-large btn-info">Open for Presentation</a>
+            </p>
+        </div>
+    </div>
+</div>
