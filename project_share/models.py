@@ -7,6 +7,8 @@ from django.contrib.comments.moderation import CommentModerator, moderator
 from taggit.models import TaggedItemBase, GenericTaggedItemBase
 
 import secretballot
+import json
+import zipfile as zippy
 
 from taggit.managers import TaggableManager
 
@@ -28,6 +30,12 @@ def project_project(instance, filename):
 def project_screenshot(instance, filename):
     return "applications/screenshots/" + slugify(instance.owner.__unicode__() + '/' + '.'.join(filename.split('.')[:-1])) + "." + slugify(filename.split('.')[-1])
 
+def module_module(instance, filename):
+    return "modules/" + slugify(instance.name) + "." + slugify(filename.split('.')[-1])
+  
+def module_library(instance, filename):
+    return "modules/libraries/" + instance.name
+    
 class Classroom(models.Model):
     name = models.CharField(max_length=255)
     teacher = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='teacher_classrooms')
@@ -36,6 +44,34 @@ class Classroom(models.Model):
     def __unicode__(self):
         return "%s's %s classroom" % (self.teacher, self.name)
 
+class Library(models.Model):
+    name = models.CharField(max_length=255)
+    lib_file = models.FileField(upload_to=module_library)
+    
+    def __unicode__(self):
+        return self.name
+      
+class Module(models.Model):
+    name = models.CharField(max_length=255)
+    module_file = models.FileField(upload_to=module_module, null=True, blank=True)
+    
+    def __unicode__(self):
+        return self.name
+
+    def get_modules(self): #Recursively get all ancestors of the current module
+        parent_list = []
+        if(self.module_file):
+            zfile = zippy.ZipFile(self.module_file, 'r')
+            meta = json.load(zfile.open('package.json', 'r'))
+            for module in meta["dependencies"]:
+                try:
+                    parent_list.extend(Module.objects.get(name=module).get_modules())
+                except Module.DoesNotExist:
+                    pass #How are we displaying errors?
+            zfile.close()
+        parent_list.append(self.module_file.url)
+        return parent_list
+        
 class Approval(models.Model):
     project = models.OneToOneField('Project')
     when_requested = models.DateTimeField(auto_now_add=True)
@@ -65,6 +101,8 @@ class Application(models.Model):
 
     application_type = models.ForeignKey('project_share.ApplicationType', null=True, blank=True)
     application_file = models.FileField(upload_to=application_application, null=True, blank=True)
+
+    module = models.ForeignKey('project_share.Module', null=True, blank=True);
 
     def get_context(self):
         # Returns all context data ordered

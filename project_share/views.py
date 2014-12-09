@@ -47,6 +47,12 @@ class ApplicationRunDetail(DetailView):
     template_name = "project_share/application_csnap.html"
 
     def render_to_response(self, context, **response_kwargs):
+        app = Application.objects.get(pk=self.kwargs['pk'])
+        unique_modules = []
+        if(app.module):
+            module_list = app.module.get_modules()
+            [unique_modules.append(module) for module in module_list if module not in unique_modules]
+        context['modules'] = unique_modules
         return super(ApplicationRunDetail, self).render_to_response(context, **response_kwargs)
 
 class ProjectList(SearchableListMixin, SortableListMixin, ListView):
@@ -57,8 +63,14 @@ class ProjectList(SearchableListMixin, SortableListMixin, ListView):
     queryset = Project.objects.all()
 
     def render_to_response(self, context, **response_kwargs):
-      context['application_list'] = Application.objects.all()
-      return super(ProjectList, self).render_to_response(context, **response_kwargs)
+        proj = Project.objects.get(pk=self.kwargs['pk'])
+        unique_modules = []
+        if(proj.application.module):
+            module_list = proj.application.module.get_modules()
+            [unique_modules.append(module) for module in module_list if module not in unique_modules]
+        context['modules'] = unique_modules
+        context['application_list'] = Application.objects.all()
+        return super(ProjectList, self).render_to_response(context, **response_kwargs)
 
 class ProjectTagList(ProjectList):
     def get_queryset(self):
