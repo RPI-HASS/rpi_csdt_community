@@ -33,7 +33,7 @@ class ProjectViewSet(viewsets.ModelViewSet):
         obj.owner = self.request.user
 
     def get_queryset(self):
-        queryset = super(ProjectViewSet, self).get_queryset()
+        queryset = self.model.objects.all()
         user = self.request.QUERY_PARAMS.get('owner', None)
         if user is not None:
           queryset = queryset.filter(owner=get_object_or_404(ExtendedUser, pk=user))
@@ -51,12 +51,12 @@ class DemosViewSet(viewsets.ReadOnlyModelViewSet):
             queryset = queryset.filter(application__name=application)
         queryset = queryset.order_by('order')
         return queryset
-      
+
 class GoalViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Goal.objects.all()
     serializer_class = GoalSerializer
     lookup_field = 'application'
-    
+
     def get_queryset(self):
         queryset = self.queryset
         application = self.request.QUERY_PARAMS.get('application', None)

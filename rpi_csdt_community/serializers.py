@@ -11,28 +11,28 @@ else:
 
 
 class DemoSerializer(serializers.ModelSerializer):
-    project_url = serializers.Field('zipfile.url')
+    project_url = serializers.URLField(source='zipfile.url', required=False)
     class Meta:
         model = ApplicationDemo
         fields = ('id', 'name', 'description', 'project_url')
-        
+
 class GoalSerializer(serializers.ModelSerializer):
-    thumb_url = serializers.Field('thumbnail.url')
-    img_url = serializers.Field('image.url')
-    
+    thumb_url = serializers.URLField(source='thumbnail.url', required=False)
+    img_url = serializers.URLField(source='image.url', required=False)
+
     class Meta:
         model = Goal
         fields = ('description', 'name', 'thumb_url', 'img_url')
 
 class ProjectSerializer(serializers.ModelSerializer):
-    project_url = serializers.Field('project.f.url')
-    screenshot_url = serializers.Field('screenshot.f.url')
+    project_url = serializers.URLField(source='project.f.url', required=False)
+    screenshot_url = serializers.URLField(source='screenshot.f.url', required=False)
 
     class Meta:
         model = Project
         fields = ('id', 'name', 'description', 'approved', 'application', 'owner', 'project_url', 'screenshot_url', 'project', 'screenshot')
         write_only_fields = ('project', 'screenshot')
-        read_only_fields = ('id', 'approved','owner')
+        read_only_fields = ('id', 'approved','owner', 'project_url', 'screenshot_url')
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
