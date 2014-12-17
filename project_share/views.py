@@ -30,8 +30,8 @@ class RestrictPermissionMixin(object):
     def get_object(self):
         o = super(RestrictPermissionMixin, self).get_object()
 
-        # If the object doesn't belong to this user and isn't published, throw a error 503
-        if ((not o.approved and o.owner != self.request.user) or o.approval != None) and not self.request.user.is_superuser:
+        # If the object doesn't belong to this user and isn't published, throw a error 403
+        if (not o.approved and o.owner != self.request.user) and not self.request.user.is_superuser:
             raise PermissionDenied()
         return o
 
@@ -63,12 +63,6 @@ class ProjectList(SearchableListMixin, SortableListMixin, ListView):
     queryset = Project.objects.all()
 
     def render_to_response(self, context, **response_kwargs):
-        proj = Project.objects.get(pk=self.kwargs['pk'])
-        unique_modules = []
-        if(proj.application.module):
-            module_list = proj.application.module.get_modules()
-            [unique_modules.append(module) for module in module_list if module not in unique_modules]
-        context['modules'] = unique_modules
         context['application_list'] = Application.objects.all()
         return super(ProjectList, self).render_to_response(context, **response_kwargs)
 

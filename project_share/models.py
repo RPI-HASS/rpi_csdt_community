@@ -32,10 +32,10 @@ def project_screenshot(instance, filename):
 
 def module_module(instance, filename):
     return "modules/" + slugify(instance.name) + "." + slugify(filename.split('.')[-1])
-  
+
 def module_library(instance, filename):
     return "modules/libraries/" + instance.name
-    
+
 class Classroom(models.Model):
     name = models.CharField(max_length=255)
     teacher = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='teacher_classrooms')
@@ -47,14 +47,14 @@ class Classroom(models.Model):
 class Library(models.Model):
     name = models.CharField(max_length=255)
     lib_file = models.FileField(upload_to=module_library)
-    
+
     def __unicode__(self):
         return self.name
-      
+
 class Module(models.Model):
     name = models.CharField(max_length=255)
     module_file = models.FileField(upload_to=module_module, null=True, blank=True)
-    
+
     def __unicode__(self):
         return self.name
 
@@ -71,7 +71,7 @@ class Module(models.Model):
             zfile.close()
         parent_list.append(self.module_file.url)
         return parent_list
-        
+
 class Approval(models.Model):
     project = models.OneToOneField('Project')
     when_requested = models.DateTimeField(auto_now_add=True)
@@ -154,8 +154,8 @@ class ApplicationDemo(models.Model):
         return self.name
 
 class ProjectManager(models.Manager):
-    def get_query_set(self):
-        return super(ProjectManager, self).get_query_set().filter(approved=True)
+    def get_queryset(self):
+        return super(ProjectManager, self).get_queryset().filter(approved=True)
 
 class Project(models.Model):
     name = models.CharField(max_length=255)
