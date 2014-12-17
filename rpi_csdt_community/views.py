@@ -5,8 +5,6 @@ from django.contrib.comments.views.comments import post_comment
 from django.http import HttpResponse
 from django.db.models import Count
 
-from registration.backends.simple.views import RegistrationView
-
 from project_share.models import Project
 
 def comment_post_wrapper(request):
@@ -28,9 +26,3 @@ def home(request):
         'projects_popular': projects_popular,
         'projects_newest': projects_newest
     }, context_instance=RequestContext(request))
-
-class RedirectRegistrationView(RegistrationView):
-  def get_success_url(self,request,user):
-    if 'is_teacher' in request.POST:
-      return "/address/create"
-    return "/"

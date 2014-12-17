@@ -2,9 +2,6 @@ from django.conf.urls import patterns, include, url
 from django.views.generic import TemplateView, RedirectView
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
-from rpi_csdt_community.forms import CaptchaRegistrationForm
-
-from rpi_csdt_community.views import RedirectRegistrationView
 
 from django.contrib import admin
 admin.autodiscover()
