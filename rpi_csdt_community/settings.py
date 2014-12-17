@@ -194,9 +194,6 @@ INSTALLED_APPS = (
     'django_teams',
 )
 
-CAPTCHA_CHALLENGE_FUNCT = 'captcha.helpers.math_challenge'
-CAPTCHA_NOISE_FUNCTIONS = ()
-
 COMMENTS_APP = "django_comments_xtd"
 COMMENTS_XTD_MAX_THREAD_LEVEL = 8
 COMMENTS_XTD_CONFIRM_EMAIL = True
@@ -217,13 +214,6 @@ AUTHENTICATION_BACKENDS = (
 
 AUTH_USER_MODEL = 'project_share.ExtendedUser'
 
-# This should probably be defined in local_settings.py, since it is external
-CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
-        'LOCATION': '127.0.0.1:11211',
-    }
-}
 
 REST_FRAMEWORK = {
     # Use hyperlinked styles by default.
@@ -246,7 +236,7 @@ SOUTH_MIGRATION_MODULES = {
 THUMBNAIL_DEBUG = False
 
 LOGIN_REDIRECT_URL = '/'
-
+PIPELINE_ENABLED = True
 STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
 
 # Stuff related to the asset pipline
