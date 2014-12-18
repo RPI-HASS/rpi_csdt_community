@@ -153,9 +153,6 @@ class ApplicationDemo(models.Model):
     def __unicode__(self):
         return self.name
 
-class ProjectManager(models.Manager):
-    def get_queryset(self):
-        return super(ProjectManager, self).get_queryset().filter(approved=True)
 
 class Project(models.Model):
     name = models.CharField(max_length=255)
@@ -172,8 +169,9 @@ class Project(models.Model):
 
     parent = models.ForeignKey('project_share.Project', null=True, blank=True, related_name="children")
 
-    objects = models.Manager()
-    approved_objects = ProjectManager()
+    @staticmethod
+    def approved_projects():
+        return Project.objects.filter(approved=True)
 
     def __unicode__(self):
         return self.name
@@ -201,7 +199,7 @@ class ExtendedUser(AbstractUser):
 class FileUpload(models.Model):
     f = models.FileField(upload_to='files/')
 
-secretballot.enable_voting_on(Project, base_manager=ProjectManager)
+secretballot.enable_voting_on(Project)
 
 class ProjectModerator(CommentModerator):
     moderate_after = -1

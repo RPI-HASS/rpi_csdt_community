@@ -18,9 +18,9 @@ def comment_post_wrapper(request):
 
 def home(request):
     # Get the 10 most popular projects
-    projects_popular = Project.approved_objects.all().annotate(num_votes=Count('votes')).order_by('-num_votes')[:10]
+    projects_popular = Project.approved_projects().all().annotate(num_votes=Count('votes')).order_by('-num_votes')[:10]
     # Get the 10 newest
-    projects_newest = Project.approved_objects.all().order_by('-id')[:10]
+    projects_newest = Project.approved_projects().all().order_by('-id')[:10]
     return render_to_response('home.html', {
         "form": AuthenticationForm(),
         'projects_popular': projects_popular,

@@ -3,7 +3,9 @@ from django.conf import settings
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
 from rest_framework import status
-from rest_framework.test import APITestCase, APILiveServerTestCase
+from rest_framework.test import APIClient
+#from rest_framework.test import APITestCase, APITransactionTestCase
+from django.test import LiveServerTestCase
 from rest_framework.reverse import reverse as api_reverse
 
 from django.core.files import File
@@ -13,7 +15,7 @@ from time import sleep
 import sys
 import pprint
 
-class ProjectTests(APILiveServerTestCase):
+class ProjectTests(LiveServerTestCase):
     fixtures = ['default.json']
 
     """@staticmethod
@@ -29,6 +31,43 @@ class ProjectTests(APILiveServerTestCase):
         pp.pprint(connection.queries)
         sys.stdout.flush()
     """
+    def setUp(self):
+        self.client = APIClient()
+
+    def create_project(self, name="test project", description="test project description"):
+        project_file = settings.PROJECT_ROOT + '/samples/CC/CC-Default.xml'
+        screenshot_file = settings.PROJECT_ROOT + '/samples/CC/CC-Default.png'
+        self.client.login(username='test', password='test')
+
+        # Try uploading the screenshot
+        image_id = -1
+        with open(screenshot_file) as f:
+            response = self.client.post(reverse('file-create'), {'file':f})
+            self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+            image_id = response.data['id']
+
+        # Upload the XML file
+        xml_id = -1
+        with open(project_file) as f:
+            response = self.client.post(reverse('file-create'), {'file':f})
+            self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+            xml_id = response.data['id']
+
+        # Upload the project
+        url = reverse('api-projects-list')
+        data = {
+            'name': name,
+            'description': description,
+            'application': 1,
+            'tags': 'CC, Default',
+            'owner': 1,
+            'project': xml_id,
+            'screenshot': image_id
+        }
+        response = self.client.post(url, data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+
+        return response
 
 
     def test_upload_file(self):
@@ -194,3 +233,39 @@ class ProjectTests(APILiveServerTestCase):
         self_url = 1
         for project in response.data:
           self.assertEqual(project['owner'], self_url)
+
+    def test_saving_published_project_creates_unpublished_project(self):
+        """
+        This is related to bug #12 (https://github.com/GK-12/rpi_csdt_community/issues/12)
+        The test should verify that saving a project that has already been
+          published results in a non-published project being created
+        """
+        # First, create the project
+        response = self.create_project()
+        response.render()
+
+        self.assertEqual(response.data['approved'], False)
+
+        # Publish the project
+        print Project.objects.all()
+        project = Project.objects.get(pk=response.data['id'])
+        project.approved = True
+        original_name = project.name
+        project.save()
+
+        # Try updating the project
+        data = {
+            'name': "Hamburger",
+            'id': project.id,
+            'application': project.application.id
+        }
+
+        url = reverse('api-projects-detail', kwargs={'pk': data['id']})
+
+        response = self.client.put(url, data, format='json')
+        response.render()
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertTrue(original_name != response.data['name'])
+
+        # Verify that the primary keys are different
+        self.assertTrue(response.data['id'] != project.id)

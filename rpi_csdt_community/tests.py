@@ -41,7 +41,7 @@ class UrlTests(StaticLiveServerTestCase):
         sys.stdout.flush()
         """
 
-        self.assertTrue(response.status_code == 200 or response.status_code == 302)
+        self.assertTrue(response.status_code == 200 or response.status_code == 302, msg="Got code %s on %s" % (response.status_code, url))
 
         for link in BeautifulSoup(response.content, parseOnlyThese=SoupStrainer('a')):
             if any('href' in el for el in link.attrs):

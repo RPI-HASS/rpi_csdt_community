@@ -8,7 +8,7 @@ class ProjectTests(TestCase):
     fixtures = ['default.json']
 
     def test_only_shows_published_projects(self):
-        projects = Project.approved_objects.all()
+        projects = Project.approved_projects().all()
 
         for project in projects:
             self.assertTrue(project.approved)

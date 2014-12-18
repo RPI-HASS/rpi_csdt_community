@@ -236,8 +236,8 @@ SOUTH_MIGRATION_MODULES = {
 THUMBNAIL_DEBUG = False
 
 LOGIN_REDIRECT_URL = '/'
-PIPELINE_ENABLED = True
-STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
+PIPELINE_ENABLED = False
+STATICFILES_STORAGE = 'pipeline.storage.PipelineStorage'
 
 # Stuff related to the asset pipline
 PIPELINE_CSS = {

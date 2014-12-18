@@ -21,15 +21,17 @@ class ProjectViewSet(viewsets.ModelViewSet):
     model = Project
     serializer_class = ProjectSerializer
 
-    def pre_save(self, obj):
-        super(ProjectViewSet, self).pre_save(obj)
+    def get_object(self):
+        obj = super(ProjectViewSet, self).get_object()
         if obj.owner != None and obj.owner != self.request.user:
             original_pk = obj.pk
             obj.pk = None
             if original_pk != None:
                 sys.stdout.write("Updating parent")
                 obj.parent = Project.objects.get(pk=original_pk)
-            obj.save()
+        # If this project is published, create a new one by resetting pk
+        if obj.approved:
+            obj.pk = None
         obj.owner = self.request.user
 
     def get_queryset(self):

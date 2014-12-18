@@ -31,10 +31,10 @@ python ./manage.py runserver
 
 Then you should be able to see the project at http://127.0.0.1:8000/
 
-## How-to deploy for production 
+## How-to deploy for production
 
 To much work. I would suggest using mod_wsgi. There is a sample configuration file in the doc/ folder.
 
-## How-to contribute 
+## How-to contribute
 
 Fork this repo, make your changes. Be sure to justify everything! Avoid anything too tricky, try to stick to Django's principles (reuse other libraries, DRY). When you're ready to share what you've done, make a pull request)

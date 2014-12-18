@@ -60,7 +60,7 @@ class ProjectList(SearchableListMixin, SortableListMixin, ListView):
     search_fields = [('application__name','iexact')]
     search_split = False
     model = Project
-    queryset = Project.objects.all()
+    queryset = Project.approved_projects().all()
 
     def render_to_response(self, context, **response_kwargs):
         context['application_list'] = Application.objects.all()
@@ -126,7 +126,7 @@ class ProjectUpdate(UpdateView):
         o = super(ProjectUpdate, self).get_object()
 
         # If the object doesn't belong to this user, throw a error 503
-        if o.owner != self.request.user or o.approval != None:
+        if o.owner != self.request.user or hasattr(o, 'approval'):
             raise PermissionDenied()
         return o
 
