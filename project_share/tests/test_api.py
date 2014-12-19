@@ -267,3 +267,67 @@ class ProjectTests(LiveServerTestCase):
         # Verify that the primary keys are different
         self.assertTrue(response.data['id'] != project.id)
         self.assertFalse(response.data['approved'])
+
+    def test_republished_project_has_user(self):
+      # First, create the project
+      response = self.create_project()
+      response.render()
+
+      self.assertEqual(response.data['approved'], False)
+
+      # Publish the project
+      project = Project.objects.get(pk=response.data['id'])
+      project.approved = True
+      project.save()
+
+      # Try updating the project
+      data = {
+          'name': project.name,
+          'id': project.id,
+          'application': project.application.id
+      }
+
+      url = reverse('api-projects-detail', kwargs={'pk': data['id']})
+
+      response = self.client.put(url, data, format='json')
+      response.render()
+      self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+      # Verify that the primary keys are different
+      self.assertTrue(response.data['id'] != project.id)
+      self.assertTrue(response.data['owner'] != None)
+      self.assertFalse(response.data['approved'])
+
+    def test_saving_published_project_creates_unpublished_project_using_post(self):
+      """
+      This is related to bug #12 (https://github.com/GK-12/rpi_csdt_community/issues/12)
+      The test should verify that saving a project that has already been
+        published results in a non-published project being created
+      """
+      # First, create the project
+      response = self.create_project()
+      response.render()
+
+      self.assertEqual(response.data['approved'], False)
+
+      # Publish the project
+      project = Project.objects.get(pk=response.data['id'])
+      project.approved = True
+      project.save()
+
+      # Try updating the project
+      data = {
+          'name': project.name,
+          'id': project.id,
+          'application': project.application.id
+      }
+
+      url = reverse('api-projects-list')
+
+      response = self.client.post(url, data, format='json')
+      response.render()
+      self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+
+      # Verify that the primary keys are different
+      self.assertTrue(response.data['id'] != project.id)
+      self.assertFalse(response.data['approved'])

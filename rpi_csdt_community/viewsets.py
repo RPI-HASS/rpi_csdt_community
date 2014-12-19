@@ -34,6 +34,7 @@ class ProjectViewSet(viewsets.ModelViewSet):
             obj.pk = None
             obj.approved = False
         obj.owner = self.request.user
+        return obj
 
     def get_queryset(self):
         queryset = self.model.objects.all()
