@@ -138,7 +138,7 @@ class Migration(migrations.Migration):
             name='FileUpload',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('f', models.FileField(upload_to=b'files/%Y-%m-%d/')),
+                ('f', models.FileField(upload_to=b'files/')),
             ],
             options={
             },
@@ -153,28 +153,6 @@ class Migration(migrations.Migration):
                 ('thumbnail', models.FileField(upload_to=project_share.models.application_application_goal)),
                 ('image', models.FileField(upload_to=project_share.models.application_application_goal)),
                 ('application', models.ForeignKey(to='project_share.Application')),
-            ],
-            options={
-            },
-            bases=(models.Model,),
-        ),
-        migrations.CreateModel(
-            name='Library',
-            fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('name', models.CharField(max_length=255)),
-                ('lib_file', models.FileField(upload_to=project_share.models.module_library)),
-            ],
-            options={
-            },
-            bases=(models.Model,),
-        ),
-        migrations.CreateModel(
-            name='Module',
-            fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('name', models.CharField(max_length=255)),
-                ('module_file', models.FileField(null=True, upload_to=project_share.models.module_module, blank=True)),
             ],
             options={
             },
@@ -208,12 +186,6 @@ class Migration(migrations.Migration):
             model_name='application',
             name='application_type',
             field=models.ForeignKey(blank=True, to='project_share.ApplicationType', null=True),
-            preserve_default=True,
-        ),
-        migrations.AddField(
-            model_name='application',
-            name='module',
-            field=models.ForeignKey(blank=True, to='project_share.Module', null=True),
             preserve_default=True,
         ),
         migrations.AddField(
