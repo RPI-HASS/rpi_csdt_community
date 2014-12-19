@@ -247,7 +247,6 @@ class ProjectTests(LiveServerTestCase):
         self.assertEqual(response.data['approved'], False)
 
         # Publish the project
-        print Project.objects.all()
         project = Project.objects.get(pk=response.data['id'])
         project.approved = True
         original_name = project.name
