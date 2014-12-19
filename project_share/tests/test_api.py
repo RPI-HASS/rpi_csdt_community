@@ -249,12 +249,11 @@ class ProjectTests(LiveServerTestCase):
         # Publish the project
         project = Project.objects.get(pk=response.data['id'])
         project.approved = True
-        original_name = project.name
         project.save()
 
         # Try updating the project
         data = {
-            'name': "Hamburger",
+            'name': project.name,
             'id': project.id,
             'application': project.application.id
         }
@@ -264,7 +263,7 @@ class ProjectTests(LiveServerTestCase):
         response = self.client.put(url, data, format='json')
         response.render()
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertTrue(original_name != response.data['name'])
 
         # Verify that the primary keys are different
         self.assertTrue(response.data['id'] != project.id)
+        self.assertFalse(response.data['approved'])

@@ -32,6 +32,7 @@ class ProjectViewSet(viewsets.ModelViewSet):
         # If this project is published, create a new one by resetting pk
         if obj.approved:
             obj.pk = None
+            obj.approved = False
         obj.owner = self.request.user
 
     def get_queryset(self):
