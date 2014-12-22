@@ -1,4 +1,5 @@
 {% load pipeline %}
+{% load rpi_csdt_community_tags %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -54,6 +55,9 @@
     {% endblock %}
 
     <div class="container">
+        {% if ''|is_warning_message %}
+            <div class="warning" role="alert">{{ ''|get_warning_message|safe }}</div>
+        {% endif %}
         {% block breadcrumb %}
         {% endblock breadcrumb %}
         {% block content %}{% endblock %}

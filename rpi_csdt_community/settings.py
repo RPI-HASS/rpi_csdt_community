@@ -330,6 +330,8 @@ LOGGING = {
     }
 }
 
+WARNING_MESSAGE = "<strong>You are currently looking at the development site!</strong> None of this is real!"
+
 try:
     from local_settings import *
 except:

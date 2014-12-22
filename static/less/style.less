@@ -9,6 +9,11 @@ body {
     margin-top: 60px;
 }
 
+.warning {
+    &:extend(.alert);
+    &:extend(.alert-warning);
+}
+
 .two-column {
     .make-row();
     .column-left {
