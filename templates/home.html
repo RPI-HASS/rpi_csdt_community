@@ -10,8 +10,11 @@
                 <h2>Combine cultural education with STEM</h2>
                 <p class="lead">Learn, create, and share your work with Culturally Situated Design Tools.</p>
             </div>
-            <p class="lead">Please <a href="{% url 'account_login' %}" class="btn btn-lg btn-default">Login</a> or
-            <a href="{% url 'account_signup' %}" class="btn btn-lg btn-primary">Register</a></p>
+
+            {% if not user.is_authenticated %}
+                <p class="lead">Please <a href="{% url 'account_login' %}" class="btn btn-lg btn-default">Login</a> or
+                <a href="{% url 'account_signup' %}" class="btn btn-lg btn-primary">Register</a></p>
+            {% endif %}
         </div>
         <div class="column-right">
             <div class="videoWrapper">
