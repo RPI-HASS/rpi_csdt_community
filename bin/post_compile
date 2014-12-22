@@ -39,4 +39,10 @@ if [ -f bin/run_compress ]; then
     bin/run_compress
 fi
 
+if [ -f bin/run_migrate ]; then
+    echo "-----> Running run_migrate"
+    chmod +x bin/run_migrate
+    bin/run_migrate
+fi
+
 echo "-----> Post-compile done"
