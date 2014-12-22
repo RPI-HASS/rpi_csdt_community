@@ -4,23 +4,14 @@
 {% load socialaccount %}
 
 {% block content %}
-    <div class="two-column-8-4">
+    <div class="two-column-7-5">
         <div class="column-left">
             <div class="jumbotron">
                 <h2>Combine cultural education with STEM</h2>
                 <p class="lead">Learn, create, and share your work with Culturally Situated Design Tools.</p>
             </div>
-            <div class="two-column-8-4">
-                {% if not user.is_authenticated %}
-                    <div class="column-left">
-                        {% include '_login.html' %}
-                    </div>
-                    <div class="column-right">
-                        <h3>New Users</h3>
-                        <a class="btn btn-large btn-primary" href="{% url 'account_signup' %}">Register</a>
-                    </div>
-                {% endif %}
-            </div>
+            <p class="lead">Please <a href="{% url 'account_login' %}" class="btn btn-lg btn-default">Login</a> or
+            <a href="{% url 'account_signup' %}" class="btn btn-lg btn-primary">Register</a></p>
         </div>
         <div class="column-right">
             <div class="videoWrapper">
@@ -53,6 +44,9 @@
         {% endfor %}
         </div>
     </div>
+    {% if not user.is_authenticated %}
+        {% include '_login.html' %}
+    {% endif %}
 
 
 {% endblock %}

@@ -34,6 +34,16 @@ body {
     }
 }
 
+.two-column-7-5 {
+    .make-row();
+    .column-left {
+        .make-md-column(7);
+    }
+    .column-right {
+        .make-md-column(5);
+    }
+}
+
 .thumbnails {
     .make-row();
 
@@ -86,26 +96,22 @@ a.liker {
         /* What should go here? */
     }
 
-    div {
+    .text-input {
         &:extend(.form-group);
         label {
-            .make-sm-column(2);
+            &:extend(.col-sm-2);
             &:extend(.control-label);
         }
-        div {
-            .make-sm-column(10);
-            input {
-                &:extend(.form-control);
-            }
+        div input {
+            &:extend(.form-control);
+        }
+        input {
+            &:extend(.form-control);
         }
     }
 
     .login-submit {
         &:extend(.form-group);
-        div {
-            .make-sm-column-offset(2);
-            .make-sm-column(10);
-        }
     }
 
     .twitter-logo {

@@ -3,36 +3,41 @@
     {% csrf_token %}
 
     <h2>Login</h2>
-    <p>Please sign in with one
-    of your existing third party accounts. Or, <a href="{{ signup_url }}">sign up</a>
-    for a CSDT Community account and sign in below:</p>
-    <div class="socialaccount_ballot">
-        <ul class="socialaccount_providers">
-        {% include "socialaccount/snippets/provider_list.html" with process="login" %}
-        </ul>
-        <div class="login-or">or</div>
-    </div>
-    {% if form.errors %}
-        <p>{{ form.non_field_errors.as_text }}</p>
-    {% endif %}
-    <div>
-        <label for="login">Username</label>
-        <div>
-            <input type="text" class="input-block-level" name="login" placeholder="{{ form.username.label }}">
+    <div class="two-column-8-4">
+        <div class="column-left">
+            <h3>Using a local account...</h3>
+            <div class="text-input">
+                <input type="text" class="input-block-level" name="login" placeholder="Username">
+            </div>
+            {{ form.username.errors }}
+            <div class="text-input">
+                <input type="password" class="input-block-level" name="password" placeholder="Password">
+            </div>
+            {{ form.password.errors }}
+            <div class="checkbox">
+                <label for="id_remember">
+                    <input id="id_remember" name="remember" type="checkbox">
+                    Remember Me?
+                </label>
+            </div>
+            <div class="login-submit">
+                <button class="btn btn-large btn-primary" type="submit">Login</button>
+                or <a href="{% url 'account_signup' %}">Register</a> or <a href="{% url 'account_reset_password' %}">Reset password</a>
+            </div>
         </div>
-    </div>
-    {{ form.username.errors }}
-    <div>
-        <label for="password">Password</label>
-        <div>
-            <input type="password" class="input-block-level" name="password" placeholder="{{ form.password.label }}">
-        </div>
-    </div>
-    {{ form.password.errors }}
-    <div class="login-submit">
-        <div>
-            <button class="btn btn-large btn-primary" type="submit">Login</button>
-            or <a href="{% url 'account_signup' %}">Register</a>
+        <div class="column-right">
+            <h3>Or using a social network...</h3>
+            <p>Please sign in with one
+            of your existing third party accounts. Or, <a href="{{ signup_url }}">sign up</a>
+            for a CSDT Community account and sign in below:</p>
+            <div class="socialaccount_ballot">
+                <ul class="socialaccount_providers">
+                {% include "socialaccount/snippets/provider_list.html" with process="login" %}
+                </ul>
+            </div>
+            {% if form.errors %}
+                <p>{{ form.non_field_errors.as_text }}</p>
+            {% endif %}
         </div>
     </div>
 </form>

@@ -1,0 +1,48 @@
+{% extends "account/base.html" %}
+
+{% load url from future %}
+{% load i18n %}
+
+{% block head_title %}{% trans "Signup" %}{% endblock %}
+
+{% block content %}
+<h1>{% trans "Sign Up" %}</h1>
+
+<p>{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}</p>
+
+    <h2>Login</h2>
+    <div class="two-column-8-4">
+
+        <div class="column-left">
+            <form class="login-form" id="signup_form" method="post" action="{% url 'account_signup' %}">
+                {% for field in form.visible_fields %}
+                    <div class="text-input">
+                        {{ field }}
+                        {{ field.errors }}
+                    </div>
+                {% endfor %}
+                {% csrf_token %}
+                {% if redirect_field_value %}
+                <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                {% endif %}
+                <button type="submit" class="btn btn-primary">{% trans "Sign Up" %} &raquo;</button>
+            </form>
+        </div>
+        <div class="column-right">
+            <h3>Or using a social network...</h3>
+            <p>Please sign in with one
+            of your existing third party accounts. Or, <a href="{{ signup_url }}">sign up</a>
+            for a CSDT Community account and sign in below:</p>
+            <div class="socialaccount_ballot">
+                <ul class="socialaccount_providers">
+                {% include "socialaccount/snippets/provider_list.html" with process="login" %}
+                </ul>
+            </div>
+            {% if form.errors %}
+                <p>{{ form.non_field_errors.as_text }}</p>
+            {% endif %}
+        </div>
+    </div>
+
+
+{% endblock %}

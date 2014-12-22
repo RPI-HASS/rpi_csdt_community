@@ -45,6 +45,10 @@
                 <ul class="nav navbar-nav navbar-right">
                     {% if user.is_authenticated %}
                         <li><a href="{% url 'account_logout' %}">Log out</a></li>
+                    {% else %}
+                    <form class="navbar-form navbar-left" role="search">
+                        <li><a class="btn btn-default" href="{% url 'account_login' %}">Login</a></li>
+                    </form>
                     {% endif %}
                 </ul>
             </div><!--/.nav-collapse -->
