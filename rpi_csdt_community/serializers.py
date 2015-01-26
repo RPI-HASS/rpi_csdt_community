@@ -28,6 +28,14 @@ class ProjectSerializer(serializers.ModelSerializer):
     project_url = serializers.URLField(source='project.f.url', read_only=True)
     screenshot_url = serializers.URLField(source='screenshot.f.url', read_only=True)
 
+    def __init__(self, *args, **kwargs):
+        super(ProjectSerializer, self).__init__(*args, **kwargs)
+        self.request = kwargs['context']['request']
+
+    def create(self, validated_data):
+        validated_data['owner'] = self.request.user
+        return super(ProjectSerializer, self).create(validated_data)
+
     class Meta:
         model = Project
         fields = ('id', 'name', 'description', 'approved', 'application', 'owner', 'project_url', 'screenshot_url', 'project', 'screenshot',)

@@ -10,6 +10,8 @@ from rest_framework.reverse import reverse as api_reverse
 
 from django.core.files import File
 from project_share.models import Project
+from django.contrib.auth import get_user_model
+User = get_user_model()
 
 from time import sleep
 import sys
@@ -29,8 +31,8 @@ class ProjectTests(LiveServerTestCase):
         pp = pprint.PrettyPrinter(indent=4)
         sys.stdout.write("SQL: ")
         pp.pprint(connection.queries)
-        sys.stdout.flush()
-    """
+        sys.stdout.flush()"""
+
     def setUp(self):
         self.client = APIClient()
 
@@ -148,9 +150,9 @@ class ProjectTests(LiveServerTestCase):
 
 
         data = {
-            'name': "Hamburger",
-            'id': project.id,
-            'application': project.application.id
+            "name": "Hamburger",
+            "id": project.id,
+            "application": project.application.id
         }
 
         # Try updating it
@@ -331,3 +333,43 @@ class ProjectTests(LiveServerTestCase):
       # Verify that the primary keys are different
       self.assertTrue(response.data['id'] != project.id)
       self.assertFalse(response.data['approved'])
+
+    def test_saving_new_project_sets_correct_owner(self):
+        """ This is related to bug #41 (https://github.com/GK-12/Snap--Build-Your-Own-Blocks/issues/41)
+        The test should verify taht the owner is correctly set when the project is
+        first saved from a "raw" application (not another project)
+        """
+
+        project_file = settings.PROJECT_ROOT + '/samples/CC/CC-Default.xml'
+        screenshot_file = settings.PROJECT_ROOT + '/samples/CC/CC-Default.png'
+        self.client.login(username='test', password='test')
+
+        # Try uploading the screenshot
+        image_id = -1
+        with open(screenshot_file) as f:
+            response = self.client.post(reverse('file-create'), {'file':f})
+            self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+            image_id = response.data['id']
+
+        # Upload the XML file
+        xml_id = -1
+        with open(project_file) as f:
+            response = self.client.post(reverse('file-create'), {'file':f})
+            self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+            xml_id = response.data['id']
+
+        # Upload the project
+        url = reverse('api-projects-list')
+        data = {
+            'name': 'abd',
+            'description': '123',
+            'application': 1,
+            'tags': 'CC, Default',
+            'project': xml_id,
+            'screenshot': image_id
+        }
+        response = self.client.post(url, data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+
+        project = Project.objects.get(pk=response.data['id'])
+        self.assertEqual(project.owner, User.objects.get(username='test'))
