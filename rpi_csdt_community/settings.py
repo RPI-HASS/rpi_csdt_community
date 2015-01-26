@@ -6,6 +6,9 @@ PROJECT_ROOT = os.path.dirname(os.path.dirname(__file__))
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
+# Override this setting local_settings.py to enable the GIS app
+ENABLE_GIS = False
+
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
@@ -336,3 +339,21 @@ try:
     from local_settings import *
 except:
     pass
+
+if ENABLE_GIS:
+    # Make sure the database is configured as postgres
+    assert DATABASES['default']['ENGINE'] == 'django.contrib.gis.db.backends.postgis'
+    INSTALLED_APPS += (
+        'gis_csdt',
+        'django.contrib.gis',
+    )
+
+    # Make sure a GOOGLE_API_KEY is defined
+    try:
+        GOOGLE_API_KEY
+    except NameError:
+        raise "To use GIS, you need to define a GOOGLE_API_KEY"
+    try:
+        CENSUS_API_KEY
+    except NameError:
+        raise "To use GIS, you need to define a CENSUS API KEY"
