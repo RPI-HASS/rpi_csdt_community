@@ -19,3 +19,9 @@ django-twitter-bootstrap==3.3.0
 django-pipeline==1.4.2
 django-jquery==1.9.1
 pytz==2014.10
+
+django-cms==3.0.9
+djangocms-text-ckeditor==2.4.3
+djangocms-picture==0.1
+django-reversion==1.8.5
+django-compressor==1.4
