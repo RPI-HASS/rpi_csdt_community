@@ -37,6 +37,10 @@ TIME_ZONE = 'America/New_York'
 # http://www.i18nguy.com/unicode/language-identifiers.html
 LANGUAGE_CODE = 'en-us'
 
+LANGUAGES = [
+    ('en-us', 'English'),
+]
+
 SITE_ID = 1
 
 # If you set this to False, Django will make some optimizations so as not
@@ -84,6 +88,7 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
     # 'django.contrib.staticfiles.finders.DefaultStorageFinder',
     'pipeline.finders.PipelineFinder',
+    'compressor.finders.CompressorFinder',
 )
 
 # Make this unique, and don't share it with anybody.
@@ -106,6 +111,10 @@ MIDDLEWARE_CLASSES = (
     'likes.middleware.SecretBallotUserIpUseragentMiddleware',
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'cms.middleware.user.CurrentUserMiddleware',
+    'cms.middleware.page.CurrentPageMiddleware',
+    'cms.middleware.toolbar.ToolbarMiddleware',
+    'cms.middleware.language.LanguageCookieMiddleware',
 )
 
 ROOT_URLCONF = 'rpi_csdt_community.urls'
@@ -193,6 +202,26 @@ INSTALLED_APPS = (
 #    'south',
     'rest_framework',
     'django_teams',
+
+# Django CMS
+    'djangocms_text_ckeditor',  # note this needs to be above the 'cms' entry
+    'cms',  # django CMS itself
+    'mptt',  # utilities for implementing a tree
+    'menus',  # helper for model independent hierarchical website navigation
+    'sekizai',  # for javascript and css management
+    'djangocms_admin_style',  # for the admin skin. You **must** add 'djangocms_admin_style' in the list **before** 'django.contrib.admin'.
+    #'djangocms_file',
+    #'djangocms_flash',
+    #'djangocms_googlemap',
+    #'djangocms_inherit',
+    'djangocms_picture',
+    #'djangocms_teaser',
+    #'djangocms_video',
+    #'djangocms_link',
+    #'djangocms_snippet',
+    'reversion',
+    'cms_bootstrap_templates',
+    'compressor',
 )
 
 COMMENTS_APP = "django_comments_xtd"
@@ -206,6 +235,8 @@ TEMPLATE_CONTEXT_PROCESSORS = TCP + (
     'django.contrib.messages.context_processors.messages',
     'allauth.account.context_processors.account',
     'allauth.socialaccount.context_processors.socialaccount',
+    'sekizai.context_processors.sekizai',
+    'cms.context_processors.cms_settings',
 )
 
 AUTHENTICATION_BACKENDS = (
@@ -215,6 +246,14 @@ AUTHENTICATION_BACKENDS = (
 
 AUTH_USER_MODEL = 'project_share.ExtendedUser'
 
+CMS_TEMPLATES = (
+    ('cms_bootstrap_templates/template_one_column.html', 'One columns'),
+    ('cms_bootstrap_templates/template_two_column.html', 'Two columns'),
+    ('cms_bootstrap_templates/template_three_column.html', 'Three columns'),
+    ('cms_bootstrap_templates/template_header_two_column.html', 'Two columns with a header'),
+    ('cms_bootstrap_templates/template_header_two_column_left.html', 'Two columns w/ header, large left'),
+    ('cms_bootstrap_templates/template_header_two_column_right.html', 'Two columns w/ header, large right'),
+)
 
 REST_FRAMEWORK = {
     # Use hyperlinked styles by default.
@@ -229,9 +268,21 @@ REST_FRAMEWORK = {
     ],
 }
 
-SOUTH_TESTS_MIGRATE = False
-SOUTH_MIGRATION_MODULES = {
-    'taggit': 'taggit.south_migrations',
+MIGRATION_MODULES = {
+    'cms': 'cms.migrations_django',
+    'menus': 'menus.migrations_django',
+
+    # Add also the following modules if you're using these plugins:
+    'djangocms_file': 'djangocms_file.migrations_django',
+    'djangocms_flash': 'djangocms_flash.migrations_django',
+    'djangocms_googlemap': 'djangocms_googlemap.migrations_django',
+    'djangocms_inherit': 'djangocms_inherit.migrations_django',
+    'djangocms_link': 'djangocms_link.migrations_django',
+    'djangocms_picture': 'djangocms_picture.migrations_django',
+    'djangocms_snippet': 'djangocms_snippet.migrations_django',
+    'djangocms_teaser': 'djangocms_teaser.migrations_django',
+    'djangocms_video': 'djangocms_video.migrations_django',
+    'djangocms_text_ckeditor': 'djangocms_text_ckeditor.migrations_django',
 }
 
 THUMBNAIL_DEBUG = False
@@ -292,17 +343,25 @@ PIPELINE_COMPILERS = (
     'pipeline.compilers.less.LessCompiler',
 )
 
-
 # Track where my LESS things live
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
-my_app_less = os.path.join(BASE_DIR, 'my_app', 'static', 'less')
+my_app_less = os.path.join(BASE_DIR, 'static', 'less')
 
 # For apps outside of your project, it's simpler to import them to find their root folders
 import twitter_bootstrap
 bootstrap_less = os.path.join(os.path.dirname(twitter_bootstrap.__file__), 'static', 'twitter_bootstrap', 'less')
 
 PIPELINE_LESS_ARGUMENTS = u'--include-path={}'.format(os.pathsep.join([bootstrap_less, my_app_less]))
+
+COMPRESS_LESSC_COMMAND = 'lessc --include-path={}'.format(os.pathsep.join([bootstrap_less, my_app_less]))
+COMPRESS_LESSC_COMMAND += " {infile} {outfile}"
+
+COMPRESS_PRECOMPILERS = (
+    ('text/less', COMPRESS_LESSC_COMMAND),
+    ('stylesheet/less', COMPRESS_LESSC_COMMAND),
+)
+
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to

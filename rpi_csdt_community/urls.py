@@ -34,7 +34,9 @@ urlpatterns = patterns('',
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^api/', include(router.urls)),
     url(r'^api/files/', FileUploadView.as_view(), name='file-create'),
-    url(r'^api/user', CurrentUserView.as_view(), name='user-api-detail')
+    url(r'^api/user', CurrentUserView.as_view(), name='user-api-detail'),
+
+    url(r'^cms/', include('cms.urls')),
 )
 
 urlpatterns += patterns('',

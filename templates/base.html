@@ -1,4 +1,4 @@
-{% load pipeline %}
+{% load pipeline %}{% load cms_tags sekizai_tags %}
 {% load rpi_csdt_community_tags %}
 <!DOCTYPE html>
 <html lang="en">
@@ -10,6 +10,7 @@
     <meta name="author" content="">
 
     {% stylesheet 'base_style' %}
+    {% render_block "css" postprocessor "compressor.contrib.sekizai.compress" %}
 
     {% block extra_style %}{% endblock %}
 
@@ -19,6 +20,7 @@
   <body>
 
 
+    {% cms_toolbar %}
     <!-- Static navbar -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
@@ -59,6 +61,11 @@
 
     {% block pre-body %}
     {% endblock %}
+
+
+    {% placeholder base_content %}
+    {% block base_content %}{% endblock %}
+    {% render_block "js" %}
 
     <div class="container">
         {% if ''|is_warning_message %}
