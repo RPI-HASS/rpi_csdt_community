@@ -55,22 +55,12 @@ class Module(models.Model):
     name = models.CharField(max_length=255)
     module_file = models.FileField(upload_to=module_module, null=True, blank=True)
 
+    def save(self, *args, **kwargs):
+        self.name = slugify(self.name)
+        super(Module, self).save(*args, **kwargs)
+        
     def __unicode__(self):
         return self.name
-
-    def get_modules(self): #Recursively get all ancestors of the current module
-        parent_list = []
-        if(self.module_file):
-            zfile = zippy.ZipFile(self.module_file, 'r')
-            meta = json.load(zfile.open('package.json', 'r'))
-            for module in meta["dependencies"]:
-                try:
-                    parent_list.extend(Module.objects.get(name=module).get_modules())
-                except Module.DoesNotExist:
-                    pass #How are we displaying errors?
-            zfile.close()
-        parent_list.append(self.module_file.url)
-        return parent_list
 
 class Approval(models.Model):
     project = models.OneToOneField('Project')
