@@ -1,5 +1,6 @@
-{% load pipeline %}{% load cms_tags sekizai_tags %}
+{% load cms_tags sekizai_tags %}
 {% load rpi_csdt_community_tags %}
+{% load compress %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -9,8 +10,9 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    {% stylesheet 'base_style' %}
-    {% render_block "css" postprocessor "compressor.contrib.sekizai.compress" %}
+    {% compress css %}
+    	<link rel="stylesheet" href="{{ STATIC_URL }}less/style.less" type="text/less" charset="utf-8">
+    {% endcompress %}
 
     {% block extra_style %}{% endblock %}
 
@@ -20,7 +22,6 @@
   <body>
 
 
-    {% cms_toolbar %}
     <!-- Static navbar -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
@@ -76,8 +77,21 @@
         {% block content %}{% endblock %}
     </div> <!-- /container -->
 
-    {% javascript 'jquery' %}
-    {% javascript 'bootstrap' %}
+    {% compress js %}
+        <script type="text/javascript" src="{{ STATIC_URL }}twitter_bootstrap/js/transition.js">
+        <script type="text/javascript" src="{{ STATIC_URL }}twitter_bootstrap/js/modal.js">
+        <script type="text/javascript" src="{{ STATIC_URL }}twitter_bootstrap/js/dropdown.js">
+        <script type="text/javascript" src="{{ STATIC_URL }}twitter_bootstrap/js/scrollspy.js">
+        <script type="text/javascript" src="{{ STATIC_URL }}twitter_bootstrap/js/tab.js">
+        <script type="text/javascript" src="{{ STATIC_URL }}twitter_bootstrap/js/tooltip.js">
+        <script type="text/javascript" src="{{ STATIC_URL }}twitter_bootstrap/js/popover.js">
+        <script type="text/javascript" src="{{ STATIC_URL }}twitter_bootstrap/js/alert.js">
+        <script type="text/javascript" src="{{ STATIC_URL }}twitter_bootstrap/js/button.js">
+        <script type="text/javascript" src="{{ STATIC_URL }}twitter_bootstrap/js/collapse.js">
+        <script type="text/javascript" src="{{ STATIC_URL }}twitter_bootstrap/js/carousel.js">
+        <script type="text/javascript" src="{{ STATIC_URL }}twitter_bootstrap/js/affix.js">
+        <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.js">
+    {% endcompress %}
     {% block js %}
     {% endblock %}
     {% block extra_script %}{% endblock %}

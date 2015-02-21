@@ -87,8 +87,8 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
     # 'django.contrib.staticfiles.finders.DefaultStorageFinder',
-    'pipeline.finders.PipelineFinder',
     'compressor.finders.CompressorFinder',
+    'pipeline.finders.PipelineFinder',
 )
 
 # Make this unique, and don't share it with anybody.
@@ -179,7 +179,7 @@ INSTALLED_APPS = (
     'project_share',
     'rpi_csdt_community',
     'twitter_bootstrap',
-    'pipeline',
+    #'pipeline',
     'jquery',
 
 
@@ -288,60 +288,8 @@ MIGRATION_MODULES = {
 THUMBNAIL_DEBUG = False
 
 LOGIN_REDIRECT_URL = '/'
-PIPELINE_ENABLED = False
 STATICFILES_STORAGE = 'pipeline.storage.PipelineStorage'
 
-# Stuff related to the asset pipline
-PIPELINE_CSS = {
-    'bootstrap': {
-        'source_filenames': (
-            'twitter_bootstrap/less/bootstrap.less',
-        ),
-        'output_filename': 'css/b.css',
-        'extra_context': {
-            'media': 'screen,projection',
-        },
-    },
-    'base_style': {
-        'source_filenames': (
-            'less/style.less',
-        ),
-        'output_filename': 'css/s.css',
-        'extra_context': {
-            'media': 'screen,projection',
-        },
-    }
-}
-
-PIPELINE_JS = {
-    'bootstrap': {
-        'source_filenames': (
-          'twitter_bootstrap/js/transition.js',
-          'twitter_bootstrap/js/modal.js',
-          'twitter_bootstrap/js/dropdown.js',
-          'twitter_bootstrap/js/scrollspy.js',
-          'twitter_bootstrap/js/tab.js',
-          'twitter_bootstrap/js/tooltip.js',
-          'twitter_bootstrap/js/popover.js',
-          'twitter_bootstrap/js/alert.js',
-          'twitter_bootstrap/js/button.js',
-          'twitter_bootstrap/js/collapse.js',
-          'twitter_bootstrap/js/carousel.js',
-          'twitter_bootstrap/js/affix.js',
-        ),
-        'output_filename': 'js/b.js',
-    },
-    'jquery': {
-        'source_filenames': {
-            'js/jquery.js',
-        },
-        'output_filename': 'js/j.js',
-    },
-}
-
-PIPELINE_COMPILERS = (
-    'pipeline.compilers.less.LessCompiler',
-)
 
 # Track where my LESS things live
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
@@ -416,3 +364,4 @@ if ENABLE_GIS:
         CENSUS_API_KEY
     except NameError:
         raise "To use GIS, you need to define a CENSUS API KEY"
+print STATIC_ROOT
