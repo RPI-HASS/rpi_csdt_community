@@ -25,9 +25,9 @@ class ClassListFilter(admin.SimpleListFilter):
         return (('mc', _('My class')), ('mca', ('Pending in my class')), ('ac', _('All classes')),)
 
     def queryset(self, request, queryset):
-         if self.value() == 'mc':
+        if self.value() == 'mc':
             return queryset.filter(classroom__in=request.user.teacher_classrooms.all())
-         if self.value() == 'mca':
+        if self.value() == 'mca':
             return queryset.filter(classroom__in=request.user.teacher_classrooms.all(), approved=False)
         else:
             return queryset
