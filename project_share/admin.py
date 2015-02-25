@@ -25,10 +25,10 @@ class ClassListFilter(admin.SimpleListFilter):
         return (('mc', _('My class')), ('mca', ('Pending in my class')), ('ac', _('All classes')),)
 
     def queryset(self, request, queryset):
-        if self.value() == 'mc':
-            return queryset.filter(owner__student_classrooms__in=request.user.teacher_classrooms.all())
-        if self.value() == 'mca':
-            return queryset.filter(owner__student_classrooms__in=request.user.teacher_classrooms.all(), approved=False)
+         if self.value() == 'mc':
+            return queryset.filter(classroom__in=request.user.teacher_classrooms.all())
+         if self.value() == 'mca':
+            return queryset.filter(classroom__in=request.user.teacher_classrooms.all(), approved=False)
         else:
             return queryset
 
@@ -38,7 +38,7 @@ class ApprovalInline(admin.TabularInline):
 class ProjectAdmin(admin.ModelAdmin):
     inlines = [AttachmentInlines, ApprovalInline]
     list_filter = (ClassListFilter,)
-    list_display = ('name', 'owner', 'application', 'approved',)
+    list_display = ('name', 'owner', 'application', 'classroom', 'approved',)
     search_fields = ['owner__first_name', 'owner__last_name', 'name']
 
     def approve(modeladmin, request, queryset):

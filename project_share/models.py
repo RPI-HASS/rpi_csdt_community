@@ -152,6 +152,7 @@ class Project(models.Model):
 
     project = models.ForeignKey('project_share.FileUpload', null=True, blank=True, related_name='+')
     screenshot = models.ForeignKey('project_share.FileUpload', null=True, blank=True, related_name='+')
+    classroom = models.ForeignKey('project_share.Classroom', null=True, blank=True, related_name='+')
 
     tags = TaggableManager(blank=True)
 

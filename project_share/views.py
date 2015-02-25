@@ -104,6 +104,10 @@ class ProjectUpdate(UpdateView):
 
     template_name = "project_share/project_edit.html"
 
+    def get_form_kwargs(self):
+        kwargs = super(ProjectUpdate, self).get_form_kwargs()
+        kwargs.update({'user': self.request.user})
+        return kwargs
 
     def dispatch(self, request, *args, **kwargs):
         self.kwargs = kwargs
