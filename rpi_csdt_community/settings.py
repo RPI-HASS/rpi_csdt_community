@@ -302,6 +302,7 @@ bootstrap_less = os.path.join(os.path.dirname(twitter_bootstrap.__file__), 'stat
 
 PIPELINE_LESS_ARGUMENTS = u'--include-path={}'.format(os.pathsep.join([bootstrap_less, my_app_less]))
 
+COMPRESS_ENABLED = False
 COMPRESS_LESSC_COMMAND = 'lessc --include-path={}'.format(os.pathsep.join([bootstrap_less, my_app_less]))
 COMPRESS_LESSC_COMMAND += " {infile} {outfile}"
 

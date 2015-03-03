@@ -10,11 +10,13 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
+    {% render_block "css" %}
     {% compress css %}
-    	<link rel="stylesheet" href="{{ STATIC_URL }}less/style.less" type="text/less" charset="utf-8">
+        {% block extra_style %}
+    	    <link rel="stylesheet" href="{{ STATIC_URL }}less/style.less" type="text/less" charset="utf-8">
+            <!-- Have base stylesheet -->
+        {% endblock %}
     {% endcompress %}
-
-    {% block extra_style %}{% endblock %}
 
     {% block extra_head %}{% endblock %}
   </head>
@@ -23,6 +25,7 @@
 
 
     <!-- Static navbar -->
+    {% cms_toolbar %}
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
             <div class="navbar-header">
