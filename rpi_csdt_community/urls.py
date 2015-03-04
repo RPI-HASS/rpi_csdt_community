@@ -49,3 +49,9 @@ urlpatterns += patterns('',
         'document_root': settings.STATIC_ROOT,
     }),
 )
+
+if settings.ENABLE_GIS:
+    urlpatterns += (
+        url(r'^api-gis/', include('gis_csdt.urls')),
+        url(r'^gis/', TemplateView.as_view(template_name='gis.html')),
+    )
