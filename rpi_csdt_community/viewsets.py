@@ -3,8 +3,8 @@ from rest_framework.parsers import FileUploadParser
 from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
 
-from project_share.models import Project, ApplicationDemo, ExtendedUser, FileUpload, Goal
-from rpi_csdt_community.serializers import DemoSerializer, GoalSerializer, ProjectSerializer, UserSerializer
+from project_share.models import Project, ApplicationDemo, ExtendedUser, FileUpload, Goal, Module
+from rpi_csdt_community.serializers import DemoSerializer, GoalSerializer, ProjectSerializer, UserSerializer, ModuleSerializer
 from django.conf import settings
 import os
 import sys
@@ -67,6 +67,11 @@ class GoalViewSet(viewsets.ReadOnlyModelViewSet):
         if application is not None:
             queryset = queryset.filter(application__name=application)
         return queryset
+
+class ModuleViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = Module.objects.all()
+    serializer_class = ModuleSerializer
+    lookup_field = 'name'
 
 class FileUploadView(views.APIView):
     parser_class = (FileUploadParser,)
