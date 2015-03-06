@@ -11,7 +11,7 @@
     <script type="text/javascript">
         var config = {
           'modules': {
-            'module': '{{ application.module.name }}',
+            'module': '{{ application.name }}',
             'stage': '{{ application.application_file.url }}',
           },
           {% if user.is_authenticated %}
@@ -64,6 +64,7 @@
     <script type="text/javascript" src="{{ STATIC_URL }}csnap/lib/jszip-load.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}csnap/lib/jszip-deflate.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}csnap/lib/jszip-inflate.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}csnap/lib/jszip-utils.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}csnap/module-loader.js"></script>
 
     <script type="text/javascript" src="{{ STATIC_URL }}csnap/morphic.js"></script>

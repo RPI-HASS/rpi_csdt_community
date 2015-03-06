@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from project_share.models import ApplicationDemo, Project, Goal, Module
+from project_share.models import ApplicationDemo, Project, Goal, Application
 
 try:
     from django.contrib.auth import get_user_model
@@ -48,6 +48,6 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ('id', 'username', 'first_name', 'last_name')
         read_only_fields = ('id', 'username', 'first_name', 'last_name')
 
-class ModuleSerializer(serializers.ModelSerializer):
+class ApplicationSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Module
+        model = Application

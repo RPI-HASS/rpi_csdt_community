@@ -8,7 +8,6 @@ from project_share.models import ApplicationContext
 from project_share.models import Goal
 from project_share.models import Classroom
 from project_share.models import ExtendedUser
-from project_share.models import Module, Library
 
 class ClassListFilter(admin.SimpleListFilter):
     title = _('Class')
@@ -75,5 +74,3 @@ admin.site.register(Project, ProjectAdmin)
 admin.site.register(Classroom, ClassroomAdmin)
 admin.site.register(ExtendedUser, UserAdmin)
 admin.site.register(FileUpload)
-admin.site.register(Module)
-admin.site.register(Library)

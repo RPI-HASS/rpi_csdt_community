@@ -30,6 +30,7 @@ def project_project(instance, filename):
 def project_screenshot(instance, filename):
     return "applications/screenshots/" + slugify(instance.owner.__unicode__() + '/' + '.'.join(filename.split('.')[:-1])) + "." + slugify(filename.split('.')[-1])
 
+# These need to be removed someday; not removed now as it causes an error message
 def module_module(instance, filename):
     return "modules/" + slugify(instance.name) + "." + slugify(filename.split('.')[-1])
 
@@ -43,24 +44,6 @@ class Classroom(models.Model):
 
     def __unicode__(self):
         return "%s's %s classroom" % (self.teacher, self.name)
-
-class Library(models.Model):
-    name = models.CharField(max_length=255)
-    lib_file = models.FileField(upload_to=module_library)
-
-    def __unicode__(self):
-        return self.name
-
-class Module(models.Model):
-    name = models.CharField(max_length=255)
-    module_file = models.FileField(upload_to=module_module, null=True, blank=True)
-
-    def save(self, *args, **kwargs):
-        self.name = slugify(self.name)
-        super(Module, self).save(*args, **kwargs)
-        
-    def __unicode__(self):
-        return self.name
 
 class Approval(models.Model):
     project = models.OneToOneField('Project')
@@ -92,7 +75,7 @@ class Application(models.Model):
     application_type = models.ForeignKey('project_share.ApplicationType', null=True, blank=True)
     application_file = models.FileField(upload_to=application_application, null=True, blank=True)
 
-    module = models.ForeignKey('project_share.Module', null=True, blank=True);
+    featured = models.BooleanField(default=True)
 
     def get_context(self):
         # Returns all context data ordered
