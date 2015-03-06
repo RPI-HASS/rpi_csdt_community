@@ -1,0 +1,117 @@
+<!doctype html>
+<html class="no-js">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css(.) styles/vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="{{ STATIC_URL }}gis/bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="{{ STATIC_URL }}gis/bower_components/angular-motion/dist/angular-motion.css" />
+    <link rel="stylesheet" href="{{ STATIC_URL }}gis/bower_components/angular-multi-select/angular-multi-select.css" />
+    <link rel="stylesheet" href="{{ STATIC_URL }}gis/bower_components/ng-tags-input/ng-tags-input.min.css" />
+    <link rel="stylesheet" href="{{ STATIC_URL }}gis/bower_components/allmighty-autocomplete/style/autocomplete.css" />
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css(.tmp) styles/main.css -->
+    <link rel="stylesheet" href="{{ STATIC_URL }}gis/main.css" type="text/css" />
+      <!-- endbuild -->
+  </head>
+  <body ng-app="socialjusticeApp" ng-controller="MainCtrl">
+      <div class="container-fluid">
+        <nav class="navbar navbar-inverse" role="navigation">
+          <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="#"> <i class="glyphicon glyphicon-map-marker"> </i>SGIS</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+              <ul class="nav navbar-nav">
+                <li class="active"><a href="#/"><span class="glyphicon glyphicon-home"></span> Home </a></li>
+                <li ><a href="#/about">About</a></li>
+              </ul>
+            </div><!-- /.navbar-collapse -->
+          </div><!-- /.container-fluid -->
+        </nav>
+        <div ng-view=""></div>
+        <div class="footer">
+        <small class="copyright">Rensselaer Polytechnic Institute@2014</small>
+          <div class="center">
+            <small class="copyright">Contact Information:
+            <br>Ron Eglash  :
+              <a href="mailto:eglash@rpi.edu">eglash@rpi.edu</a> <br>Gouravjeet Singh  :
+              <a href="mailto:singhg4@rpi.edu">gouravjeet@gmail.com</a><br>
+              Kathleen Tully :
+              <a href="mailto:kathleen.tully@gmail.com">kathleen.tully@gmail.com</a>
+            </small>
+          </div>
+        </div>
+      </div>
+
+    <script type="text/javascript">
+    //<![CDATA[
+  var config = {
+        routes: {
+          dataSource: '/api-gis/api-ds/:id',
+          dataFeed: '/api-gis/api-mp/?dataset=:dataSourceId&page_size=100&page=:pageFeed&max_lat=:maxLat&min_lon=:minLon&min_lat=:minLat&max_lon=:maxLon&tag=:selectedTag&match=:matchModel',
+          tagService:'/api-gis/api-ds/:Id',
+          polygonService:'/api-gis/api-poly/?max_lat=:maxLat&min_lon=:minLon&min_lat=:minLat&max_lon=:maxLon&page_size=100&page=:pagePoly',
+          dataEdit:'/api-gis/api-tag/'
+        }
+      };
+  //]]>
+  </script>
+      <script src="bower_components/bluebird/js/browser/bluebird.js"></script>
+     <script type="text/javascript" src="//maps.googleapis.com/maps/api/js?key=AIzaSyBsqM8z-sm8gohHbuBO-2KlzbTyxbEAvsc&sensor=false&libraries=places,drawing"></script>
+
+    <!-- build:js(.) scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="{{ STATIC_URL }}gis/bower_components/jquery/dist/jquery.js"></script>
+    <script src="{{ STATIC_URL }}gis/bower_components/angular/angular.js"></script>
+    <script src="{{ STATIC_URL }}gis/bower_components/json3/lib/json3.js"></script>
+    <script src="{{ STATIC_URL }}gis/bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="{{ STATIC_URL }}gis/bower_components/angular-resource/angular-resource.js"></script>
+    <script src="{{ STATIC_URL }}gis/bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="{{ STATIC_URL }}gis/bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="{{ STATIC_URL }}gis/bower_components/angular-animate/angular-animate.js"></script>
+    <script src="{{ STATIC_URL }}gis/bower_components/angular-touch/angular-touch.js"></script>
+    <script src="{{ STATIC_URL }}gis/bower_components/angular-route/angular-route.js"></script>
+    <script src="{{ STATIC_URL }}gis/bower_components/lodash/dist/lodash.compat.js"></script>
+    <script src="{{ STATIC_URL }}gis/bower_components/angular-google-maps/dist/angular-google-maps.js"></script>
+    <script src="{{ STATIC_URL }}gis/bower_components/requirejs/require.js"></script>
+    <script src="{{ STATIC_URL }}gis/bower_components/autocomplete/dist/autocomplete.js"></script>
+    <script src="{{ STATIC_URL }}gis/bower_components/ngAutocomplete/src/ngAutocomplete.js"></script>
+    <script src="{{ STATIC_URL }}gis/bower_components/angular-strap/dist/angular-strap.min.js"></script>
+    <script src="{{ STATIC_URL }}gis/bower_components/angular-strap/dist/angular-strap.tpl.min.js"></script>
+    <script src="{{ STATIC_URL }}gis/bower_components/d3/d3.js"></script>
+    <script src="{{ STATIC_URL }}gis/bower_components/angular-charts/dist/angular-charts.js"></script>
+    <script src="{{ STATIC_URL }}gis/bower_components/angular-multi-select/angular-multi-select.js"></script>
+    <script src="{{ STATIC_URL }}gis/bower_components/angular-bootstrap-show-errors/src/showErrors.js"></script>
+    <script src="{{ STATIC_URL }}gis/bower_components/checklist-model/checklist-model.js"></script>
+    <script src="{{ STATIC_URL }}gis/bower_components/angular-django-rest-resource/angular-django-rest-resource.js"></script>
+    <script src="{{ STATIC_URL }}gis/bower_components/ng-tags-input/ng-tags-input.min.js"></script>
+    <script src="{{ STATIC_URL }}gis/bower_components/allmighty-autocomplete/script/autocomplete.js"></script>
+    <script src="{{ STATIC_URL }}gis/bower_components/jquery-ui/jquery-ui.js"></script>
+    <script src="{{ STATIC_URL }}gis/bower_components/angucomplete/angucomplete.js"></script>
+    <script src="{{ STATIC_URL }}gis/scripts/app.js"></script>
+    <script src="{{ STATIC_URL }}gis/scripts/controllers/main.js"></script>
+    <script src="{{ STATIC_URL }}gis/scripts/controllers/about.js"></script>
+    <script src="{{ STATIC_URL }}gis/scripts/controllers/charts.js"></script>
+    <script src="{{ STATIC_URL }}gis/scripts/services/config.js"></script>
+    <script src="{{ STATIC_URL }}gis/scripts/services/datasource.js"></script>
+    <script src="{{ STATIC_URL }}gis/scripts/services/datafeed.js"></script>
+    <script src="{{ STATIC_URL }}gis/scripts/services/dataedit.js"></script>
+    <script src="{{ STATIC_URL }}gis/scripts/services/polygonservice.js"></script>
+    <script src="{{ STATIC_URL }}gis/scripts/services/tagservice.js"></script>
+    <script src="{{ STATIC_URL }}gis/scripts/controllers/addTag.js"></script>
+</body>
+</html>
