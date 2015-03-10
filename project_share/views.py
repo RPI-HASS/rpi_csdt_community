@@ -63,7 +63,7 @@ class ProjectList(SearchableListMixin, SortableListMixin, ListView):
 class ProjectTagList(ProjectList):
     def get_queryset(self):
         self.tag = get_object_or_404(Tag, pk=self.kwargs['tag_pk'])
-        return Project.approved_objects.filter(tags__in=[self.tag])
+        return Project.approved_projects().filter(tags__in=[self.tag])
 
 class ProjectDetail(RestrictPermissionMixin, DetailView):
     model = Project
