@@ -1,6 +1,6 @@
 {% load thumbnail %}
 <div class="col-sm-4 col-md-3">
-    <div class="thumbnail">
+    <div class="thumbnail" style="height: 350px; overflow: auto;">
         {% thumbnail object.screenshot.f "200x200" crop="center" as im %}
             <a href="{% url 'project-detail' pk=object.id %}"><img src="{{ im.url }}" alt="Screenshot of {{ object.name }}"></a>
         {% endthumbnail %}
