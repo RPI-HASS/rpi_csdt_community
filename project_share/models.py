@@ -202,7 +202,7 @@ class ApplicationCategory(models.Model):
     theme = models.ForeignKey('project_share.ApplicationTheme')
     name = models.CharField(max_length=255)
     description = models.TextField(blank=True, null=True)
-    applications = models.ManyToManyField('project_share.Application', related_name='categories')
+    applications = models.ManyToManyField('project_share.Application', related_name='categories', blank=True)
 
     def __unicode__(self):
         return self.name

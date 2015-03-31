@@ -1,0 +1,18 @@
+<ul class="nav nav-pills">
+    <li ng-repeat="theme in themes" class="{{ activeTheme.id == theme.id ? 'active' : '' }}"><a href="" ng-click="setTheme(theme.id)">{{ theme.name }}</a></li>
+</ul>
+
+<div ng-repeat="category in categories" class="create">
+    <div ng-if="category.theme == activeTheme.id" class="category">
+        <h3>{{ category.name }}</h3>
+        <div ng-repeat="app in category.applications" class="application">
+            <div class="application-thumbnail">
+                <div class="application-caption">
+                    <h4><a href="{{ getApplication(app).url }}">{{ getApplication(app).name }}</a></h4>
+                    <div class="description">{{ getApplication(app).description }}</div>
+                    <h5><a href="/applications/{{ app }}/run">Run Application</a></h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

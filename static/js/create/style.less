@@ -1,0 +1,25 @@
+/* Rely on the less above me */
+@import "../../less/style.less";
+
+.create {
+    .make-row();
+    /* Static height */
+    .category {
+        /* A category should be aligned to the top, with bars going down */
+        .application {
+            .make-md-column(4);
+            .application-thumbnail {
+                &:extend(.thumbnail);
+                .application-caption {
+                    &:extend(.caption);
+                    .description {
+                        margin-top: 25px;
+                        margin-bottom: 25px;
+                        height: 250px;
+                        overflow: auto;
+                    }
+                }
+            }
+        }
+    }
+}

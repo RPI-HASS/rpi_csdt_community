@@ -13,11 +13,13 @@ from project_share.models import ExtendedUser
 from project_share.forms import ApplicationAdminForm
 
 class ApplicationAdmin(admin.ModelAdmin):
-    fields = ('name', 'url', 'application_type', 'application_file', 'featured', 'categories',)
+    fields = ('name', 'url', 'description', 'application_type', 'application_file', 'featured', 'categories',)
 
     form = ApplicationAdminForm
 
     def save_model(self, request, obj, form, change):
+        if obj.id == None:
+            obj.save()
         obj.categories.clear()
         for category in form.cleaned_data['categories']:
             obj.categories.add(category)

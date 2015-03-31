@@ -15,7 +15,7 @@ router.register(r'demos', DemosViewSet, base_name='api-demos')
 router.register(r'goals', GoalViewSet, base_name='api-goals')
 router.register(r'application', ApplicationViewSet, base_name='api-modules')
 router.register(r'theme', ApplicationThemeViewSet, base_name='api-themes')
-router.register(r'category', ApplicationCategoryViewSet, base_name='api-themes')
+router.register(r'category', ApplicationCategoryViewSet, base_name='api-category')
 
 
 urlpatterns = patterns('',
