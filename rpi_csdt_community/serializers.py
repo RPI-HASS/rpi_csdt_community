@@ -1,6 +1,7 @@
 from rest_framework import serializers
 
 from project_share.models import ApplicationDemo, Project, Goal, Application
+from project_share.models import ApplicationTheme, ApplicationCategory
 
 try:
     from django.contrib.auth import get_user_model
@@ -51,3 +52,12 @@ class UserSerializer(serializers.ModelSerializer):
 class ApplicationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Application
+        fields = ('id', 'name', 'version', 'description', 'url', 'application_file', 'featured', 'application_type', 'categories')
+
+class ApplicationCategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ApplicationCategory
+
+class ApplicationThemeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ApplicationTheme

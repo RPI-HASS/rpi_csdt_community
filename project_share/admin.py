@@ -3,11 +3,30 @@ from django.contrib.auth.admin import UserAdmin
 from django.utils.translation import ugettext_lazy as _
 from attachments.admin import AttachmentInlines
 
-from project_share.models import Application, ApplicationDemo, ApplicationType, Address, Project, Approval, FileUpload
-from project_share.models import ApplicationContext
+from project_share.models import Application, ApplicationDemo, ApplicationType, ApplicationContext
+from project_share.models import ApplicationTheme, ApplicationCategory
+from project_share.models import Address
 from project_share.models import Goal
-from project_share.models import Classroom
+from project_share.models import Classroom, Project, Approval, FileUpload
 from project_share.models import ExtendedUser
+
+from project_share.forms import ApplicationAdminForm
+
+class ApplicationAdmin(admin.ModelAdmin):
+    fields = ('name', 'url', 'application_type', 'application_file', 'featured', 'categories',)
+
+    form = ApplicationAdminForm
+
+    def save_model(self, request, obj, form, change):
+        obj.categories.clear()
+        for category in form.cleaned_data['categories']:
+            obj.categories.add(category)
+        obj.save()
+
+    def get_form(self, request, obj=None, **kwargs):
+        if obj:
+            self.form.base_fields['categories'].initial = obj.categories.all()
+        return super(ApplicationAdmin, self).get_form(request, obj)
 
 class ClassListFilter(admin.SimpleListFilter):
     title = _('Class')
@@ -33,7 +52,7 @@ class ClassListFilter(admin.SimpleListFilter):
 
 class ApprovalInline(admin.TabularInline):
     model = Approval
-    
+
 class ProjectAdmin(admin.ModelAdmin):
     inlines = [AttachmentInlines, ApprovalInline]
     list_filter = (ClassListFilter,)
@@ -63,9 +82,11 @@ class GoalAdmin(admin.ModelAdmin):
     list_display = ('name', 'application')
     list_filter = ('application',)
 
-admin.site.register(Application)
+admin.site.register(Application, ApplicationAdmin)
 admin.site.register(ApplicationContext)
 admin.site.register(ApplicationDemo)
+admin.site.register(ApplicationTheme)
+admin.site.register(ApplicationCategory)
 admin.site.register(Goal, GoalAdmin)
 admin.site.register(ApplicationType)
 admin.site.register(Address)

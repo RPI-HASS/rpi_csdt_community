@@ -7,12 +7,15 @@ from django.contrib import admin
 admin.autodiscover()
 
 from rpi_csdt_community.viewsets import ProjectViewSet, DemosViewSet, GoalViewSet, ApplicationViewSet, FileUploadView, CurrentUserView
+from rpi_csdt_community.viewsets import ApplicationThemeViewSet, ApplicationCategoryViewSet
 from rest_framework import routers
 router = routers.DefaultRouter()
 router.register(r'projects', ProjectViewSet, base_name='api-projects')
 router.register(r'demos', DemosViewSet, base_name='api-demos')
 router.register(r'goals', GoalViewSet, base_name='api-goals')
 router.register(r'application', ApplicationViewSet, base_name='api-modules')
+router.register(r'theme', ApplicationThemeViewSet, base_name='api-themes')
+router.register(r'category', ApplicationCategoryViewSet, base_name='api-themes')
 
 
 urlpatterns = patterns('',

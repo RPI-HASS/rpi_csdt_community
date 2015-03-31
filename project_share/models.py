@@ -191,4 +191,20 @@ class Address(models.Model):
     class Meta:
       verbose_name_plural = "Addresses"
 
+class ApplicationTheme(models.Model):
+    name = models.CharField(max_length=255)
+    description = models.TextField(blank=True, null=True)
+
+    def __unicode__(self):
+        return self.name
+
+class ApplicationCategory(models.Model):
+    theme = models.ForeignKey('project_share.ApplicationTheme')
+    name = models.CharField(max_length=255)
+    description = models.TextField(blank=True, null=True)
+    applications = models.ManyToManyField('project_share.Application', related_name='categories')
+
+    def __unicode__(self):
+        return self.name
+
 import project_share.signals

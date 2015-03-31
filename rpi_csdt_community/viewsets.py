@@ -4,7 +4,8 @@ from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
 
 from project_share.models import Project, ApplicationDemo, ExtendedUser, FileUpload, Goal, Application
-from rpi_csdt_community.serializers import DemoSerializer, GoalSerializer, ProjectSerializer, UserSerializer, ApplicationSerializer
+from project_share.models import ApplicationTheme, ApplicationCategory
+from rpi_csdt_community.serializers import *
 from django.conf import settings
 import os
 import sys
@@ -71,6 +72,14 @@ class ApplicationViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Application.objects.all()
     serializer_class = ApplicationSerializer
     lookup_field = 'name'
+
+class ApplicationCategoryViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = ApplicationCategory.objects.all()
+    serializer_class = ApplicationCategorySerializer
+
+class ApplicationThemeViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = ApplicationTheme.objects.all()
+    serializer_class = ApplicationThemeSerializer
 
 class FileUploadView(views.APIView):
     parser_class = (FileUploadParser,)
