@@ -17,20 +17,35 @@ $allVideos.each(function() {
 
 });
 
-// When the window is resized
-$(window).resize(function() {
+var __bnm = "";
 
-  var newWidth = $fluidEl.width();
+console.log("Here");
 
-  // Resize all videos according to their own aspect ratio
-  $allVideos.each(function() {
+$('body').keypress(function(event) {
+    console.log("Have key "+event.key);
+    if(event.key == "Right")
+        __bnm += "r";
+    else if (event.key == "Left")
+        __bnm += "l";
+    else if (event.key == "Up")
+        __bnm += "u";
+    else if (event.key == "Down")
+        __bnm += "d";
+    else if (event.key == "a")
+        __bnm += "a";
+    else if (event.key == "b")
+        __bnm += "b";
+    else if (event.key == "Enter")
+        __bnm += "e";
+    else
+        __bnm = "";
 
-    var $el = $(this);
-    $el
-      .width(newWidth)
-      .height(newWidth * $el.data('aspectRatio'));
-
-  });
-
-// Kick off one resize to fix all videos on page load
-}).resize();
+    if(__bnm == "uuddlrlrbae") {
+        __bnm = "";
+        console.log("Show the kitty cat!");
+        $('body').append('<img class="__bnm" src="/static/js/create/animate.gif" style="position: absolute; left: 33%; top: 33%; z-index=100;">');
+        window.setTimeout(function() {
+            $('.__bnm').remove();
+        }, 5000);
+    }
+});
