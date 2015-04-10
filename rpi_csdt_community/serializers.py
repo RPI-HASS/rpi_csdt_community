@@ -52,7 +52,7 @@ class UserSerializer(serializers.ModelSerializer):
 class ApplicationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Application
-        fields = ('id', 'name', 'version', 'description', 'url', 'application_file', 'featured', 'application_type', 'categories')
+        fields = ('id', 'name', 'version', 'description', 'url', 'application_file', 'featured', 'application_type', 'categories', 'screenshot')
 
 class ApplicationCategorySerializer(serializers.ModelSerializer):
     class Meta:

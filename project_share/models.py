@@ -76,6 +76,7 @@ class Application(models.Model):
     application_file = models.FileField(upload_to=application_application, null=True, blank=True)
 
     featured = models.BooleanField(default=True)
+    screenshot = models.ImageField(upload_to="application_screenshot/", null=True)
 
     def get_context(self):
         # Returns all context data ordered

@@ -13,7 +13,7 @@ from project_share.models import ExtendedUser
 from project_share.forms import ApplicationAdminForm
 
 class ApplicationAdmin(admin.ModelAdmin):
-    fields = ('name', 'url', 'description', 'application_type', 'application_file', 'featured', 'categories',)
+    fields = ('name', 'url', 'description', 'application_type', 'application_file', 'featured', 'categories', 'screenshot',)
 
     form = ApplicationAdminForm
 

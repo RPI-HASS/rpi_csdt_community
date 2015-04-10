@@ -7,15 +7,15 @@
     .category {
         /* A category should be aligned to the top, with bars going down */
         .application {
-            .make-md-column(4);
+            .make-md-column(2);
             .application-thumbnail {
                 &:extend(.thumbnail);
+                height: 250px;
                 .application-caption {
                     &:extend(.caption);
                     .description {
                         margin-top: 25px;
-                        margin-bottom: 25px;
-                        height: 250px;
+                        height: 75px;
                         overflow: auto;
                     }
                 }
