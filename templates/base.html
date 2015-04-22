@@ -1,9 +1,11 @@
 {% load cms_tags sekizai_tags %}
 {% load rpi_csdt_community_tags %}
 {% load compress %}
+{% load analytical %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    {% analytical_head_top %}
     <meta charset="utf-8">
     <title>{% block title %}CSDT Community{% endblock %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,11 +21,11 @@
     {% endcompress %}
 
     {% block extra_head %}{% endblock %}
+    {% analytical_head_bottom %}
   </head>
 
   <body>
-
-
+    {% analytical_body_top %}
     <!-- Static navbar -->
     {% cms_toolbar %}
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -99,6 +101,6 @@
     {% block js %}
     {% endblock %}
     {% block extra_script %}{% endblock %}
-
+    {% analytical_body_bottom %}
   </body>
 </html>

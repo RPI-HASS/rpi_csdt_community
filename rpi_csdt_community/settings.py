@@ -222,6 +222,7 @@ INSTALLED_APPS = (
     'reversion',
     'cms_bootstrap_templates',
     'compressor',
+    'analytical',
 )
 
 COMMENTS_APP = "django_comments_xtd"
@@ -286,6 +287,8 @@ MIGRATION_MODULES = {
 }
 
 THUMBNAIL_DEBUG = False
+
+TEXT_ADDITIONAL_TAGS = ('iframe',)
 
 LOGIN_REDIRECT_URL = '/'
 STATICFILES_STORAGE = 'pipeline.storage.PipelineStorage'
