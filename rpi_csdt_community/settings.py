@@ -256,6 +256,8 @@ CMS_TEMPLATES = (
     ('cms_bootstrap_templates/template_header_two_column_right.html', 'Two columns w/ header, large right'),
 )
 
+CMS_SOFTROOT = True
+
 REST_FRAMEWORK = {
     # Use hyperlinked styles by default.
     # Only used if the `serializer_class` attribute is not set on a view.
