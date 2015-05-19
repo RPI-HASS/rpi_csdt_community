@@ -195,8 +195,6 @@ INSTALLED_APPS = (
     'secretballot',
     'likes',
 
-    'django.contrib.comments',
-    'django_comments_xtd',
     'django_markup',
 #    'pybb',
 #    'south',
@@ -224,10 +222,6 @@ INSTALLED_APPS = (
     'compressor',
     'analytical',
 )
-
-COMMENTS_APP = "django_comments_xtd"
-COMMENTS_XTD_MAX_THREAD_LEVEL = 8
-COMMENTS_XTD_CONFIRM_EMAIL = True
 
 from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS as TCP
 
