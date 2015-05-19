@@ -5,6 +5,7 @@ from django.shortcuts import get_object_or_404
 from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse
 from django.core.urlresolvers import reverse_lazy
+from django.contrib.contenttypes.models import ContentType
 
 from taggit.models import Tag
 
@@ -13,6 +14,7 @@ from extra_views import SearchableListMixin
 
 from project_share.models import Application, Project, ApplicationDemo, Classroom, Approval, Address
 from project_share.forms import ProjectForm, ApprovalForm, AddressForm
+from django_teams.models import Ownership
 
 try:
     from django.contrib.auth import get_user_model
@@ -141,7 +143,19 @@ class ApprovalCreate(CreateView):
       self.request = request
       return super(ApprovalCreate, self).dispatch(request, *args, **kwargs)
 
+    def post(self, request, *args, **kwargs):
+      
+        project_id = self.kwargs['project_pk']
+      
+        team_approval = Ownership() # Create an ownership object
+        team_approval.content_type = ContentType.objects.get(app_label="project_share", model="project")
+        team_approval.object_id = project_id
+        team_approval.team = Project.objects.get(pk=project_id).classroom
+        team_approval.approved = False
+        team_approval.save()
 
+        return super(ApprovalCreate, self).post(request, *args, **kwargs)
+      
     def form_valid(self, form):
         form.instance.project_id = self.kwargs['project_pk']
         return super(ApprovalCreate, self).form_valid(form)

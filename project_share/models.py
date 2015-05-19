@@ -5,6 +5,7 @@ from django.contrib.auth.models import AbstractUser
 from django.template.defaultfilters import slugify
 from django.contrib.comments.moderation import CommentModerator, moderator
 from taggit.models import TaggedItemBase, GenericTaggedItemBase
+from django_teams.models import Team
 
 import secretballot
 import json
@@ -136,7 +137,7 @@ class Project(models.Model):
 
     project = models.ForeignKey('project_share.FileUpload', null=True, blank=True, related_name='+')
     screenshot = models.ForeignKey('project_share.FileUpload', null=True, blank=True, related_name='+')
-    classroom = models.ForeignKey('project_share.Classroom', null=True, blank=True, related_name='+')
+    classroom = models.ForeignKey('django_teams.Team', null=True, blank=True, related_name='+')
 
     tags = TaggableManager(blank=True)
 
