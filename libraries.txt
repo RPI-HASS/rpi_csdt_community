@@ -29,3 +29,4 @@ djangocms-file==0.1
 djangocms-link==1.5
 djangocms-video==0.1
 django-analytical==0.21.0
+djangocms-text-ckeditor==2.4.3
