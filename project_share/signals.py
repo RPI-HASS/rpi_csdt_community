@@ -1,8 +1,10 @@
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
-from project_share.models import Approval
+from project_share.models import Approval, Project
 from django_comments_xtd.models import XtdComment
+from django_teams.models import Ownership
+from django.contrib.contenttypes.models import ContentType
 
 @receiver(post_save, sender=Approval)
 def approval_handler(sender, instance, created, **kwargs):
@@ -15,3 +17,9 @@ def approval_comment(sender, instance, created, **kwargs):
     if created == True:
         instance.is_public = False
         instance.save()
+
+@receiver(post_save, sender=Ownership)
+def approve_project(sender, instance, created, **kwargs):
+    if instance.approved and isinstance(instance.content_object, Project):
+        instance.content_object.approved = True
+        instance.content_object.save()
