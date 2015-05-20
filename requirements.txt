@@ -29,6 +29,8 @@ djangocms-file==0.1
 djangocms-link==1.5
 djangocms-video==0.1
 django-analytical==0.21.0
+django-attachments==0.3.1.dev0
+gunicorn==19.3.0
 git+https://github.com/bartTC/django-attachments.git
 git+https://github.com/chuck211991/django-likes.git
 git+https://github.com/chuck211991/django_teams.git
