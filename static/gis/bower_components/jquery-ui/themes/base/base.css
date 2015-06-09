@@ -26,8 +26,3 @@
 @import url("spinner.css");
 @import url("tabs.css");
 @import url("tooltip.css");
-
-.application{
-	max-width:200px
-	float:left
-}
