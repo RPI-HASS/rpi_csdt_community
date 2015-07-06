@@ -38,3 +38,8 @@ To much work. I would suggest using mod_wsgi. There is a sample configuration fi
 ## How-to contribute
 
 Fork this repo, make your changes. Be sure to justify everything! Avoid anything too tricky, try to stick to Django's principles (reuse other libraries, DRY). When you're ready to share what you've done, make a pull request)
+
+Current Release
+---------------
+
+The current release is 20150705.
