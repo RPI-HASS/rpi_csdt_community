@@ -33,7 +33,7 @@ Then you should be able to see the project at http://127.0.0.1:8000/
 
 ## How-to deploy for production
 
-To much work. I would suggest using mod_wsgi. There is a sample configuration file in the doc/ folder.
+Too much work. I would suggest using mod_wsgi. There is a sample configuration file in the doc/ folder.
 
 ## How-to contribute
 
