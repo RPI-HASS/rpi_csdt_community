@@ -22,4 +22,4 @@ def approval_comment(sender, instance, created, **kwargs):
     if instance.content_type == ContentType.objects.get(app_label="project_share", model="project") and instance.approved == True:
         p = Project.objects.get(pk=instance.object_id)
         p.approved = True
-        p.save() 
+        p.save()
