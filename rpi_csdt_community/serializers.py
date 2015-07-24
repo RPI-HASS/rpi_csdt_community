@@ -2,6 +2,7 @@ from rest_framework import serializers
 
 from project_share.models import ApplicationDemo, Project, Goal, Application
 from project_share.models import ApplicationTheme, ApplicationCategory
+from django_teams.models import TeamStatus
 
 try:
     from django.contrib.auth import get_user_model
@@ -42,6 +43,23 @@ class ProjectSerializer(serializers.ModelSerializer):
         fields = ('id', 'name', 'description', 'approved', 'application', 'owner', 'project_url', 'screenshot_url', 'project', 'screenshot',)
         write_only_fields = ('project', 'screenshot',)
         read_only_fields = ('id', 'approved','owner', 'project_url', 'screenshot_url',)
+
+class TeamSerializer(serializers.ModelSerializer):
+    team_name = serializers.StringRelatedField(source='team', read_only=True)
+	
+    def __init__(self, *args, **kwargs):
+        super(TeamSerializer, self).__init__(*args, **kwargs)
+        self.request = kwargs['context']['request']
+
+    def create(self, validated_data):
+        validated_data['owner'] = self.request.user
+        return super(TeamSerializer, self).create(validated_data)
+
+    class Meta:
+        model = TeamStatus
+        fields = ('id', 'team_name', 'team')
+        read_only_fields = ('id', 'team_name', 'team')
+
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:

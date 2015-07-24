@@ -5,6 +5,7 @@ from django.shortcuts import get_object_or_404
 
 from project_share.models import Project, ApplicationDemo, ExtendedUser, FileUpload, Goal, Application
 from project_share.models import ApplicationTheme, ApplicationCategory
+from django_teams.models import TeamStatus, Team
 from rpi_csdt_community.serializers import *
 from django.conf import settings
 import os
@@ -43,6 +44,16 @@ class ProjectViewSet(viewsets.ModelViewSet):
           queryset = queryset.filter(owner=get_object_or_404(ExtendedUser, pk=user))
         return queryset
 
+class TeamViewSet(viewsets.ModelViewSet):
+    model = TeamStatus
+    serializer_class = TeamSerializer
+
+    def get_queryset(self):
+		queryset = self.model.objects.select_related()
+		user = self.request.QUERY_PARAMS.get('owner', None)
+		queryset = queryset.filter(user_id=get_object_or_404(ExtendedUser, pk=user))
+		return queryset
+	
 class DemosViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = ApplicationDemo.objects.all()
     serializer_class = DemoSerializer
