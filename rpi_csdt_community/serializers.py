@@ -57,8 +57,8 @@ class TeamSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = TeamStatus
-        fields = ('id', 'team_name', 'team')
-        read_only_fields = ('id', 'team_name', 'team')
+        fields = ('id', 'role', 'team_name', 'team')
+        read_only_fields = ('id', 'role', 'team_name', 'team')
 
 
 class UserSerializer(serializers.ModelSerializer):

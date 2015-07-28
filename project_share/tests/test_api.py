@@ -241,7 +241,7 @@ class ProjectTests(LiveServerTestCase):
         Verify that we can get a list of projects for this user using the REST API
         """
         from django.test import Client
-        url = reverse(r'^api/team') + "?owner=1"
+        url = reverse(r'^api/team') + "?user=1"
         # This doesn't work with the built-in client
         # !! This was fixed in the edge version as of 2014-04-21
         # !! Edge version of Django Rest Framework :)
