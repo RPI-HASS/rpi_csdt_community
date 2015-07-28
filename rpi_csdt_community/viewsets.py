@@ -50,8 +50,9 @@ class TeamViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
 		queryset = self.model.objects.select_related()
-		user = self.request.QUERY_PARAMS.get('owner', None)
-		queryset = queryset.filter(user_id=get_object_or_404(ExtendedUser, pk=user))
+		user = self.request.QUERY_PARAMS.get('user', None)
+		queryset = queryset.filter(user=get_object_or_404(ExtendedUser, pk=user))
+		queryset = queryset.filter(role='10') | queryset.filter(role='20')
 		return queryset
 	
 class DemosViewSet(viewsets.ReadOnlyModelViewSet):
