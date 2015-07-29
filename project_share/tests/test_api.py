@@ -235,6 +235,22 @@ class ProjectTests(LiveServerTestCase):
         self_url = 1
         for project in response.data:
           self.assertEqual(project['owner'], self_url)
+		  
+    def test_get_teams(self):
+        """
+        Verify that we can get a list of projects for this user using the REST API
+        """
+        from django.test import Client
+        url = reverse('api-teams-list') + "?user=1"
+        # This doesn't work with the built-in client
+        # !! This was fixed in the edge version as of 2014-04-21
+        # !! Edge version of Django Rest Framework :)
+        response = self.client.get(url, format='json')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        self_url = 1
+        for team in response.data:
+          self.assertEqual(team['user'], self_url)
 
     def test_saving_published_project_creates_unpublished_project(self):
         """
