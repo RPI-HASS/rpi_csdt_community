@@ -42,4 +42,4 @@ Fork this repo, make your changes. Be sure to justify everything! Avoid anything
 Current Release
 ---------------
 
-The current release is 20150705.
+The current release is 20150731.
