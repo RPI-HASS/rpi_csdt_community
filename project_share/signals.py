@@ -4,6 +4,7 @@ from django.dispatch import receiver
 from project_share.models import Approval, Project
 from django_teams.models import Ownership
 from django_comments_xtd.models import XtdComment
+from django.contrib.contenttypes.models import ContentType
 
 @receiver(post_save, sender=Approval)
 def approval_handler(sender, instance, created, **kwargs):
