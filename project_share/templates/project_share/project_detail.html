@@ -1,5 +1,4 @@
 {% extends 'base.html' %}
-{% load comments comments_xtd %}
 {% load attachments_tags %}
 {% load likes_inclusion_tags %}
 {% load thumbnail %}
@@ -34,10 +33,5 @@
     {% endif %}
 
     {% likes object %}
-
-    {% render_comment_list for object %}
-    {% with next=request.path %}
-    {% render_comment_form for object %}
-    {% endwith %}
 
 {% endblock %}
