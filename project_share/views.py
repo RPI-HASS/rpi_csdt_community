@@ -150,6 +150,9 @@ class ApprovalCreate(CreateView):
         team_approval = Ownership() # Create an ownership object
         team_approval.content_type = ContentType.objects.get(app_label="project_share", model="project")
         team_approval.object_id = project_id
+        if Project.objects.get(pk=project_id).classroom == None:
+            team_approval = None
+            return super(ApprovalCreate, self).post(request, *args, **kwargs) #ben horne added this to fix 500 error
         team_approval.team = Project.objects.get(pk=project_id).classroom
         team_approval.approved = False
         team_approval.save()
