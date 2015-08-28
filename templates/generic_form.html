@@ -1,7 +1,7 @@
     {% if form.is_multipart %}
-        <form class="form-horizontal" method="post" action="{{ action }}" enctype="multipart/form-data">
-    {% else %}
-        <form class="form-horizontal" method="post" action="{{ action }}">
+    <form id="generic_form" class="form-horizontal" method="post" action="{{ action }}" enctype="multipart/form-data">
+	{% else %}
+    <form id="generic_form" class="form-horizontal" method="post" action="{{ action }}">
     {% endif %}
         {% csrf_token %}
         {% for field in form %}
