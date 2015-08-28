@@ -1,7 +1,7 @@
 from django.views.generic import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, redirect
 from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse
 from django.core.urlresolvers import reverse_lazy
@@ -106,6 +106,14 @@ class ProjectUpdate(UpdateView):
 
     template_name = "project_share/project_edit.html"
 
+    def post(self, request, *args, **kwargs):
+        if 'publish_project' in request.POST:
+            super(ProjectUpdate, self).post(request, *args, **kwargs)
+            o = super(ProjectUpdate, self).get_object()
+            o.save()
+            return redirect('approval-create', project_pk=o.pk)
+        return super(ProjectUpdate, self).post(request, *args, **kwargs)
+
     def get_form_kwargs(self):
         kwargs = super(ProjectUpdate, self).get_form_kwargs()
         kwargs.update({'user': self.request.user})
@@ -152,7 +160,7 @@ class ApprovalCreate(CreateView):
         team_approval.object_id = project_id
         if Project.objects.get(pk=project_id).classroom == None:
             team_approval = None
-            return super(ApprovalCreate, self).post(request, *args, **kwargs) #ben horne added this to fix 500 error
+            return super(ApprovalCreate, self).post(request, *args, **kwargs)
         team_approval.team = Project.objects.get(pk=project_id).classroom
         team_approval.approved = False
         team_approval.save()
