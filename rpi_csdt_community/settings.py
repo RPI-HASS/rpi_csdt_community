@@ -285,6 +285,8 @@ MIGRATION_MODULES = {
 THUMBNAIL_DEBUG = False
 
 TEXT_ADDITIONAL_TAGS = ('iframe',)
+TEXT_ADDITIONAL_ATTRIBUTES = ('position', 'bottom')
+
 
 LOGIN_REDIRECT_URL = '/'
 STATICFILES_STORAGE = 'pipeline.storage.PipelineStorage'
