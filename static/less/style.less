@@ -229,3 +229,27 @@ a.liker {
 {
 	display:block
 }
+
+/*Responsive Styles*/
+
+@media screen and (max-width : 1000px){
+	/*Make dropdown links appear inline*/
+	#CMS_Menu ul ul {
+		position: static;
+		display: none;
+	}
+	/*Create vertical spacing*/
+	#CMS_Menu li {
+		margin-bottom: 1px;
+	}
+	/*Make all menu links full width*/
+	#CMS_Menu ul li, li a {
+		width: 100%;
+	}
+	
+	#CMS_Menu ul li:hover > ul
+	{
+		display:block;
+		background:#f2f2f2
+	}
+}
