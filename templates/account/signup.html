@@ -8,9 +8,7 @@
 {% block content %}
 <h1>{% trans "Sign Up" %}</h1>
 
-<p>{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}</p>
-
-    <h2>Login</h2>
+<p>{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">login</a>.{% endblocktrans %}</p>
     <div class="two-column-8-4">
 
         <div class="column-left">
@@ -19,8 +17,8 @@
                     <div class="text-input">
                         {{ field }}
                         {{ field.errors }}
-                    </div>
-                <div class="text-input">
+                    </div>                
+				<div class="text-input">
 					<h4>Demographic Information</h4>
 					<input type="text" placeholder="Gender" name="gender" /><br>
 					<input type="text" placeholder="Race" name="race" /><br>
