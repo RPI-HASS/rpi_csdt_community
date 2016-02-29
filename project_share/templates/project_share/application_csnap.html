@@ -11,8 +11,11 @@
     <script type="text/javascript">
         var config = {
           'modules': {
-            'module': '{{ application.name }}',
+		    {% if applicationdemo %}'module': '{{ applicationdemo.application.name }}',
+            'stage': '{{ applicationdemo.application.application_file.url }}',
+			{% else %}'module': '{{ application.name }}',
             'stage': '{{ application.application_file.url }}',
+			{% endif %}
           },
           {% if user.is_authenticated %}
           'user': '{{ user }}',
@@ -20,26 +23,27 @@
           {% endif %}
           'urls': {
             'user_api_detail_url': '{% url 'user-api-detail'%}',
-            'demos_url': '{% url 'api-demos-list' %}?format=json&application={{ application }}',
-            'demo_detail_url': '{% url 'demo-list' %}',
-            'goals_url': '{% url 'api-goals-list' %}?format=json&application={{ application }}',
-            'create_project_url': '{% url 'api-projects-list' %}',
+            {% if applicationdemo %}'demos_url': '{% url 'api-demos-list' %}?format=json&application={{ applicationdemo.application }}',
+            {% else %}'demos_url': '{% url 'api-demos-list' %}?format=json&application={{ application }}',
+            {% endif %}'demo_detail_url': '{% url 'demo-list' %}',
+            {% if applicationdemo %}'goals_url': '{% url 'api-goals-list' %}?format=json&application={{ applicationdemo.application }}',
+            {% else %}'goals_url': '{% url 'api-goals-list' %}?format=json&application={{ application }}',
+            {% endif %}'create_project_url': '{% url 'api-projects-list' %}',
             'list_project_url': '{% url 'api-projects-list' %}',
             'create_file_url': '{% url 'file-create' %}',
             'login_url': '{% url 'account_login' %}',
             'project_url_root': '{% url 'project-list' %}',
             'module_api': '{% url 'api-modules-list' %}',
-            {% if user.is_authenticated %}
-            'user_detail_url': '{% url 'extendeduser-detail' pk=user.id %}',
+			'signup_url': '{% url 'account_signup' %}',
+            {% if user.is_authenticated %}'user_detail_url': '{% url 'extendeduser-detail' pk=user.id %}',
             {% endif %}
           },
           'asset_path': '{{ STATIC_URL }}csnap/',
           'lib_path': '/media/modules/libraries/',
-          'application_id': {{ application.id }},
-          {% if present %}
-          'presentation': true,
+          {% if present %}'presentation': true,
           {% endif %}
-          {% if project %}
+          {% if application %}'application_id': {{ application.id }},
+          {% elif project %}'application_id': {{ application.id }},
           'project': {
             'id': {{ project.id }},
             'name': '{{ project.name }}',
@@ -47,7 +51,7 @@
             'approved': {{ project.approved|lower }},
             'project_url': '{{ project.project.f.url }}'
           }
-          {% elif applicationdemo %}
+          {% elif applicationdemo %}'application_id': {{ applicationdemo.application.id }},
           'demo': {
             'id': {{ applicationdemo.id }},
             'name': '{{ applicationdemo.name }}',

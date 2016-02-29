@@ -139,8 +139,13 @@ class ProjectDelete(DeleteView):
 class DemoList(ListView):
     model = ApplicationDemo
 
-class DemoDetail(DetailView):
+class DemoDetail(DetailView):		
     model = ApplicationDemo
+    context_object_name = 'applicationdemo'
+    template_name = "project_share/application_csnap.html"
+
+    def render_to_response(self, context, **response_kwargs):
+        return super(DemoDetail, self).render_to_response(context, **response_kwargs)
 
 class ApprovalCreate(CreateView):
     model = Approval
