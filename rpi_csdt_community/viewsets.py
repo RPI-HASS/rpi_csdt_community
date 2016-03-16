@@ -39,7 +39,7 @@ class ProjectViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         queryset = self.model.objects.all()
-        user = self.request.QUERY_PARAMS.get('owner', None)
+        user = self.request.query_params.get('owner', None)
         if user is not None:
           queryset = queryset.filter(owner=get_object_or_404(ExtendedUser, pk=user))
         return queryset
@@ -97,8 +97,8 @@ class FileUploadView(views.APIView):
     parser_class = (FileUploadParser,)
     model = FileUpload
 
-    def post(self, request, format=None):
-        file_object = request.FILES['file']
+    def put(self, request, format=None):
+        file_object = request.data['file']
         f = FileUpload(f=file_object)
         f.save()
         path = os.path.join(settings.MEDIA_URL, f.f.url)

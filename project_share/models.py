@@ -3,7 +3,7 @@ from django.core.urlresolvers import reverse
 from django.conf import settings
 from django.contrib.auth.models import AbstractUser
 from django.template.defaultfilters import slugify
-from django.contrib.comments.moderation import CommentModerator, moderator
+from django_comments.moderation import CommentModerator, moderator
 from taggit.models import TaggedItemBase, GenericTaggedItemBase
 from django_teams.models import Team
 

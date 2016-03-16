@@ -4,7 +4,6 @@ import os
 PROJECT_ROOT = os.path.dirname(os.path.dirname(__file__))
 
 DEBUG = True
-TEMPLATE_DEBUG = DEBUG
 
 # Override this setting local_settings.py to enable the GIS app
 ENABLE_GIS = False
@@ -88,18 +87,10 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
     # 'django.contrib.staticfiles.finders.DefaultStorageFinder',
     'compressor.finders.CompressorFinder',
-    'pipeline.finders.PipelineFinder',
 )
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = 'n)ntn6k*y6tt5zd5m!0$&qd$y_*rpv5m87-ld4f7suj8%shd^4'
-
-# List of callables that know how to import templates from various sources.
-TEMPLATE_LOADERS = (
-    'django.template.loaders.filesystem.Loader',
-    'django.template.loaders.app_directories.Loader',
-    # 'django.template.loaders.eggs.Loader',
-)
 
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
@@ -122,13 +113,6 @@ ROOT_URLCONF = 'rpi_csdt_community.urls'
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'rpi_csdt_community.wsgi.application'
 
-TEMPLATE_DIRS = (
-    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
-    os.path.join(PROJECT_ROOT, 'templates/'),
-)
-
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -140,6 +124,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     'django.contrib.admindocs',
+    'django_comments',
     'taggit',
     'taggit_templatetags',
 
@@ -179,7 +164,6 @@ INSTALLED_APPS = (
     'project_share',
     'rpi_csdt_community',
     'twitter_bootstrap',
-    #'pipeline',
     'jquery',
 
 
@@ -200,8 +184,10 @@ INSTALLED_APPS = (
 #    'south',
     'rest_framework',
     'django_teams',
+    'django_comments_xtd',
 
 # Django CMS
+    'treebeard',
     'djangocms_text_ckeditor',  # note this needs to be above the 'cms' entry
     'cms',  # django CMS itself
     'mptt',  # utilities for implementing a tree
@@ -223,16 +209,25 @@ INSTALLED_APPS = (
     'analytical',
 )
 
-from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS as TCP
+TEMPLATES = [ 
+    {   
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [os.path.join(PROJECT_ROOT, 'templates')],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+		'django.core.context_processors.static',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+                'sekizai.context_processors.sekizai',
+                'cms.context_processors.cms_settings',
+            ],
+        },
+    },  
+]
 
-TEMPLATE_CONTEXT_PROCESSORS = TCP + (
-    'django.core.context_processors.request',
-    'django.contrib.messages.context_processors.messages',
-    'allauth.account.context_processors.account',
-    'allauth.socialaccount.context_processors.socialaccount',
-    'sekizai.context_processors.sekizai',
-    'cms.context_processors.cms_settings',
-)
 
 AUTHENTICATION_BACKENDS = (
     "django.contrib.auth.backends.ModelBackend",
@@ -265,23 +260,6 @@ REST_FRAMEWORK = {
     ],
 }
 
-MIGRATION_MODULES = {
-    'cms': 'cms.migrations_django',
-    'menus': 'menus.migrations_django',
-
-    # Add also the following modules if you're using these plugins:
-    'djangocms_file': 'djangocms_file.migrations_django',
-    'djangocms_flash': 'djangocms_flash.migrations_django',
-    'djangocms_googlemap': 'djangocms_googlemap.migrations_django',
-    'djangocms_inherit': 'djangocms_inherit.migrations_django',
-    'djangocms_link': 'djangocms_link.migrations_django',
-    'djangocms_picture': 'djangocms_picture.migrations_django',
-    'djangocms_snippet': 'djangocms_snippet.migrations_django',
-    'djangocms_teaser': 'djangocms_teaser.migrations_django',
-    'djangocms_video': 'djangocms_video.migrations_django',
-    'djangocms_text_ckeditor': 'djangocms_text_ckeditor.migrations_django',
-}
-
 THUMBNAIL_DEBUG = False
 
 TEXT_ADDITIONAL_TAGS = ('iframe',)
@@ -289,8 +267,6 @@ TEXT_ADDITIONAL_ATTRIBUTES = ('position', 'bottom')
 
 
 LOGIN_REDIRECT_URL = '/'
-STATICFILES_STORAGE = 'pipeline.storage.PipelineStorage'
-
 
 # Track where my LESS things live
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
@@ -300,8 +276,6 @@ my_app_less = os.path.join(BASE_DIR, 'static', 'less')
 # For apps outside of your project, it's simpler to import them to find their root folders
 import twitter_bootstrap
 bootstrap_less = os.path.join(os.path.dirname(twitter_bootstrap.__file__), 'static', 'twitter_bootstrap', 'less')
-
-PIPELINE_LESS_ARGUMENTS = u'--include-path={}'.format(os.pathsep.join([bootstrap_less, my_app_less]))
 
 COMPRESS_ENABLED = False
 COMPRESS_LESSC_COMMAND = 'lessc --include-path={}'.format(os.pathsep.join([bootstrap_less, my_app_less]))
