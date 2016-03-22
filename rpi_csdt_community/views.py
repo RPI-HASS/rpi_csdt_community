@@ -1,7 +1,7 @@
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.comments.views.comments import post_comment
+from django_comments.views.comments import post_comment
 from django.http import HttpResponse
 from django.db.models import Count
 
