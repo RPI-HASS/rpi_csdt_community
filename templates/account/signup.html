@@ -17,14 +17,14 @@
                     <div class="text-input">
                         {{ field }}
                         {{ field.errors }}
-                    </div>                
-				<div class="text-input">
-					<h4>Demographic Information</h4>
-					<input type="text" placeholder="Gender" name="gender" /><br>
-					<input type="text" placeholder="Race" name="race" /><br>
-					<input type="text" placeholder="Age" name="age" /><br>
-				</div>
-                {% endfor %}
+                    </div>
+                {% endfor %}                
+		<div class="text-input">
+			<h4>Demographic Information</h4>
+			<input type="text" placeholder="Gender" name="gender" /><br>
+			<input type="text" placeholder="Race" name="race" /><br>
+			<input type="text" placeholder="Age" name="age" /><br>
+		</div>
                 {% csrf_token %}
                 {% if redirect_field_value %}
                 <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
