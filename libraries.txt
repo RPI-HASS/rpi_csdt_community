@@ -49,4 +49,3 @@ pybbm
 PyYAML
 six
 sorl-thumbnail
-django-templatetag-sugar
