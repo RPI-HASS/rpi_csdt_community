@@ -42,8 +42,7 @@
           'lib_path': '/media/modules/libraries/',
           {% if present %}'presentation': true,
           {% endif %}
-          {% if application %}'application_id': {{ application.id }},
-          {% elif project %}'application_id': {{ application.id }},
+          {% if project %}'application_id': {{ application.id }},
           'project': {
             'id': {{ project.id }},
             'name': '{{ project.name }}',
@@ -58,6 +57,7 @@
             'application': {{ applicationdemo.application.id }},
             'project_url': '{{ applicationdemo.zipfile.url }}'
           }
+          {% elif application %}'application_id': {{ application.id }},
           {% endif %}
         };
     </script>
