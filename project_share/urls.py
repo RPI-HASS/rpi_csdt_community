@@ -10,7 +10,7 @@ from project_share.views import ProjectUpdate
 from project_share.views import ProjectDelete
 from project_share.views import UserDetail
 
-urlpatterns = patterns('',
+urlpatterns = [
     url(r'^projects/$', ProjectList.as_view(), name='project-list'),
     url(r'^projects/tag/(?P<tag_pk>\d+)/$', ProjectTagList.as_view(), name='project-tag-list'),
     url(r'^projects/(?P<pk>\d+)/$', ProjectDetail.as_view(), name='project-detail'),
@@ -36,4 +36,4 @@ urlpatterns = patterns('',
     url(r'address/create$', AddressCreate.as_view(), name='address-create'),
     url(r'address/confirm$', TemplateView.as_view(template_name='project_share/address_confirm.html'), name='address-confirm'),
     url(r'address/(?P<pk>.*)$', AddressUpdate.as_view(), name='address-update'),
-)
+]
