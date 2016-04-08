@@ -50,7 +50,7 @@ class TeamViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
 		queryset = self.model.objects.select_related()
-		user = self.request.QUERY_PARAMS.get('user', None)
+		user = self.request.query_params.get('user', None)
 		queryset = queryset.filter(user=get_object_or_404(ExtendedUser, pk=user))
 		queryset = queryset.filter(role='10') | queryset.filter(role='20')
 		return queryset
@@ -62,7 +62,7 @@ class DemosViewSet(viewsets.ReadOnlyModelViewSet):
 
     def get_queryset(self):
         queryset = self.queryset
-        application = self.request.QUERY_PARAMS.get('application', None)
+        application = self.request.query_params.get('application', None)
         if application is not None:
             queryset = queryset.filter(application__name=application)
         queryset = queryset.order_by('order')
@@ -75,7 +75,7 @@ class GoalViewSet(viewsets.ReadOnlyModelViewSet):
 
     def get_queryset(self):
         queryset = self.queryset
-        application = self.request.QUERY_PARAMS.get('application', None)
+        application = self.request.query_params.get('application', None)
         if application is not None:
             queryset = queryset.filter(application__name=application)
         return queryset
