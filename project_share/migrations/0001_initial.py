@@ -14,7 +14,6 @@ class Migration(migrations.Migration):
     dependencies = [
         ('taggit', '0001_initial'),
         ('auth', '0001_initial'),
-        ('secretballot', '0001_initial'),
     ]
 
     operations = [
