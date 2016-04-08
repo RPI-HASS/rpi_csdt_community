@@ -56,7 +56,9 @@ class ProjectList(SearchableListMixin, SortableListMixin, ListView):
     search_fields = [('application__name','iexact')]
     search_split = False
     model = Project
-    queryset = Project.approved_projects().all()
+	
+    def get_queryset(self):
+        return Project.approved_projects().all()
 
     def render_to_response(self, context, **response_kwargs):
         context['application_list'] = Application.objects.all()
