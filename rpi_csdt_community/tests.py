@@ -25,7 +25,7 @@ class UrlTests(StaticLiveServerTestCase):
         self.visited[url] = True
 
         # Ignore URL's that point elsewhere
-        if url.startswith('http://') or url.startswith('http://') or url.startswith('//'):
+        if url.startswith('http://') or url.startswith('http://') or url.startswith('https://') or url.startswith('//'):
             return
 
         # Ignore URL that simply point to media...
