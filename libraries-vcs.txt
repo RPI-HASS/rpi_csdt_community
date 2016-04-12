@@ -1,5 +1,5 @@
 git+https://github.com/bartTC/django-attachments.git
-git+https://github.com/chuck211991/django-likes.git
-git+https://github.com/chuck211991/django_teams.git
+git+https://github.com/CSnap/django-likes.git
+git+https://github.com/CSnap/django_teams.git
 git+https://github.com/chuck211991/django-cms-bootstrap-templates.git
 git+https://github.com/loimu/django-templatetag-sugar.git
