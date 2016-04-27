@@ -13,7 +13,6 @@ ADMINS = (
 )
 
 MANAGERS = ADMINS
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
@@ -235,6 +234,7 @@ AUTHENTICATION_BACKENDS = (
 )
 
 AUTH_USER_MODEL = 'project_share.ExtendedUser'
+ACCOUNT_SIGNUP_FORM_CLASS = 'project_share.forms.ExtendedSignupForm'
 
 CMS_TEMPLATES = (
     ('cms_bootstrap_templates/template_one_column.html', 'One columns'),

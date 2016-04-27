@@ -1,7 +1,7 @@
 from django import forms
 from django.forms import ModelForm
 
-from project_share.models import Project, Approval, Address, Application, ApplicationCategory
+from project_share.models import Project, Approval, Address, Application, ApplicationCategory, ExtendedUser
 from django_teams.models import Team
 
 class ProjectForm(ModelForm):
@@ -18,6 +18,18 @@ class ApprovalForm(ModelForm):
     class Meta:
         model = Approval
         exclude = ('project', 'when_requested', 'when_updated', 'approved_by',)
+		
+class ExtendedSignupForm(forms.Form):
+    gender = forms.CharField(max_length=100, label='gender', widget=forms.TextInput(attrs={'placeholder': 'gender (optional)'}))
+    race = forms.CharField(max_length=100, label='race', widget=forms.TextInput(attrs={'placeholder': 'race (optional)'}))
+    age = forms.IntegerField(label='age', widget=forms.TextInput(attrs={'placeholder': 'age (optional)'}))
+    field_order = ['username', 'email', 'password1', 'password2', 'gender', 'race', 'age']
+
+    def signup(self, request, user):
+        user.gender = self.cleaned_data['gender']
+        user.race = self.cleaned_data['race']
+        user.age = self.cleaned_data['age']
+        user.save()
 
 class AddressForm(ModelForm):
     class Meta:
