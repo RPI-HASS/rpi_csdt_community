@@ -49,3 +49,4 @@ pybbm
 PyYAML
 six
 sorl-thumbnail
+pytz
