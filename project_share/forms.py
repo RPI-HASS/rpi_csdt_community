@@ -2,7 +2,7 @@ from django import forms
 from django.forms import ModelForm
 
 from project_share.models import Project, Approval, Address, Application, ApplicationCategory, ExtendedUser
-from django_teams.models import Team
+from django_teams.models import Team, TeamStatus
 
 class ProjectForm(ModelForm):
     def __init__(self,*args,**kwargs):
@@ -20,16 +20,20 @@ class ApprovalForm(ModelForm):
         exclude = ('project', 'when_requested', 'when_updated', 'approved_by',)
 		
 class ExtendedSignupForm(forms.Form):
-    gender = forms.CharField(max_length=100, label='gender', widget=forms.TextInput(attrs={'placeholder': 'gender (optional)'}))
-    race = forms.CharField(max_length=100, label='race', widget=forms.TextInput(attrs={'placeholder': 'race (optional)'}))
-    age = forms.IntegerField(label='age', widget=forms.TextInput(attrs={'placeholder': 'age (optional)'}))
-    field_order = ['username', 'email', 'password1', 'password2', 'gender', 'race', 'age']
+    gender = forms.CharField(max_length=100, label='gender', widget=forms.TextInput(attrs={'placeholder': 'gender (optional)'}), required=False)
+    race = forms.CharField(max_length=100, label='race', widget=forms.TextInput(attrs={'placeholder': 'race (optional)'}), required=False)
+    age = forms.IntegerField(label='age', widget=forms.TextInput(attrs={'placeholder': 'age (optional)'}), required=False)
+    classroom = forms.IntegerField(label='classroom', widget=forms.TextInput(attrs={'placeholder': 'classroom # (optional)'}), required=False)
+    field_order = ['username', 'email', 'password1', 'password2', 'gender', 'race', 'age', 'classroom']
 
-    def signup(self, request, user):
-        user.gender = self.cleaned_data['gender']
-        user.race = self.cleaned_data['race']
-        user.age = self.cleaned_data['age']
-        user.save()
+    def signup(self, request, n_user):
+        n_user.gender = self.cleaned_data['gender']
+        n_user.race = self.cleaned_data['race']
+        n_user.age = self.cleaned_data['age']
+        n_user.save()
+        team = self.cleaned_data['classroom']
+        if not team is None:
+           TeamStatus(team=Team.objects.get(pk=team), role = 1, user = n_user, comment = 'just signed up').save()
 
 class AddressForm(ModelForm):
     class Meta:
