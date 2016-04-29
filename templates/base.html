@@ -98,6 +98,9 @@
         <script type="text/javascript" src="{{ STATIC_URL }}twitter_bootstrap/js/affix.js"></script>
         <script type="text/javascript" src="{{ STATIC_URL }}js/fluid-resize.js"></script>
     {% endcompress %}
+	{% if GOOGLE_ANALYTICS_PROPERTY_ID %}
+        <script type="text/javascript" src="{{ STATIC_URL }}js/ga.js"></script>
+    {% endif %}
     {% block js %}
     {% endblock %}
     {% block extra_script %}{% endblock %}

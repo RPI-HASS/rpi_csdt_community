@@ -4,6 +4,9 @@ import os
 PROJECT_ROOT = os.path.dirname(os.path.dirname(__file__))
 
 DEBUG = True
+if not DEBUG:
+    GOOGLE_ANALYTICS_PROPERTY_ID = 'UA-1314478-3'
+    GOOGLE_ANALYTICS_DOMAIN = 'rpi.edu'
 
 # Override this setting local_settings.py to enable the GIS app
 ENABLE_GIS = False
