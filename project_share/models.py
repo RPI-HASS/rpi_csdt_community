@@ -41,7 +41,7 @@ def module_library(instance, filename):
 class Classroom(models.Model):
     name = models.CharField(max_length=255)
     teacher = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='teacher_classrooms')
-    students = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='student_classrooms', null=True, blank=True)
+    students = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='student_classrooms', blank=True)
 
     def __unicode__(self):
         return "%s's %s classroom" % (self.teacher, self.name)
