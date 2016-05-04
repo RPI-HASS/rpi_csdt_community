@@ -4,6 +4,9 @@ import os
 PROJECT_ROOT = os.path.dirname(os.path.dirname(__file__))
 
 DEBUG = True
+if not DEBUG:
+    GOOGLE_ANALYTICS_PROPERTY_ID = 'UA-77115650-1'
+    GOOGLE_ANALYTICS_DOMAIN = 'rpi.edu'
 
 # Override this setting local_settings.py to enable the GIS app
 ENABLE_GIS = False
@@ -13,7 +16,6 @@ ADMINS = (
 )
 
 MANAGERS = ADMINS
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
@@ -235,6 +237,7 @@ AUTHENTICATION_BACKENDS = (
 )
 
 AUTH_USER_MODEL = 'project_share.ExtendedUser'
+ACCOUNT_SIGNUP_FORM_CLASS = 'project_share.forms.ExtendedSignupForm'
 
 CMS_TEMPLATES = (
     ('cms_bootstrap_templates/template_one_column.html', 'One columns'),

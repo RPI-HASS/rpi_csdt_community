@@ -6,6 +6,7 @@ from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse
 from django.core.urlresolvers import reverse_lazy
 from django.contrib.contenttypes.models import ContentType
+from django.conf import settings
 
 from taggit.models import Tag
 
@@ -49,6 +50,8 @@ class ApplicationRunDetail(DetailView):
     template_name = "project_share/application_csnap.html"
 
     def render_to_response(self, context, **response_kwargs):
+        if not settings.DEBUG:
+           context['GOOGLE_ANALYTICS_PROPERTY_ID'] = settings.GOOGLE_ANALYTICS_PROPERTY_ID
         return super(ApplicationRunDetail, self).render_to_response(context, **response_kwargs)
 
 class ProjectList(SearchableListMixin, SortableListMixin, ListView):
@@ -79,6 +82,8 @@ class ProjectRunDetail(RestrictPermissionMixin, DetailView):
 
     def render_to_response(self, context, **response_kwargs):
         context['application'] = context['project'].application
+        if not settings.DEBUG:
+           context['GOOGLE_ANALYTICS_PROPERTY_ID'] = settings.GOOGLE_ANALYTICS_PROPERTY_ID
         return super(ProjectRunDetail, self).render_to_response(context, **response_kwargs)
 
 class ProjectPresentDetail(ProjectRunDetail):
@@ -147,6 +152,8 @@ class DemoDetail(DetailView):
     template_name = "project_share/application_csnap.html"
 
     def render_to_response(self, context, **response_kwargs):
+        if not settings.DEBUG:
+           context['GOOGLE_ANALYTICS_PROPERTY_ID'] = settings.GOOGLE_ANALYTICS_PROPERTY_ID
         return super(DemoDetail, self).render_to_response(context, **response_kwargs)
 
 class ApprovalCreate(CreateView):

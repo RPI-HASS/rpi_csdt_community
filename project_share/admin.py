@@ -29,6 +29,8 @@ class ApplicationAdmin(admin.ModelAdmin):
         if obj:
             self.form.base_fields['categories'].initial = obj.categories.all()
         return super(ApplicationAdmin, self).get_form(request, obj)
+		
+UserAdmin.list_display = ('username', 'email', 'gender', 'race', 'age', 'date_joined', 'is_staff')
 
 class ClassListFilter(admin.SimpleListFilter):
     title = _('Class')

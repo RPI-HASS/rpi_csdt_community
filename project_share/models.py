@@ -167,6 +167,9 @@ class Goal(models.Model):
         return self.name
 
 class ExtendedUser(AbstractUser):
+    gender = models.CharField(max_length=100, null=True, blank=True)
+    race = models.CharField(max_length=100, null=True, blank=True)
+    age = models.PositiveIntegerField(null=True, blank=True)
     def __unicode__(self):
         if self.first_name != "":
             return "%s %s" % (self.first_name, self.last_name)
