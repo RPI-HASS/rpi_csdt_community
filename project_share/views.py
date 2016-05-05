@@ -50,8 +50,10 @@ class ApplicationRunDetail(DetailView):
     template_name = "project_share/application_csnap.html"
 
     def render_to_response(self, context, **response_kwargs):
-        if not settings.DEBUG:
+        try:
            context['GOOGLE_ANALYTICS_PROPERTY_ID'] = settings.GOOGLE_ANALYTICS_PROPERTY_ID
+        except:
+           pass
         return super(ApplicationRunDetail, self).render_to_response(context, **response_kwargs)
 
 class ProjectList(SearchableListMixin, SortableListMixin, ListView):
@@ -82,8 +84,10 @@ class ProjectRunDetail(RestrictPermissionMixin, DetailView):
 
     def render_to_response(self, context, **response_kwargs):
         context['application'] = context['project'].application
-        if not settings.DEBUG:
+        try:
            context['GOOGLE_ANALYTICS_PROPERTY_ID'] = settings.GOOGLE_ANALYTICS_PROPERTY_ID
+        except:
+           pass
         return super(ProjectRunDetail, self).render_to_response(context, **response_kwargs)
 
 class ProjectPresentDetail(ProjectRunDetail):
@@ -152,8 +156,10 @@ class DemoDetail(DetailView):
     template_name = "project_share/application_csnap.html"
 
     def render_to_response(self, context, **response_kwargs):
-        if not settings.DEBUG:
+        try:
            context['GOOGLE_ANALYTICS_PROPERTY_ID'] = settings.GOOGLE_ANALYTICS_PROPERTY_ID
+        except:
+           pass
         return super(DemoDetail, self).render_to_response(context, **response_kwargs)
 
 class ApprovalCreate(CreateView):
