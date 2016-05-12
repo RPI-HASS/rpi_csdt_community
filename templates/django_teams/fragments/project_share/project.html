@@ -1,0 +1,17 @@
+{% load thumbnail %}		
+		
+        <div class="thumbnail-long">		
+            <div class="heading">		
+                <h3><a href="{% url 'project-detail' pk=obj.id %}">{{ obj }}</a></h3>		
+            </div>		
+            <div class="body">		
+                <div class="image">		
+                      {% thumbnail obj.screenshot.f "400x400" as im %}		
+                      <a href="{% url 'project-detail' pk=obj.id %}"><img class="img-polaroid" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a>		
+                      {% endthumbnail %}		
+                </div>		
+                <div class="description">		
+                    <p>{{ obj.description }}</p>		
+                </div>		
+            </div>		
+        </div>
