@@ -7,7 +7,7 @@
             <div class="body" width="100%">		
                 <div class="image" width="100%">		
                       {% thumbnail obj.screenshot.f "400x400" as im %}		
-                      <a href="{% url 'project-detail' pk=obj.id %}"><img class="img-polaroid" src="{{ im.url }}" width="100%"></a>		
+                      <a href="{% url 'project-detail' pk=obj.id %}"><img class="img-polaroid" src="{{ im.url }}" width="175px"></a>		
                       {% endthumbnail %}		
                 </div>		
                 <div class="description">		
