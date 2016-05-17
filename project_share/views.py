@@ -198,6 +198,10 @@ class ApprovalCreate(CreateView):
 class UserDetail(DetailView):
     model = User
     template_name = "project_share/user_detail.html"
+	
+    def render_to_response(self, context, **response_kwargs):
+        context['user'] = self.request.user
+        return super(UserDetail, self).render_to_response(context, **response_kwargs)
 
 class AddressCreate(CreateView):
     model = Address
