@@ -10,9 +10,9 @@
             </a>
 
             <ul class="dropdown-menu">
-                <li><a href="{% url 'project-list' %}?orderby=id">Newest</a></li>
+                <li><a href="{% url 'project-list' %}?orderby=-id">Newest</a></li>
+                <li><a href="{% url 'project-list' %}?orderby=id">Oldest</a></li>
                 <li><a href="{% url 'project-list' %}?orderby=name">By name</a></li>
-                <li><a href="{% url 'project-list' %}?orderby=votes">By likes</a></li>
             </ul>
         </div>
 
