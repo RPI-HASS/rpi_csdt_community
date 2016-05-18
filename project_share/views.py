@@ -63,7 +63,14 @@ class ProjectList(SearchableListMixin, SortableListMixin, ListView):
     model = Project
 	
     def get_queryset(self):
-        return Project.approved_projects().all()
+        set = Project.approved_projects()
+        filter_val = self.request.GET.get('filter')
+        if filter_val is not None:
+           set = set.filter(application=filter_val,)
+        order = self.request.GET.get('orderby')
+        if order is not None:
+           set = set.order_by(order)
+        return set
 
     def render_to_response(self, context, **response_kwargs):
         context['application_list'] = Application.objects.all()
