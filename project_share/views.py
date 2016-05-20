@@ -86,7 +86,7 @@ class ProjectDetail(RestrictPermissionMixin, DetailView):
 	
     def render_to_response(self, context, **response_kwargs):
         o = super(ProjectDetail, self).get_object()
-        context['hasApproval'] = hasattr(o, 'approval')
+        context['hasApproval'] = (hasattr(o, 'approval') or o.approved)
         return super(ProjectDetail, self).render_to_response(context, **response_kwargs)
 
 class ProjectRunDetail(RestrictPermissionMixin, DetailView):
@@ -151,7 +151,7 @@ class ProjectUpdate(UpdateView):
         o = super(ProjectUpdate, self).get_object()
 
         # If the object doesn't belong to this user, throw a error 503
-        if o.owner != self.request.user or hasattr(o, 'approval'):
+        if o.owner != self.request.user or (hasattr(o, 'approval') or o.approved):
             raise PermissionDenied()
         return o
 
