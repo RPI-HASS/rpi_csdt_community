@@ -173,10 +173,15 @@ class ProjectUnpublish(UpdateView):
     def post(self, request, *args, **kwargs):
         if 'Unpublish' in request.POST:
             proj = super(ProjectUnpublish, self).get_object()
-            approval = Approval.objects.get(project_id=proj.id)
             proj.approved = False
             proj.save()
-            approval.delete()
+
+            try:
+                approval = Approval.objects.get(project_id=proj.id)
+                approval.delete()
+            except:
+                pass
+
             try:
                 ownership = Ownership.objects.filter(content_type_id=ContentType.objects.get_for_model(proj)).get(object_id=proj.id)
                 ownership.delete()
