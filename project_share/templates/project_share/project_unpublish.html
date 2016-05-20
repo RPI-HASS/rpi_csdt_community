@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Unpublish Project</h2>
+    <p>Are you sure you want to unpublish your project?</p>
+    <form  id="unpublish_form" class="form-horizontal" method="post">
+        {% csrf_token %}
+        <input type="submit" form="unpublish_form" name="Unpublish" class="btn btn-large btn-primary" value="Unpublish"></input>
+    </form>
+{% endblock %}

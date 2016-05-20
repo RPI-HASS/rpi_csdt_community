@@ -17,6 +17,13 @@
     </div>
     <a href="{% url 'project-run-detail' pk=object.pk %}" class="btn btn-large btn-primary">Open</a>
     <a href="{% url 'project-present-detail' pk=object.pk %}" class="btn btn-large btn-info">Open for Presentation</a>
+	{% if object.owner.id == user.id %}
+		{% if hasApproval %}
+			<a href="{% url 'project-unpublish' pk=object.pk %}" class="btn btn-large btn-primary">Unpublish</a>
+		{% else %}
+			<a href="{% url 'project-delete' pk=object.pk %}" class="btn btn-large btn-primary">Delete</a>
+		{% endif %}
+	{% endif %}
     {% get_attachments_for object as "attachments_list" %}
 
     {% if attachments_list.count > 0 %}

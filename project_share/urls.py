@@ -7,7 +7,7 @@ from project_share.views import ProjectRunDetail, ProjectPresentDetail, Applicat
 from project_share.views import ProjectCreate, ApprovalCreate, AddressCreate
 from project_share.views import AddressUpdate
 from project_share.views import ProjectUpdate
-from project_share.views import ProjectDelete
+from project_share.views import ProjectDelete, ProjectUnpublish
 from project_share.views import UserDetail
 
 urlpatterns = [
@@ -19,7 +19,9 @@ urlpatterns = [
     url(r'^projects/create$', ProjectCreate.as_view(), name='project-create'),
     url(r'^projects/(?P<pk>\d+)/edit$', ProjectUpdate.as_view(), name='project-update'),
     url(r'^projects/(?P<pk>\d+)/delete$', ProjectDelete.as_view(), name='project-delete'),
+    url(r'^projects/(?P<pk>\d+)/unpublish$', ProjectUnpublish.as_view(), name='project-unpublish'),
     url(r'^projects/delete/success$', TemplateView.as_view(template_name='project_share/project_delete_success.html'), name='project-delete-success'),
+    url(r'^projects/unpublish/success$', TemplateView.as_view(template_name='project_share/project_unpublish_success.html'), name='project-unpublish-success'),
 
     url(r'projects/(?P<project_pk>\d+)/publish$', ApprovalCreate.as_view(), name='approval-create'),
     url(r'approval/confirm$', TemplateView.as_view(template_name='project_share/approval_confirm.html'), name='approval-confirm'),
