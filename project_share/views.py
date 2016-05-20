@@ -14,7 +14,7 @@ from extra_views import SortableListMixin
 from extra_views import SearchableListMixin
 
 from project_share.models import Application, Project, ApplicationDemo, Classroom, Approval, Address
-from project_share.forms import ProjectForm, ApprovalForm, AddressForm
+from project_share.forms import ProjectForm, ApprovalForm, AddressForm, ProjectUnpublishForm
 from django_teams.models import Ownership
 
 try:
@@ -83,6 +83,11 @@ class ProjectTagList(ProjectList):
 
 class ProjectDetail(RestrictPermissionMixin, DetailView):
     model = Project
+	
+    def render_to_response(self, context, **response_kwargs):
+        o = super(ProjectDetail, self).get_object()
+        context['hasApproval'] = hasattr(o, 'approval')
+        return super(ProjectDetail, self).render_to_response(context, **response_kwargs)
 
 class ProjectRunDetail(RestrictPermissionMixin, DetailView):
     model = Project
@@ -153,6 +158,52 @@ class ProjectUpdate(UpdateView):
 class ProjectDelete(DeleteView):
     model = Project
     success_url = reverse_lazy('project-delete-success')
+
+    def get_object(self, queryset=None):
+        o = super(ProjectDelete, self).get_object()
+        if not o.owner == self.request.user:
+            raise PermissionDenied('this isn\'t your project')
+        return o
+	
+class ProjectUnpublish(UpdateView):
+    model = Project
+    template_name = "project_share/project_unpublish.html"
+    form_class = ProjectUnpublishForm
+	
+    def post(self, request, *args, **kwargs):
+        if 'Unpublish' in request.POST:
+            proj = super(ProjectUnpublish, self).get_object()
+            approval = Approval.objects.get(project_id=proj.id)
+            proj.approved = False
+            proj.save()
+            approval.delete()
+            try:
+                ownership = Ownership.objects.filter(content_type_id=ContentType.objects.get_for_model(proj)).get(object_id=proj.id)
+                ownership.delete()
+            except:
+                pass
+            return redirect(reverse_lazy('project-unpublish-success'))
+        return super(ProjectUnpublish, self).post(request, *args, **kwargs)
+
+    def dispatch(self, request, *args, **kwargs):
+        self.kwargs = kwargs
+        self.request = request
+        return super(ProjectUnpublish, self).dispatch(request, *args, **kwargs)
+
+    def get_object(self):
+        o = super(ProjectUnpublish, self).get_object()
+
+        # If the object doesn't belong to this user, throw a error 503
+        if o.owner != self.request.user:
+            raise PermissionDenied('this isn\'t your project')
+        return o
+    def get_object(self):
+        o = super(ProjectUnpublish, self).get_object()
+
+        # If the object doesn't belong to this user, throw a error 503
+        if o.owner != self.request.user:
+            raise PermissionDenied('this isn\'t your project')
+        return o
 
 class DemoList(ListView):
     model = ApplicationDemo

@@ -13,6 +13,11 @@ class ProjectForm(ModelForm):
     class Meta:
         model = Project
         exclude = ('owner', 'approved','application','project','screenshot','parent',)
+		
+class ProjectUnpublishForm(ModelForm):
+    class Meta:
+        model = Project
+        exclude = ('owner', 'approved','application','project','screenshot','parent',)
 
 class ApprovalForm(ModelForm):
     class Meta:
