@@ -173,7 +173,7 @@ a.liker {
 	color:#333;
 	text-decoration:none;
 	font-weight:700;
-	font-size:12px;
+	/*font-size:12px;*/
 	line-height:32px;
 	padding:0 15px;
 	font-family:"HelveticaNeue","Helvetica Neue",Helvetica,Arial,sans-serif
@@ -187,14 +187,18 @@ a.liker {
 	padding:0
 }
 
+
 #CMS_Menu ul li.selected
 {
-	background:#ddd
+	background:#ddd;
+	font-weight:600;
+	font-size:24px;
+	font-family:"HelveticaNeue","Helvetica Neue",Helvetica,Arial,sans-serif
 }
 
 #CMS_Menu ul li:hover
 {
-	background:#f6f6f6
+	background:#f6f6f6;
 }
 
 #CMS_Menu ul ul
@@ -231,25 +235,25 @@ a.liker {
 }
 
 /*Responsive Styles*/
-
-@media screen and (max-width : 1000px){
-	/*Make dropdown links appear inline*/
-	#CMS_Menu ul ul {
-		position: static;
-		display: none;
-	}
-	/*Create vertical spacing*/
-	#CMS_Menu li {
-		margin-bottom: 1px;
-	}
-	/*Make all menu links full width*/
-	#CMS_Menu ul li, li a {
-		width: 100%;
-	}
-	
-	#CMS_Menu ul li:hover > ul
-	{
-		display:block;
-		background:#f2f2f2
-	}
-}
+ 
+ @media screen and (max-width : 1000px){
+ /*Make dropdown links appear inline*/
+ 	#CMS_Menu ul ul {
+ 		position: static;
+ 		display: none;
+ 	}
+ 	/*Create vertical spacing*/
+ 	#CMS_Menu li {
+ 		margin-bottom: 1px;
+ 	}
+ 	/*Make all menu links full width*/
+ 	#CMS_Menu ul li, li a {
+ 		width: 100%;
+ 	}
+ 	
+ 	#CMS_Menu ul li:hover > ul
+ 	{
+ 		display:block;
+ 		background:#f2f2f2
+ 	}
+ }
