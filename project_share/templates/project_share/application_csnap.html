@@ -18,7 +18,7 @@
 		    {% if applicationdemo %}'module': '{{ applicationdemo.application.name }}',
             'stage': '{{ applicationdemo.application.application_file.url }}',
 			{% else %}'module': '{{ application.name }}',
-            'stage': '{{ application.application_file.url }}',
+            'stage': '{{ STATIC_URL }}applications/CSnap-Modules/',
 			{% endif %}
           },
           {% if user.is_authenticated %}
@@ -27,6 +27,7 @@
           {% endif %}
           'urls': {
             'user_api_detail_url': '{% url 'user-api-detail'%}',
+			'applications_root': '{{ STATIC_URL }}applications/CSnap-Modules/',
             {% if applicationdemo %}'demos_url': '{% url 'api-demos-list' %}?format=json&application={{ applicationdemo.application }}',
             {% else %}'demos_url': '{% url 'api-demos-list' %}?format=json&application={{ application }}',
             {% endif %}'demo_detail_url': '{% url 'demo-list' %}',
@@ -61,7 +62,7 @@
             'application': {{ applicationdemo.application.id }},
             'project_url': '{{ applicationdemo.zipfile.url }}'
           }
-          {% elif application %}'application_id': {{ application.id }},
+          {% elif application %}'application_id': '{{ application.id }}',
           {% endif %}
         };
     </script>
