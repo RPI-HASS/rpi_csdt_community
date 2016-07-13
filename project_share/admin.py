@@ -1,8 +1,10 @@
+import git
+import os 
+
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.utils.translation import ugettext_lazy as _
 from attachments.admin import AttachmentInlines
-
 from project_share.models import Application, ApplicationDemo, ApplicationType, ApplicationContext
 from project_share.models import ApplicationTheme, ApplicationCategory
 from project_share.models import Address
@@ -24,6 +26,8 @@ class ApplicationAdmin(admin.ModelAdmin):
         for category in form.cleaned_data['categories']:
             obj.categories.add(category)
         obj.save()
+        g = git.Git(os.path.dirname(os.path.realpath(__file__)))
+        result = g.execute(["git", "submodule", "foreach", "git", "pull", "origin", "master"])
 
     def get_form(self, request, obj=None, **kwargs):
         if obj:
