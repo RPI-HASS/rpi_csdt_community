@@ -1,3 +1,6 @@
 [submodule "static/csnap"]
 	path = static/csnap
 	url = https://github.com/GK-12/Snap--Build-Your-Own-Blocks.git
+[submodule "static/applications/CSnap-Modules"]
+	path = static/applications/CSnap-Modules
+	url = https://github.com/CSnap/CSnap-Modules
