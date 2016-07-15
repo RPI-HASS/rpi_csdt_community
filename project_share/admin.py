@@ -26,9 +26,9 @@ class ApplicationAdmin(admin.ModelAdmin):
         for category in form.cleaned_data['categories']:
             obj.categories.add(category)
         obj.save()
-        g = git.Git(os.path.dirname(os.path.realpath(__file__)))
+        g = git.Git(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
         result = g.execute(["git", "submodule", "foreach", "git", "pull", "origin", "master"])
-
+        result = g.execute(["python", "manage.py", "collectstatic", "--noinput"])
     def get_form(self, request, obj=None, **kwargs):
         if obj:
             self.form.base_fields['categories'].initial = obj.categories.all()
