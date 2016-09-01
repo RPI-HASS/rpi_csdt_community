@@ -47,7 +47,6 @@ class ApplicationDetail(DetailView):
 class ApplicationRunDetail(DetailView):
     model = Application
     context_object_name = 'application'
-    template_name = "project_share/application_csnap.html"
 
     def render_to_response(self, context, **response_kwargs):
         try:
@@ -55,6 +54,9 @@ class ApplicationRunDetail(DetailView):
         except:
            pass
         return super(ApplicationRunDetail, self).render_to_response(context, **response_kwargs)
+    
+    def get_template_names(self):
+        return ['project_share/application_%s.html' % self.object.application_type.lower()]
 
 class ProjectList(SearchableListMixin, SortableListMixin, ListView):
     sort_fields_aliases = [('name', 'by_name'), ('id', 'by_id'), ('votes', 'by_likes'), ]

@@ -55,13 +55,6 @@ class Approval(models.Model):
     def __unicode__(self):
         return "%s approval for %s" % (self.project.owner, self.project)
 
-class ApplicationType(models.Model):
-    name = models.CharField(max_length=255, unique=True)
-    description = models.TextField(null=True, blank=True)
-
-    def __unicode__(self):
-        return self.name
-
 class Application(models.Model):
     name = models.CharField(max_length=255, unique=True)
     version = models.CharField(max_length=10, blank=True, null=True)
@@ -73,7 +66,10 @@ class Application(models.Model):
 
     more_info_url = models.URLField(null=True, blank=True)
 
-    application_type = models.ForeignKey('project_share.ApplicationType', null=True, blank=True)
+    application_type = models.CharField(max_length=5, choices= (
+            ('CSNAP', 'cSnap'),
+            ('BLOCK', 'Blockly/Scratch'),
+        ))
     application_file = models.FileField(upload_to=application_application, null=True, blank=True)
 
     featured = models.BooleanField(default=True)
