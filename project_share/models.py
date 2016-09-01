@@ -178,8 +178,6 @@ class ExtendedUser(AbstractUser):
 class FileUpload(models.Model):
     f = models.FileField(upload_to='files/%Y-%m-%d/')
 
-secretballot.enable_voting_on(Project)
-
 class ProjectModerator(CommentModerator):
     moderate_after = -1
 
