@@ -75,14 +75,6 @@
 },
 {
   "fields": {
-    "name": "CSnap",
-    "description": ""
-  },
-  "model": "project_share.applicationtype",
-  "pk": 1
-},
-{
-  "fields": {
     "name": "Cornrow Curves",
     "codebase_url": "",
     "url": "",
@@ -231,24 +223,6 @@
   },
   "model": "admin.logentry",
   "pk": 1
-},
-{
-  "fields": {
-    "action_flag": 1,
-    "action_time": "2014-11-30T22:48:14.745Z",
-    "object_repr": "CSnap",
-    "object_id": "1",
-    "change_message": "",
-    "user": [
-      "test"
-    ],
-    "content_type": [
-      "project_share",
-      "applicationtype"
-    ]
-  },
-  "model": "admin.logentry",
-  "pk": 2
 },
 {
   "fields": {

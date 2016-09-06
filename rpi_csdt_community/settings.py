@@ -102,7 +102,6 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
 	'django.middleware.locale.LocaleMiddleware',
 
-    'likes.middleware.SecretBallotUserIpUseragentMiddleware',
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'cms.middleware.user.CurrentUserMiddleware',
@@ -129,7 +128,7 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
     'django_comments',
     'taggit',
-    'taggit_templatetags',
+    'taggit_templatetags2',
 
     'allauth',
     'allauth.account',
@@ -179,9 +178,6 @@ INSTALLED_APPS = (
 
     'extra_views',
 
-    'secretballot',
-    'likes',
-
     'django_markup',
 #    'pybb',
 #    'south',
@@ -219,7 +215,6 @@ TEMPLATES = [
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
-		'django.core.context_processors.static',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',

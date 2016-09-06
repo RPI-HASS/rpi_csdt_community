@@ -1,6 +1,5 @@
 {% extends 'base.html' %}
 {% load attachments_tags %}
-{% load likes_inclusion_tags %}
 {% load thumbnail %}
 
 {% block content %}
@@ -38,7 +37,5 @@
     </ul>
 
     {% endif %}
-
-    {% likes object %}
 
 {% endblock %}

@@ -1,6 +1,7 @@
 {% load cms_tags sekizai_tags %}
 {% load rpi_csdt_community_tags %}
 {% load compress %}
+{% load static %}
 {% load analytical %}
 <!DOCTYPE html>
 <html lang="en">
@@ -15,7 +16,7 @@
     {% render_block "css" %}
     {% compress css %}
         {% block extra_style %}
-    	    <link rel="stylesheet" href="{{ STATIC_URL }}less/style.less" type="text/less" charset="utf-8">
+        <link rel="stylesheet" href="{% static "less/style.less" %}" type="text/less" charset="utf-8">
             <!-- Have base stylesheet -->
         {% endblock %}
     {% endcompress %}
@@ -83,23 +84,23 @@
     </div> <!-- /container -->
 
     {% compress js %}
-        <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.js"></script>
-        <script type="text/javascript" src="{{ STATIC_URL }}twitter_bootstrap/js/transition.js"></script>
-        <script type="text/javascript" src="{{ STATIC_URL }}twitter_bootstrap/js/modal.js"></script>
-        <script type="text/javascript" src="{{ STATIC_URL }}twitter_bootstrap/js/dropdown.js"></script>
-        <script type="text/javascript" src="{{ STATIC_URL }}twitter_bootstrap/js/scrollspy.js"></script>
-        <script type="text/javascript" src="{{ STATIC_URL }}twitter_bootstrap/js/tab.js"></script>
-        <script type="text/javascript" src="{{ STATIC_URL }}twitter_bootstrap/js/tooltip.js"></script>
-        <script type="text/javascript" src="{{ STATIC_URL }}twitter_bootstrap/js/popover.js"></script>
-        <script type="text/javascript" src="{{ STATIC_URL }}twitter_bootstrap/js/alert.js"></script>
-        <script type="text/javascript" src="{{ STATIC_URL }}twitter_bootstrap/js/button.js"></script>
-        <script type="text/javascript" src="{{ STATIC_URL }}twitter_bootstrap/js/collapse.js"></script>
-        <script type="text/javascript" src="{{ STATIC_URL }}twitter_bootstrap/js/carousel.js"></script>
-        <script type="text/javascript" src="{{ STATIC_URL }}twitter_bootstrap/js/affix.js"></script>
-        <script type="text/javascript" src="{{ STATIC_URL }}js/fluid-resize.js"></script>
+        <script type="text/javascript" src="{% static "js/jquery.js" %}"></script>
+        <script type="text/javascript" src="{% static "twitter_bootstrap/js/transition.js" %}"></script>
+        <script type="text/javascript" src="{% static "twitter_bootstrap/js/modal.js" %}"></script>
+        <script type="text/javascript" src="{% static "twitter_bootstrap/js/dropdown.js" %}"></script>
+        <script type="text/javascript" src="{% static "twitter_bootstrap/js/scrollspy.js" %}"></script>
+        <script type="text/javascript" src="{% static "twitter_bootstrap/js/tab.js" %}"></script>
+        <script type="text/javascript" src="{% static "twitter_bootstrap/js/tooltip.js" %}"></script>
+        <script type="text/javascript" src="{% static "twitter_bootstrap/js/popover.js" %}"></script>
+        <script type="text/javascript" src="{% static "twitter_bootstrap/js/alert.js" %}"></script>
+        <script type="text/javascript" src="{% static "twitter_bootstrap/js/button.js" %}"></script>
+        <script type="text/javascript" src="{% static "twitter_bootstrap/js/collapse.js" %}"></script>
+        <script type="text/javascript" src="{% static "twitter_bootstrap/js/carousel.js" %}"></script>
+        <script type="text/javascript" src="{% static "twitter_bootstrap/js/affix.js" %}"></script>
+        <script type="text/javascript" src="{% static "js/fluid-resize.js" %}"></script>
     {% endcompress %}
 	{% if GOOGLE_ANALYTICS_PROPERTY_ID %}
-        <script type="text/javascript" src="{{ STATIC_URL }}js/ga.js"></script>
+        <script type="text/javascript" src="{% static "js/ga.js" %}"></script>
     {% endif %}
     {% block js %}
     {% endblock %}

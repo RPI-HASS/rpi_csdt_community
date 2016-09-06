@@ -1,16 +1,17 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block js %}
 {{ super }}
-    <script type="text/javascript" src="{{ STATIC_URL }}gis/bower_components/angular/angular.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}gis/bower_components/angular-route/angular-route.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}gis/bower_components/angular-resource/angular-resource.js"></script>
+    <script type="text/javascript" src="{% static "gis/bower_components/angular/angular.js" %}"></script>
+    <script type="text/javascript" src="{% static "gis/bower_components/angular-route/angular-route.js" %}"></script>
+    <script type="text/javascript" src="{% static "gis/bower_components/angular-resource/angular-resource.js" %}"></script>
 
-    <script type="text/javascript" src="{{ STATIC_URL }}js/create/app.js"></script>
+    <script type="text/javascript" src="{% static "js/create/app.js" %}"></script>
 {% endblock %}
 
 {% block extra_style %}
-    <link rel="stylesheet" href="{{ STATIC_URL }}js/create/style.less" type="text/less" charset="utf-8">
+    <link rel="stylesheet" href="{% static "js/create/style.less" type="text/less" charset="utf-8" %}">
 {% endblock %}
 
 {% block content %}
