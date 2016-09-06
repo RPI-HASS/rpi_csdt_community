@@ -1,6 +1,5 @@
 bbcode
 BeautifulSoup
-cms-bootstrap-templates
 coverage
 Django
 django-allauth

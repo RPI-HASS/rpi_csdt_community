@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load cms_tags sekizai_tags %}
+
+{% block content %}
+        <div class="wrapper">
+            <div class="column-one">
+                {% placeholder column %}
+            </div>
+        </div>
+{% block extra_style %}
+    <link rel="stylesheet" type="text/less" media="all" href="{{ STATIC_URL }}cms_bootstrap_templates/less/template_one_column.less" />
+{% endblock %}
+
+{% endblock %}
