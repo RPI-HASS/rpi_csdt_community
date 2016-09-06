@@ -63,6 +63,8 @@ class ProjectList(SearchableListMixin, SortableListMixin, ListView):
     search_fields = [('application__name','iexact')]
     search_split = False
     model = Project
+    paginate_by = 20
+    ordering = ["-when"]
 	
     def get_queryset(self):
         set = Project.approved_projects()
