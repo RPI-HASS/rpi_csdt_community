@@ -5,7 +5,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.utils.translation import ugettext_lazy as _
 from attachments.admin import AttachmentInlines
-from project_share.models import Application, ApplicationDemo, ApplicationType, ApplicationContext
+from project_share.models import Application, ApplicationDemo, ApplicationContext
 from project_share.models import ApplicationTheme, ApplicationCategory
 from project_share.models import Address
 from project_share.models import Goal
@@ -97,7 +97,6 @@ admin.site.register(ApplicationDemo)
 admin.site.register(ApplicationTheme)
 admin.site.register(ApplicationCategory)
 admin.site.register(Goal, GoalAdmin)
-admin.site.register(ApplicationType)
 admin.site.register(Address)
 admin.site.register(Project, ProjectAdmin)
 #admin.site.register(Approval, ApprovalAdmin)
