@@ -131,6 +131,9 @@ class Project(models.Model):
     application = models.ForeignKey(Application)
     owner = models.ForeignKey(settings.AUTH_USER_MODEL, null=True)
 
+    when_created = models.DateTimeField(auto_now_add=True, verbose_name="Created")
+    when_modified = models.DateTimeField(auto_now=True, verbose_name="Last Changed")
+
     project = models.ForeignKey('project_share.FileUpload', null=True, blank=True, related_name='+')
     screenshot = models.ForeignKey('project_share.FileUpload', null=True, blank=True, related_name='+')
     classroom = models.ForeignKey('django_teams.Team', null=True, blank=True, related_name='+')
