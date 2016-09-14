@@ -21,12 +21,6 @@ class Migration(migrations.Migration):
                 ('objects', django.contrib.auth.models.UserManager()),
             ],
         ),
-        migrations.AlterModelManagers(
-            name='project',
-            managers=[
-                ('_default_manager', django.db.models.manager.Manager()),
-            ],
-        ),
         migrations.AlterField(
             model_name='extendeduser',
             name='email',

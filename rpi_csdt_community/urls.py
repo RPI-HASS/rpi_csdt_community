@@ -1,4 +1,4 @@
-from django.conf.urls import patterns, include, url
+from django.conf.urls import include, url
 from django.views.generic import TemplateView, RedirectView
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
@@ -36,7 +36,6 @@ urlpatterns = [
     url(r'^comments/', include('django_comments_xtd.urls')),
 
     url(r'^attachments/', include('attachments.urls', namespace="attachments")),
-    url(r'^likes/', include('likes.urls')),
 
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^api/', include(router.urls)),

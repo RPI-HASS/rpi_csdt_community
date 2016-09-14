@@ -1,3 +1,4 @@
+{% load static %}
 <!doctype html>
 <html class="no-js">
   <head>
@@ -8,15 +9,15 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
-    <link rel="stylesheet" href="{{ STATIC_URL }}gis/bower_components/bootstrap/dist/css/bootstrap.css" />
-    <link rel="stylesheet" href="{{ STATIC_URL }}gis/bower_components/angular-motion/dist/angular-motion.css" />
-    <link rel="stylesheet" href="{{ STATIC_URL }}gis/bower_components/angular-multi-select/angular-multi-select.css" />
-    <link rel="stylesheet" href="{{ STATIC_URL }}gis/bower_components/ng-tags-input/ng-tags-input.min.css" />
-    <link rel="stylesheet" href="{{ STATIC_URL }}gis/bower_components/allmighty-autocomplete/style/autocomplete.css" />
+    <link rel="stylesheet" href="{% static "gis/bower_components/bootstrap/dist/css/bootstrap.css" %}" />
+    <link rel="stylesheet" href="{% static "gis/bower_components/angular-motion/dist/angular-motion.css" %}" />
+    <link rel="stylesheet" href="{% static "gis/bower_components/angular-multi-select/angular-multi-select.css" %}" />
+    <link rel="stylesheet" href="{% static "gis/bower_components/ng-tags-input/ng-tags-input.min.css" %}" />
+    <link rel="stylesheet" href="{% static "gis/bower_components/allmighty-autocomplete/style/autocomplete.css" %}" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
-    <link rel="stylesheet" href="{{ STATIC_URL }}gis/main.css" type="text/css" />
+    <link rel="stylesheet" href="{% static "gis/main.css" type="text/css" %}" />
       <!-- endbuild -->
   </head>
   <body ng-app="socialjusticeApp" ng-controller="MainCtrl">
@@ -75,43 +76,43 @@
 
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
-    <script src="{{ STATIC_URL }}gis/bower_components/jquery/dist/jquery.js"></script>
-    <script src="{{ STATIC_URL }}gis/bower_components/angular/angular.js"></script>
-    <script src="{{ STATIC_URL }}gis/bower_components/json3/lib/json3.js"></script>
-    <script src="{{ STATIC_URL }}gis/bower_components/bootstrap/dist/js/bootstrap.js"></script>
-    <script src="{{ STATIC_URL }}gis/bower_components/angular-resource/angular-resource.js"></script>
-    <script src="{{ STATIC_URL }}gis/bower_components/angular-cookies/angular-cookies.js"></script>
-    <script src="{{ STATIC_URL }}gis/bower_components/angular-sanitize/angular-sanitize.js"></script>
-    <script src="{{ STATIC_URL }}gis/bower_components/angular-animate/angular-animate.js"></script>
-    <script src="{{ STATIC_URL }}gis/bower_components/angular-touch/angular-touch.js"></script>
-    <script src="{{ STATIC_URL }}gis/bower_components/angular-route/angular-route.js"></script>
-    <script src="{{ STATIC_URL }}gis/bower_components/lodash/dist/lodash.compat.js"></script>
-    <script src="{{ STATIC_URL }}gis/bower_components/angular-google-maps/dist/angular-google-maps.js"></script>
-    <script src="{{ STATIC_URL }}gis/bower_components/requirejs/require.js"></script>
-    <script src="{{ STATIC_URL }}gis/bower_components/autocomplete/dist/autocomplete.js"></script>
-    <script src="{{ STATIC_URL }}gis/bower_components/ngAutocomplete/src/ngAutocomplete.js"></script>
-    <script src="{{ STATIC_URL }}gis/bower_components/angular-strap/dist/angular-strap.min.js"></script>
-    <script src="{{ STATIC_URL }}gis/bower_components/angular-strap/dist/angular-strap.tpl.min.js"></script>
-    <script src="{{ STATIC_URL }}gis/bower_components/d3/d3.js"></script>
-    <script src="{{ STATIC_URL }}gis/bower_components/angular-charts/dist/angular-charts.js"></script>
-    <script src="{{ STATIC_URL }}gis/bower_components/angular-multi-select/angular-multi-select.js"></script>
-    <script src="{{ STATIC_URL }}gis/bower_components/angular-bootstrap-show-errors/src/showErrors.js"></script>
-    <script src="{{ STATIC_URL }}gis/bower_components/checklist-model/checklist-model.js"></script>
-    <script src="{{ STATIC_URL }}gis/bower_components/angular-django-rest-resource/angular-django-rest-resource.js"></script>
-    <script src="{{ STATIC_URL }}gis/bower_components/ng-tags-input/ng-tags-input.min.js"></script>
-    <script src="{{ STATIC_URL }}gis/bower_components/allmighty-autocomplete/script/autocomplete.js"></script>
-    <script src="{{ STATIC_URL }}gis/bower_components/jquery-ui/jquery-ui.js"></script>
-    <script src="{{ STATIC_URL }}gis/bower_components/angucomplete/angucomplete.js"></script>
-    <script src="{{ STATIC_URL }}gis/scripts/app.js"></script>
-    <script src="{{ STATIC_URL }}gis/scripts/controllers/main.js"></script>
-    <script src="{{ STATIC_URL }}gis/scripts/controllers/about.js"></script>
-    <script src="{{ STATIC_URL }}gis/scripts/controllers/charts.js"></script>
-    <script src="{{ STATIC_URL }}gis/scripts/services/config.js"></script>
-    <script src="{{ STATIC_URL }}gis/scripts/services/datasource.js"></script>
-    <script src="{{ STATIC_URL }}gis/scripts/services/datafeed.js"></script>
-    <script src="{{ STATIC_URL }}gis/scripts/services/dataedit.js"></script>
-    <script src="{{ STATIC_URL }}gis/scripts/services/polygonservice.js"></script>
-    <script src="{{ STATIC_URL }}gis/scripts/services/tagservice.js"></script>
-    <script src="{{ STATIC_URL }}gis/scripts/controllers/addTag.js"></script>
+    <script src="{% static "gis/bower_components/jquery/dist/jquery.js" %}"></script>
+    <script src="{% static "gis/bower_components/angular/angular.js" %}"></script>
+    <script src="{% static "gis/bower_components/json3/lib/json3.js" %}"></script>
+    <script src="{% static "gis/bower_components/bootstrap/dist/js/bootstrap.js" %}"></script>
+    <script src="{% static "gis/bower_components/angular-resource/angular-resource.js" %}"></script>
+    <script src="{% static "gis/bower_components/angular-cookies/angular-cookies.js" %}"></script>
+    <script src="{% static "gis/bower_components/angular-sanitize/angular-sanitize.js" %}"></script>
+    <script src="{% static "gis/bower_components/angular-animate/angular-animate.js" %}"></script>
+    <script src="{% static "gis/bower_components/angular-touch/angular-touch.js" %}"></script>
+    <script src="{% static "gis/bower_components/angular-route/angular-route.js" %}"></script>
+    <script src="{% static "gis/bower_components/lodash/dist/lodash.compat.js" %}"></script>
+    <script src="{% static "gis/bower_components/angular-google-maps/dist/angular-google-maps.js" %}"></script>
+    <script src="{% static "gis/bower_components/requirejs/require.js" %}"></script>
+    <script src="{% static "gis/bower_components/autocomplete/dist/autocomplete.js" %}"></script>
+    <script src="{% static "gis/bower_components/ngAutocomplete/src/ngAutocomplete.js" %}"></script>
+    <script src="{% static "gis/bower_components/angular-strap/dist/angular-strap.min.js" %}"></script>
+    <script src="{% static "gis/bower_components/angular-strap/dist/angular-strap.tpl.min.js" %}"></script>
+    <script src="{% static "gis/bower_components/d3/d3.js" %}"></script>
+    <script src="{% static "gis/bower_components/angular-charts/dist/angular-charts.js" %}"></script>
+    <script src="{% static "gis/bower_components/angular-multi-select/angular-multi-select.js" %}"></script>
+    <script src="{% static "gis/bower_components/angular-bootstrap-show-errors/src/showErrors.js" %}"></script>
+    <script src="{% static "gis/bower_components/checklist-model/checklist-model.js" %}"></script>
+    <script src="{% static "gis/bower_components/angular-django-rest-resource/angular-django-rest-resource.js" %}"></script>
+    <script src="{% static "gis/bower_components/ng-tags-input/ng-tags-input.min.js" %}"></script>
+    <script src="{% static "gis/bower_components/allmighty-autocomplete/script/autocomplete.js" %}"></script>
+    <script src="{% static "gis/bower_components/jquery-ui/jquery-ui.js" %}"></script>
+    <script src="{% static "gis/bower_components/angucomplete/angucomplete.js" %}"></script>
+    <script src="{% static "gis/scripts/app.js" %}"></script>
+    <script src="{% static "gis/scripts/controllers/main.js" %}"></script>
+    <script src="{% static "gis/scripts/controllers/about.js" %}"></script>
+    <script src="{% static "gis/scripts/controllers/charts.js" %}"></script>
+    <script src="{% static "gis/scripts/services/config.js" %}"></script>
+    <script src="{% static "gis/scripts/services/datasource.js" %}"></script>
+    <script src="{% static "gis/scripts/services/datafeed.js" %}"></script>
+    <script src="{% static "gis/scripts/services/dataedit.js" %}"></script>
+    <script src="{% static "gis/scripts/services/polygonservice.js" %}"></script>
+    <script src="{% static "gis/scripts/services/tagservice.js" %}"></script>
+    <script src="{% static "gis/scripts/controllers/addTag.js" %}"></script>
 </body>
 </html>
