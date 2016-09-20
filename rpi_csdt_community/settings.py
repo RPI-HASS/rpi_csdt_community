@@ -9,7 +9,7 @@ if not DEBUG:
     GOOGLE_ANALYTICS_DOMAIN = 'rpi.edu'
 
 # Override this setting local_settings.py to enable the GIS app
-ENABLE_GIS = True
+ENABLE_GIS = False
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
