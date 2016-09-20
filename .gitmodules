@@ -4,3 +4,9 @@
 [submodule "static/applications/CSnap-Modules"]
 	path = static/applications/CSnap-Modules
 	url = https://github.com/CSnap/CSnap-Modules
+[submodule "static/scratch-blocks"]
+	path = static/scratch-blocks
+	url = https://github.com/LLK/scratch-blocks.git
+[submodule "static/closure-library"]
+	path = static/closure-library
+	url = https://github.com/google/closure-library.git
