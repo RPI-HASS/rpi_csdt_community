@@ -337,4 +337,3 @@ if ENABLE_GIS:
         CENSUS_API_KEY
     except NameError:
         raise "To use GIS, you need to define a CENSUS API KEY"
-print STATIC_ROOT
