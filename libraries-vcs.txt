@@ -3,3 +3,4 @@ git+https://github.com/CSnap/django-likes.git
 git+https://github.com/CSnap/django_teams.git
 git+https://github.com/CSnap/django-templatetag-sugar.git
 git+https://github.com/fladi/django-treebeard.git@django-1.10
+git+https://github.com/divio/django-filer.git

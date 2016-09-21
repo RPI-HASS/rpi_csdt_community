@@ -48,8 +48,8 @@ class Classroom(models.Model):
 
 class Approval(models.Model):
     project = models.OneToOneField('Project')
-    when_requested = models.DateTimeField(auto_now_add=True)
-    when_updated = models.DateTimeField(auto_now=True)
+    when_requested = models.DateTimeField(auto_now_add=True, null=True, blank=True)
+    when_updated = models.DateTimeField(auto_now=True, null=True, blank=True)
     approved_by = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True)
 
     def __unicode__(self):
