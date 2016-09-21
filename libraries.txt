@@ -37,6 +37,7 @@ djangorestframework
 djangorestframework-csv
 djangorestframework-gis
 geopy
+html5lib==0.99
 Markdown
 numpy
 oauthlib
