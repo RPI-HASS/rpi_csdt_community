@@ -169,8 +169,8 @@ INSTALLED_APPS = (
     'jquery',
 
 
-    'filer',
     'easy_thumbnails',
+    'filer',
 
     'attachments',
 
