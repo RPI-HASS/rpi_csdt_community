@@ -174,13 +174,9 @@ INSTALLED_APPS = (
 
     'attachments',
 
-    'sorl.thumbnail',
-
     'extra_views',
 
     'django_markup',
-#    'pybb',
-#    'south',
     'rest_framework',
     'django_teams',
     'django_comments_xtd',
@@ -259,6 +255,14 @@ REST_FRAMEWORK = {
 }
 
 THUMBNAIL_DEBUG = False
+
+THUMBNAIL_PROCESSORS = (
+    'easy_thumbnails.processors.colorspace',
+    'easy_thumbnails.processors.autocrop',
+    #'easy_thumbnails.processors.scale_and_crop',
+    'filer.thumbnail_processors.scale_and_crop_with_subject_location',
+    'easy_thumbnails.processors.filters',
+)
 
 TEXT_HTML_SANITIZE = False
 

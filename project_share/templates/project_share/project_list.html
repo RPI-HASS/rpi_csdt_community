@@ -33,5 +33,7 @@
     {% for object in object_list %}
        {% include "_project_thumbnail.html" %}
     {% endfor %}
-    {% include '_paginate.html' %}
+    <div class="footer">
+      {% include '_paginate.html' %}
+    </div>
 {% endblock %}

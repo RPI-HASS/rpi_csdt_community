@@ -45,6 +45,5 @@ Pillow
 pybbm
 PyYAML
 six
-sorl-thumbnail
 pytz
 gitpython

@@ -1,3 +1,5 @@
+{% load static %}
+
 <html>
   <head>
     {% if project %}
@@ -6,7 +8,7 @@
       <title>{{ application.name }}</title>
     {% endif %}
 	{% if GOOGLE_ANALYTICS_PROPERTY_ID %}
-      <script type="text/javascript" src="{{ STATIC_URL }}js/ga.js"></script>
+      <script type="text/javascript" src="{% static 'js/ga.js'%}"></script>
     {% endif %}
     
   </head>
@@ -18,7 +20,7 @@
 		    {% if applicationdemo %}'module': '{{ applicationdemo.application.name }}',
             'stage': '{{ applicationdemo.application.application_file.url }}',
 			{% else %}'module': '{{ application.name }}',
-            'stage': '{{ STATIC_URL }}applications/CSnap-Modules/',
+            'stage': '{% static "applications/CSnap-Modules/" %}',
 			{% endif %}
           },
           {% if user.is_authenticated %}
@@ -27,7 +29,7 @@
           {% endif %}
           'urls': {
             'user_api_detail_url': '{% url 'user-api-detail'%}',
-			'applications_root': '{{ STATIC_URL }}applications/CSnap-Modules/',
+			'applications_root': '{% static "applications/CSnap-Modules/" %}',
             {% if applicationdemo %}'demos_url': '{% url 'api-demos-list' %}?format=json&application={{ applicationdemo.application }}',
             {% else %}'demos_url': '{% url 'api-demos-list' %}?format=json&application={{ application }}',
             {% endif %}'demo_detail_url': '{% url 'demo-list' %}',
@@ -43,7 +45,7 @@
             {% if user.is_authenticated %}'user_detail_url': '{% url 'extendeduser-detail' pk=user.id %}',
             {% endif %}
           },
-          'asset_path': '{{ STATIC_URL }}csnap/',
+          'asset_path': '{% static "csnap/" %}',
           'lib_path': '/media/modules/libraries/',
           {% if present %}'presentation': true,
           {% endif %}
@@ -67,32 +69,32 @@
         };
     </script>
 
-    <script type="text/javascript" src="{{ STATIC_URL }}csnap/jquery-1.11.0.js"></script>
+    <script type="text/javascript" src="{% static 'csnap/jquery-1.11.0.js'%}"></script>
 
-    <script type="text/javascript" src="{{ STATIC_URL }}csnap/lib/jszip.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}csnap/lib/jszip-load.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}csnap/lib/jszip-deflate.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}csnap/lib/jszip-inflate.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}csnap/lib/jszip-utils.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}csnap/module-loader.js"></script>
+    <script type="text/javascript" src="{% static 'csnap/lib/jszip.js'%}"></script>
+    <script type="text/javascript" src="{% static 'csnap/lib/jszip-load.js'%}"></script>
+    <script type="text/javascript" src="{% static 'csnap/lib/jszip-deflate.js'%}"></script>
+    <script type="text/javascript" src="{% static 'csnap/lib/jszip-inflate.js'%}"></script>
+    <script type="text/javascript" src="{% static 'csnap/lib/jszip-utils.js'%}"></script>
+    <script type="text/javascript" src="{% static 'csnap/module-loader.js'%}"></script>
 
-    <script type="text/javascript" src="{{ STATIC_URL }}csnap/morphic.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}csnap/widgets.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}csnap/blocks.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}csnap/threads.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}csnap/objects.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}csnap/gui.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}csnap/paint.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}csnap/lists.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}csnap/byob.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}csnap/xml.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}csnap/store.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}csnap/locale.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}csnap/cloud.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}csnap/sha512.js"></script>
-	<script type="text/javascript" src="{{ STATIC_URL }}csnap/threejs/three.js"></script>
-	<script type="text/javascript" src="{{ STATIC_URL }}csnap/threejs/helvetiker_regular.typeface.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}csnap/Charles_Changes_To_IDE_Morph.js"></script>
+    <script type="text/javascript" src="{% static 'csnap/morphic.js'%}"></script>
+    <script type="text/javascript" src="{% static 'csnap/widgets.js'%}"></script>
+    <script type="text/javascript" src="{% static 'csnap/blocks.js'%}"></script>
+    <script type="text/javascript" src="{% static 'csnap/threads.js'%}"></script>
+    <script type="text/javascript" src="{% static 'csnap/objects.js'%}"></script>
+    <script type="text/javascript" src="{% static 'csnap/gui.js'%}"></script>
+    <script type="text/javascript" src="{% static 'csnap/paint.js'%}"></script>
+    <script type="text/javascript" src="{% static 'csnap/lists.js'%}"></script>
+    <script type="text/javascript" src="{% static 'csnap/byob.js'%}"></script>
+    <script type="text/javascript" src="{% static 'csnap/xml.js'%}"></script>
+    <script type="text/javascript" src="{% static 'csnap/store.js'%}"></script>
+    <script type="text/javascript" src="{% static 'csnap/locale.js'%}"></script>
+    <script type="text/javascript" src="{% static 'csnap/cloud.js'%}"></script>
+    <script type="text/javascript" src="{% static 'csnap/sha512.js'%}"></script>
+	<script type="text/javascript" src="{% static 'csnap/threejs/three.js'%}"></script>
+	<script type="text/javascript" src="{% static 'csnap/threejs/helvetiker_regular.typeface.js'%}"></script>
+    <script type="text/javascript" src="{% static 'csnap/Charles_Changes_To_IDE_Morph.js'%}"></script>
 
     <script type="text/javascript">
         var world;

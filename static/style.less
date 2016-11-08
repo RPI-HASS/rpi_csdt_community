@@ -1,0 +1,152 @@
+@import "bootstrap.less";
+/* Include theme settings */
+@import "themes/spacelab/bootswatch.less";
+@import "themes/spacelab/variables.less";
+
+@icon-font-path: "/static/twitter_bootstrap/fonts/";
+
+body {
+    margin-top: 60px;
+}
+
+.warning {
+    &:extend(.alert);
+    &:extend(.alert-warning);
+}
+
+.two-column {
+    .make-row();
+    .column-left {
+        .make-md-column(6);
+    }
+    .column-right {
+        .make-md-column(6);
+    }
+}
+
+.two-column-8-4 {
+    .make-row();
+    .column-left {
+        .make-md-column(8);
+    }
+    .column-right {
+        .make-md-column(4);
+    }
+}
+
+.two-column-7-5 {
+    .make-row();
+    .column-left {
+        .make-md-column(7);
+    }
+    .column-right {
+        .make-md-column(5);
+    }
+}
+
+.thumbnails {
+    .make-row();
+
+    /*div {
+        .make-md-column(4);
+
+        div {
+            &:extend(.thumbnail);
+            div {
+                &:extend(.caption);
+            }
+        }
+    }*/
+}
+
+.thumbnail-long {
+    /* Each thumbnail takes up a complete row, but splits it into two columns
+        with the image on the left, description on the right */
+    &:extend(.panel);
+    &:extend(.panel-default);
+    div.heading {
+        &:extend(.panel-heading);
+        h3 {
+            &:extend(.panel-title);
+        }
+    }
+    div.body {
+        &:extend(.panel-body);
+        .make-row();
+        div.image {
+            .make-md-column(4);
+        }
+        div.description {
+            .make-md-column(8);
+        }
+    }
+    div.footer {
+        &:extend(.panel-footer);
+        margin-bottom: 20px;
+	padding-bottom: 20px;
+    }
+}
+
+a.liker {
+    &:extend(.btn, .btn-large, .btn-primary, .glyphicon);
+}
+
+.login-form {
+    &:extend(.form-horizontal);
+
+    h2 {
+        /* What should go here? */
+    }
+
+    .text-input {
+        &:extend(.form-group);
+        label {
+            &:extend(.col-sm-2);
+            &:extend(.control-label);
+        }
+        div input {
+            &:extend(.form-control);
+        }
+        input {
+            &:extend(.form-control);
+        }
+    }
+
+    .login-submit {
+        &:extend(.form-group);
+    }
+
+    .twitter-logo {
+        /* Add twitter logo */
+    }
+
+    .facebook-logo {
+        /* Add facebook logo */
+    }
+
+    .github-logo {
+        /* Add github logo */
+    }
+}
+
+.videoWrapper {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 */
+    padding-top: 25px;
+    height: 0;
+}
+
+.videoWrapper object,
+.videoWrapper embed,
+.videoWrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.application{ /*this is for responsive sizing on applications page
+	max-width:200px;
+	float:left;
+}

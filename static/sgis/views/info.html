@@ -1,0 +1,6 @@
+<address> <strong>{{clickedPoint.name}}</strong> <span ng-repeat="line in clickedPoint.address"><br>{{line}}</span> </address> <form class="form-horizontal"> <div><strong>Tags</strong></div> <div class="input-group"> <tags-input ng-model="tags" placeholder="Add Tags"> <auto-complete source="availableTags" min-length="1"></auto-complete> </tags-input> <span class="input-group-btn"> <button class="btn btn-primary last-btn-fix" type="button" ng-click="pushTags()"><span class="glyphicon glyphicon-floppy-disk"></span></button> </span> </div><!-- /input-group --> <div ng-show="!approved" class="alert alert-warning" role="alert"> A tag you added has not yet been approved, so a teacher needs to approve it. Until then, your tag will only appear while you stay on this page, but it has been saved. </div> </form> <div> <table ng-show="{{dataList}}"> <!--<thead ng-show="{{false}}">
+      <tr>
+        <th class="table-label">Label</th>
+        <th>Data</th>
+      </tr>
+    </thead>--> <tbody id="data-table"> <tr ng-repeat="(label, data) in dataList" ng-show="data.length>0"> <td class="table-label">{{label}} <td><a href="{{data}}" ng-show="data.indexOf('http://') == 0">{{data}}</a><span ng-show="data.indexOf('http://') != 0">{{data}}</span>  <tbody> </table> </div>

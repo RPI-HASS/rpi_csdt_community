@@ -9,3 +9,4 @@ eclipse/
 python/
 media/
 collected_static/
+local_settings.py

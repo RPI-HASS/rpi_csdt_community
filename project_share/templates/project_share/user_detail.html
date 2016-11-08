@@ -30,9 +30,7 @@
             {% if not object.approved %}
                 <div class="col-sm-6 col-md-4">
                     <div class="thumbnail">
-                        {% thumbnail object.screenshot.f "300x300" crop="center" as im %}
-                            <a href="{% url 'project-update' pk=object.id %}"><img src="{{ im.url }}" alt="Screenshot of {{ object.name }}"></a>
-                        {% endthumbnail %}
+                            <a href="{% url 'project-update' pk=object.id %}"><img src="{% thumbnail object.screenshot.f 300x300 crop %}" alt="Screenshot of {{ object.name }}"></a>
                          <div class="caption">
                             <h4>{{ object.name }}</h4>
                             <p>{{ object.description|truncatewords:10 }}</p>

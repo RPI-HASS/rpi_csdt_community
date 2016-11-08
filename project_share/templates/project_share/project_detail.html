@@ -6,9 +6,7 @@
     <h2>{{ object.name }}<small> by {{ object.owner }}</small></h2>
     <div class="container row">
         <div class="span4">
-            {% thumbnail project.screenshot.f "400x400" crop="center" as im %}
-              <a href="{% url 'project-detail' pk=project.id %}"><img src="{{ im.url }}" alt="Screenshot of {{ project.name }}"></a>
-            {% endthumbnail %}
+              <a href="{% url 'project-detail' pk=project.id %}"><img src="{% thumbnail object.screenshot.f 400x400 crop %}" alt="Screenshot of {{ object.name }}"></a>
         </div>
         <div class="span7 lead">
           {{ object.description }}

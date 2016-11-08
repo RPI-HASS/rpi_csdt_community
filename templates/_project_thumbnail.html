@@ -1,13 +1,11 @@
 {% load thumbnail %}
 <div class="col-sm-4 col-md-3">
     <div class="thumbnail" style="height: 350px; overflow: auto;">
-        {% thumbnail object.screenshot.f "200x200" crop="center" as im %}
-            <a href="{% url 'project-detail' pk=object.id %}"><img src="{{ im.url }}" alt="Screenshot of {{ object.name }}"></a>
-        {% endthumbnail %}
+	<a href="{% url 'project-detail' pk=object.id %}"><img src="{% thumbnail object.screenshot.f 200x200 crop %}" alt="Screenshot of {{ object.name }}"></a>
          <div class="caption">
-		    <a href="{% url 'project-detail' pk=object.id %}">
-                <h4>{{ object.name }}</h4>
-			</a>
+		<a href="{% url 'project-detail' pk=object.id %}">
+			<h4>{{ object.name }}</h4>
+		</a>
             <p>{{ object.description|truncatewords:10 }}</p>
         </div>
     </div>
