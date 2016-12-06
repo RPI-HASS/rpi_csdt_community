@@ -1,4 +1,4 @@
-{% load cms_tags sekizai_tags %}
+{% load sekizai_tags %}
 {% load rpi_csdt_community_tags %}
 {% load compress %}
 {% load static %}
@@ -28,7 +28,10 @@
   <body>
     {% analytical_body_top %}
     <!-- Static navbar -->
-    {% cms_toolbar %}
+    {% if is_cms_page %}
+        HELLO WORLD THIS IS A TEST
+        {% include "_cms_toolbar.html" %}
+    {% endif %}
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
             <div class="navbar-header">
@@ -70,7 +73,9 @@
     {% endblock %}
 
 
-    {% placeholder base_content %}
+    {% if is_cms_page %}
+        {% include "_cms_placeholder.html" %}
+    {% endif %}
     {% block base_content %}{% endblock %}
     {% render_block "js" %}
 

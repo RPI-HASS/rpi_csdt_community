@@ -19,9 +19,14 @@ def comment_post_wrapper(request):
 def home(request):
     # Get the 10 most popular projects
     # Get the 10 newest
-    projects_newest = Project.approved_projects().all().order_by('-id')[:10]
+    projects_newest = Project.approved_projects().all().select_related("screenshot").order_by('-id')[:10]
+    projects_newest = [project for project in projects_newest]
     return render(request, 'home.html', {
         "form": AuthenticationForm(),
         'projects_popular': projects_newest,
         'projects_newest': projects_newest
     })
+
+def return_true(req):
+    return True
+

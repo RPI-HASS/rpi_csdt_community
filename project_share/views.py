@@ -31,11 +31,14 @@ class RestrictPermissionMixin(object):
         return super(RestrictPermissionMixin, self).dispatch(request, *args, **kwargs)
 
     def get_object(self):
+        if hasattr(self, 'object'):
+            return self.object
         o = super(RestrictPermissionMixin, self).get_object()
 
         # If the object doesn't belong to this user and isn't published, throw a error 403
         if (not o.approved and o.owner != self.request.user) and not self.request.user.is_superuser:
             raise PermissionDenied()
+        self.object = o
         return o
 
 class ApplicationList(ListView):
@@ -86,10 +89,10 @@ class ProjectTagList(ProjectList):
         return Project.approved_projects().filter(tags__in=[self.tag])
 
 class ProjectDetail(RestrictPermissionMixin, DetailView):
-    model = Project
+    queryset = Project.objects.select_related("approval").select_related("owner").select_related("screenshot")
 	
     def render_to_response(self, context, **response_kwargs):
-        o = super(ProjectDetail, self).get_object()
+        o = self.get_object()
         context['hasApproval'] = (hasattr(o, 'approval') or o.approved)
         return super(ProjectDetail, self).render_to_response(context, **response_kwargs)
 

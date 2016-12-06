@@ -14,7 +14,7 @@ def get_warning_message(context):
 
 @register.simple_tag(takes_context=True)
 def is_cms_page(context):
-    return False
+    return context.path.startswith("/cms/")
 
 register.filter(is_warning_message)
 register.filter(get_warning_message)

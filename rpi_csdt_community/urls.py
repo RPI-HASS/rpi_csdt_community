@@ -2,6 +2,7 @@ from django.conf.urls import include, url
 from django.views.generic import TemplateView, RedirectView
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
+import debug_toolbar
 
 from django.contrib import admin
 admin.autodiscover()
@@ -19,6 +20,7 @@ router.register(r'goals', GoalViewSet, base_name='api-goals')
 router.register(r'application', ApplicationViewSet, base_name='api-modules')
 router.register(r'theme', ApplicationThemeViewSet, base_name='api-themes')
 router.register(r'category', ApplicationCategoryViewSet, base_name='api-category')
+
 		
 urlpatterns = [
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
@@ -42,7 +44,8 @@ urlpatterns = [
     url(r'^api/files/', FileUploadView.as_view(), name='file-create'),
     url(r'^api/user', CurrentUserView.as_view(), name='user-api-detail'),
 
-    url(r'^cms/', include('cms.urls'))
+    url(r'^cms/', include('cms.urls')),
+    url(r'^__debug__/', include(debug_toolbar.urls)),
 ]
 
 urlpatterns += [
