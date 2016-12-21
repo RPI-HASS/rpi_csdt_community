@@ -12,9 +12,9 @@ def is_warning_message(context):
 def get_warning_message(context):
     return settings.WARNING_MESSAGE
 
-@register.simple_tag(takes_context=True)
-def is_cms_page(context):
-    return context.path.startswith("/cms/")
+def is_cms_page(path):
+    return path.startswith("/cms/")
 
 register.filter(is_warning_message)
 register.filter(get_warning_message)
+register.filter(is_cms_page)

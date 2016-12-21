@@ -240,7 +240,6 @@ CMS_TEMPLATES = (
 )
 
 CMS_SOFTROOT = True
-CMS_TOOLBAR_HIDE = True
 
 REST_FRAMEWORK = {
     # Use hyperlinked styles by default.
@@ -319,6 +318,8 @@ LOGGING = {
 }
 
 WARNING_MESSAGE = "<strong>You are currently looking at the development site!</strong> None of this is real!"
+
+USE_CACHE = False
 
 try:
     from local_settings import *
