@@ -2,6 +2,8 @@ if [ ! -d "./python/" ]; then
     virtualenv python/
     . ./python/bin/activate
     pip install -r ./libraries.txt.lock
+    pip install -r ./libraries-vcs.txt
+    pip install -r ./libraries-heroku.txt
 fi
 
 . ./python/bin/activate
