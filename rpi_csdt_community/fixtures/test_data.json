@@ -136,34 +136,6 @@
 },
 {
   "fields": {
-    "value": "{\"storage\": \"django.core.files.storage.FileSystemStorage\", \"name\": \"cache/ea/31/ea31dab22401b492fb762566aab2ce98.jpg\", \"size\": [400, 400]}"
-  },
-  "model": "thumbnail.kvstore",
-  "pk": "sorl-thumbnail||image||5d258ebdad592b29f05b638a43c61218"
-},
-{
-  "fields": {
-    "value": "{\"storage\": \"django.core.files.storage.FileSystemStorage\", \"name\": \"files/blob_IbuUev9\", \"size\": [480, 360]}"
-  },
-  "model": "thumbnail.kvstore",
-  "pk": "sorl-thumbnail||image||9d00b3db82b265ef49bf1d0c82690b9a"
-},
-{
-  "fields": {
-    "value": "{\"storage\": \"django.core.files.storage.FileSystemStorage\", \"name\": \"cache/10/72/10722b1d8a788ddb9f54e5d5473f4f6a.jpg\", \"size\": [400, 300]}"
-  },
-  "model": "thumbnail.kvstore",
-  "pk": "sorl-thumbnail||image||f93b03fb0bd3e229c20e7128ceb61637"
-},
-{
-  "fields": {
-    "value": "[\"5d258ebdad592b29f05b638a43c61218\"]"
-  },
-  "model": "thumbnail.kvstore",
-  "pk": "sorl-thumbnail||thumbnails||9d00b3db82b265ef49bf1d0c82690b9a"
-},
-{
-  "fields": {
     "parent": null,
     "name": "Modified Cornrows",
     "screenshot": 1,
@@ -295,24 +267,6 @@
   },
   "model": "admin.logentry",
   "pk": 6
-},
-{
-  "fields": {
-    "action_flag": 2,
-    "action_time": "2014-11-30T22:58:39.467Z",
-    "object_repr": "Published Modified Cornrows",
-    "object_id": "2",
-    "change_message": "Changed approved and tags. Added approval \"test approval for Published Modified Cornrows\".",
-    "user": [
-      "test"
-    ],
-    "content_type": [
-      "thumbnail",
-      "kvstore"
-    ]
-  },
-  "model": "admin.logentry",
-  "pk": 7
 },
 {
   "fields": {

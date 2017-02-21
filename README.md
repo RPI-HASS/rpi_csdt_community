@@ -1,7 +1,7 @@
 CSDT Community Site
 ========
 
-[![Build Status](https://drone.io/github.com/GK-12/rpi_csdt_community/status.png)](https://drone.io/github.com/GK-12/rpi_csdt_community/latest)
+[![Build Status](https://travis-ci.org/CSnap/rpi_csdt_community.svg?branch=master)](https://travis-ci.org/CSnap/rpi_csdt_community)
 
 This project is sponsered by Rensselaer Polytechnic Institute's GK-12 fellowship under Dr. Ron Eglash. The goal is the create a web platform for students to share projects, community, and in general create a community around the pCSDT's. More information about the pCSDT's can be found here: http://csdt.rpi.edu/
 
@@ -16,20 +16,22 @@ Before setup you need:
 * Subversion
 * Mercurial
 * NPM
-* Clone, fork, or download this repo
+* This repo (clone, fork, or download)
 
 Setup for Linux:
 ```shell
 cd {{ Directory of this repo }}
 . ./activate
+sudo npm install -g less
+sudo npm install -g yuglify
 
-# for the time being you will need to select option 1 and timezone.now()
+# For the time being you will need to select option 1 and timezone.now()
 python ./manage.py makemigrations
 python ./manage.py migrate
 git submodule init
 git submodule update
 
-#Enter credentials as desired
+# Enter credentials as desired
 python manage.py createsuperuser
 
 # Every time you start to develop, start the server
@@ -43,18 +45,20 @@ Setup for Windows
 cd {{ Directory of this repo }}
 python virtualenv.py python
 python ./python/bin/activate
+sudo npm install -g less
+sudo npm install -g yuglify
 python pip install -r ./libraries.txt.lock
 python pip install -r ./libraries-vcs.txt
 python pip install -r ./libraries-heroku.txt
 npm install -g less
 
-# for the time being you will need to select option 1 and timezone.now()
+# For the time being you will need to select option 1 and timezone.now()
 python ./manage.py makemigrations
 python ./manage.py migrate
 git submodule init
 git submodule update
 
-#Enter credentials as desired
+# Enter credentials as desired
 python manage.py createsuperuser
 
 # Every time you start to develop, start the server
@@ -69,14 +73,14 @@ Then you should be able to see the project at http://127.0.0.1:8000/
 * Fork repo or if already forked, pull this repo to get latest.
 * Make relevant issue on this repo
 
-```
+```shell
 cd {{ Directory of this repo }}
-git checkout -b {{name of changes}}
+git checkout -b {{name of changes to be made}}
 # Make changes
-git add {{changed files}}
+git add -A
 git commit
 # Write a description
 git push origin {{name of changes}}
 # Make pull request on githup and reference your issue
-git checkout develop (switch back to main branch for future pulls)
+git checkout master
 ```
