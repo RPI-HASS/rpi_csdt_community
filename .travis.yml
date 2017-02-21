@@ -1,0 +1,30 @@
+language: python
+
+python:
+  - 2.7
+
+services: postgresql
+
+env:
+  - DJANGO=1.9.5
+
+before_install:
+  - export DJANGO_SETTINGS_MODULE="rpi_csdt_community.settings"
+  - export PYTHONPATH="/usr/local/lib/python2.7/dist-packages"
+  - export PIP_USE_MIRRORS=true
+
+install:
+  - sudo $(type -P npm) install -g less
+  - sudo $(type -P npm) install -g yuglify
+  - sudo pip install setuptools --upgrade
+  - sudo pip install --upgrade -r libraries-vcs.txt
+  - sudo pip install -r libraries.txt
+  - sudo pip install -r libraries-heroku.txt
+
+before_script:
+  - psql -c "CREATE DATABASE travisci;" -U postgres
+
+script:
+  - python manage.py migrate
+  - python manage.py test rpi_csdt_community
+  - python manage.py test project_share
