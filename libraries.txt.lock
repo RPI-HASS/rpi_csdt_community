@@ -1,5 +1,5 @@
 bbcode~=1.0.24
-BeautifulSoup~=3.2.1
+BeautifulSoup4~=4.5.3
 coverage~=4.2
 Django~=1.9.5
 django-allauth~=0.28.0

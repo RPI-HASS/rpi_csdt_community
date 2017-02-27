@@ -42,14 +42,13 @@ Setup for Windows
 
 ```shell
 cd {{ Directory of this repo }}
-python virtualenv.py python
-python ./python/bin/activate
-sudo npm install -g less
-sudo npm install -g yuglify
-python pip install -r ./libraries.txt.lock
-python pip install -r ./libraries-vcs.txt
-python pip install -r ./libraries-heroku.txt
+virtualenv python
+python\Scripts\activate.bat
 npm install -g less
+npm install -g yuglify
+pip install -r ./libraries.txt.lock
+pip install -r ./libraries-vcs.txt
+pip install -r ./libraries-heroku.txt
 
 # For the time being you will need to select option 1 and timezone.now()
 python ./manage.py migrate
