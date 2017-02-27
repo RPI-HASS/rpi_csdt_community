@@ -8,14 +8,14 @@ This project is sponsered by Rensselaer Polytechnic Institute's GK-12 fellowship
 ## How-to deploy for development
 
 Before setup you need:
-* Python
+* Python 2.X
 * Python Virtualenv
 * Python setup tools
 * Libpq-dev
 * Git
 * Subversion
 * Mercurial
-* NPM
+* NPM & Node
 * This repo (clone, fork, or download)
 
 Setup for Linux:
@@ -26,7 +26,6 @@ sudo npm install -g less
 sudo npm install -g yuglify
 
 # For the time being you will need to select option 1 and timezone.now()
-python ./manage.py makemigrations
 python ./manage.py migrate
 git submodule init
 git submodule update
@@ -53,7 +52,6 @@ python pip install -r ./libraries-heroku.txt
 npm install -g less
 
 # For the time being you will need to select option 1 and timezone.now()
-python ./manage.py makemigrations
 python ./manage.py migrate
 git submodule init
 git submodule update
