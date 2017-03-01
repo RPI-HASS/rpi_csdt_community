@@ -44,6 +44,7 @@ Markdown
 numpy
 oauthlib
 Pillow
+psycopg2
 pybbm
 PyYAML
 six
