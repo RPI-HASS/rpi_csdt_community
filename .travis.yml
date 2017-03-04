@@ -17,10 +17,8 @@ install:
   - sudo $(type -P npm) install -g less
   - sudo $(type -P npm) install -g yuglify
   - sudo pip install setuptools --upgrade
-  - sudo pip install --upgrade -r libraries-vcs.txt
-  - sudo pip install -r libraries.txt
-  - sudo pip install -r libraries-heroku.txt
-
+  - sudo pip install --upgrade -r requirements.txt
+  
 before_script:
   - psql -c "CREATE DATABASE travisci;" -U postgres
 

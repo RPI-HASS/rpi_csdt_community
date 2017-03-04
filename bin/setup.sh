@@ -23,7 +23,7 @@ sudo apt-get install -y nodejs build-essential
 
 sudo npm install -g less
 
-pip install --upgrade -r /vagrant/libraries.txt.lock
+pip install --upgrade -r /vagrant/requirements.txt
 
 # Install the git submodules
 cd /vagrant/

@@ -1,9 +1,7 @@
 if [ ! -d "./python/" ]; then
     virtualenv python/
     . ./python/bin/activate
-    sudo pip install --upgrade -r libraries-vcs.txt
-    sudo pip install -r libraries.txt.lock
-    sudo pip install -r libraries-heroku.txt
+    sudo pip install --upgrade -r requirements.txt
 fi
 
 . ./python/bin/activate
