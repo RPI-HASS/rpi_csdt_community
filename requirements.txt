@@ -51,7 +51,7 @@ pytz==2016.7
 PyYAML==3.12
 requests-oauthlib==0.7.0
 six==1.10.0
-geopy=1.11.0
+geopy==1.11.0
 git+https://github.com/GK-12/SGIS-backend.git
 git+https://github.com/bartTC/django-attachments.git
 git+https://github.com/CSnap/django-likes.git
