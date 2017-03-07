@@ -1,27 +1,34 @@
-from django.conf.urls import include, url
-from django.views.generic import TemplateView, RedirectView
-from django.contrib.auth.decorators import login_required
+'''RPI CSDT Community urls.py'''
 from django.conf import settings
+from django.conf.urls import include, url
+from django.contrib import admin
+# from django.contrib.auth.decorators import login_required
+from django.views import static
+from django.views.generic import TemplateView
+
 import debug_toolbar
 
-from django.contrib import admin
+from rest_framework import routers
+
+from rpi_csdt_community.views import home
+from rpi_csdt_community.viewsets import ProjectViewSet, DemosViewSet, \
+    GoalViewSet, ApplicationViewSet, FileUploadView, CurrentUserView, TeamViewSet
+from rpi_csdt_community.viewsets import ApplicationThemeViewSet, ApplicationCategoryViewSet
+
+
+
+
+ROUTER = routers.DefaultRouter()
+ROUTER.register(r'projects', ProjectViewSet, base_name='api-projects')
+ROUTER.register(r'team', TeamViewSet, base_name='api-teams')
+ROUTER.register(r'demos', DemosViewSet, base_name='api-demos')
+ROUTER.register(r'goals', GoalViewSet, base_name='api-goals')
+ROUTER.register(r'application', ApplicationViewSet, base_name='api-modules')
+ROUTER.register(r'theme', ApplicationThemeViewSet, base_name='api-themes')
+ROUTER.register(r'category', ApplicationCategoryViewSet, base_name='api-category')
+
 admin.autodiscover()
 
-from rpi_csdt_community.viewsets import ProjectViewSet, DemosViewSet, GoalViewSet, ApplicationViewSet, FileUploadView, CurrentUserView, TeamViewSet
-from rpi_csdt_community.viewsets import ApplicationThemeViewSet, ApplicationCategoryViewSet
-from rpi_csdt_community.views import home
-from django.views import static
-from rest_framework import routers
-router = routers.DefaultRouter()
-router.register(r'projects', ProjectViewSet, base_name='api-projects')
-router.register(r'team', TeamViewSet, base_name='api-teams')
-router.register(r'demos', DemosViewSet, base_name='api-demos')
-router.register(r'goals', GoalViewSet, base_name='api-goals')
-router.register(r'application', ApplicationViewSet, base_name='api-modules')
-router.register(r'theme', ApplicationThemeViewSet, base_name='api-themes')
-router.register(r'category', ApplicationCategoryViewSet, base_name='api-category')
-
-		
 urlpatterns = [
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     url(r'^admin/', include(admin.site.urls)),
@@ -40,7 +47,7 @@ urlpatterns = [
     url(r'^attachments/', include('attachments.urls', namespace="attachments")),
 
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    url(r'^api/', include(router.urls)),
+    url(r'^api/', include(ROUTER.urls)),
     url(r'^api/files/', FileUploadView.as_view(), name='file-create'),
     url(r'^api/user', CurrentUserView.as_view(), name='user-api-detail'),
 

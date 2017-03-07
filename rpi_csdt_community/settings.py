@@ -1,5 +1,7 @@
+''' RPI CSDT settings.py'''
 # Django settings for rpi_csdt_community project.
 import os
+import twitter_bootstrap
 
 PROJECT_ROOT = os.path.dirname(os.path.dirname(__file__))
 
@@ -110,8 +112,7 @@ MIDDLEWARE_CLASSES = [
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-	'django.middleware.locale.LocaleMiddleware',
-
+    'django.middleware.locale.LocaleMiddleware',
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'cms.middleware.user.CurrentUserMiddleware',
@@ -190,22 +191,22 @@ INSTALLED_APPS = (
     'rest_framework',
     'django_teams',
     'django_comments_xtd',
-
-# Django CMS
+    # Django CMS
     'treebeard',
     'djangocms_text_ckeditor',  # note this needs to be above the 'cms' entry
     'cms',  # django CMS itself
     'mptt',  # utilities for implementing a tree
     'menus',  # helper for model independent hierarchical website navigation
     'sekizai',  # for javascript and css management
-    'djangocms_admin_style',  # for the admin skin. You **must** add 'djangocms_admin_style' in the list **before** 'django.contrib.admin'.
+    'djangocms_admin_style',  # for the admin skin. You **must** add 'djangocms_admin_style'...
+    #  ...in the list **before** 'django.contrib.admin'.
     'djangocms_file',
     #'djangocms_flash',
     #'djangocms_googlemap',
     #'djangocms_inherit',
     'djangocms_picture',
     #'djangocms_teaser',
-#    'djangocms_video',
+    #'djangocms_video',
     'djangocms_link',
     #'djangocms_snippet',
     'cms_bootstrap_templates',
@@ -213,8 +214,8 @@ INSTALLED_APPS = (
     'analytical',
 )
 
-TEMPLATES = [ 
-    {   
+TEMPLATES = [
+    {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [os.path.join(PROJECT_ROOT, 'templates')],
         'APP_DIRS': True,
@@ -228,7 +229,7 @@ TEMPLATES = [
                 'cms.context_processors.cms_settings'
             ],
         },
-    },  
+    },
 ]
 
 
@@ -245,8 +246,10 @@ CMS_TEMPLATES = (
     ('cms_bootstrap_templates/template_two_column.html', 'Two columns'),
     ('cms_bootstrap_templates/template_three_column.html', 'Three columns'),
     ('cms_bootstrap_templates/template_header_two_column.html', 'Two columns with a header'),
-    ('cms_bootstrap_templates/template_header_two_column_left.html', 'Two columns w/ header, large left'),
-    ('cms_bootstrap_templates/template_header_two_column_right.html', 'Two columns w/ header, large right'),
+    ('cms_bootstrap_templates/template_header_two_column_left.html',
+     'Two columns w/ header, large left'),
+    ('cms_bootstrap_templates/template_header_two_column_right.html',
+     'Two columns w/ header, large right'),
 )
 
 CMS_SOFTROOT = True
@@ -282,14 +285,16 @@ LOGIN_REDIRECT_URL = '/'
 # Track where my LESS things live
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
-my_app_less = os.path.join(BASE_DIR, 'static', 'less')
+MY_APP_LESS = os.path.join(BASE_DIR, 'static', 'less')
 
 # For apps outside of your project, it's simpler to import them to find their root folders
-import twitter_bootstrap
-bootstrap_less = os.path.join(os.path.dirname(twitter_bootstrap.__file__), 'static', 'twitter_bootstrap', 'less')
+
+BOOTSTRAP_LESS = os.path.join(os.path.dirname(twitter_bootstrap.__file__),
+                              'static', 'twitter_bootstrap', 'less')
 
 COMPRESS_ENABLED = False
-COMPRESS_LESSC_COMMAND = 'lessc --include-path={}'.format(os.pathsep.join([bootstrap_less, my_app_less]))
+COMPRESS_LESSC_COMMAND = 'lessc --include-path={}'\
+    .format(os.pathsep.join([BOOTSTRAP_LESS, MY_APP_LESS]))
 COMPRESS_LESSC_COMMAND += " {infile} {outfile}"
 
 COMPRESS_PRECOMPILERS = (
@@ -327,14 +332,18 @@ LOGGING = {
     }
 }
 
-WARNING_MESSAGE = "<strong>You are currently looking at the development site!</strong> None of this is real!"
+WARNING_MESSAGE = "<strong>You are currently looking " \
+                  "at the development site!</strong> None of this is real!"
 
 USE_CACHE = False
 
+# Not Passing Lint:
+'''
 try:
     from local_settings import *
-except:
+except ImportError:
     pass
+'''
 
 if USE_CACHE:
     MIDDLEWARE_CLASSES += [
