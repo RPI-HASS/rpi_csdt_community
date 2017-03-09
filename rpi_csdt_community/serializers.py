@@ -75,7 +75,9 @@ class ApplicationSerializer(serializers.ModelSerializer):
 class ApplicationCategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = ApplicationCategory
+        fields = ('theme', 'name', 'description', 'applications')
 
 class ApplicationThemeSerializer(serializers.ModelSerializer):
     class Meta:
         model = ApplicationTheme
+        fields = ('name', 'description')
