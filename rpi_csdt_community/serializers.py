@@ -8,7 +8,7 @@ from django_teams.models import TeamStatus
 
 try:
     from django.contrib.auth import get_user_model
-except ImportError: # django < 1.5
+except ImportError:  # django < 1.5
     from django.contrib.auth.models import User
 else:
     USER = get_user_model()
@@ -17,9 +17,11 @@ else:
 class DemoSerializer(serializers.ModelSerializer):
     '''Demo Serializer'''
     project_url = serializers.URLField(source='zipfile.url', read_only=True)
+
     class Meta:
         model = ApplicationDemo
         fields = ('id', 'name', 'description', 'project_url')
+
 
 class GoalSerializer(serializers.ModelSerializer):
     '''Goal Serializer'''
@@ -30,10 +32,13 @@ class GoalSerializer(serializers.ModelSerializer):
         model = Goal
         fields = ('description', 'name', 'thumb_url', 'img_url')
 
+
 class ProjectSerializer(serializers.ModelSerializer):
     '''Project Serializer'''
-    project_url = serializers.URLField(source='project.f.url', read_only=True)
-    screenshot_url = serializers.URLField(source='screenshot.f.url', read_only=True)
+    project_url = serializers\
+        .URLField(source='project.f.url', read_only=True)
+    screenshot_url = serializers\
+        .URLField(source='screenshot.f.url', read_only=True)
 
     def __init__(self, *args, **kwargs):
         super(ProjectSerializer, self).__init__(*args, **kwargs)
@@ -49,7 +54,9 @@ class ProjectSerializer(serializers.ModelSerializer):
                   'approved', 'application', 'owner', 'project_url',
                   'screenshot_url', 'project', 'screenshot',)
         write_only_fields = ('project', 'screenshot',)
-        read_only_fields = ('id', 'approved', 'owner', 'project_url', 'screenshot_url',)
+        read_only_fields = ('id', 'approved',
+                            'owner', 'project_url', 'screenshot_url',)
+
 
 class TeamSerializer(serializers.ModelSerializer):
     '''Team Serializer'''
@@ -76,17 +83,22 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ('id', 'username', 'first_name', 'last_name')
         read_only_fields = ('id', 'username', 'first_name', 'last_name')
 
+
 class ApplicationSerializer(serializers.ModelSerializer):
     '''Application Serializer'''
     class Meta:
         model = Application
-        fields = ('id', 'name', 'version', 'description', 'url', 'application_file',
-                  'featured', 'application_type', 'categories', 'screenshot')
+        fields = ('id', 'name', 'version', 'description',
+                  'url', 'application_file',
+                  'featured', 'application_type',
+                  'categories', 'screenshot')
+
 
 class ApplicationCategorySerializer(serializers.ModelSerializer):
     '''Application Category Serializer'''
     class Meta:
         model = ApplicationCategory
+
 
 class ApplicationThemeSerializer(serializers.ModelSerializer):
     '''Application Theme Serializer'''

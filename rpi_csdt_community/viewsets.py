@@ -12,7 +12,7 @@ from django_teams.models import TeamStatus
 from django.conf import settings
 try:
     from django.contrib.auth import get_user_model
-except ImportError: # django < 1.5
+except ImportError:  # django < 1.5
     # from django.contrib.auth.models import User
     pass
 else:
@@ -29,19 +29,18 @@ from .serializers import TeamSerializer, ProjectSerializer, GoalSerializer, \
     ApplicationThemeSerializer, UserSerializer
 
 
-
-
-class ProjectViewSet(viewsets.ModelViewSet): #pylint: disable=too-many-ancestors
+class ProjectViewSet(viewsets.ModelViewSet):  \
+        # pylint: disable=too-many-ancestors
     '''Project View Set'''
     model = Project
     serializer_class = ProjectSerializer
 
     def get_object(self):
         obj = super(ProjectViewSet, self).get_object()
-        if obj.owner != None and obj.owner != self.request.user:
+        if obj.owner is not None and obj.owner != self.request.user:
             original_pk = obj.pk
             obj.pk = None
-            if original_pk != None:
+            if original_pk is not None:
                 sys.stdout.write("Updating parent")
                 obj.parent = Project.objects.get(pk=original_pk)
         # If this project is published, create a new one by resetting pk
@@ -58,7 +57,9 @@ class ProjectViewSet(viewsets.ModelViewSet): #pylint: disable=too-many-ancestors
             queryset = queryset.filter(owner=get_object_or_404(ExtendedUser, pk=user))
         return queryset
 
-class TeamViewSet(viewsets.ModelViewSet): #pylint: disable=too-many-ancestors
+
+class TeamViewSet(viewsets.ModelViewSet):  \
+        # pylint: disable=too-many-ancestors
     '''Team View Set'''
     model = TeamStatus
     serializer_class = TeamSerializer
@@ -71,7 +72,8 @@ class TeamViewSet(viewsets.ModelViewSet): #pylint: disable=too-many-ancestors
         return queryset
 
 
-class DemosViewSet(viewsets.ReadOnlyModelViewSet): #pylint: disable=too-many-ancestors
+class DemosViewSet(viewsets.ReadOnlyModelViewSet):  \
+        # pylint: disable=too-many-ancestors
     '''Demo View Set'''
     queryset = ApplicationDemo.objects.all()
     serializer_class = DemoSerializer
@@ -86,7 +88,8 @@ class DemosViewSet(viewsets.ReadOnlyModelViewSet): #pylint: disable=too-many-anc
         return queryset
 
 
-class GoalViewSet(viewsets.ReadOnlyModelViewSet): #pylint: disable=too-many-ancestors
+class GoalViewSet(viewsets.ReadOnlyModelViewSet):  \
+        # pylint: disable=too-many-ancestors
     '''Goal View Set'''
     queryset = Goal.objects.all()
     serializer_class = GoalSerializer
@@ -100,20 +103,23 @@ class GoalViewSet(viewsets.ReadOnlyModelViewSet): #pylint: disable=too-many-ance
         return queryset
 
 
-class ApplicationViewSet(viewsets.ReadOnlyModelViewSet): #pylint: disable=too-many-ancestors
+class ApplicationViewSet(viewsets.ReadOnlyModelViewSet):  \
+        # pylint: disable=too-many-ancestors
     '''Application View Set'''
     queryset = Application.objects.all()
     serializer_class = ApplicationSerializer
     lookup_field = 'name'
 
 
-class ApplicationCategoryViewSet(viewsets.ReadOnlyModelViewSet): #pylint: disable=too-many-ancestors
+class ApplicationCategoryViewSet(viewsets.ReadOnlyModelViewSet):  \
+        # pylint: disable=too-many-ancestors
     '''Application Category View Set'''
     queryset = ApplicationCategory.objects.all()
     serializer_class = ApplicationCategorySerializer
 
 
-class ApplicationThemeViewSet(viewsets.ReadOnlyModelViewSet): #pylint: disable=too-many-ancestors
+class ApplicationThemeViewSet(viewsets.ReadOnlyModelViewSet):  \
+        # pylint: disable=too-many-ancestors
     '''Application Theme View Set'''
     queryset = ApplicationTheme.objects.all()
     serializer_class = ApplicationThemeSerializer
@@ -131,12 +137,13 @@ class FileUploadView(views.APIView):
         file_to_upload = FileUpload(f=file_object)
         file_to_upload.save()
         path = os.path.join(settings.MEDIA_URL, file_to_upload.f.url)
-        return Response(status=201, data={'url':path, 'id':file_to_upload.id})
+        return Response(status=201, data={'url': path, 'id': file_to_upload.id})
 
 
 class CurrentUserView(views.APIView):
     '''Current User View'''
     model = USER
+
     def get(self, request):
         '''Serializer for Current User View'''
         serializer = UserSerializer(request.user)

@@ -13,11 +13,14 @@ except ImportError:
 
     from BeautifulSoup import BeautifulSoup, SoupStrainer
 
+
 class UrlTests(StaticLiveServerTestCase):
     ''' Test of URLs'''
     fixtures = ['test_data.json']
+
     def setUp(self):
-        # user = USER.objects.create_user('temporary', 'temporary@gmail.com', 'temporary')
+        # user = USER.objects.create_user('temporary',
+        # 'temporary@gmail.com', 'temporary')
         self.client = Client()
         self.client.login(username='temporary', password='temporary')
         self.visited = {}
@@ -38,13 +41,13 @@ class UrlTests(StaticLiveServerTestCase):
             return
 
         # We need the HTTP_REFERER here to get past Django-likes checking
-        response = self.client.get(url, **{'HTTP_REFERER':url})
+        response = self.client.get(url, **{'HTTP_REFERER': url})
 
-
-
-        self.assertTrue(response.status_code == 200 or response.status_code == 302,
+        self.assertTrue(response.status_code == 200
+                        or response.status_code == 302,
                         msg="Got code %s on %s" % (response.status_code, url))
 
-        for link in BeautifulSoup(response.content, parseOnlyThese=SoupStrainer('a')):
+        for link in BeautifulSoup(response.content,
+                                  parseOnlyThese=SoupStrainer('a')):
             if any('href' in el for el in link.attrs):
                 self.test_all_site_links(link['href'])

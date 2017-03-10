@@ -5,16 +5,9 @@ from django.conf import settings
 from django.contrib.auth.models import AbstractUser
 from django.template.defaultfilters import slugify
 from django_comments.moderation import CommentModerator, moderator
-from taggit.models import TaggedItemBase, GenericTaggedItemBase
-from django_teams.models import Team
-
-import project_share.signals
-
-import secretballot
-import json
-import zipfile as zippy
 
 from taggit.managers import TaggableManager
+
 
 def application_application(instance, filename):
     '''Slugify Applications/'''
@@ -24,42 +17,48 @@ def application_application(instance, filename):
 
 def application_application_demo(instance, filename):
     '''Slugify Applications/Demos'''
-    return "applications/demos/" + slugify(instance.application.__unicode__()) + \
+    return "applications/demos/" + \
+           slugify(instance.application.__unicode__()) + \
            "/" + slugify(filename.split('.')[:-1]) + "." + \
            slugify(filename.split('.')[-1])
 
 
 def application_application_goal(instance, filename):
     '''Slugify Applications/Goals'''
-    return "applications/goals/" + slugify(instance.application.__unicode__()) + \
+    return "applications/goals/" + \
+           slugify(instance.application.__unicode__()) + \
            "/" + slugify(filename.split('.')[:-1]) + "." + \
            slugify(filename.split('.')[-1])
 
 
 def application_library(filename):
     '''Slugify Applications/Libraries'''
-    return "applications/libraries/" + slugify(filename.split('.')[:-1]) + \
+    return "applications/libraries/" + \
+           slugify(filename.split('.')[:-1]) + \
            "." + slugify(filename.split('.')[-1])
 
 
 def project_project(instance, filename):
     '''Slugify Applications/Files'''
-    return "applications/files/" + slugify(instance.owner.__unicode__() +
-                                           '/' + '.'.join(filename.split('.')[:-1])) \
+    return "applications/files/" + \
+           slugify(instance.owner.__unicode__() +
+                   '/' + '.'.join(filename.split('.')[:-1])) \
            + "." + slugify(filename.split('.')[-1])
 
 
 def project_screenshot(instance, filename):
     '''Slugify Applications/Screenshots'''
-    return "applications/screenshots/" + slugify(instance.owner.__unicode__() +
-                                                 '/' + '.'.join(filename.split('.')[:-1])) + \
+    return "applications/screenshots/" + \
+           slugify(instance.owner.__unicode__() +
+                   '/' + '.'.join(filename.split('.')[:-1])) + \
            "." + slugify(filename.split('.')[-1])
 
 
 # These need to be removed someday; not removed now as it causes an error message
 def module_module(instance, filename):
     '''Slugify Modules/'''
-    return "modules/" + slugify(instance.name) + "." + slugify(filename.split('.')[-1])
+    return "modules/" + slugify(instance.name) \
+           + "." + slugify(filename.split('.')[-1])
 
 
 def module_library(instance):
@@ -72,8 +71,9 @@ class Classroom(models.Model):
     name = models.CharField(max_length=255)
     teacher = models.ForeignKey(settings.AUTH_USER_MODEL,
                                 related_name='teacher_classrooms')
-    students = models.ManyToManyField(settings.AUTH_USER_MODEL,
-                                      related_name='student_classrooms', blank=True)
+    students = models.ManyToManyField(
+        settings.AUTH_USER_MODEL,
+        related_name='student_classrooms', blank=True)
 
     def __unicode__(self):
         return "%s's %s classroom" % (self.teacher, self.name)
@@ -82,9 +82,11 @@ class Classroom(models.Model):
 class Approval(models.Model):
     '''Approval Model'''
     project = models.OneToOneField('Project')
-    when_requested = models.DateTimeField(auto_now_add=True, null=True, blank=True)
+    when_requested = models.DateTimeField(
+        auto_now_add=True, null=True, blank=True)
     when_updated = models.DateTimeField(auto_now=True, null=True, blank=True)
-    approved_by = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True)
+    approved_by = models.ForeignKey(
+        settings.AUTH_USER_MODEL, null=True, blank=True)
 
     def __unicode__(self):
         return "%s approval for %s" % (self.project.owner, self.project)
@@ -106,15 +108,18 @@ class Application(models.Model):
         ('CSNAP', 'cSnap'),
         ('BLOCK', 'Blockly/Scratch'),
     ))
-    application_file = models.FileField(upload_to=application_application, null=True, blank=True)
+    application_file = models.FileField(
+        upload_to=application_application, null=True, blank=True)
 
     featured = models.BooleanField(default=True)
-    screenshot = models.ImageField(upload_to="application_screenshot/", null=True)
+    screenshot = models.ImageField(
+        upload_to="application_screenshot/", null=True)
 
     def get_context(self):
         '''Returns all context data ordered'''
         ret = []
-        for item in self.applicationcontext_set.filter(parent=None).order_by('order'):
+        for item in self.applicationcontext_set.filter(
+                parent=None).order_by('order'):
             ret += [item]
             context = self._get_context(item)
             if len(context) > 0:
@@ -125,9 +130,9 @@ class Application(models.Model):
         ret = []
         for item in parent.applicationcontext_set.all().order_by('order'):
             ret += [item]
-            l = self._get_context(item)
-            if len(l) > 0:
-                ret += l
+            context = self._get_context(item)
+            if len(context) > 0:
+                ret += context
         return ret
 
     def __unicode__(self):
@@ -137,7 +142,8 @@ class Application(models.Model):
 class ApplicationContext(models.Model):
     '''ApplicationContext Model'''
     application = models.ForeignKey('project_share.Application')
-    parent = models.ForeignKey('project_share.ApplicationContext', null=True, blank=True)
+    parent = models.ForeignKey(
+        'project_share.ApplicationContext', null=True, blank=True)
     order = models.IntegerField(default=100)
 
     title = models.TextField()
@@ -173,8 +179,10 @@ class Project(models.Model):
     application = models.ForeignKey(Application)
     owner = models.ForeignKey(settings.AUTH_USER_MODEL, null=True)
 
-    when_created = models.DateTimeField(auto_now_add=True, verbose_name="Created")
-    when_modified = models.DateTimeField(auto_now=True, verbose_name="Last Changed")
+    when_created = models.DateTimeField(
+        auto_now_add=True, verbose_name="Created")
+    when_modified = models.DateTimeField(
+        auto_now=True, verbose_name="Last Changed")
 
     project = models.ForeignKey('project_share.FileUpload',
                                 null=True, blank=True, related_name='+')
@@ -221,6 +229,7 @@ class ExtendedUser(AbstractUser):
     gender = models.CharField(max_length=100, null=True, blank=True)
     race = models.CharField(max_length=100, null=True, blank=True)
     age = models.PositiveIntegerField(null=True, blank=True)
+
     def __unicode__(self):
         if self.first_name != "":
             return "%s %s" % (self.first_name, self.last_name)
@@ -229,7 +238,10 @@ class ExtendedUser(AbstractUser):
 
 class FileUpload(models.Model):
     '''File Upload Model'''
-    f = models.FileField(upload_to='files/%Y-%m-%d/')
+    file_path = models.FileField(upload_to='files/%Y-%m-%d/')
+
+    def __unicode__(self):
+        return self.file_path
 
 
 class ProjectModerator(CommentModerator):
@@ -252,6 +264,9 @@ class Address(models.Model):
     class Meta:
         verbose_name_plural = "Addresses"
 
+    def __unicode__(self):
+        return self.school
+
 
 class ApplicationTheme(models.Model):
     '''Application Theme Model'''
@@ -272,4 +287,3 @@ class ApplicationCategory(models.Model):
 
     def __unicode__(self):
         return self.name
-

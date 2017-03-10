@@ -6,24 +6,30 @@ from project_share.models import Project, Approval, Address, \
     Application, ApplicationCategory
 from django_teams.models import Team, TeamStatus
 
+
 class ProjectForm(ModelForm):
     '''Project Form'''
     def __init__(self, *args, **kwargs):
         user = kwargs.pop('user')
-        super(ProjectForm, self).__init__(*args, **kwargs) # populates the post
+        # populates the post
+        super(ProjectForm, self).__init__(*args, **kwargs)
         # make sure we're only getting the right classrooms:
         self.fields['classroom'].queryset = Team.objects.filter(users=user)
 
     class Meta:
         model = Project
-        exclude = ('owner', 'approved', 'application', 'project', 'screenshot', 'parent',)
+        exclude = ('owner', 'approved',
+                   'application', 'project',
+                   'screenshot', 'parent',)
 
 
 class ProjectUnpublishForm(ModelForm):
     '''Project Unpublish Form'''
     class Meta:
         model = Project
-        exclude = ('owner', 'approved', 'application', 'project', 'screenshot', 'parent',)
+        exclude = ('owner', 'approved',
+                   'application', 'project',
+                   'screenshot', 'parent',)
 
 
 class ApprovalForm(ModelForm):
@@ -58,7 +64,7 @@ class ExtendedSignupForm(forms.Form):
         n_user.age = self.cleaned_data['age']
         n_user.save()
         team = self.cleaned_data['classroom']
-        if not team is None:
+        if team is not None:
             TeamStatus(team=Team.objects.get(pk=team),
                        role=1, user=n_user, comment='just signed up').save()
 
@@ -72,12 +78,11 @@ class AddressForm(ModelForm):
 
 class ApplicationAdminForm(ModelForm):
     '''Project Application Admin Form'''
-    categories = forms.ModelMultipleChoiceField(label='Categories',
-                                                queryset=ApplicationCategory.objects.all(),
-                                                required=False,
-                                                help_text='Select which categories this application'
-                                                          ' belongs too; think about multiple '
-                                                          'themes (computing, math, cultural)')
+    categories = forms\
+        .ModelMultipleChoiceField(label='Categories', queryset=ApplicationCategory.objects.all(),
+                                  required=False, help_text='Select which categories this application'
+                                        ' belongs to; think about multiple '
+                                        'themes (computing, math, cultural)')
 
     class Meta:
         model = Application
