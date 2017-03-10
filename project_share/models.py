@@ -6,7 +6,6 @@ from django.template.defaultfilters import slugify
 from django_comments.moderation import CommentModerator, moderator
 from taggit.models import TaggedItemBase, GenericTaggedItemBase
 from django_teams.models import Team
-from django.utils import timezone
 
 import secretballot
 import json
@@ -49,19 +48,12 @@ class Classroom(models.Model):
 
 class Approval(models.Model):
     project = models.OneToOneField('Project')
-    when_requested = models.DateTimeField(null=True, blank=True, default=timezone.now())
-    when_updated = models.DateTimeField(null=True, blank=True, default=timezone.now())
+    when_requested = models.DateTimeField(auto_now_add=True, null=True, blank=True)
+    when_updated = models.DateTimeField(auto_now=True, null=True, blank=True)
     approved_by = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True)
 
     def __unicode__(self):
         return "%s approval for %s" % (self.project.owner, self.project)
-
-    def save(self, *args, **kwargs):
-        ''' On save, update timestamps '''
-        if not self.id:
-            self.when_requested = timezone.now()
-        self.when_updated = timezone.now()
-        return super(Approval, self).save(*args, **kwargs)
 
 class Application(models.Model):
     name = models.CharField(max_length=255, unique=True)
@@ -139,8 +131,8 @@ class Project(models.Model):
     application = models.ForeignKey(Application)
     owner = models.ForeignKey(settings.AUTH_USER_MODEL, null=True)
 
-    when_created = models.DateTimeField(verbose_name="Created", default=timezone.now())
-    when_modified = models.DateTimeField(verbose_name="Last Changed", default=timezone.now())
+    when_created = models.DateTimeField(auto_now_add=True, verbose_name="Created")
+    when_modified = models.DateTimeField(auto_now=True, verbose_name="Last Changed")
 
     project = models.ForeignKey('project_share.FileUpload', null=True, blank=True, related_name='+')
     screenshot = models.ForeignKey('project_share.FileUpload', null=True, blank=True, related_name='+')
@@ -161,13 +153,6 @@ class Project(models.Model):
 
     def get_absolute_url(self):
         return reverse('project-detail', kwargs={'pk': self.pk})
-
-    def save(self, *args, **kwargs):
-        ''' On save, update timestamps '''
-        if not self.id:
-            self.when_created = timezone.now()
-        self.when_modified = timezone.now()
-        return super(Project, self).save(*args, **kwargs)
 
 class Goal(models.Model):
     name = models.CharField(max_length=255)
