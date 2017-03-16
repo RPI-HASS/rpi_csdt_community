@@ -12,7 +12,7 @@ sudo apt-get upgrade
 sudo apt-get install -y python-pip python-dev
 
 # Install the database
-sudo apt-get install -y postgresql postgresql-contrib libpq-dev
+sudo apt-get install -y postgresql postgresql-contrib
 # Set password
 sudo -u postgres psql -U postgres -d postgres -c "alter user postgres with password 'postgres';"
 # Create the database
@@ -23,7 +23,10 @@ sudo apt-get install -y nodejs build-essential
 
 sudo npm install -g less
 
-pip install --upgrade -r /vagrant/libraries.txt.lock
+# Install libraries for the community site
+sudo apt-get install -y  libpq-dev libcurl4-openssl-dev
+pip install --upgrade pip
+pip install --upgrade -r /vagrant/requirements.txt
 
 # Install the git submodules
 cd /vagrant/

@@ -1,2 +1,0 @@
-geopy
-git+https://github.com/GK-12/SGIS-backend.git
