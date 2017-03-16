@@ -1,6 +1,6 @@
 # CSDT Community Site
 
-[![Build Status](https://travis-ci.org/CSnap/rpi_csdt_community.svg?branch=master)](https://travis-ci.org/CSnap/rpi_csdt_community)
+[![Build Status](https://travis-ci.org/CSnap/rpi_csdt_community.svg?branch=master)](https://travis-ci.org/CSnap/rpi_csdt_community) [![Coverage Status](https://coveralls.io/repos/github/CSnap/rpi_csdt_community/badge.svg?branch=master)](https://coveralls.io/github/CSnap/rpi_csdt_community?branch=master)
 
 This project is sponsered by Rensselaer Polytechnic Institute's GK-12 fellowship under Dr. Ron Eglash. The goal is the create a web platform for students to share projects, community, and in general create a community around the pCSDT's. More information about the pCSDT's (also serving as a demo) can be found here: https://community.csdt.rpi.edu/
 
@@ -9,6 +9,7 @@ This project is sponsered by Rensselaer Polytechnic Institute's GK-12 fellowship
 If you just want to install the server locally, you can follow the instructions at [https://github.com/CSnap/rpi_csdt_community/wiki/Setting-up-for-Development](https://github.com/CSnap/rpi_csdt_community/wiki/Setting-up-for-Development0)
 
 We encourage people to contribute; to do so, please follow the instructions at [https://github.com/CSnap/rpi_csdt_community/wiki/Development-Workflow](https://github.com/CSnap/rpi_csdt_community/wiki/Development-Workflow).
+
 
 ## Related Projects
 

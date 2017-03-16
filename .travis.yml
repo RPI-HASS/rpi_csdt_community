@@ -18,11 +18,15 @@ install:
   - sudo $(type -P npm) install -g yuglify
   - sudo pip install setuptools --upgrade
   - sudo pip install --upgrade -r requirements.txt
+  - sudo pip install coveralls
   
 before_script:
   - psql -c "CREATE DATABASE travisci;" -U postgres
 
 script:
   - python manage.py migrate
-  - python manage.py test rpi_csdt_community
-  - python manage.py test project_share
+  - coverage run --source=rpi_csdt_community manage.py test
+
+after_success:
+  - pip freeze
+  - echo Uploading code coverage data ...; coveralls
