@@ -42,18 +42,21 @@ class ApprovalForm(ModelForm):
 class ExtendedSignupForm(forms.Form):
     '''Project Extended Signup Form'''
     gender = forms.CharField(max_length=100, label='gender',
-                             widget=forms.TextInput(attrs={'placeholder': 'gender (optional)'}),
+                             widget=forms.TextInput(
+                                 attrs={'placeholder': 'gender (optional)'}),
                              required=False)
     race = forms.CharField(max_length=100, label='race',
-                           widget=forms.TextInput(attrs={'placeholder': 'race (optional)'}),
+                           widget=forms.TextInput(
+                               attrs={'placeholder': 'race (optional)'}),
                            required=False)
     age = forms.IntegerField(label='age',
-                             widget=forms.TextInput(attrs={'placeholder': 'age (optional)'}),
+                             widget=forms.TextInput(
+                                 attrs={'placeholder': 'age (optional)'}),
                              required=False)
     classroom = forms.IntegerField(label='classroom',
-                                   widget=forms.TextInput(attrs={
-                                       'placeholder': 'classroom # (optional)'}),
-                                   required=False)
+                                   widget=forms.TextInput(attrs={'placeholder': 'classroom # (optional)'}),  # noqa: E501
+                                   required=False
+                                   )
     field_order = ['username', 'email', 'password1',
                    'password2', 'gender', 'race', 'age', 'classroom']
 
@@ -79,10 +82,13 @@ class AddressForm(ModelForm):
 class ApplicationAdminForm(ModelForm):
     '''Project Application Admin Form'''
     categories = forms\
-        .ModelMultipleChoiceField(label='Categories', queryset=ApplicationCategory.objects.all(),
-                                  required=False, help_text='Select which categories this application'
-                                        ' belongs to; think about multiple '
-                                        'themes (computing, math, cultural)')
+        .ModelMultipleChoiceField(
+            label='Categories', queryset=ApplicationCategory.objects.all(),
+            required=False,
+            help_text='Select which categories this application'
+            ' belongs to; think about multiple '
+            'themes (computing, math, cultural)'
+        )
 
     class Meta:
         model = Application

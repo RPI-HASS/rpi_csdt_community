@@ -54,7 +54,9 @@ class ProjectViewSet(viewsets.ModelViewSet):  \
         queryset = self.model.objects.all()
         user = self.request.query_params.get('owner', None)
         if user is not None:
-            queryset = queryset.filter(owner=get_object_or_404(ExtendedUser, pk=user))
+            queryset = queryset.filter(
+                owner=get_object_or_404(ExtendedUser, pk=user)
+            )
         return queryset
 
 
@@ -67,7 +69,9 @@ class TeamViewSet(viewsets.ModelViewSet):  \
     def get_queryset(self):
         queryset = self.model.objects.select_related()
         user = self.request.query_params.get('user', None)
-        queryset = queryset.filter(user=get_object_or_404(ExtendedUser, pk=user))
+        queryset = queryset.filter(
+            user=get_object_or_404(ExtendedUser, pk=user)
+        )
         queryset = queryset.filter(role='10') | queryset.filter(role='20')
         return queryset
 
@@ -137,7 +141,9 @@ class FileUploadView(views.APIView):
         file_to_upload = FileUpload(f=file_object)
         file_to_upload.save()
         path = os.path.join(settings.MEDIA_URL, file_to_upload.f.url)
-        return Response(status=201, data={'url': path, 'id': file_to_upload.id})
+        return Response(
+            status=201, data={'url': path, 'id': file_to_upload.id}
+        )
 
 
 class CurrentUserView(views.APIView):

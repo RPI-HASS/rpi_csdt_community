@@ -25,6 +25,8 @@ before_script:
   - psql -c "CREATE DATABASE travisci;" -U postgres
 
 script:
+  - flake8 .
+  - flake8 /project_share
   - python manage.py migrate
   - python manage.py test rpi_csdt_community
   - python manage.py test project_share

@@ -23,8 +23,11 @@ from taggit.models import Tag
 from extra_views import SortableListMixin
 from extra_views import SearchableListMixin
 
-from project_share.models import Application, Project, ApplicationDemo, Approval, Address
-from project_share.forms import ProjectForm, ApprovalForm, AddressForm, ProjectUnpublishForm
+from project_share.models import (
+    Application, Project, ApplicationDemo, Approval, Address)
+from project_share.forms import (
+    ProjectForm, ApprovalForm,
+    AddressForm, ProjectUnpublishForm)
 
 
 class RestrictPermissionMixin(object):
@@ -33,7 +36,9 @@ class RestrictPermissionMixin(object):
         '''Dispatch'''
         self.kwargs = kwargs
         self.request = request
-        return super(RestrictPermissionMixin, self).dispatch(request, *args, **kwargs)
+        return super(
+            RestrictPermissionMixin, self
+        ).dispatch(request, *args, **kwargs)
 
     def get_object(self):
         '''Returns object'''
@@ -41,7 +46,8 @@ class RestrictPermissionMixin(object):
             return self.object
         object_to_return = super(RestrictPermissionMixin, self).get_object()
 
-        # If the object doesn't belong to this user and isn't published, throw a error 403
+        # If the object doesn't belong to this user
+        # and isn't published, throw a error 403
         if (not object_to_return.approved and
                 object_to_return.owner != self.request.user) \
                 and not self.request.user.is_superuser:
@@ -67,18 +73,26 @@ class ApplicationRunDetail(DetailView):  # pylint: disable=too-many-ancestors
 
     def render_to_response(self, context, **response_kwargs):
         try:
-            context['GOOGLE_ANALYTICS_PROPERTY_ID'] = settings.GOOGLE_ANALYTICS_PROPERTY_ID
+            context[
+                'GOOGLE_ANALYTICS_PROPERTY_ID'
+            ] = settings.GOOGLE_ANALYTICS_PROPERTY_ID
         except:
             pass
-        return super(ApplicationRunDetail, self).render_to_response(context, **response_kwargs)
+        return super(
+            ApplicationRunDetail, self
+        ).render_to_response(context, **response_kwargs)
 
     def get_template_names(self):
-        return ['project_share/application_%s.html' % self.object.application_type.lower()]
+        return ['project_share/application_%s.html' % self.object.application_type.lower()]  # noqa: E501
 
 
-class ProjectList(SearchableListMixin, SortableListMixin, ListView):  # pylint: disable=too-many-ancestors
+class ProjectList(
+    SearchableListMixin, SortableListMixin, ListView
+):  # pylint: disable=too-many-ancestors
     '''Project List View'''
-    sort_fields_aliases = [('name', 'by_name'), ('id', 'by_id'), ('votes', 'by_likes'), ]
+    sort_fields_aliases = [('name', 'by_name'),
+                           ('id', 'by_id'),
+                           ('votes', 'by_likes'), ]
     search_fields = [('application__name', 'iexact')]
     search_split = False
     model = Project
@@ -90,7 +104,9 @@ class ProjectList(SearchableListMixin, SortableListMixin, ListView):  # pylint: 
         set_of_approved_projects = Project.approved_projects()
         filter_val = self.request.GET.get('filter')
         if filter_val is not None:
-            set_of_approved_projects = set_of_approved_projects.filter(application=filter_val,)
+            set_of_approved_projects = set_of_approved_projects.filter(
+                application=filter_val,
+            )
         order = self.request.GET.get('orderby')
         if order is not None:
             set_of_approved_projects = set_of_approved_projects.order_by(order)
@@ -99,7 +115,9 @@ class ProjectList(SearchableListMixin, SortableListMixin, ListView):  # pylint: 
     def render_to_response(self, context, **response_kwargs):
         '''Render to Response'''
         context['application_list'] = Application.objects.all()
-        return super(ProjectList, self).render_to_response(context, **response_kwargs)
+        return super(ProjectList, self).render_to_response(
+            context, **response_kwargs
+        )
 
 
 class ProjectTagList(ProjectList):  # pylint: disable=too-many-ancestors
@@ -110,17 +128,24 @@ class ProjectTagList(ProjectList):  # pylint: disable=too-many-ancestors
         return Project.approved_projects().filter(tags__in=[self.tag])
 
 
-class ProjectDetail(RestrictPermissionMixin, DetailView):  # pylint: disable=too-many-ancestors
+class ProjectDetail(
+    RestrictPermissionMixin, DetailView
+):  # pylint: disable=too-many-ancestors
     '''Project Detail View'''
     queryset = \
-        Project.objects.select_related("approval").select_related("owner").select_related("screenshot")
+        Project.objects.select_related(
+            "approval"
+        ).select_related("owner").select_related("screenshot")
 
     def render_to_response(self, context, **response_kwargs):
         '''Render to Response'''
         object_to_render = self.get_object()
         context['hasApproval'] = \
-            (hasattr(object_to_render, 'approval') or object_to_render.approved)
-        return super(ProjectDetail, self).render_to_response(context, **response_kwargs)
+            (hasattr(
+                object_to_render, 'approval'
+            ) or object_to_render.approved)
+        return super(ProjectDetail, self)\
+            .render_to_response(context, **response_kwargs)
 
 
 class ProjectRunDetail(RestrictPermissionMixin, DetailView):  \
@@ -246,9 +271,9 @@ class ProjectUnpublish(UpdateView):  # pylint: disable=too-many-ancestors
                 pass
 
             try:
-                ownership = Ownership.objects\
-                    .filter(content_type_id=ContentType.objects.get_for_model(proj))\
-                    .get(object_id=proj.id)
+                ownership = Ownership.objects.filter(
+                    content_type_id=ContentType.objects.get_for_model(proj)
+                ).get(object_id=proj.id)
                 ownership.delete()
             except:
                 pass

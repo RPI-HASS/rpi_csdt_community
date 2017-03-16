@@ -145,32 +145,32 @@ INSTALLED_APPS = (
     'allauth.account',
     'allauth.socialaccount',
     # ... include the providers you want to enable:
-    #'allauth.socialaccount.providers.amazon',
-    #'allauth.socialaccount.providers.angellist',
-    #'allauth.socialaccount.providers.bitbucket',
-    #'allauth.socialaccount.providers.bitly',
-    #'allauth.socialaccount.providers.coinbase',
-    #'allauth.socialaccount.providers.dropbox',
+    # 'allauth.socialaccount.providers.amazon',
+    # 'allauth.socialaccount.providers.angellist',
+    # 'allauth.socialaccount.providers.bitbucket',
+    # 'allauth.socialaccount.providers.bitly',
+    # 'allauth.socialaccount.providers.coinbase',
+    # 'allauth.socialaccount.providers.dropbox',
     'allauth.socialaccount.providers.facebook',
-    #'allauth.socialaccount.providers.flickr',
+    # 'allauth.socialaccount.providers.flickr',
     'allauth.socialaccount.providers.github',
-    #'allauth.socialaccount.providers.feedly',
-    #'allauth.socialaccount.providers.google',
-    #'allauth.socialaccount.providers.hubic',
-    #'allauth.socialaccount.providers.instagram',
-    #'allauth.socialaccount.providers.linkedin',
-    #'allauth.socialaccount.providers.linkedin_oauth2',
-    #'allauth.socialaccount.providers.openid',
-    #'allauth.socialaccount.providers.persona',
-    #'allauth.socialaccount.providers.soundcloud',
-    #'allauth.socialaccount.providers.stackexchange',
-    #'allauth.socialaccount.providers.tumblr',
-    #'allauth.socialaccount.providers.twitch',
+    # 'allauth.socialaccount.providers.feedly',
+    # 'allauth.socialaccount.providers.google',
+    # 'allauth.socialaccount.providers.hubic',
+    # 'allauth.socialaccount.providers.instagram',
+    # 'allauth.socialaccount.providers.linkedin',
+    # 'allauth.socialaccount.providers.linkedin_oauth2',
+    # 'allauth.socialaccount.providers.openid',
+    # 'allauth.socialaccount.providers.persona',
+    # 'allauth.socialaccount.providers.soundcloud',
+    # 'allauth.socialaccount.providers.stackexchange',
+    # 'allauth.socialaccount.providers.tumblr',
+    # 'allauth.socialaccount.providers.twitch',
     'allauth.socialaccount.providers.twitter',
-    #'allauth.socialaccount.providers.vimeo',
-    #'allauth.socialaccount.providers.vk',
-    #'allauth.socialaccount.providers.weibo',
-    #'allauth.socialaccount.providers.xing',
+    # 'allauth.socialaccount.providers.vimeo',
+    # 'allauth.socialaccount.providers.vk',
+    # 'allauth.socialaccount.providers.weibo',
+    # 'allauth.socialaccount.providers.xing',
 
     'captcha',
     'django_extensions',
@@ -198,17 +198,18 @@ INSTALLED_APPS = (
     'mptt',  # utilities for implementing a tree
     'menus',  # helper for model independent hierarchical website navigation
     'sekizai',  # for javascript and css management
-    'djangocms_admin_style',  # for the admin skin. You **must** add 'djangocms_admin_style'...
+    'djangocms_admin_style',  # for the admin skin.
+    # ^You **must** add 'djangocms_admin_style'...
     #  ...in the list **before** 'django.contrib.admin'.
     'djangocms_file',
-    #'djangocms_flash',
-    #'djangocms_googlemap',
-    #'djangocms_inherit',
+    # 'djangocms_flash',
+    # 'djangocms_googlemap',
+    # 'djangocms_inherit',
     'djangocms_picture',
-    #'djangocms_teaser',
-    #'djangocms_video',
+    # 'djangocms_teaser',
+    # 'djangocms_video',
     'djangocms_link',
-    #'djangocms_snippet',
+    # 'djangocms_snippet',
     'cms_bootstrap_templates',
     'compressor',
     'analytical',
@@ -245,7 +246,8 @@ CMS_TEMPLATES = (
     ('cms_bootstrap_templates/template_one_column.html', 'One columns'),
     ('cms_bootstrap_templates/template_two_column.html', 'Two columns'),
     ('cms_bootstrap_templates/template_three_column.html', 'Three columns'),
-    ('cms_bootstrap_templates/template_header_two_column.html', 'Two columns with a header'),
+    ('cms_bootstrap_templates/template_header_two_column.html',
+     'Two columns with a header'),
     ('cms_bootstrap_templates/template_header_two_column_left.html',
      'Two columns w/ header, large left'),
     ('cms_bootstrap_templates/template_header_two_column_right.html',
@@ -272,7 +274,7 @@ THUMBNAIL_DEBUG = False
 THUMBNAIL_PROCESSORS = (
     'easy_thumbnails.processors.colorspace',
     'easy_thumbnails.processors.autocrop',
-    #'easy_thumbnails.processors.scale_and_crop',
+    # 'easy_thumbnails.processors.scale_and_crop',
     'filer.thumbnail_processors.scale_and_crop_with_subject_location',
     'easy_thumbnails.processors.filters',
 )
@@ -287,7 +289,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 MY_APP_LESS = os.path.join(BASE_DIR, 'static', 'less')
 
-# For apps outside of your project, it's simpler to import them to find their root folders
+# For apps outside of your project,
+# it's simpler to import them to find their root folders
 
 BOOTSTRAP_LESS = os.path.join(os.path.dirname(twitter_bootstrap.__file__),
                               'static', 'twitter_bootstrap', 'less')
@@ -355,7 +358,9 @@ if USE_CACHE:
 
 if ENABLE_GIS:
     # Make sure the database is configured as postgres
-    assert DATABASES['default']['ENGINE'] == 'django.contrib.gis.db.backends.postgis'
+    assert DATABASES['default'][
+               'ENGINE'
+           ] == 'django.contrib.gis.db.backends.postgis'
     INSTALLED_APPS += (
         'gis_csdt',
         'django.contrib.gis',

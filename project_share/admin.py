@@ -71,10 +71,14 @@ class ClassListFilter(admin.SimpleListFilter):
 
     def queryset(self, request, queryset):
         if self.value() == 'mc':
-            return queryset.filter(classroom__in=request.user.team_member.all())
+            return queryset.filter(
+                classroom__in=request.user.team_member.all()
+            )
         if self.value() == 'mca':
-            return queryset.filter(classroom__in=request.user.team_member.all(),
-                                   approved=False)
+            return queryset.filter(
+                classroom__in=request.user.team_member.all(),
+                approved=False
+            )
         else:
             return queryset
 

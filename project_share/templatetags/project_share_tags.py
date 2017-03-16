@@ -15,7 +15,9 @@ def unrestricted_projects(user, requester):
             Project.objects.filter(Q(owner=user)).filter(Q(approved=True)
                                                          | Q(owner=requester))
     except:
-        objects_retrieved = Project.objects.filter(Q(owner=user), Q(approved=True))
+        objects_retrieved = Project.objects.filter(
+            Q(owner=user), Q(approved=True)
+        )
     return objects_retrieved.all()
 
 

@@ -25,7 +25,7 @@ def approval_comment(instance, created):
         instance.save()
 
 
-@receiver(post_save, sender=Ownership)
+@receiver(post_save, sender=Ownership)  # noqa: F811
 def approval_comment(instance):
     '''Approval Comment'''
     if instance.content_type == \

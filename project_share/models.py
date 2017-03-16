@@ -54,7 +54,8 @@ def project_screenshot(instance, filename):
            "." + slugify(filename.split('.')[-1])
 
 
-# These need to be removed someday; not removed now as it causes an error message
+# These need to be removed someday;
+# not removed now as it causes an error message
 def module_module(instance, filename):
     '''Slugify Modules/'''
     return "modules/" + slugify(instance.name) \
@@ -282,8 +283,10 @@ class ApplicationCategory(models.Model):
     theme = models.ForeignKey('project_share.ApplicationTheme')
     name = models.CharField(max_length=255)
     description = models.TextField(blank=True, null=True)
-    applications = models.ManyToManyField('project_share.Application',
-                                          related_name='categories', blank=True)
+    applications = models.ManyToManyField(
+        'project_share.Application',
+        related_name='categories', blank=True
+    )
 
     def __unicode__(self):
         return self.name
