@@ -6,7 +6,7 @@ This project is sponsered by Rensselaer Polytechnic Institute's GK-12 fellowship
 
 ## Contributing
 
-If you just want to install the server locally, you can follow the instructions at [https://github.com/RPI-HASS/rpi_csdt_community/wiki/Setting-up-for-Development](https://github.com/RPI-HASS/rpi_csdt_community/wiki/Setting-up-for-Development0)
+If you just want to install the server locally, you can follow the instructions at [https://github.com/RPI-HASS/rpi_csdt_community/wiki/Setting-up-for-Development](https://github.com/RPI-HASS/rpi_csdt_community/wiki/Setting-up-for-Development)
 
 We encourage people to contribute; to do so, please follow the instructions at [https://github.com/RPI-HASS/rpi_csdt_community/wiki/Development-Workflow](https://github.com/RPI-HASS/rpi_csdt_community/wiki/Development-Workflow).
 
