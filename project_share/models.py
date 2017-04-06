@@ -1,11 +1,12 @@
 from django.db import models
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.conf import settings
 from django.contrib.auth.models import AbstractUser
 from django.template.defaultfilters import slugify
 from django_comments.moderation import CommentModerator, moderator
 from taggit.models import TaggedItemBase, GenericTaggedItemBase
 from django_teams.models import Team
+from django.utils import timezone
 
 import secretballot
 import json
@@ -37,20 +38,24 @@ def module_module(instance, filename):
 
 def module_library(instance, filename):
     return "modules/libraries/" + instance.name
+    
+class AutoDateTimeField(models.DateTimeField):
+    def pre_save(self, model_instance, add):
+        return timezone.now()
 
 class Classroom(models.Model):
     name = models.CharField(max_length=255)
-    teacher = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='teacher_classrooms')
+    teacher = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='teacher_classrooms', on_delete=models.CASCADE)
     students = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='student_classrooms', blank=True)
 
     def __unicode__(self):
         return "%s's %s classroom" % (self.teacher, self.name)
 
 class Approval(models.Model):
-    project = models.OneToOneField('Project')
-    when_requested = models.DateTimeField(auto_now_add=True, null=True, blank=True)
-    when_updated = models.DateTimeField(auto_now=True, null=True, blank=True)
-    approved_by = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True)
+    project = models.OneToOneField('Project', on_delete=models.CASCADE)
+    when_requested = AutoDateTimeField(default=timezone.now, null=True, blank=True)
+    when_updated = AutoDateTimeField(default=timezone.now, null=True, blank=True)
+    approved_by = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True, on_delete=models.SET_NULL)
 
     def __unicode__(self):
         return "%s approval for %s" % (self.project.owner, self.project)
@@ -98,8 +103,8 @@ class Application(models.Model):
         return self.name
 
 class ApplicationContext(models.Model):
-    application = models.ForeignKey('project_share.Application')
-    parent = models.ForeignKey('project_share.ApplicationContext', null=True, blank=True)
+    application = models.ForeignKey('project_share.Application', on_delete=models.CASCADE)
+    parent = models.ForeignKey('project_share.ApplicationContext', null=True, blank=True, on_delete=models.SET_NULL)
     order = models.IntegerField(default=100)
 
     title = models.TextField()
@@ -116,7 +121,7 @@ class ApplicationContext(models.Model):
 class ApplicationDemo(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField(null=True, blank=True)
-    application = models.ForeignKey('project_share.Application')
+    application = models.ForeignKey('project_share.Application', on_delete=models.CASCADE)
     order = models.IntegerField(blank=True, default=1000)
 
     zipfile = models.FileField(upload_to=application_application_demo)
@@ -128,21 +133,21 @@ class ApplicationDemo(models.Model):
 class Project(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField(null=True, blank=True)
-    application = models.ForeignKey(Application)
-    owner = models.ForeignKey(settings.AUTH_USER_MODEL, null=True)
+    application = models.ForeignKey(Application, on_delete=models.DO_NOTHING)
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, on_delete=models.SET_NULL)
 
-    when_created = models.DateTimeField(auto_now_add=True, verbose_name="Created")
-    when_modified = models.DateTimeField(auto_now=True, verbose_name="Last Changed")
+    when_created = AutoDateTimeField(default=timezone.now, verbose_name = "Created")
+    when_modified = AutoDateTimeField(default=timezone.now, verbose_name="Last Changed")
 
-    project = models.ForeignKey('project_share.FileUpload', null=True, blank=True, related_name='+')
-    screenshot = models.ForeignKey('project_share.FileUpload', null=True, blank=True, related_name='+')
-    classroom = models.ForeignKey('django_teams.Team', null=True, blank=True, related_name='+')
+    project = models.ForeignKey('project_share.FileUpload', null=True, blank=True, related_name='+', on_delete=models.SET_NULL)
+    screenshot = models.ForeignKey('project_share.FileUpload', null=True, blank=True, related_name='+', on_delete=models.SET_NULL)
+    classroom = models.ForeignKey('django_teams.Team', null=True, blank=True, related_name='+', on_delete=models.SET_NULL)
 
     tags = TaggableManager(blank=True)
 
     approved = models.BooleanField(default=False)
 
-    parent = models.ForeignKey('project_share.Project', null=True, blank=True, related_name="children")
+    parent = models.ForeignKey('project_share.Project', null=True, blank=True, related_name="children", on_delete=models.SET_NULL)
 
     @staticmethod
     def approved_projects():
@@ -157,7 +162,7 @@ class Project(models.Model):
 class Goal(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField(null=True, blank=True)
-    application = models.ForeignKey(Application)
+    application = models.ForeignKey(Application, on_delete=models.CASCADE)
 
     thumbnail = models.FileField(upload_to=application_application_goal)
     image = models.FileField(upload_to=application_application_goal)
@@ -188,7 +193,7 @@ class Address(models.Model):
     state = models.CharField(max_length=255, verbose_name = 'State or Province')
     country = models.CharField(max_length=255)
     phone = models.CharField(max_length=255)
-    teacher = models.OneToOneField(settings.AUTH_USER_MODEL, primary_key=True)
+    teacher = models.OneToOneField(settings.AUTH_USER_MODEL, primary_key=True, on_delete=models.CASCADE)
 
     class Meta:
       verbose_name_plural = "Addresses"
@@ -201,7 +206,7 @@ class ApplicationTheme(models.Model):
         return self.name
 
 class ApplicationCategory(models.Model):
-    theme = models.ForeignKey('project_share.ApplicationTheme')
+    theme = models.ForeignKey('project_share.ApplicationTheme', null=True, on_delete=models.SET_NULL)
     name = models.CharField(max_length=255)
     description = models.TextField(blank=True, null=True)
     applications = models.ManyToManyField('project_share.Application', related_name='categories', blank=True)
