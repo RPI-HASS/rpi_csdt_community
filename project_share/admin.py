@@ -1,5 +1,5 @@
 import git
-import os 
+import os
 
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
@@ -14,37 +14,41 @@ from project_share.models import ExtendedUser
 
 from project_share.forms import ApplicationAdminForm
 
+
 class ApplicationAdmin(admin.ModelAdmin):
-    fields = ('name', 'url', 'description', 'application_type', 'application_file', 'featured', 'categories', 'screenshot',)
+    fields = ('name', 'url', 'description', 'application_type', 'application_file', 'featured', 'categories',
+              'screenshot',)
 
     form = ApplicationAdminForm
 
     def save_model(self, request, obj, form, change):
-        if obj.id == None:
+        if obj.id is None:
             obj.save()
         obj.categories.clear()
         for category in form.cleaned_data['categories']:
             obj.categories.add(category)
         obj.save()
         g = git.Git(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
-        result = g.execute(["git", "submodule", "foreach", "git", "stash",])
-        result = g.execute(["git", "submodule", "foreach", "git", "pull", "origin", "master"])
-        result = g.execute(["python", "manage.py", "collectstatic", "--noinput"])
+        g.execute(["git", "submodule", "foreach", "git", "stash"])
+        g.execute(["git", "submodule", "foreach", "git", "pull", "origin", "master"])
+        g.execute(["python", "manage.py", "collectstatic", "--noinput"])
+
     def get_form(self, request, obj=None, **kwargs):
         if obj:
             self.form.base_fields['categories'].initial = obj.categories.all()
         return super(ApplicationAdmin, self).get_form(request, obj)
-		
+
+
 UserAdmin.list_display = ('username', 'email', 'gender', 'race', 'age', 'date_joined', 'is_staff')
+
 
 class ClassListFilter(admin.SimpleListFilter):
     title = _('Class')
-
     parameter_name = 'class'
 
     def value(self):
         t = super(ClassListFilter, self).value()
-        if t == None:
+        if t is None:
             return 'mc'
         return t
 
@@ -59,8 +63,10 @@ class ClassListFilter(admin.SimpleListFilter):
         else:
             return queryset
 
+
 class ApprovalInline(admin.TabularInline):
     model = Approval
+
 
 class ProjectAdmin(admin.ModelAdmin):
     inlines = [AttachmentInlines, ApprovalInline]
@@ -69,27 +75,32 @@ class ProjectAdmin(admin.ModelAdmin):
     search_fields = ['owner__first_name', 'owner__last_name', 'name']
 
     def approve(modeladmin, request, queryset):
-       Approval.objects.filter(project__in=queryset).update(approved_by=request.user)
-       queryset.update(approved=True)
+        Approval.objects.filter(project__in=queryset).update(approved_by=request.user)
+        queryset.update(approved=True)
 
     approve.short_description = "Approve selected projects"
     actions = [approve]
 
+
 class ApprovalAdmin(admin.ModelAdmin):
     pass
 
+
 class ClassroomAdmin(admin.ModelAdmin):
-    #exclude = ('teacher',)
+    # exclude = ('teacher',)
     filter_horizontal = ('students',)
+
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
         if db_field.name == 'teacher':
             kwargs['initial'] = request.user.id
             return db_field.formfield(**kwargs)
         return super(ClassroomAdmin, self).formfield_for_foreignkey(db_field, request, **kwargs)
 
+
 class GoalAdmin(admin.ModelAdmin):
     list_display = ('name', 'application')
     list_filter = ('application',)
+
 
 admin.site.register(Application, ApplicationAdmin)
 admin.site.register(ApplicationContext)
@@ -99,7 +110,7 @@ admin.site.register(ApplicationCategory)
 admin.site.register(Goal, GoalAdmin)
 admin.site.register(Address)
 admin.site.register(Project, ProjectAdmin)
-#admin.site.register(Approval, ApprovalAdmin)
+# admin.site.register(Approval, ApprovalAdmin)
 admin.site.register(Classroom, ClassroomAdmin)
 admin.site.register(ExtendedUser, UserAdmin)
 admin.site.register(FileUpload)
