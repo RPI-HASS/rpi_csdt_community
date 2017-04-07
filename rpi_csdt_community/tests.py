@@ -1,4 +1,3 @@
-from django.test import TestCase
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from django.test.client import Client
 from django.conf import settings
@@ -11,10 +10,12 @@ try:
 except ImportError:
     from django.contrib.auth.models import User
 
+
 class UrlTests(StaticLiveServerTestCase):
     fixtures = ['test_data.json']
+
     def setUp(self):
-        user = User.objects.create_user('temporary', 'temporary@gmail.com', 'temporary')
+        User.objects.create_user('temporary', 'temporary@gmail.com', 'temporary')
         self.client = Client()
         self.client.login(username='temporary', password='temporary')
         self.visited = {}
@@ -25,7 +26,8 @@ class UrlTests(StaticLiveServerTestCase):
         self.visited[url] = True
 
         # Ignore URL's that point elsewhere
-        if url.startswith('http://') or url.startswith('http://') or url.startswith('https://') or url.startswith('//'):
+        if url.startswith('http://') or url.startswith('http://') or url.startswith('https://') or\
+           url.startswith('//'):
             return
 
         # Ignore URL that simply point to media...
@@ -33,7 +35,7 @@ class UrlTests(StaticLiveServerTestCase):
             return
 
         # We need the HTTP_REFERER here to get past Django-likes checking
-        response = self.client.get(url, **{'HTTP_REFERER':url})
+        response = self.client.get(url, **{'HTTP_REFERER': url})
 
         """
         import sys
@@ -41,7 +43,8 @@ class UrlTests(StaticLiveServerTestCase):
         sys.stdout.flush()
         """
 
-        self.assertTrue(response.status_code == 200 or response.status_code == 302, msg="Got code %s on %s" % (response.status_code, url))
+        self.assertTrue(response.status_code == 200 or response.status_code == 302,
+                        msg="Got code %s on %s" % (response.status_code, url))
 
         for link in BeautifulSoup(response.content, parseOnlyThese=SoupStrainer('a')):
             if any('href' in el for el in link.attrs):
