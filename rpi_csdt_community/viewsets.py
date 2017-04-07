@@ -1,22 +1,25 @@
-from rest_framework import viewsets, routers, views
+from rest_framework import viewsets, views
 from rest_framework.parsers import FileUploadParser
 from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
 
 from project_share.models import Project, ApplicationDemo, ExtendedUser, FileUpload, Goal, Application
 from project_share.models import ApplicationTheme, ApplicationCategory
-from django_teams.models import TeamStatus, Team
-from rpi_csdt_community.serializers import *
+from django_teams.models import TeamStatus
+from rpi_csdt_community.serializers import DemoSerializer, GoalSerializer, ProjectSerializer, TeamSerializer
+from rpi_csdt_community.serializers import UserSerializer, ApplicationSerializer, ApplicationCategorySerializer
+from rpi_csdt_community.serializers import ApplicationThemeSerializer
 from django.conf import settings
 import os
 import sys
 
 try:
     from django.contrib.auth import get_user_model
-except ImportError: # django < 1.5
+except ImportError:  # django < 1.5
     from django.contrib.auth.models import User
 else:
     User = get_user_model()
+
 
 class ProjectViewSet(viewsets.ModelViewSet):
     model = Project
@@ -24,10 +27,10 @@ class ProjectViewSet(viewsets.ModelViewSet):
 
     def get_object(self):
         obj = super(ProjectViewSet, self).get_object()
-        if obj.owner != None and obj.owner != self.request.user:
+        if obj.owner is not None and obj.owner != self.request.user:
             original_pk = obj.pk
             obj.pk = None
-            if original_pk != None:
+            if original_pk is not None:
                 sys.stdout.write("Updating parent")
                 obj.parent = Project.objects.get(pk=original_pk)
         # If this project is published, create a new one by resetting pk
@@ -41,8 +44,9 @@ class ProjectViewSet(viewsets.ModelViewSet):
         queryset = self.model.objects.all()
         user = self.request.query_params.get('owner', None)
         if user is not None:
-          queryset = queryset.filter(owner=get_object_or_404(ExtendedUser, pk=user))
+            queryset = queryset.filter(owner=get_object_or_404(ExtendedUser, pk=user))
         return queryset
+
 
 class TeamViewSet(viewsets.ModelViewSet):
     model = TeamStatus
@@ -54,7 +58,8 @@ class TeamViewSet(viewsets.ModelViewSet):
         queryset = queryset.filter(user=get_object_or_404(ExtendedUser, pk=user))
         queryset = queryset.filter(role='10') | queryset.filter(role='20')
         return queryset
-	
+
+
 class DemosViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = ApplicationDemo.objects.all()
     serializer_class = DemoSerializer
@@ -68,6 +73,7 @@ class DemosViewSet(viewsets.ReadOnlyModelViewSet):
         queryset = queryset.order_by('order')
         return queryset
 
+
 class GoalViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Goal.objects.all()
     serializer_class = GoalSerializer
@@ -80,18 +86,22 @@ class GoalViewSet(viewsets.ReadOnlyModelViewSet):
             queryset = queryset.filter(application__name=application)
         return queryset
 
+
 class ApplicationViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Application.objects.all()
     serializer_class = ApplicationSerializer
     lookup_field = 'name'
 
+
 class ApplicationCategoryViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = ApplicationCategory.objects.all()
     serializer_class = ApplicationCategorySerializer
 
+
 class ApplicationThemeViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = ApplicationTheme.objects.all()
     serializer_class = ApplicationThemeSerializer
+
 
 class FileUploadView(views.APIView):
     parser_class = (FileUploadParser,)
@@ -102,10 +112,12 @@ class FileUploadView(views.APIView):
         f = FileUpload(f=file_object)
         f.save()
         path = os.path.join(settings.MEDIA_URL, f.f.url)
-        return Response(status=201, data={'url':path, 'id':f.id})
+        return Response(status=201, data={'url': path, 'id': f.id})
+
 
 class CurrentUserView(views.APIView):
     model = User
+
     def get(self, request):
         serializer = UserSerializer(request.user)
         return Response(serializer.data)
