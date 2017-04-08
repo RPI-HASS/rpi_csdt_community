@@ -1,17 +1,22 @@
-from rest_framework import viewsets, views
-from rest_framework.parsers import FileUploadParser
-from rest_framework.response import Response
-from django.shortcuts import get_object_or_404
-
-from project_share.models import Project, ApplicationDemo, ExtendedUser, FileUpload, Goal, Application
-from project_share.models import ApplicationTheme, ApplicationCategory
-from django_teams.models import TeamStatus
-from rpi_csdt_community.serializers import DemoSerializer, GoalSerializer, ProjectSerializer, TeamSerializer
-from rpi_csdt_community.serializers import UserSerializer, ApplicationSerializer, ApplicationCategorySerializer
-from rpi_csdt_community.serializers import ApplicationThemeSerializer
-from django.conf import settings
 import os
 import sys
+
+from django.conf import settings
+from django.shortcuts import get_object_or_404
+from django_teams.models import TeamStatus
+from rest_framework import views, viewsets
+from rest_framework.parsers import FileUploadParser
+from rest_framework.response import Response
+
+from project_share.models import (Application, ApplicationCategory,
+                                  ApplicationDemo, ApplicationTheme,
+                                  ExtendedUser, FileUpload, Goal, Project)
+from rpi_csdt_community.serializers import (ApplicationCategorySerializer,
+                                            ApplicationSerializer,
+                                            ApplicationThemeSerializer,
+                                            DemoSerializer, GoalSerializer,
+                                            ProjectSerializer, TeamSerializer,
+                                            UserSerializer)
 
 try:
     from django.contrib.auth import get_user_model
@@ -109,10 +114,10 @@ class FileUploadView(views.APIView):
 
     def put(self, request, format=None):
         file_object = request.data['file']
-        f = FileUpload(f=file_object)
-        f.save()
-        path = os.path.join(settings.MEDIA_URL, f.f.url)
-        return Response(status=201, data={'url': path, 'id': f.id})
+        file = FileUpload(file_path=file_object)
+        file.save()
+        path = os.path.join(settings.MEDIA_URL, file.file_path.url)
+        return Response(status=201, data={'url': path, 'id': file.id})
 
 
 class CurrentUserView(views.APIView):

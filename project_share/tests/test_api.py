@@ -1,13 +1,15 @@
-from django.core.urlresolvers import reverse
 from django.conf import settings
+from django.contrib.auth import get_user_model
+from django.core.urlresolvers import reverse
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
-from rest_framework import status
-from rest_framework.test import APIClient
 # from rest_framework.test import APITestCase, APITransactionTestCase
 from django.test import LiveServerTestCase
+from rest_framework import status
+from rest_framework.test import APIClient
+
 from project_share.models import Project
-from django.contrib.auth import get_user_model
+
 User = get_user_model()
 
 
@@ -37,15 +39,15 @@ class ProjectTests(LiveServerTestCase):
 
         # Try uploading the screenshot
         image_id = -1
-        with open(screenshot_file) as f:
-            response = self.client.put(reverse('file-create'), {'file': f})
+        with open(screenshot_file) as file_path:
+            response = self.client.put(reverse('file-create'), {'file': file_path})
             self.assertEqual(response.status_code, status.HTTP_201_CREATED)
             image_id = response.data['id']
 
         # Upload the XML file
         xml_id = -1
-        with open(project_file) as f:
-            response = self.client.put(reverse('file-create'), {'file': f})
+        with open(project_file) as file_path:
+            response = self.client.put(reverse('file-create'), {'file': file_path})
             self.assertEqual(response.status_code, status.HTTP_201_CREATED)
             xml_id = response.data['id']
 
@@ -73,9 +75,9 @@ class ProjectTests(LiveServerTestCase):
         screenshot_file = settings.PROJECT_ROOT + '/samples/CC/CC-Default.png'
         url = reverse('file-create')
 
-        with open(screenshot_file) as f:
+        with open(screenshot_file) as file_path:
             self.client.login(username='test', password='test')
-            response = self.client.put(url, {'file': f})
+            response = self.client.put(url, {'file': file_path})
             self.assertEqual(response.status_code, status.HTTP_201_CREATED)
             self.client.logout()
 
@@ -87,8 +89,8 @@ class ProjectTests(LiveServerTestCase):
         screenshot_file = settings.PROJECT_ROOT + '/samples/CC/CC-Default.png'
         url = reverse('file-create')
 
-        with open(screenshot_file) as f:
-            response = self.client.put(url, {'file': f})
+        with open(screenshot_file) as file_path:
+            response = self.client.put(url, {'file': file_path})
             self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
     def test_create_project(self):
@@ -102,15 +104,15 @@ class ProjectTests(LiveServerTestCase):
 
         # Try uploading the screenshot
         image_id = -1
-        with open(screenshot_file) as f:
-            response = self.client.put(reverse('file-create'), {'file': f})
+        with open(screenshot_file) as file_path:
+            response = self.client.put(reverse('file-create'), {'file': file_path})
             self.assertEqual(response.status_code, status.HTTP_201_CREATED)
             image_id = response.data['id']
 
         # Upload the XML file
         xml_id = -1
-        with open(project_file) as f:
-            response = self.client.put(reverse('file-create'), {'file': f})
+        with open(project_file) as file_path:
+            response = self.client.put(reverse('file-create'), {'file': file_path})
             self.assertEqual(response.status_code, status.HTTP_201_CREATED)
             xml_id = response.data['id']
 
@@ -164,15 +166,15 @@ class ProjectTests(LiveServerTestCase):
 
         # Try uploading the screenshot
         image_id = -1
-        with open(screenshot_file) as f:
-            response = self.client.put(reverse('file-create'), {'file': f})
+        with open(screenshot_file) as file_path:
+            response = self.client.put(reverse('file-create'), {'file': file_path})
             self.assertEqual(response.status_code, status.HTTP_201_CREATED)
             image_id = response.data['id']
 
         # Upload the XML file
         xml_id = -1
-        with open(project_file) as f:
-            response = self.client.put(reverse('file-create'), {'file': f})
+        with open(project_file) as file_path:
+            response = self.client.put(reverse('file-create'), {'file': file_path})
             self.assertEqual(response.status_code, status.HTTP_201_CREATED)
             xml_id = response.data['id']
 
@@ -348,15 +350,15 @@ class ProjectTests(LiveServerTestCase):
 
         # Try uploading the screenshot
         image_id = -1
-        with open(screenshot_file) as f:
-            response = self.client.put(reverse('file-create'), {'file': f})
+        with open(screenshot_file) as file_path:
+            response = self.client.put(reverse('file-create'), {'file': file_path})
             self.assertEqual(response.status_code, status.HTTP_201_CREATED)
             image_id = response.data['id']
 
         # Upload the XML file
         xml_id = -1
-        with open(project_file) as f:
-            response = self.client.put(reverse('file-create'), {'file': f})
+        with open(project_file) as file_path:
+            response = self.client.put(reverse('file-create'), {'file': file_path})
             self.assertEqual(response.status_code, status.HTTP_201_CREATED)
             xml_id = response.data['id']
 

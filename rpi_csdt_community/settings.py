@@ -1,5 +1,6 @@
 # Django settings for rpi_csdt_community project.
 import os
+
 import twitter_bootstrap
 
 PROJECT_ROOT = os.path.dirname(os.path.dirname(__file__))

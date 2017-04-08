@@ -1,21 +1,19 @@
+from django.conf import settings
+from django.contrib.contenttypes.models import ContentType
+from django.core.exceptions import PermissionDenied
+from django.core.urlresolvers import reverse, reverse_lazy
+from django.shortcuts import get_object_or_404, redirect
 from django.views.generic import ListView
 from django.views.generic.detail import DetailView
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from django.shortcuts import get_object_or_404, redirect
-from django.core.exceptions import PermissionDenied
-from django.core.urlresolvers import reverse
-from django.core.urlresolvers import reverse_lazy
-from django.contrib.contenttypes.models import ContentType
-from django.conf import settings
-
+from django.views.generic.edit import CreateView, DeleteView, UpdateView
+from django_teams.models import Ownership
+from extra_views import SearchableListMixin, SortableListMixin
 from taggit.models import Tag
 
-from extra_views import SortableListMixin
-from extra_views import SearchableListMixin
-
-from project_share.models import Application, Project, ApplicationDemo, Approval, Address
-from project_share.forms import ProjectForm, ApprovalForm, AddressForm, ProjectUnpublishForm
-from django_teams.models import Ownership
+from project_share.forms import (AddressForm, ApprovalForm, ProjectForm,
+                                 ProjectUnpublishForm)
+from project_share.models import (Address, Application, ApplicationDemo,
+                                  Approval, Project)
 
 try:
     from django.contrib.auth import get_user_model

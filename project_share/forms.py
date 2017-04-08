@@ -1,8 +1,9 @@
 from django import forms
 from django.forms import ModelForm
-
-from project_share.models import Project, Approval, Address, Application, ApplicationCategory
 from django_teams.models import Team, TeamStatus
+
+from project_share.models import (Address, Application, ApplicationCategory,
+                                  Approval, Project)
 
 
 class ProjectForm(ModelForm):

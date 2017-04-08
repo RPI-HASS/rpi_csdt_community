@@ -1,7 +1,7 @@
-from django.shortcuts import render
 from django.contrib.auth.forms import AuthenticationForm
-from django_comments.views.comments import post_comment
 from django.http import HttpResponse
+from django.shortcuts import render
+from django_comments.views.comments import post_comment
 
 from project_share.models import Project
 

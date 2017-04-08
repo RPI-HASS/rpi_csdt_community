@@ -1,8 +1,7 @@
+from BeautifulSoup import BeautifulSoup, SoupStrainer
+from django.conf import settings
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from django.test.client import Client
-from django.conf import settings
-
-from BeautifulSoup import BeautifulSoup, SoupStrainer
 
 try:
     from django.contrib.auth import get_user_model

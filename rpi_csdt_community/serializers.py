@@ -1,8 +1,9 @@
+from django_teams.models import TeamStatus
 from rest_framework import serializers
 
-from project_share.models import ApplicationDemo, Project, Goal, Application
-from project_share.models import ApplicationTheme, ApplicationCategory
-from django_teams.models import TeamStatus
+from project_share.models import (Application, ApplicationCategory,
+                                  ApplicationDemo, ApplicationTheme, Goal,
+                                  Project)
 
 try:
     from django.contrib.auth import get_user_model
@@ -30,8 +31,8 @@ class GoalSerializer(serializers.ModelSerializer):
 
 
 class ProjectSerializer(serializers.ModelSerializer):
-    project_url = serializers.URLField(source='project.f.url', read_only=True)
-    screenshot_url = serializers.URLField(source='screenshot.f.url', read_only=True)
+    project_url = serializers.URLField(source='project.file_path.url', read_only=True)
+    screenshot_url = serializers.URLField(source='screenshot.file_path.url', read_only=True)
 
     def __init__(self, *args, **kwargs):
         super(ProjectSerializer, self).__init__(*args, **kwargs)

@@ -1,14 +1,20 @@
-from django.conf.urls import include, url
-from django.views.generic import TemplateView
-from django.conf import settings
-from rpi_csdt_community.viewsets import ProjectViewSet, DemosViewSet, GoalViewSet, ApplicationViewSet, FileUploadView
-from rpi_csdt_community.viewsets import CurrentUserView, TeamViewSet, ApplicationThemeViewSet
-from rpi_csdt_community.viewsets import ApplicationCategoryViewSet
-from rpi_csdt_community.views import home
-from django.views import static
-from rest_framework import routers
-from django.contrib import admin
+'''Directs all incoming requests to relevant views and apps'''
 import debug_toolbar
+from django.conf import settings
+from django.conf.urls import include, url
+from django.contrib import admin
+from django.views import static
+from django.views.generic import TemplateView
+from rest_framework import routers
+
+from rpi_csdt_community.views import home
+from rpi_csdt_community.viewsets import (ApplicationCategoryViewSet,
+                                         ApplicationThemeViewSet,
+                                         ApplicationViewSet, CurrentUserView,
+                                         DemosViewSet, FileUploadView,
+                                         GoalViewSet, ProjectViewSet,
+                                         TeamViewSet)
+
 admin.autodiscover()
 
 router = routers.DefaultRouter()
