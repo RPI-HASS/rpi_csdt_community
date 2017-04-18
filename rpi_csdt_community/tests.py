@@ -2,6 +2,9 @@ from django.test import TestCase
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from django.test.client import Client
 from django.conf import settings
+from django.urls import reverse
+from rest_framework.test import APIClient
+import json
 
 from BeautifulSoup import BeautifulSoup, SoupStrainer
 
@@ -66,3 +69,23 @@ class UrlTests(StaticLiveServerTestCase):
             response = self.client.get(image.get('src'))
             self.assertEqual(response.status_code, 200)
     """
+
+class APITests(TestCase):
+    
+    def testLinks(self):
+        self.client = APIClient()
+        
+        # Verify root itself is okay
+        response = self.client.get(reverse('api-root'))
+        self.assertTrue(response.status_code == 200);
+        
+        data = json.load(response.text)
+        
+        # Go through all links to test okay and returning some data
+        for key in data:
+            url = data.get(key)
+            
+            response = self.client.get(url)
+            
+            self.assertTrue(response.status_code == 200);
+            self.assertTrue(len(json.load(response.text)) > 0)

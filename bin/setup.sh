@@ -12,11 +12,15 @@ sudo apt-get upgrade
 sudo apt-get install -y python-pip python-dev
 
 # Install the database
-sudo apt-get install -y postgresql postgresql-contrib
+sudo apt-get install -y postgresql postgresql-contrib postgis
 # Set password
 sudo -u postgres psql -U postgres -d postgres -c "alter user postgres with password 'postgres';"
 # Create the database
 sudo -u postgres createdb rpi_csdt_community
+
+# Add extensions to database
+CREATE EXTENSION postgis;
+CREATE EXTENSION postgis_topology;
 
 # Install node
 sudo apt-get install -y nodejs build-essential
