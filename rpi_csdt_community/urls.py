@@ -29,7 +29,7 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
 
     # TemplateView + Login
-    url(r'^(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT+'/index.html'}),
+    url(r'^$', serve, {'document_root': settings.STATIC_ROOT+'/index.html'}),
     #url(r'^$', home, {}, 'home'),
     #url(r'^$', login_required(TemplateView.as_view(template_name="home.html")), {}, 'home'),
 
