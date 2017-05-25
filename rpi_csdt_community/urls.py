@@ -11,6 +11,8 @@ from rpi_csdt_community.viewsets import ProjectViewSet, DemosViewSet, GoalViewSe
 from rpi_csdt_community.viewsets import ApplicationThemeViewSet, ApplicationCategoryViewSet
 from rpi_csdt_community.views import home
 from django.views import static
+from django.views.static import serve
+
 from rest_framework import routers
 router = routers.DefaultRouter()
 router.register(r'projects', ProjectViewSet, base_name='api-projects')
@@ -27,7 +29,8 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
 
     # TemplateView + Login
-    url(r'^$', home, {}, 'home'),
+    url(r'^(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT}),
+    #url(r'^$', home, {}, 'home'),
     #url(r'^$', login_required(TemplateView.as_view(template_name="home.html")), {}, 'home'),
 
     url(r'', include('project_share.urls')),
