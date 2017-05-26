@@ -4,3 +4,6 @@
 [submodule "static/applications/CSnap-Modules"]
 	path = static/applications/CSnap-Modules
 	url = https://github.com/CSnap/CSnap-Modules
+[submodule "static/website"]
+	path = static/website
+	url = git@git.hass.rpi.edu:csdt/website.git
