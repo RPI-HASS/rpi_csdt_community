@@ -20,14 +20,12 @@ install:
   - sudo pip install --upgrade -r requirements.txt
   - sudo pip install coveralls
   - sudo pip install flake8
-  - sudo pip install pep257
   
 before_script:
   - psql -c "CREATE DATABASE travisci;" -U postgres
 
 script:
   - flake8 .
-  - pep257 .
   - python manage.py migrate
   - coverage run --source=rpi_csdt_community manage.py test
 

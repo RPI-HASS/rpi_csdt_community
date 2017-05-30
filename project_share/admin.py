@@ -1,4 +1,4 @@
-'''Admin models and settings for the projects, applications, and approvals'''
+"""Admin models and settings for the projects, applications, and approvals."""
 import os
 
 import git
@@ -15,14 +15,15 @@ from project_share.models import (Address, Application, ApplicationCategory,
 
 
 class ApplicationAdmin(admin.ModelAdmin):
-    '''Innumerates application updating from admin'''
+    """Innumerate application updating from admin."""
+
     fields = ('name', 'url', 'description', 'application_type', 'application_file', 'featured', 'categories',
               'screenshot',)
 
     form = ApplicationAdminForm
 
     def save_model(self, request, obj, form, change):
-        '''updates submodules when applications are updated'''
+        """Update submodules when applications are updated."""
         if obj.id is None:
             obj.save()
         obj.categories.clear()
@@ -35,7 +36,7 @@ class ApplicationAdmin(admin.ModelAdmin):
         g.execute(["python", "manage.py", "collectstatic", "--noinput"])
 
     def get_form(self, request, obj=None, **kwargs):
-        '''Includes categories in form'''
+        """Include categories in form."""
         if obj:
             self.form.base_fields['categories'].initial = obj.categories.all()
         return super(ApplicationAdmin, self).get_form(request, obj)
@@ -45,23 +46,24 @@ UserAdmin.list_display = ('username', 'email', 'gender', 'race', 'age', 'date_jo
 
 
 class ClassListFilter(admin.SimpleListFilter):
-    '''A filter used by projects to get by specific classrooms'''
+    """A filter used by projects to get by specific classrooms."""
+
     title = _('Class')
     parameter_name = 'class'
 
     def value(self):
-        '''Returns whether it is filtering by my class, pending in my class, and all classes'''
+        """Return whether it is filtering by my class, pending in my class, and all classes."""
         t = super(ClassListFilter, self).value()
         if t is None:
             return 'mc'
         return t
 
     def lookups(self, request, model_admin):
-        '''The three ways that the filter filters'''
+        """The three ways that the filter filters."""
         return (('mc', _('My class')), ('mca', ('Pending in my class')), ('ac', _('All classes')),)
 
     def queryset(self, request, queryset):
-        '''The actual filter as applied to queryset'''
+        """The actual filter as applied to queryset."""
         if self.value() == 'mc':
             return queryset.filter(classroom__in=request.user.team_member.all())
         if self.value() == 'mca':
@@ -71,38 +73,42 @@ class ClassListFilter(admin.SimpleListFilter):
 
 
 class ApprovalInline(admin.TabularInline):
-    '''Just displays approvals'''
+    """Just displays approvals."""
+
     model = Approval
 
 
 class ProjectAdmin(admin.ModelAdmin):
-    '''Enables filters for classrooms and sets the display for projects'''
+    """Enable filters for classrooms and sets the display for projects."""
+
     inlines = [AttachmentInlines, ApprovalInline]
     list_filter = (ClassListFilter,)
     list_display = ('name', 'owner', 'application', 'classroom', 'approved', 'when_created', 'when_modified',)
     search_fields = ['owner__first_name', 'owner__last_name', 'name']
 
     def approve(modeladmin, request, queryset):
-        '''Changes to filter by approval'''
+        """Change to filter by approval."""
         Approval.objects.filter(project__in=queryset).update(approved_by=request.user)
         queryset.update(approved=True)
 
-    approve.short_description = "Approve selected projects"
+    approve.short_description = "Approve selected projects."
     actions = [approve]
 
 
 class ApprovalAdmin(admin.ModelAdmin):
-    '''Display nothing for approvals'''
+    """Display nothing for approvals."""
+
     pass
 
 
 class ClassroomAdmin(admin.ModelAdmin):
-    '''Deprecated, should be removed'''
+    """Deprecated, should be removed."""
+
     # exclude = ('teacher',)
     filter_horizontal = ('students',)
 
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
-        '''Deprecated, should be removed'''
+        """Deprecated, should be removed."""
         if db_field.name == 'teacher':
             kwargs['initial'] = request.user.id
             return db_field.formfield(**kwargs)
@@ -110,7 +116,8 @@ class ClassroomAdmin(admin.ModelAdmin):
 
 
 class GoalAdmin(admin.ModelAdmin):
-    '''Goals merely need to display name and app'''
+    """Goals merely need to display name and app."""
+
     list_display = ('name', 'application')
     list_filter = ('application',)
 

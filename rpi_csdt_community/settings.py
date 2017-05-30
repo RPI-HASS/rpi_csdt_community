@@ -284,13 +284,13 @@ LOGIN_REDIRECT_URL = '/'
 # Track where my LESS things live
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
-my_app_less = os.path.join(BASE_DIR, 'static', 'less')
+MY_LESS_APP = os.path.join(BASE_DIR, 'static', 'less')
 
 # For apps outside of your project, it's simpler to import them to find their root folders
-bootstrap_less = os.path.join(os.path.dirname(twitter_bootstrap.__file__), 'static', 'twitter_bootstrap', 'less')
+BOOTSTRAP_LESS = os.path.join(os.path.dirname(twitter_bootstrap.__file__), 'static', 'twitter_bootstrap', 'less')
 
 COMPRESS_ENABLED = False
-COMPRESS_LESSC_COMMAND = 'lessc --include-path={}'.format(os.pathsep.join([bootstrap_less, my_app_less]))
+COMPRESS_LESSC_COMMAND = 'lessc --include-path={}'.format(os.pathsep.join([BOOTSTRAP_LESS, MY_LESS_APP]))
 COMPRESS_LESSC_COMMAND += " {infile} {outfile}"
 
 COMPRESS_PRECOMPILERS = (

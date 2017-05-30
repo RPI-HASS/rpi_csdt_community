@@ -1,4 +1,4 @@
-'''Directs URLs for the project_share sub-app to relevant views'''
+"""Directs URLs for the project_share sub-app to relevant views."""
 from django.conf.urls import url
 from django.views.generic.base import TemplateView
 

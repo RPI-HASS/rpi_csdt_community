@@ -1,4 +1,4 @@
-'''Directs all incoming requests to relevant views and apps'''
+"""Directs all incoming requests to relevant views and apps."""
 import debug_toolbar
 from django.conf import settings
 from django.conf.urls import include, url
