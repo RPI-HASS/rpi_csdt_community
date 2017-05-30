@@ -114,7 +114,7 @@ class Application(models.Model):
         for item in self.applicationcontext_set.filter(parent=None).order_by('order'):
             ret += [item]
             context = self._get_context(item)
-            if len(context) > 0:
+            if context:
                 ret += context
         return ret
 
@@ -124,7 +124,7 @@ class Application(models.Model):
         for item in parent.applicationcontext_set.all().order_by('order'):
             ret += [item]
             context = self._get_context(item)
-            if len(context) > 0:
+            if context:
                 ret += context
         return ret
 
@@ -143,7 +143,7 @@ class ApplicationContext(models.Model):
     html_data = models.TextField(null=True, blank=True)
 
     def level(self):
-        """Has been deprecated in favor of CMS and should be removed."""
+        """Deprecated in favor of CMS and should be removed."""
         if self.parent is not None:
             return self.parent.level()+1
         return 1

@@ -15,8 +15,8 @@ class PageheaderPlugin(TextPlugin):
 
 
 class AlertPlugin(TextPlugin):
-    """TODO: This should be made to provide an option of several alerts
-    """
+    """TODO: This should be made to provide an option of several alerts."""
+
     name = _("Bootstrap Alert")
     render_template = "cms_bootstrap_templates/alert.html"
 

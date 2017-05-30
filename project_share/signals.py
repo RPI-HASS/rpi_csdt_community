@@ -29,6 +29,6 @@ def approval_comment(sender, instance, created, **kwargs):
     """If approval is changed, set project to approved."""
     if instance.content_type == ContentType.objects.get(app_label="project_share", model="project") and\
        instance.approved is True:
-        p = Project.objects.get(pk=instance.object_id)
-        p.approved = True
-        p.save()
+        project = Project.objects.get(pk=instance.object_id)
+        project.approved = True
+        project.save()

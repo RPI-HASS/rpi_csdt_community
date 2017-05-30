@@ -288,9 +288,9 @@ class ProjectTests(LiveServerTestCase):
 
         # Try updating the project
         data = {
-          'name': project.name,
-          'id': project.id,
-          'application': project.application.id
+            'name': project.name,
+            'id': project.id,
+            'application': project.application.id
         }
 
         url = reverse('api-projects-detail', kwargs={'pk': data['id']})
@@ -323,9 +323,9 @@ class ProjectTests(LiveServerTestCase):
 
         # Try updating the project
         data = {
-          'name': project.name,
-          'id': project.id,
-          'application': project.application.id
+            'name': project.name,
+            'id': project.id,
+            'application': project.application.id
         }
 
         url = reverse('api-projects-list')

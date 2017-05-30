@@ -1,3 +1,4 @@
+"""Serialize the models from projectshare into displayable items for admin / forms."""
 from django_teams.models import TeamStatus
 from rest_framework import serializers
 
@@ -14,6 +15,8 @@ else:
 
 
 class DemoSerializer(serializers.ModelSerializer):
+    """Display the id, name, description, and url for the demo."""
+
     project_url = serializers.URLField(source='zipfile.url', read_only=True)
 
     class Meta:
@@ -22,6 +25,8 @@ class DemoSerializer(serializers.ModelSerializer):
 
 
 class GoalSerializer(serializers.ModelSerializer):
+    """Display the name, description, and urls for the goal."""
+
     thumb_url = serializers.URLField(source='thumbnail.url', read_only=True)
     img_url = serializers.URLField(source='image.url', read_only=True)
 
@@ -31,14 +36,18 @@ class GoalSerializer(serializers.ModelSerializer):
 
 
 class ProjectSerializer(serializers.ModelSerializer):
+    """Validate changes and limit access, aswell as specify display for project."""
+
     project_url = serializers.URLField(source='project.file_path.url', read_only=True)
     screenshot_url = serializers.URLField(source='screenshot.file_path.url', read_only=True)
 
     def __init__(self, *args, **kwargs):
+        """Set the context."""
         super(ProjectSerializer, self).__init__(*args, **kwargs)
         self.request = kwargs['context']['request']
 
     def create(self, validated_data):
+        """Validate owner."""
         validated_data['owner'] = self.request.user
         return super(ProjectSerializer, self).create(validated_data)
 
@@ -51,13 +60,17 @@ class ProjectSerializer(serializers.ModelSerializer):
 
 
 class TeamSerializer(serializers.ModelSerializer):
+    """Validate changes and limit access, aswell as specify display for team."""
+
     team_name = serializers.StringRelatedField(source='team', read_only=True)
 
     def __init__(self, *args, **kwargs):
+        """Set the context."""
         super(TeamSerializer, self).__init__(*args, **kwargs)
         self.request = kwargs['context']['request']
 
     def create(self, validated_data):
+        """Validate owner."""
         validated_data['owner'] = self.request.user
         return super(TeamSerializer, self).create(validated_data)
 
@@ -68,6 +81,8 @@ class TeamSerializer(serializers.ModelSerializer):
 
 
 class UserSerializer(serializers.ModelSerializer):
+    """All fields are read only for users."""
+
     class Meta:
         model = User
         fields = ('id', 'username', 'first_name', 'last_name')
@@ -75,6 +90,8 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class ApplicationSerializer(serializers.ModelSerializer):
+    """Display everything for the application."""
+
     class Meta:
         model = Application
         fields = ('id', 'name', 'version', 'description', 'url', 'application_file', 'featured',
@@ -82,10 +99,14 @@ class ApplicationSerializer(serializers.ModelSerializer):
 
 
 class ApplicationCategorySerializer(serializers.ModelSerializer):
+    """Stub for displaying category."""
+
     class Meta:
         model = ApplicationCategory
 
 
 class ApplicationThemeSerializer(serializers.ModelSerializer):
+    """Stub for displaying theme."""
+
     class Meta:
         model = ApplicationTheme

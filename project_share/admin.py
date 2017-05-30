@@ -30,10 +30,10 @@ class ApplicationAdmin(admin.ModelAdmin):
         for category in form.cleaned_data['categories']:
             obj.categories.add(category)
         obj.save()
-        g = git.Git(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
-        g.execute(["git", "submodule", "foreach", "git", "stash"])
-        g.execute(["git", "submodule", "foreach", "git", "pull", "origin", "master"])
-        g.execute(["python", "manage.py", "collectstatic", "--noinput"])
+        gitControl = git.Git(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
+        gitControl.execute(["git", "submodule", "foreach", "git", "stash"])
+        gitControl.execute(["git", "submodule", "foreach", "git", "pull", "origin", "master"])
+        gitControl.execute(["python", "manage.py", "collectstatic", "--noinput"])
 
     def get_form(self, request, obj=None, **kwargs):
         """Include categories in form."""
@@ -53,10 +53,10 @@ class ClassListFilter(admin.SimpleListFilter):
 
     def value(self):
         """Return whether it is filtering by my class, pending in my class, and all classes."""
-        t = super(ClassListFilter, self).value()
-        if t is None:
+        filt = super(ClassListFilter, self).value()
+        if filt is None:
             return 'mc'
-        return t
+        return filt
 
     def lookups(self, request, model_admin):
         """The three ways that the filter filters."""

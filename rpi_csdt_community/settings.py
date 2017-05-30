@@ -1,4 +1,4 @@
-# Django settings for rpi_csdt_community project.
+"""Django settings for rpi_csdt_community project."""
 import os
 
 import twitter_bootstrap

@@ -1,3 +1,4 @@
+"""Test the entire site by going through and testing all links."""
 from BeautifulSoup import BeautifulSoup, SoupStrainer
 from django.conf import settings
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
@@ -11,15 +12,19 @@ except ImportError:
 
 
 class UrlTests(StaticLiveServerTestCase):
+    """Test all links."""
+
     fixtures = ['test_data.json']
 
     def setUp(self):
+        """Create a fake user and fake login."""
         User.objects.create_user('temporary', 'temporary@gmail.com', 'temporary')
         self.client = Client()
         self.client.login(username='temporary', password='temporary')
         self.visited = {}
 
     def test_all_site_links(self, url='/'):
+        """Test all links."""
         if url in self.visited:
             return
         self.visited[url] = True
@@ -35,12 +40,6 @@ class UrlTests(StaticLiveServerTestCase):
 
         # We need the HTTP_REFERER here to get past Django-likes checking
         response = self.client.get(url, **{'HTTP_REFERER': url})
-
-        """
-        import sys
-        sys.stdout.write(url + '->' + repr(response.status_code)+'\n')
-        sys.stdout.flush()
-        """
 
         self.assertTrue(response.status_code == 200 or response.status_code == 302,
                         msg="Got code %s on %s" % (response.status_code, url))
