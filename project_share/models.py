@@ -36,14 +36,14 @@ def project_project(instance, filename):
     '''Creates URL for getting to project'''
     return "applications/files/" + slugify(instance.owner.__unicode__()
                                            + '/' + '.'.join(filename.split('.')[:-1]))\
-                                           + "." + slugify(filename.split('.')[-1])
+           + "." + slugify(filename.split('.')[-1])
 
 
 def project_screenshot(instance, filename):
     '''Creates URL for getting to screenshot'''
     return "applications/screenshots/" + slugify(instance.owner.__unicode__()
                                                  + '/' + '.'.join(filename.split('.')[:-1]))\
-                                                 + "." + slugify(filename.split('.')[-1])
+           + "." + slugify(filename.split('.')[-1])
 
 
 # These need to be removed someday; not removed now as it causes an error message
@@ -58,7 +58,7 @@ def module_library(instance, filename):
 
 
 class AutoDateTimeField(models.DateTimeField):
-     def pre_save(self, model_instance, add):
+    def pre_save(self, model_instance, add):
         return timezone.now()
 
 
