@@ -103,6 +103,7 @@ class ApplicationCategorySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = ApplicationCategory
+        fields = ('id', 'theme', 'name', 'description', 'applications')
 
 
 class ApplicationThemeSerializer(serializers.ModelSerializer):
@@ -110,3 +111,4 @@ class ApplicationThemeSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = ApplicationTheme
+        fields = ('id', 'name', 'description')
