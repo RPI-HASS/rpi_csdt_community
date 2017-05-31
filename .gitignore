@@ -10,6 +10,7 @@ python/
 media/
 collected_static/
 local_settings.py
+static/website/
 
 # Vagrant stuff
 .vagrant

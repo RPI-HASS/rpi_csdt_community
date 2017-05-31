@@ -52,13 +52,16 @@ urlpatterns = [
     url(r'^__debug__/', include(debug_toolbar.urls)),
 ]
 
-urlpatterns += [
-    url(r'^media/(?P<path>.*)$', static.serve, {'document_root': settings.MEDIA_ROOT}),
-    url(r'^static/(?P<path>.*)$', static.serve, {'document_root': settings.STATIC_ROOT}),
-]
-
 if settings.ENABLE_GIS:
     urlpatterns += [
         url(r'^api-gis/', include('gis_csdt.urls')),
         url(r'^gis/', TemplateView.as_view(template_name='gis.html')),
     ]
+
+urlpatterns += [
+    url(r'^media/(?P<path>.*)$', static.serve, {'document_root': settings.MEDIA_ROOT,}),
+    url(r'^static/(?P<path>.*)$', static.serve, {'document_root': settings.STATIC_ROOT,}),
+    url(r'^(?P<path>.*)$', static.serve, {'document_root':
+                                              settings.STATIC_ROOT + "website/www/", }),
+
+]
