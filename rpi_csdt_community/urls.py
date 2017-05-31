@@ -52,7 +52,7 @@ urlpatterns = [
 
 if settings.ENABLE_GIS:
     urlpatterns += [
-        url(r'^api-gis/', include('gis_csdt.urls')),
+        url(r'^api-gis/', include('gis_csdt.urls'), name='api-root'),
         url(r'^gis/', TemplateView.as_view(template_name='gis.html')),
     ]
 
