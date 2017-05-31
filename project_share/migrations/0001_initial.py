@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.db import models, migrations
-import project_share.models
-import taggit.managers
-import django.utils.timezone
-from django.conf import settings
 import django.core.validators
+import django.utils.timezone
+import taggit.managers
+from django.conf import settings
+from django.db import migrations, models
+
+import project_share.models
 
 
 class Migration(migrations.Migration):

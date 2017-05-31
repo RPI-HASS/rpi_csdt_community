@@ -1,21 +1,17 @@
-from django.core.urlresolvers import reverse
 from django.conf import settings
+from django.contrib.auth import get_user_model
+from django.core.urlresolvers import reverse
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
+# from rest_framework.test import APITestCase, APITransactionTestCase
+from django.test import LiveServerTestCase
 from rest_framework import status
 from rest_framework.test import APIClient
-#from rest_framework.test import APITestCase, APITransactionTestCase
-from django.test import LiveServerTestCase
-from rest_framework.reverse import reverse as api_reverse
 
-from django.core.files import File
 from project_share.models import Project
-from django.contrib.auth import get_user_model
+
 User = get_user_model()
 
-from time import sleep
-import sys
-import pprint
 
 class ProjectTests(LiveServerTestCase):
     fixtures = ['default.json']
@@ -43,15 +39,15 @@ class ProjectTests(LiveServerTestCase):
 
         # Try uploading the screenshot
         image_id = -1
-        with open(screenshot_file) as f:
-            response = self.client.put(reverse('file-create'), {'file':f})
+        with open(screenshot_file) as file_path:
+            response = self.client.put(reverse('file-create'), {'file': file_path})
             self.assertEqual(response.status_code, status.HTTP_201_CREATED)
             image_id = response.data['id']
 
         # Upload the XML file
         xml_id = -1
-        with open(project_file) as f:
-            response = self.client.put(reverse('file-create'), {'file':f})
+        with open(project_file) as file_path:
+            response = self.client.put(reverse('file-create'), {'file': file_path})
             self.assertEqual(response.status_code, status.HTTP_201_CREATED)
             xml_id = response.data['id']
 
@@ -71,7 +67,6 @@ class ProjectTests(LiveServerTestCase):
 
         return response
 
-
     def test_upload_file(self):
         """
         Verifies that we can upload a file and get back the URL
@@ -80,9 +75,9 @@ class ProjectTests(LiveServerTestCase):
         screenshot_file = settings.PROJECT_ROOT + '/samples/CC/CC-Default.png'
         url = reverse('file-create')
 
-        with open(screenshot_file) as f:
+        with open(screenshot_file) as file_path:
             self.client.login(username='test', password='test')
-            response = self.client.put(url, {'file': f})
+            response = self.client.put(url, {'file': file_path})
             self.assertEqual(response.status_code, status.HTTP_201_CREATED)
             self.client.logout()
 
@@ -94,8 +89,8 @@ class ProjectTests(LiveServerTestCase):
         screenshot_file = settings.PROJECT_ROOT + '/samples/CC/CC-Default.png'
         url = reverse('file-create')
 
-        with open(screenshot_file) as f:
-            response = self.client.put(url, {'file': f})
+        with open(screenshot_file) as file_path:
+            response = self.client.put(url, {'file': file_path})
             self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
     def test_create_project(self):
@@ -109,20 +104,20 @@ class ProjectTests(LiveServerTestCase):
 
         # Try uploading the screenshot
         image_id = -1
-        with open(screenshot_file) as f:
-            response = self.client.put(reverse('file-create'), {'file':f})
+        with open(screenshot_file) as file_path:
+            response = self.client.put(reverse('file-create'), {'file': file_path})
             self.assertEqual(response.status_code, status.HTTP_201_CREATED)
             image_id = response.data['id']
 
         # Upload the XML file
         xml_id = -1
-        with open(project_file) as f:
-            response = self.client.put(reverse('file-create'), {'file':f})
+        with open(project_file) as file_path:
+            response = self.client.put(reverse('file-create'), {'file': file_path})
             self.assertEqual(response.status_code, status.HTTP_201_CREATED)
             xml_id = response.data['id']
 
-
         ProjectTests.saved = False
+
         @receiver(pre_save, sender=Project)
         def func(sender, **kwargs):
             ProjectTests.saved = True
@@ -147,8 +142,6 @@ class ProjectTests(LiveServerTestCase):
         self.client.login(username='test', password='test')
         project = Project.objects.all()[0]
         original_name = project.name
-
-
         data = {
             "name": "Hamburger",
             "id": project.id,
@@ -173,15 +166,15 @@ class ProjectTests(LiveServerTestCase):
 
         # Try uploading the screenshot
         image_id = -1
-        with open(screenshot_file) as f:
-            response = self.client.put(reverse('file-create'), {'file':f})
+        with open(screenshot_file) as file_path:
+            response = self.client.put(reverse('file-create'), {'file': file_path})
             self.assertEqual(response.status_code, status.HTTP_201_CREATED)
             image_id = response.data['id']
 
         # Upload the XML file
         xml_id = -1
-        with open(project_file) as f:
-            response = self.client.put(reverse('file-create'), {'file':f})
+        with open(project_file) as file_path:
+            response = self.client.put(reverse('file-create'), {'file': file_path})
             self.assertEqual(response.status_code, status.HTTP_201_CREATED)
             xml_id = response.data['id']
 
@@ -199,7 +192,6 @@ class ProjectTests(LiveServerTestCase):
         response = self.client.post(url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
-
         # Logout
         self.client.logout()
 
@@ -207,8 +199,6 @@ class ProjectTests(LiveServerTestCase):
         """
         Verify that we can create a project using the REST API
         """
-        project_file = settings.PROJECT_ROOT + '/samples/CC/CC-Default.xml'
-        screenshot_file = settings.PROJECT_ROOT + '/samples/CC/CC-Default.png'
 
         url = reverse('api-projects-list')
         data = {
@@ -224,7 +214,6 @@ class ProjectTests(LiveServerTestCase):
         """
         Verify that we can get a list of projects for this user using the REST API
         """
-        from django.test import Client
         url = reverse('api-projects-list') + "?owner=1"
         # This doesn't work with the built-in client
         # !! This was fixed in the edge version as of 2014-04-21
@@ -234,13 +223,12 @@ class ProjectTests(LiveServerTestCase):
 
         self_url = 1
         for project in response.data:
-          self.assertEqual(project['owner'], self_url)
-		  
+            self.assertEqual(project['owner'], self_url)
+
     def test_get_teams(self):
         """
         Verify that we can get a list of projects for this user using the REST API
         """
-        from django.test import Client
         url = reverse('api-teams-list') + "?user=1"
         # This doesn't work with the built-in client
         # !! This was fixed in the edge version as of 2014-04-21
@@ -250,7 +238,7 @@ class ProjectTests(LiveServerTestCase):
 
         self_url = 1
         for team in response.data:
-          self.assertEqual(team['user'], self_url)
+            self.assertEqual(team['user'], self_url)
 
     def test_saving_published_project_creates_unpublished_project(self):
         """
@@ -287,68 +275,68 @@ class ProjectTests(LiveServerTestCase):
         self.assertFalse(response.data['approved'])
 
     def test_republished_project_has_user(self):
-      # First, create the project
-      response = self.create_project()
-      response.render()
+        # First, create the project
+        response = self.create_project()
+        response.render()
 
-      self.assertEqual(response.data['approved'], False)
+        self.assertEqual(response.data['approved'], False)
 
-      # Publish the project
-      project = Project.objects.get(pk=response.data['id'])
-      project.approved = True
-      project.save()
+        # Publish the project
+        project = Project.objects.get(pk=response.data['id'])
+        project.approved = True
+        project.save()
 
-      # Try updating the project
-      data = {
-          'name': project.name,
-          'id': project.id,
-          'application': project.application.id
-      }
+        # Try updating the project
+        data = {
+            'name': project.name,
+            'id': project.id,
+            'application': project.application.id
+        }
 
-      url = reverse('api-projects-detail', kwargs={'pk': data['id']})
+        url = reverse('api-projects-detail', kwargs={'pk': data['id']})
 
-      response = self.client.put(url, data, format='json')
-      response.render()
-      self.assertEqual(response.status_code, status.HTTP_200_OK)
+        response = self.client.put(url, data, format='json')
+        response.render()
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
 
-      # Verify that the primary keys are different
-      self.assertTrue(response.data['id'] != project.id)
-      self.assertTrue(response.data['owner'] != None)
-      self.assertFalse(response.data['approved'])
+        # Verify that the primary keys are different
+        self.assertTrue(response.data['id'] != project.id)
+        self.assertTrue(response.data['owner'] is not None)
+        self.assertFalse(response.data['approved'])
 
     def test_saving_published_project_creates_unpublished_project_using_post(self):
-      """
-      This is related to bug #12 (https://github.com/GK-12/rpi_csdt_community/issues/12)
-      The test should verify that saving a project that has already been
+        """
+        This is related to bug #12 (https://github.com/GK-12/rpi_csdt_community/issues/12)
+        The test should verify that saving a project that has already been
         published results in a non-published project being created
-      """
-      # First, create the project
-      response = self.create_project()
-      response.render()
+        """
+        # First, create the project
+        response = self.create_project()
+        response.render()
 
-      self.assertEqual(response.data['approved'], False)
+        self.assertEqual(response.data['approved'], False)
 
-      # Publish the project
-      project = Project.objects.get(pk=response.data['id'])
-      project.approved = True
-      project.save()
+        # Publish the project
+        project = Project.objects.get(pk=response.data['id'])
+        project.approved = True
+        project.save()
 
-      # Try updating the project
-      data = {
-          'name': project.name,
-          'id': project.id,
-          'application': project.application.id
-      }
+        # Try updating the project
+        data = {
+            'name': project.name,
+            'id': project.id,
+            'application': project.application.id
+        }
 
-      url = reverse('api-projects-list')
+        url = reverse('api-projects-list')
 
-      response = self.client.post(url, data, format='json')
-      response.render()
-      self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        response = self.client.post(url, data, format='json')
+        response.render()
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
-      # Verify that the primary keys are different
-      self.assertTrue(response.data['id'] != project.id)
-      self.assertFalse(response.data['approved'])
+        # Verify that the primary keys are different
+        self.assertTrue(response.data['id'] != project.id)
+        self.assertFalse(response.data['approved'])
 
     def test_saving_new_project_sets_correct_owner(self):
         """ This is related to bug #41 (https://github.com/GK-12/Snap--Build-Your-Own-Blocks/issues/41)
@@ -362,15 +350,15 @@ class ProjectTests(LiveServerTestCase):
 
         # Try uploading the screenshot
         image_id = -1
-        with open(screenshot_file) as f:
-            response = self.client.put(reverse('file-create'), {'file':f})
+        with open(screenshot_file) as file_path:
+            response = self.client.put(reverse('file-create'), {'file': file_path})
             self.assertEqual(response.status_code, status.HTTP_201_CREATED)
             image_id = response.data['id']
 
         # Upload the XML file
         xml_id = -1
-        with open(project_file) as f:
-            response = self.client.put(reverse('file-create'), {'file':f})
+        with open(project_file) as file_path:
+            response = self.client.put(reverse('file-create'), {'file': file_path})
             self.assertEqual(response.status_code, status.HTTP_201_CREATED)
             xml_id = response.data['id']
 
