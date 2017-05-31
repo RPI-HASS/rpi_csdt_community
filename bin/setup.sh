@@ -10,13 +10,18 @@ sudo apt-get upgrade
 
 # Install python
 sudo apt-get install -y python-pip python-dev
+# Install postgis
+sudo apt-get install -y libpq-dev libcurl4-openssl-dev postgresql postgis
 
 # Install the database
-sudo apt-get install -y postgresql postgresql-contrib
+sudo apt-get install -y postgresql postgresql-contrib 
 # Set password
 sudo -u postgres psql -U postgres -d postgres -c "alter user postgres with password 'postgres';"
 # Create the database
 sudo -u postgres createdb rpi_csdt_community
+# Add Extensions
+echo 'rpi_csdt_community; CREATE EXTENSION adminpack; CREATE EXTENSION postgis; CREATE EXTENSION postgis_topology;' | psql -U postgres
+
 
 # Install node
 sudo apt-get install -y nodejs build-essential
@@ -32,3 +37,6 @@ pip install --upgrade -r /vagrant/requirements.txt
 cd /vagrant/
 git submodule init
 git submodule update
+
+# Run migrations to init db
+python manage.py migrate
