@@ -27,7 +27,8 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
 
     # TemplateView + Login
-    url(r'^$', home, {}, 'home'),
+    url(r'^$', static.serve, {'document_root':settings.STATIC_ROOT+'/index.html',}, 'home'),
+    #url(r'^$', home, {}, 'home'),
     #url(r'^$', login_required(TemplateView.as_view(template_name="home.html")), {}, 'home'),
 
     url(r'', include('project_share.urls')),
