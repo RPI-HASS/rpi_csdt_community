@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/RPI-HASS/rpi_csdt_community.svg?branch=master)](https://travis-ci.org/RPI-HASS/rpi_csdt_community) [![Coverage Status](https://coveralls.io/repos/github/RPI-HASS/rpi_csdt_community/badge.svg?branch=master)](https://coveralls.io/github/RPI-HASS/rpi_csdt_community?branch=master)
 
-This project is sponsered by Rensselaer Polytechnic Institute's GK-12 fellowship under Dr. Ron Eglash. The goal is the create a web platform for students to share projects, community, and in general create a community around the pCSDT's. More information about the pCSDT's (also serving as a demo) can be found here: https://community.csdt.rpi.edu/
+This project is sponsored by Rensselaer Polytechnic Institute's GK-12 fellowship under Dr. Ron Eglash. The goal is the create a web platform for students to share projects, community, and in general create a community around the CSDT's. More information about the CSDT's (also serving as a demo) can be found here: https://community.csdt.rpi.edu/
 
 ## Contributing
 
