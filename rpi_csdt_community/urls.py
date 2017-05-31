@@ -59,9 +59,9 @@ if settings.ENABLE_GIS:
     ]
 
 urlpatterns += [
-    url(r'^media/(?P<path>.*)$', static.serve, {'document_root': settings.MEDIA_ROOT,}),
-    url(r'^static/(?P<path>.*)$', static.serve, {'document_root': settings.STATIC_ROOT,}),
+    url(r'^media/(?P<path>.*)$', static.serve, {'document_root': settings.MEDIA_ROOT, }),
+    url(r'^static/(?P<path>.*)$', static.serve, {'document_root': settings.STATIC_ROOT, }),
     url(r'^(?P<path>.*)$', static.serve, {'document_root':
-                                              settings.STATIC_ROOT + "website/www/", }),
+                                          settings.STATIC_ROOT + "website/www/", }),
 
 ]
