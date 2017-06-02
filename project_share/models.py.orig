@@ -1,12 +1,28 @@
+<<<<<<< HEAD
 """Models for making, uploading, and owning projects and their owning applications."""
+=======
+from django.db import models
+from django.urls import reverse
+>>>>>>> 9ca58e084f44c2e60af221b2fbe6f91849fe25be
 from django.conf import settings
 from django.contrib.auth.models import AbstractUser
-from django.urls import reverse
+from django.core.urlresolvers import reverse
 from django.db import models
-from taggit.managers import TaggableManager
 from django.template.defaultfilters import slugify
 from django.utils import timezone
 from django_comments.moderation import CommentModerator, moderator
+<<<<<<< HEAD
+=======
+from taggit.models import TaggedItemBase, GenericTaggedItemBase
+from django_teams.models import Team
+from django.utils import timezone
+
+import secretballot
+import json
+import zipfile as zippy
+
+>>>>>>> 9ca58e084f44c2e60af221b2fbe6f91849fe25be
+from taggit.managers import TaggableManager
 
 
 def application_application(instance, filename):
@@ -55,6 +71,10 @@ def module_module(instance, filename):
 def module_library(instance, filename):
     """Create URL for getting to the module library."""
     return "modules/libraries/" + instance.name
+    
+class AutoDateTimeField(models.DateTimeField):
+    def pre_save(self, model_instance, add):
+        return timezone.now()
 
 
 class AutoDateTimeField(models.DateTimeField):
@@ -76,12 +96,19 @@ class Classroom(models.Model):
 
 
 class Approval(models.Model):
+<<<<<<< HEAD
     """The object that determines whether a project is viewable to the public."""
 
+    project = models.OneToOneField('Project')
+    when_requested = AutoDateTimeField(default=timezone.now, null=True, blank=True)
+    when_updated = AutoDateTimeField(default=timezone.now, null=True, blank=True)
+    approved_by = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True)
+=======
     project = models.OneToOneField('Project', on_delete=models.CASCADE)
     when_requested = AutoDateTimeField(default=timezone.now, null=True, blank=True)
     when_updated = AutoDateTimeField(default=timezone.now, null=True, blank=True)
     approved_by = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True, on_delete=models.SET_NULL)
+>>>>>>> 9ca58e084f44c2e60af221b2fbe6f91849fe25be
 
     def __unicode__(self):
         return "%s approval for %s" % (self.project.owner, self.project)
@@ -133,10 +160,15 @@ class Application(models.Model):
 
 
 class ApplicationContext(models.Model):
+<<<<<<< HEAD
     """Has been deprecated in favor of CMS and should be removed."""
 
+    application = models.ForeignKey('project_share.Application')
+    parent = models.ForeignKey('project_share.ApplicationContext', null=True, blank=True)
+=======
     application = models.ForeignKey('project_share.Application', on_delete=models.CASCADE)
     parent = models.ForeignKey('project_share.ApplicationContext', null=True, blank=True, on_delete=models.SET_NULL)
+>>>>>>> 9ca58e084f44c2e60af221b2fbe6f91849fe25be
     order = models.IntegerField(default=100)
 
     title = models.TextField()
@@ -174,22 +206,22 @@ class Project(models.Model):
     application = models.ForeignKey(Application, on_delete=models.DO_NOTHING)
     owner = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, on_delete=models.SET_NULL)
 
+<<<<<<< HEAD
     when_created = AutoDateTimeField(default=timezone.now, verbose_name="Created")
+=======
+    when_created = AutoDateTimeField(default=timezone.now, verbose_name = "Created")
+>>>>>>> 9ca58e084f44c2e60af221b2fbe6f91849fe25be
     when_modified = AutoDateTimeField(default=timezone.now, verbose_name="Last Changed")
 
-    project = models.ForeignKey('project_share.FileUpload', null=True, blank=True,
-                                related_name='+', on_delete=models.SET_NULL)
-    screenshot = models.ForeignKey('project_share.FileUpload', null=True, blank=True,
-                                   related_name='+', on_delete=models.SET_NULL)
-    classroom = models.ForeignKey('django_teams.Team', null=True, blank=True, related_name='+',
-                                  on_delete=models.SET_NULL)
+    project = models.ForeignKey('project_share.FileUpload', null=True, blank=True, related_name='+', on_delete=models.SET_NULL)
+    screenshot = models.ForeignKey('project_share.FileUpload', null=True, blank=True, related_name='+', on_delete=models.SET_NULL)
+    classroom = models.ForeignKey('django_teams.Team', null=True, blank=True, related_name='+', on_delete=models.SET_NULL)
 
     tags = TaggableManager(blank=True)
 
     approved = models.BooleanField(default=False)
 
-    parent = models.ForeignKey('project_share.Project', null=True, blank=True, related_name="children",
-                               on_delete=models.SET_NULL)
+    parent = models.ForeignKey('project_share.Project', null=True, blank=True, related_name="children", on_delete=models.SET_NULL)
 
     @staticmethod
     def approved_projects():
@@ -271,9 +303,13 @@ class ApplicationTheme(models.Model):
 
 
 class ApplicationCategory(models.Model):
+<<<<<<< HEAD
     """A category for sorting and displaying applications."""
 
+    theme = models.ForeignKey('project_share.ApplicationTheme')
+=======
     theme = models.ForeignKey('project_share.ApplicationTheme', null=True, on_delete=models.SET_NULL)
+>>>>>>> 9ca58e084f44c2e60af221b2fbe6f91849fe25be
     name = models.CharField(max_length=255)
     description = models.TextField(blank=True, null=True)
     applications = models.ManyToManyField('project_share.Application', related_name='categories', blank=True)

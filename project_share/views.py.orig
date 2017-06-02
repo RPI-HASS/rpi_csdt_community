@@ -2,13 +2,23 @@
 from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import PermissionDenied
+from django.core.urlresolvers import reverse, reverse_lazy
 from django.shortcuts import get_object_or_404, redirect
-from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView
 from django.views.generic.detail import DetailView
+<<<<<<< HEAD
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django_teams.models import Ownership
 from extra_views import SearchableListMixin, SortableListMixin
+=======
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.shortcuts import get_object_or_404, redirect
+from django.core.exceptions import PermissionDenied
+from django.urls import reverse, reverse_lazy
+from django.contrib.contenttypes.models import ContentType
+from django.conf import settings
+
+>>>>>>> 9ca58e084f44c2e60af221b2fbe6f91849fe25be
 from taggit.models import Tag
 
 from project_share.forms import (AddressForm, ApprovalForm, ProjectForm,
