@@ -2,6 +2,7 @@
 {% load taggit_templatetags2_tags %}
 {% load thumbnail %}
 {% load socialaccount %}
+{% load static %}
 
 {% block content %}
 
@@ -12,221 +13,250 @@
 
     <div class="row match-my-cols tiles">
 
-
+        <a href="http://dev.csdt.rpi.edu/culture/adinkra/html/index.html">
         <div class="card col-sm-6 col-md-3">
             <div class="card-block well" style="height: 540px">
-                <a href="http://dev.csdt.rpi.edu/culture/adinkra/html/index.html" class="thumbnail no-underline"><img class="img-responsive" src="http://dev.csdt.rpi.edu/culture/img/adinkra.jpg"></a>
+                <div class="thumbnail no-underline"><img class="img-responsive" src="http://dev.csdt.rpi.edu/culture/img/adinkra.jpg">
                 <h3 class="caption">Adinkra</h3>
-                <p>Search the secret complicated meanings in individuals symbol created by the Akan in Ghana. Cartesian Coordinates, Polar Coordinates</p>
-                </a>
+                <p class="module-description">Search the secret complicated meanings in individuals symbol created by the Akan in Ghana. Cartesian Coordinates, Polar Coordinates</p>
+                </div>
             </div>
         </div>
+        </a>
+        <a href="http://dev.csdt.rpi.edu/culture/mangbetu/html/index.html" >
         <div class="card col-sm-6 col-md-3">
             <div class="card-block well" style="height: 540px">
-                <a href="http://dev.csdt.rpi.edu/culture/mangbetu/html/index.html" class="thumbnail no-underline"><img class="img-responsive" src="http://dev.csdt.rpi.edu/culture/img/mangbetu.jpg" >
+                <div  class="thumbnail no-underline"><img class="img-responsive" src="http://dev.csdt.rpi.edu/culture/img/mangbetu.jpg" >
                     <h3 class="caption">Mangbetu</h3>
-                    <p>Play with ancient Mangbetu designs. African, Transformational Geometry</p>
-                </a>
+                    <p class="module-description">Play with ancient Mangbetu designs. African, Transformational Geometry</p>
+                </div>
             </div>
         </div>
-
+        </a>
+        <a href="http://dev.csdt.rpi.edu/culture/yarnarts/html/index.html">
         <div class="card col-sm-6 col-md-3">
             <div class="card-block well" style="height: 540px">
-                <a href="http://dev.csdt.rpi.edu/culture/yarnarts/html/index.html" class="thumbnail no-underline"><img class="img-responsive" src="http://dev.csdt.rpi.edu/culture/img/yarnArts.jpg" >
+                <div class="thumbnail no-underline"><img class="img-responsive" src="http://dev.csdt.rpi.edu/culture/img/yarnArts.jpg" >
                     <h3 class="caption">Yarn Arts</h3>
-                    <p>Yarn Arts: From cultural tradition to community activism. Iteration, Global Culture</p>
-                </a>
+                    <p class="module-description">Yarn Arts: From cultural tradition to community activism. Iteration, Global Culture</p>
+                </div>
             </div>
         </div>
+        </a>
+        <a href="http://dev.csdt.rpi.edu/culture/graffiti/html/index.html">
         <div class="card col-sm-6 col-md-3">
             <div class="card-block well" style="height: 540px">
-                <a href="http://dev.csdt.rpi.edu/culture/graffiti/html/index.html" class="thumbnail no-underline"><img class="img-responsive" src="http://dev.csdt.rpi.edu/culture/img/grafitti.jpg" >
+                <div class="thumbnail no-underline"><img class="img-responsive" src="http://dev.csdt.rpi.edu/culture/img/grafitti.jpg" >
                     <h3 class="caption">Graffiti</h3>
-                    <p>Explore the hidden world of Graffiti, and fine the reason behind the madness. Cartesian Coordinates, Polar Coordinates, Global Culture</p>
-                </a>
+                    <p class="module-description">Explore the hidden world of Graffiti, and fine the reason behind the madness. Cartesian Coordinates, Polar Coordinates, Global Culture</p>
+                </div>
+            </div>
+        </div>
+        </a>
+        <a  href="http://dev.csdt.rpi.edu/culture/diysportsscience/html/index.html" >
+    <div class="card col-sm-6 col-md-3">
+        <div class="card-block well" style="height: 540px">
+            <div class="thumbnail no-underline"><img class="img-responsive" src="http://dev.csdt.rpi.edu/culture/img/diySportsScience.jpg" >
+                <h3 class="caption">DIY Sports Science</h3>
+                <p class="module-description">Make your own sports lab to investigate and improve athletic abilities. Global Culture</p>
             </div>
         </div>
     </div>
+    </a>
+    <a href="http://dev.csdt.rpi.edu/culture/kentecomputing/html/index.html">
     <div class="card col-sm-6 col-md-3">
         <div class="card-block well" style="height: 540px">
-            <a href="http://dev.csdt.rpi.edu/culture/diysportsscience/html/index.html" class="thumbnail no-underline"><img class="img-responsive" src="http://dev.csdt.rpi.edu/culture/img/diySportsScience.jpg" >
-                <h3 class="caption">DIY Sports Science</h3>
-                <p>Make your own sports lab to investigate and improve athletic abilities. Global Culture</p>
-            </a>
-        </div>
-    </div>
-    <div class="card col-sm-6 col-md-3">
-        <div class="card-block well" style="height: 540px">
-            <a href="http://dev.csdt.rpi.edu/culture/kentecomputing/html/index.html" class="thumbnail no-underline"><img class="img-responsive" src="http://dev.csdt.rpi.edu/culture/img/kenteComputing.jpg" >
+            <div class="thumbnail no-underline"><img class="img-responsive" src="http://dev.csdt.rpi.edu/culture/img/kenteComputing.jpg" >
                 <h3 class="caption">Kente Computing</h3>
-                <p>Design your own Kente Cloth with this cloth simulator. African, Algorithms</p>
-            </a>
+                <p class="module-description">Design your own Kente Cloth with this cloth simulator. African, Algorithms</p>
+            </div>
         </div>
     </div>
+    </a>
+        <a href="http://dev.csdt.rpi.edu/culture/africanfractals/html/index.html" >
     <div class="card col-sm-6 col-md-3">
         <div class="card-block well" style="height: 540px">
-            <a href="http://dev.csdt.rpi.edu/culture/africanfractals/html/index.html" class="thumbnail no-underline"><img class="img-responsive" src="http://dev.csdt.rpi.edu/culture/img/africanFractals.jpg" >
+            <div class="thumbnail no-underline"><img class="img-responsive" src="http://dev.csdt.rpi.edu/culture/img/africanFractals.jpg" >
                 <h3 class="caption">African Fractals</h3>
-                <p>Use the principle of self similarity to make intricate fractals from simple seeds like ancient African Tribes. African, Recursion, Fractal Geometry</p>
-            </a>
+                <p class="module-description">Use the principle of self similarity to make intricate fractals from simple seeds like ancient African Tribes. African, Recursion, Fractal Geometry</p>
+            </div>
         </div>
     </div>
+    </a>
+    <a href="http://dev.csdt.rpi.edu/culture/afrofuturism/html/index.html">
     <div class="card col-sm-6 col-md-3">
         <div class="card-block well" style="height: 540px">
-            <a href="http://dev.csdt.rpi.edu/culture/afrofuturism/html/index.html" class="thumbnail no-underline"><img class="img-responsive" src="http://dev.csdt.rpi.edu/culture/img/afrofuturism.jpg" >
+            <div class="thumbnail no-underline"><img class="img-responsive" src="http://dev.csdt.rpi.edu/culture/img/afroFuturism.jpg" >
                 <h3 class="caption">Afrofuturism</h3>
-                <p>Explore the Afrofuturist movement, simulate some of their designs, and invent your own. Algorithms in contemporary graphic arts.</p>
-            </a>
+                <p class="module-description">Explore the Afrofuturist movement, simulate some of their designs, and invent your own. Algorithms in contemporary graphic arts.</p>
+            </div>
         </div>
     </div>
+    </a>
+    <a href="http://dev.csdt.rpi.edu/culture/cornrowcurves/html/index.html">
     <div class="card col-sm-6 col-md-3">
         <div class="card-block well" style="height: 540px">
-            <a href="http://dev.csdt.rpi.edu/culture/cornrowcurves/html/index.html" class="thumbnail no-underline"><img class="img-responsive" src="http://dev.csdt.rpi.edu/culture/img/cornrowCurves.jpg" >
+            <div class="thumbnail no-underline"><img class="img-responsive" src="http://dev.csdt.rpi.edu/culture/img/cornrowCurves.jpg" >
                 <h3 class="caption">Cornrow Curves</h3>
-                <p>Learn about this ancient but popular hair style then create your own version. Iteration, African American, Transformational Geometry</p>
-            </a>
+                <p class="module-description">Learn about this ancient but popular hair style then create your own version. Iteration, African American, Transformational Geometry</p>
+            </div>
         </div>
     </div>
-
+    </a>
+    <a href="http://dev.csdt.rpi.edu/culture/quilting/html/index.html">
     <div class="card col-sm-6 col-md-3">
         <div class="card-block well" style="height: 540px">
-            <a href="http://dev.csdt.rpi.edu/culture/quilting/html/index.html" class="thumbnail no-underline"><img class="img-responsive" src="http://dev.csdt.rpi.edu/culture/img/quilting.jpg" >
+            <div class="thumbnail no-underline"><img class="img-responsive" src="http://dev.csdt.rpi.edu/culture/img/quilting.jpg" >
                 <h3 class="caption">Quilting</h3>
-                <p>Appalachian, African American and Native American traditions all practice this beautiful and practical craft. Iteration</p>
-            </a>
+                <p class="module-description">Appalachian, African American and Native American traditions all practice this beautiful and practical craft. Iteration</p>
+            </div>
         </div>
     </div>
-
+    </a>
+    <a href="http://dev.csdt.rpi.edu/culture/anishinaabearcs/html/index.html">
     <div class="card col-sm-6 col-md-3">
         <div class="card-block well" style="height: 540px">
-            <a href="http://dev.csdt.rpi.edu/culture/anishinaabearcs/html/index.html" class="thumbnail no-underline"><img class="img-responsive" src="http://dev.csdt.rpi.edu/culture/img/anishenabegArcs.jpg" >
+            <div class="thumbnail no-underline"><img class="img-responsive" src="http://dev.csdt.rpi.edu/culture/img/anishenabegArcs.jpg" >
                 <h3 class="caption">Anishinaabe Arcs</h3>
-                <p>Design Anishinaabe Arcs in 3D. Native American, Angles, Coordinates, Parabolas</p>
-            </a>
+                <p class="module-description">Design Anishinaabe Arcs in 3D. Native American, Angles, Coordinates, Parabolas</p>
+            </div>
         </div>
     </div>
+    </a>
+    <a href="http://dev.csdt.rpi.edu/culture/beadloom/html/index.html">
     <div class="card col-sm-6 col-md-3">
         <div class="card-block well" style="height: 540px">
-            <a href="http://dev.csdt.rpi.edu/culture/beadloom/html/index.html" class="thumbnail no-underline"><img class="img-responsive" src="http://dev.csdt.rpi.edu/culture/img/beadLoom.jpg" >
+            <div class="thumbnail no-underline"><img class="img-responsive" src="http://dev.csdt.rpi.edu/culture/img/beadLoom.jpg" >
                 <h3 class="caption">Bead Loom</h3>
-                <p>Simulate native american bead loom, and build your own patterns. Native American, Cartesian Coordinates, Iteration</p>
-            </a>
+                <p class="module-description">Simulate native american bead loom, and build your own patterns. Native American, Cartesian Coordinates, Iteration</p>
+            </div>
         </div>
     </div>
+    </a>
+    <a href="http://dev.csdt.rpi.edu/culture/navajorugweaver/html/index.html">
     <div class="card col-sm-6 col-md-3">
         <div class="card-block well" style="height: 540px">
-            <a href="http://dev.csdt.rpi.edu/culture/navajorugweaver/html/index.html" class="thumbnail no-underline"><img class="img-responsive" src="http://dev.csdt.rpi.edu/culture/img/navajo.jpg" >
+            <div class="thumbnail no-underline"><img class="img-responsive" src="http://dev.csdt.rpi.edu/culture/img/navajo.jpg" >
                 <h3 class="caption">Navajo Rug Weaver</h3>
-                <p>Design Navajo rugs with this textile simulator. Native American, Cartesian Coordinates</p>
-            </a>
+                <p class="module-description">Design Navajo rugs with this textile simulator. Native American, Cartesian Coordinates</p>
+            </div>
         </div>
     </div>
-
+    </a>
+    <a href="http://dev.csdt.rpi.edu/culture/pacificnorthwestbasketweaver/html/index.html" >
     <div class="card col-sm-6 col-md-3">
         <div class="card-block well" style="height: 540px">
-            <a href="http://dev.csdt.rpi.edu/culture/pacificnorthwestbasketweaver/html/index.html" class="thumbnail no-underline"><img class="img-responsive" src="http://dev.csdt.rpi.edu/culture/img/northwestBasketWeaver.jpg" >
+            <div class="thumbnail no-underline"><img class="img-responsive" src="http://dev.csdt.rpi.edu/culture/img/northwestBasketWeaver.jpg" >
                 <h3 class="caption">Pacific Northwest Basket Weaver</h3>
-                <p>Design baskets like traditional Northwestern Native American groups. Native American, Cartesian Coordinates</p>
-            </a>
+                <p class="module-description">Design baskets like traditional Northwestern Native American groups. Native American, Cartesian Coordinates</p>
+            </div>
         </div>
     </div>
+    </a>
+    <a href="http://dev.csdt.rpi.edu/culture/precolumbianpyramids/html/index.html">
     <div class="card col-sm-6 col-md-3">
         <div class="card-block well" style="height: 540px">
-            <a href="http://dev.csdt.rpi.edu/culture/precolumbianpyramids/html/index.html" class="thumbnail no-underline"><img class="img-responsive" src="http://dev.csdt.rpi.edu/culture/img/preColumbianPyramids.jpg" >
+            <div  class="thumbnail no-underline"><img class="img-responsive" src="http://dev.csdt.rpi.edu/culture/img/preColumbianPyramids.jpg" >
                 <h3 class="caption">Pre Columbian Pyramids</h3>
-                <p>Latino, Symmetry, Pre-Algebra</p>
-            </a>
+                <p class="module-description">Latino, Symmetry, Pre-Algebra</p>
+            </div>
         </div>
     </div>
+    </a>
+    <a href="http://dev.csdt.rpi.edu/culture/rhythmwheels/html/index.html">
     <div class="card col-sm-6 col-md-3">
         <div class="card-block well" style="height: 540px">
-            <a href="http://dev.csdt.rpi.edu/culture/rhythmwheels/html/index.html" class="thumbnail no-underline"><img class="img-responsive" src="http://dev.csdt.rpi.edu/culture/img/rhythmWheels.jpg" >
+            <div class="thumbnail no-underline"><img class="img-responsive" src="http://dev.csdt.rpi.edu/culture/img/rhythmWheels.jpg" >
                 <h3 class="caption">Rhythm Wheels</h3>
-                <p>Use Latino-Caribbean traditions to build rhythms and music. Latino, Iteration, Fractions, Least Common Multiple</p>
-            </a>
+                <p class="module-description">Use Latino-Caribbean traditions to build rhythms and music. Latino, Iteration, Fractions, Least Common Multiple</p>
+            </div>
         </div>
     </div>
+    </a>
+    <a href="http://dev.csdt.rpi.edu/culture/hexastripweaving/html/index.html">
     <div class="card col-sm-6 col-md-3">
         <div class="card-block well" style="height: 540px">
-            <a href="http://dev.csdt.rpi.edu/culture/hexastripweaving/html/index.html" class="thumbnail no-underline"><img class="img-responsive" src="http://dev.csdt.rpi.edu/culture/img/hexaStripWeaving.jpg" >
+            <div  class="thumbnail no-underline"><img class="img-responsive" src="http://dev.csdt.rpi.edu/culture/img/hexaStripWeaving.jpg" >
                 <h3 class="caption">Hexastrip Weaving</h3>
-                <p>Buckyballs</p>
-            </a>
+                <p class="module-description">Buckyballs</p>
+            </div>
         </div>
     </div>
+    </a>
+        <a href="http://dev.csdt.rpi.edu/culture/breakdancer/html/index.html">
     <div class="card col-sm-6 col-md-3">
         <div class="card-block well" style="height: 540px">
-            <a href="http://dev.csdt.rpi.edu/culture/breakdancer/html/index.html" class="thumbnail no-underline"><img class="img-responsive" src="http://dev.csdt.rpi.edu/culture/img/breakDancer.jpg" >
+            <div  class="thumbnail no-underline"><img class="img-responsive" src="http://dev.csdt.rpi.edu/culture/img/breakDancer.jpg" >
                 <h3 class="caption">Break Dancer</h3>
-                <p>Rotation, Sine Function</p>
-            </a>
+                <p class="module-description">Rotation, Sine Function</p>
+            </div>
         </div>
     </div>
+            </a>
+
+    <a href="http://dev.csdt.rpi.edu/culture/skateboarding/html/index.html">
     <div class="card col-sm-6 col-md-3">
         <div class="card-block well" style="height: 540px">
-            <a href="http://dev.csdt.rpi.edu/culture/skateboarding/html/index.html" class="thumbnail no-underline"><img class="img-responsive" src="http://dev.csdt.rpi.edu/culture/img/skateBoarding.jpg" >
+            <div  class="thumbnail no-underline"><img class="img-responsive" src="http://dev.csdt.rpi.edu/culture/img/skateBoarding.jpg" >
                 <h3 class="caption">Skateboarding</h3>
-                <p>Programming, Slopes, Arcs, Physics</p>
-            </a>
+                <p class="module-description">Programming, Slopes, Arcs, Physics</p>
+            </div>
         </div>
     </div>
+    </a>
+
+
+    <a  href="http://dev.csdt.rpi.edu/culture/simshoban/html/index.html">
     <div class="card col-sm-6 col-md-3">
         <div class="card-block well" style="height: 540px">
-            <a href="http://dev.csdt.rpi.edu/culture/yupikstarnavigator/html/index.html" class="thumbnail no-underline"><img class="img-responsive" src="http://dev.csdt.rpi.edu/culture/img/yupikStarNavigator.jpg" >
-                <h3 class="caption">Yupik Star Navigator</h3>
-                <p>Counting, Modular Math</p>
-            </a>
-        </div>
-    </div>
-    <div class="card col-sm-6 col-md-3">
-        <div class="card-block well" style="height: 540px">
-            <a href="http://dev.csdt.rpi.edu/culture/yupikparkapatterns/html/index.html" class="thumbnail no-underline"><img class="img-responsive" src="http://dev.csdt.rpi.edu/culture/img/yupikParkaPatterns.jpg" >
-                <h3 class="caption">Yupik Parka Patterns</h3>
-                <p>Transformational Geometry</p>
-            </a>
-        </div>
-    </div>
-    <div class="card col-sm-6 col-md-3">
-        <div class="card-block well" style="height: 540px">
-            <a href="http://dev.csdt.rpi.edu/culture/simshoban/html/index.html" class="thumbnail no-underline"><img class="img-responsive" src="http://dev.csdt.rpi.edu/culture/img/simShoBan.jpg" >
+            <div class="thumbnail no-underline"><img class="img-responsive" src="http://dev.csdt.rpi.edu/culture/img/simShoBan.jpg" >
                 <h3 class="caption">SimShoBan</h3>
-                <p></p>
-            </a>
+                <p class="module-description">Polar Coordinates</p>
+            </div>
         </div>
     </div>
+    </a>
+    <a href="http://dev.csdt.rpi.edu/culture/darwingame/html/index.html">
     <div class="card col-sm-6 col-md-3">
         <div class="card-block well" style="height: 540px">
-            <a href="http://dev.csdt.rpi.edu/culture/darwingame/html/index.html" class="thumbnail no-underline"><img class="img-responsive" src="http://dev.csdt.rpi.edu/culture/img/darwinGame.jpg" >
+            <div class="thumbnail no-underline"><img class="img-responsive" src="http://dev.csdt.rpi.edu/culture/img/darwinGame.jpg" >
                 <h3 class="caption">Darwin Game</h3>
-                <p>Biology</p>
-            </a>
+                <p class="module-description">Biology</p>
+            </div>
         </div>
     </div>
+    </a>
+    <a href="http://dev.csdt.rpi.edu/culture/cellgrowth/html/index.html">
     <div class="card col-sm-6 col-md-3">
         <div class="card-block well" style="height: 540px">
-            <a href="http://dev.csdt.rpi.edu/culture/cellgrowth/html/index.html" class="thumbnail no-underline"><img class="img-responsive" src="http://dev.csdt.rpi.edu/culture/img/cellGrowth.jpg" >
+            <div class="thumbnail no-underline"><img class="img-responsive" src="http://dev.csdt.rpi.edu/culture/img/cellGrowth.jpg" >
                 <h3 class="caption">Cell Growth</h3>
-                <p>Replicating endlessly cells can easily grow out of control. Biology</p>
-            </a>
+                <p class="module-description">Replicating endlessly cells can easily grow out of control. Biology</p>
+            </div>
         </div>
     </div>
-    <div class="card col-sm-6 col-md-3">
-        <div class="card-block well" style="height: 540px">
-            <a href="http://dev.csdt.rpi.edu/culture/collage/html/index.html" class="thumbnail no-underline"><img class="img-responsive" src="http://dev.csdt.rpi.edu/culture/img/collage.jpg" >
-                <h3 class="caption">Collage</h3>
-                <p>The Collage project includes all custom blocks. Miscellaneous</p>
-            </a>
-        </div>
-    </div>
-    <div class="card col-sm-6 col-md-3">
-        <div class="card-block well" style="height: 540px">
-            <a href="http://dev.csdt.rpi.edu/culture/sensing/html/index.html" class="thumbnail no-underline"><img class="img-responsive" src="http://dev.csdt.rpi.edu/culture/img/sensing.jpg" >
-                <h3 class="caption">Sensing</h3>
-                <p>Load data from your sensing platforms into CSnap and display it any way you want. Miscellaneous</p>
-            </a>
-        </div>
-    </div>
+    </a>
+
 
 </div>
 
+{% endblock %}
+
+{% block js %}
+<script>
+$(function() {
+    $('.row').each(function() {
+        var intHeight = 0;
+        $(this).find('.well').each(function() {
+            if ($(this).outerHeight() > intHeight) {
+                intHeight = $(this).outerHeight()
+            }
+        });
+        console.log(intHeight);
+        $(this).find('.well').each(function() {
+            $(this).outerHeight(intHeight)
+        });
+    });
+});
+</script>
 {% endblock %}
