@@ -14,36 +14,7 @@ html, body {
   height: 100%;
   background-color: #e5e9ec;
 }
-nav.navbar-fixed-top {
-  background-color: #FFF;
-  border: none;
-}
 
-nav .top-left-menu {
-  background-color: #252830;
-  display: -webkit-flex;
-  display: flex;
-  align-items: center;
-}
-.navbar-toggle {
-  border-color: #252830;
-  background-color: #e5e9ec;
-  margin-top: 13px
-}
-
-.navbar-toggle .icon-bar {
-  background-color: #252830;
-}
-.navbar-header{
-	  background-color: #252830;
-}
-.navbar {
-    background-color: black;
-}
-
-.navbar-brand {
-  height: auto;
-}
 h3 {
     text-align: center;
     margin: 30px 0;
@@ -58,34 +29,7 @@ h3 {
     align-content: center;
     padding: 2rem;
 }
-.navbar-brand h1 {
-  margin: 0;
-  font-size: 1.5em;
-  font-weight: 300;
-  color: #FFF;
-}
-nav.navbar.navbar-inverse.navbar-fixed-top{
-	  background-color: #252830;
 
-}
-
-nav form#search {
-  float: right;
-  padding: 0.5em;
-  padding-right: 2em;
-}
-
-nav form#search .glyphicon-search {
-    z-index: 99;
-    position: absolute;
-    right: 0.7em;
-    top: 50%;
-    margin-top: -0.44em;
-}
-
-nav form#search .input-group .form-control {
-    border-radius: 0.25em;
-}
 body {
   background: lightgray;
   background-size: cover;
@@ -121,7 +65,7 @@ card-block img.card-img {
     background-color: lightgray;
 }
 .content-wrap {
-  padding-top: 61px;
+
   width: 100%;
   background-color: lightgray;
 }
@@ -175,105 +119,6 @@ application .h3{
 .row.match-my-cols [class*="col-"]{
     margin-bottom: -99999px;
     padding-bottom: 99999px;
-}
-
-#side-menu {
-  background-color: #1b1e24;
-  padding-top: 7.2rem;
-  height: 100%;
-  position: fixed;
-  overflow-y: scroll;
-}
-
-#side-menu .profile-block > * {
-  display: inline-block;
-}
-
-#side-menu .profile-block img {
-  width: 70px;
-}
-
-#side-menu .profile-title {
-  color: #FFF;
-  margin-left: 1rem;
-  font-size: 1.5em;
-  vertical-align: middle;
-}
-
-#side-menu .profile-title small {
-  display: block;
-}
-
-#side-menu ul.nav {
-  margin-top: 1rem;
-}
-
-#side-menu ul.nav a {
-  color: #8b91a0;
-}
-
-#side-menu ul.nav a:hover,
-#side-menu ul.nav a:focus {
-  color: #FFF;
-  background-color: inherit;
-}
-
-#side-menu ul.nav a .glyphicon {
-  margin-right: 0.7rem;
-}
-
-#side-menu ul.nav a .glyphicon.pull-right {
-  margin-top: 0.2rem;
-}
-
-#side-menu ul.nav a .badge {
-  background-color: #1ca095;
-}
-
-#side-menu ul.nav .nav-divider {
-  background-color: #252830;
-}
-
-#side-menu ul.nav ul {
-  margin-left: 10%;
-}
-
-#side-menu ul.nav ul a {
-  display: block;
-  background-color: #2b303b;
-  padding: 1rem;
-  margin-bottom: 0.3rem;
-  border-radius: 0.25em;
-}
-
-#side-menu ul.nav ul a:hover {
-  text-decoration: none;
-  background-color: #434857;
-}
-#side-menu ul.nav a:focus .glyphicon.pull-right {
-  -moz-transform: rotate(-90deg);
-  -webkit-transform: rotate(-90deg);
-  -o-transform: rotate(-90deg);
-  -ms-transform: rotate(-90deg);
-  transform: rotate(-90deg);
-}
-#side-menu ul.nav a .glyphicon.pull-right {
-  margin-top: 0.2rem;
-  will-change: transform;
-}
-#main {
-  padding-top: 7.2rem;
-  display: -webkit-flex;
-  display: flex;
-  align-items: stretch;
-  flex-flow: row wrap;
-}
-
-
-
-#side-menu ul.nav ul a.selected {
-  background-color: #aaa;
-  color: white;
 }
 
 .module-description {
