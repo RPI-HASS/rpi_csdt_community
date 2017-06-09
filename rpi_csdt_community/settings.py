@@ -215,7 +215,6 @@ INSTALLED_APPS = (
     'compressor',
     'analytical',
     'blogposts',
-    'news',
     'comments',
     'markdown_deux',
     'crispy_forms',
