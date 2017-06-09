@@ -214,6 +214,11 @@ INSTALLED_APPS = (
     'cms_bootstrap_templates',
     'compressor',
     'analytical',
+    'blogposts',
+    'news',
+    'comments',
+    'markdown_deux',
+    'crispy_forms',
 )
 
 TEMPLATES = [

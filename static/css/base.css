@@ -30,10 +30,7 @@ h3 {
     padding: 2rem;
 }
 
-body {
-  background: lightgray;
-  background-size: cover;
-}
+
 card-block img.card-img {
   top: 50%;
   margin-top: -36px;
@@ -124,4 +121,20 @@ application .h3{
 .module-description {
     color: black;
 
+}
+
+
+/* blog css 8
+
+h1 {
+    color: #777777;
+}
+
+.wmd-panel{
+    margin-right: 0px !important;
+    margin-left: 0px !important;
+}
+
+.comment-reply{
+    display:none;
 }
