@@ -20,7 +20,7 @@
     <h1>{{ title }}<br> <small>{% if instance.draft %}
         <span style='color:red;'>Draft</span> {% endif %}{{ instance.publish }}</small></h1>
     {% if instance.image %}
-    <img src='{{ instance.image.url }}' class='img-responsive' />
+    <a href="{{ instance.image.url }}"><img src='{{ instance.image.url }}' width="{{ instance.image.width }}" height="{{ instance.image.height }} class='img-responsive' /></a>
     {% endif %}
 
 
