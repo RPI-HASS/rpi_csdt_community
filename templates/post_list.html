@@ -22,7 +22,7 @@
     <div class="thumbnail">
         {% if obj.image %}
         <a href='{{ obj.get_absolute_url }}'>
-         <img src='{{ obj.image.url }}' width="{{ obj.image.width }}" height="{{ obj.image.height }} class='img-responsive' />
+         <img src='{{ obj.image.url }}'  class='img-responsive' />
         </a>
         {% endif %}
       <div class="caption post-detail-item">
