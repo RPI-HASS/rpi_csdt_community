@@ -17,10 +17,12 @@
 
 {% block content %}
 <div class='col-sm-6 col-sm-offset-3'>
+    <h1>{{ title }}<br> <small>{% if instance.draft %}
+        <span style='color:red;'>Draft</span> {% endif %}{{ instance.publish }}</small></h1>
     {% if instance.image %}
     <img src='{{ instance.image.url }}' class='img-responsive' />
     {% endif %}
-<h1>{{ title }} <small>{% if instance.draft %}<span style='color:red;'>Draft</span> {% endif %}{{ instance.publish }}</small></h1>
+
 
 <!-- {% if instance.read_time|time:"i" <= "01" %} < 1 minute {% else %}{{ instance.read_time|time:"i" }} minutes {% endif %} -->
 
