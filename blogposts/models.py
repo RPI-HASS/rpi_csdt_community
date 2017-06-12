@@ -55,6 +55,8 @@ class Post(models.Model):
                               blank=True,
                               width_field="width_field",
                               height_field="height_field")
+    height_field = models.IntegerField(default=0)
+    width_field = models.IntegerField(default=0)
     content = models.TextField()
     draft = models.BooleanField(default=False)
     publish = models.DateField(auto_now=False, auto_now_add=False)
