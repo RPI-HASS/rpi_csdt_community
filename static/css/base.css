@@ -9,11 +9,7 @@
   transition: all 150ms ease-in-out;
 }
 
-html, body {
-  position: relative;
-  height: 100%;
-  background-color: #e5e9ec;
-}
+
 
 h3 {
     text-align: center;
@@ -124,7 +120,7 @@ application .h3{
 }
 
 
-/* blog css 8
+/* blog css */
 
 h1 {
     color: #777777;
