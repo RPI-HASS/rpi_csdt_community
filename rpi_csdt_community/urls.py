@@ -40,6 +40,8 @@ urlpatterns = [
     url(r'^accounts/', include('allauth.urls')),
 
     url(r'^comments/', include('django_comments_xtd.urls')),
+    url(r'^blogcomments/', include("comments.urls", namespace='comments')),
+    url(r'^news/', include("blogposts.urls", namespace='blogposts')),
 
     url(r'^attachments/', include('attachments.urls', namespace="attachments")),
 

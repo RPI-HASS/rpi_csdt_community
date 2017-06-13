@@ -9,11 +9,7 @@
   transition: all 150ms ease-in-out;
 }
 
-html, body {
-  position: relative;
-  height: 100%;
-  background-color: #e5e9ec;
-}
+
 
 h3 {
     text-align: center;
@@ -30,10 +26,7 @@ h3 {
     padding: 2rem;
 }
 
-body {
-  background: lightgray;
-  background-size: cover;
-}
+
 card-block img.card-img {
   top: 50%;
   margin-top: -36px;
@@ -124,4 +117,20 @@ application .h3{
 .module-description {
     color: black;
 
+}
+
+
+/* blog css */
+
+h1 {
+    color: #777777;
+}
+
+.wmd-panel{
+    margin-right: 0px !important;
+    margin-left: 0px !important;
+}
+
+.comment-reply{
+    display:none;
 }
