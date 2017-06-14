@@ -218,6 +218,7 @@ INSTALLED_APPS = (
     'comments',
     'markdown_deux',
     'crispy_forms',
+    'guides',
 )
 
 TEMPLATES = [

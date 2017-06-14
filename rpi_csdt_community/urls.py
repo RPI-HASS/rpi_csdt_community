@@ -42,6 +42,8 @@ urlpatterns = [
     url(r'^comments/', include('django_comments_xtd.urls')),
     url(r'^blogcomments/', include("comments.urls", namespace='comments')),
     url(r'^news/', include("blogposts.urls", namespace='blogposts')),
+    url(r'^guides/', include("guides.urls", namespace='guides')),
+
 
     url(r'^attachments/', include('attachments.urls', namespace="attachments")),
 
