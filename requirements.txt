@@ -61,3 +61,4 @@ git+https://github.com/CSnap/django_teams.git
 git+https://github.com/CSnap/django-templatetag-sugar.git
 git+https://github.com/CSnap/SGIS-backend.git
 git+https://github.com/divio/django-filer.git
+git+https://github.com/RuofanLiu/SGIS-backend.git
