@@ -26,7 +26,7 @@ if 'TRAVIS' in os.environ:
             'USER':     'postgres',
             'PASSWORD': '',
             'HOST':     'localhost',
-            'PORT':     '',
+            'PORT':     '',		
         }
     }
 else:
@@ -352,7 +352,7 @@ if USE_CACHE:
 
 if ENABLE_GIS:
     # Make sure the database is configured as postgres
-    assert DATABASES['default']['ENGINE'] == 'django.contrib.gis.db.backends.postgis'
+    #assert DATABASES['default']['ENGINE'] == 'django.contrib.gis.db.backends.postgis'
     INSTALLED_APPS += (
         'gis_csdt',
         'django.contrib.gis',
