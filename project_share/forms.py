@@ -2,6 +2,7 @@
 from django import forms
 from django.forms import ModelForm
 from django_teams.models import Team, TeamStatus
+from captcha.fields import CaptchaField
 
 from project_share.models import (Address, Application, ApplicationCategory,
                                   Approval, Project)
@@ -49,7 +50,9 @@ class ExtendedSignupForm(forms.Form):
     classroom = forms.IntegerField(label='classroom',
                                    widget=forms.TextInput(attrs={'placeholder': 'classroom # (optional)'}),
                                    required=False)
-    field_order = ['username', 'email', 'password1', 'password2', 'gender', 'race', 'age', 'classroom']
+    captcha = CaptchaField()
+    
+    field_order = ['username', 'email', 'password1', 'password2', 'gender', 'race', 'age', 'classroom', 'captch']
 
     def signup(self, request, n_user):
         """specify where to put race / gender data, and signup for classroom"""

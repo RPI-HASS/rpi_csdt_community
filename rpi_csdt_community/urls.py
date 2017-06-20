@@ -38,6 +38,7 @@ urlpatterns = [
     url(r'teams/', include('django_teams.urls')),
 
     url(r'^accounts/', include('allauth.urls')),
+    url(r'^captcha/', include('captcha.urls')),
 
     url(r'^comments/', include('django_comments_xtd.urls')),
     url(r'^blogcomments/', include("comments.urls", namespace='comments')),
