@@ -99,6 +99,8 @@ class ProjectList(SearchableListMixin, SortableListMixin, ListView):
     def render_to_response(self, context, **response_kwargs):
         """List all applications for the user to choose to filter by."""
         context['application_list'] = Application.objects.all()
+        context['order'] = self.request.GET.get('orderby')
+        context['filter_val'] = self.request.GET.get('filter')
         return super(ProjectList, self).render_to_response(context, **response_kwargs)
 
 
