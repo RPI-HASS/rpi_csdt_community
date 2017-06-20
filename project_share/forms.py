@@ -51,7 +51,7 @@ class ExtendedSignupForm(forms.Form):
                                    widget=forms.TextInput(attrs={'placeholder': 'classroom # (optional)'}),
                                    required=False)
     captcha = CaptchaField()
-    
+
     field_order = ['username', 'email', 'password1', 'password2', 'gender', 'race', 'age', 'classroom', 'captch']
 
     def signup(self, request, n_user):
