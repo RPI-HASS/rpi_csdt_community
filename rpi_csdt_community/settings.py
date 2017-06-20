@@ -1,5 +1,7 @@
-# Django settings for rpi_csdt_community project.
+"""Django settings for rpi_csdt_community project."""
 import os
+
+import twitter_bootstrap
 
 PROJECT_ROOT = os.path.dirname(os.path.dirname(__file__))
 
@@ -79,6 +81,7 @@ MEDIA_URL = '/media/'
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/var/www/example.com/static/"
 STATIC_ROOT = os.path.join(PROJECT_ROOT, 'collected_static/')
+STATIC_WEBSITE_ROOT = os.path.join(PROJECT_ROOT, 'static/website/www')
 
 # URL prefix for static files.
 # Example: "http://example.com/static/", "http://static.example.com/"
@@ -110,8 +113,7 @@ MIDDLEWARE = [
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-	'django.middleware.locale.LocaleMiddleware',
-
+    'django.middleware.locale.LocaleMiddleware',
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'cms.middleware.user.CurrentUserMiddleware',
@@ -144,32 +146,32 @@ INSTALLED_APPS = (
     'allauth.account',
     'allauth.socialaccount',
     # ... include the providers you want to enable:
-    #'allauth.socialaccount.providers.amazon',
-    #'allauth.socialaccount.providers.angellist',
-    #'allauth.socialaccount.providers.bitbucket',
-    #'allauth.socialaccount.providers.bitly',
-    #'allauth.socialaccount.providers.coinbase',
-    #'allauth.socialaccount.providers.dropbox',
+    # 'allauth.socialaccount.providers.amazon',
+    # 'allauth.socialaccount.providers.angellist',
+    # 'allauth.socialaccount.providers.bitbucket',
+    # 'allauth.socialaccount.providers.bitly',
+    # 'allauth.socialaccount.providers.coinbase',
+    # 'allauth.socialaccount.providers.dropbox',
     'allauth.socialaccount.providers.facebook',
-    #'allauth.socialaccount.providers.flickr',
+    # 'allauth.socialaccount.providers.flickr',
     'allauth.socialaccount.providers.github',
-    #'allauth.socialaccount.providers.feedly',
-    #'allauth.socialaccount.providers.google',
-    #'allauth.socialaccount.providers.hubic',
-    #'allauth.socialaccount.providers.instagram',
-    #'allauth.socialaccount.providers.linkedin',
-    #'allauth.socialaccount.providers.linkedin_oauth2',
-    #'allauth.socialaccount.providers.openid',
-    #'allauth.socialaccount.providers.persona',
-    #'allauth.socialaccount.providers.soundcloud',
-    #'allauth.socialaccount.providers.stackexchange',
-    #'allauth.socialaccount.providers.tumblr',
-    #'allauth.socialaccount.providers.twitch',
+    # 'allauth.socialaccount.providers.feedly',
+    # 'allauth.socialaccount.providers.google',
+    # 'allauth.socialaccount.providers.hubic',
+    # 'allauth.socialaccount.providers.instagram',
+    # 'allauth.socialaccount.providers.linkedin',
+    # 'allauth.socialaccount.providers.linkedin_oauth2',
+    # 'allauth.socialaccount.providers.openid',
+    # 'allauth.socialaccount.providers.persona',
+    # 'allauth.socialaccount.providers.soundcloud',
+    # 'allauth.socialaccount.providers.stackexchange',
+    # 'allauth.socialaccount.providers.tumblr',
+    # 'allauth.socialaccount.providers.twitch',
     'allauth.socialaccount.providers.twitter',
-    #'allauth.socialaccount.providers.vimeo',
-    #'allauth.socialaccount.providers.vk',
-    #'allauth.socialaccount.providers.weibo',
-    #'allauth.socialaccount.providers.xing',
+    # 'allauth.socialaccount.providers.vimeo',
+    # 'allauth.socialaccount.providers.vk',
+    # 'allauth.socialaccount.providers.weibo',
+    # 'allauth.socialaccount.providers.xing',
 
     'captcha',
     'django_extensions',
@@ -191,30 +193,35 @@ INSTALLED_APPS = (
     'django_teams',
     'django_comments_xtd',
 
-# Django CMS
+    # Django CMS
     'treebeard',
     'djangocms_text_ckeditor',  # note this needs to be above the 'cms' entry
     'cms',  # django CMS itself
     'mptt',  # utilities for implementing a tree
     'menus',  # helper for model independent hierarchical website navigation
     'sekizai',  # for javascript and css management
-    'djangocms_admin_style',  # for the admin skin. You **must** add 'djangocms_admin_style' in the list **before** 'django.contrib.admin'.
+    # for the admin skin. You **must** add 'djangocms_admin_style' in the list **before** 'django.contrib.admin'.
+    'djangocms_admin_style',
     'djangocms_file',
-    #'djangocms_flash',
-    #'djangocms_googlemap',
-    #'djangocms_inherit',
+    # 'djangocms_flash',
+    # 'djangocms_googlemap',
+    # 'djangocms_inherit',
     'djangocms_picture',
-    #'djangocms_teaser',
-#    'djangocms_video',
+    # 'djangocms_teaser',
+    # 'djangocms_video',
     'djangocms_link',
-    #'djangocms_snippet',
+    # 'djangocms_snippet',
     'cms_bootstrap_templates',
     'compressor',
     'analytical',
+    'blogposts',
+    'comments',
+    'markdown_deux',
+    'crispy_forms',
 )
 
-TEMPLATES = [ 
-    {   
+TEMPLATES = [
+    {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [os.path.join(PROJECT_ROOT, 'templates')],
         'APP_DIRS': True,
@@ -228,7 +235,7 @@ TEMPLATES = [
                 'cms.context_processors.cms_settings'
             ],
         },
-    },  
+    },
 ]
 
 
@@ -269,7 +276,7 @@ THUMBNAIL_DEBUG = False
 THUMBNAIL_PROCESSORS = (
     'easy_thumbnails.processors.colorspace',
     'easy_thumbnails.processors.autocrop',
-    #'easy_thumbnails.processors.scale_and_crop',
+    # 'easy_thumbnails.processors.scale_and_crop',
     'filer.thumbnail_processors.scale_and_crop_with_subject_location',
     'easy_thumbnails.processors.filters',
 )
@@ -282,14 +289,13 @@ LOGIN_REDIRECT_URL = '/'
 # Track where my LESS things live
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
-my_app_less = os.path.join(BASE_DIR, 'static', 'less')
+MY_LESS_APP = os.path.join(BASE_DIR, 'static', 'less')
 
 # For apps outside of your project, it's simpler to import them to find their root folders
-import twitter_bootstrap
-bootstrap_less = os.path.join(os.path.dirname(twitter_bootstrap.__file__), 'static', 'twitter_bootstrap', 'less')
+BOOTSTRAP_LESS = os.path.join(os.path.dirname(twitter_bootstrap.__file__), 'static', 'twitter_bootstrap', 'less')
 
 COMPRESS_ENABLED = False
-COMPRESS_LESSC_COMMAND = 'lessc --include-path={}'.format(os.pathsep.join([bootstrap_less, my_app_less]))
+COMPRESS_LESSC_COMMAND = 'lessc --include-path={}'.format(os.pathsep.join([BOOTSTRAP_LESS, MY_LESS_APP]))
 COMPRESS_LESSC_COMMAND += " {infile} {outfile}"
 
 COMPRESS_PRECOMPILERS = (
@@ -332,12 +338,12 @@ WARNING_MESSAGE = "<strong>You are currently looking at the development site!</s
 USE_CACHE = False
 
 try:
-    from local_settings import *
+    from local_settings import *  # noqa: F403
 except:
     pass
 
 if USE_CACHE:
-    MIDDLEWARE_CLASSES += [
+    MIDDLEWARE += [
         'django.middleware.cache.UpdateCacheMiddleware',
         'django.middleware.common.CommonMiddleware',
         'django.middleware.cache.FetchFromCacheMiddleware',
@@ -354,10 +360,10 @@ if ENABLE_GIS:
 
     # Make sure a GOOGLE_API_KEY is defined
     try:
-        GOOGLE_API_KEY
+        GOOGLE_API_KEY  # noqa: F405
     except NameError:
         raise "To use GIS, you need to define a GOOGLE_API_KEY"
     try:
-        CENSUS_API_KEY
+        CENSUS_API_KEY  # noqa: F405
     except NameError:
         raise "To use GIS, you need to define a CENSUS API KEY"
