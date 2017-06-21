@@ -22,7 +22,8 @@ sudo -u postgres createdb rpi_csdt_community
 # Add Extensions
 echo 'rpi_csdt_community; CREATE EXTENSION adminpack; CREATE EXTENSION postgis; CREATE EXTENSION postgis_topology;' | psql -U postgres
 
-
+#echo "GOOGLE_API_KEY = "rgsehsfgsdfbsfdgxvfx532dfe52"" > /usr/local/lib/python2.7/dist-packages/gis_csdt/settings.py
+#echo "CENSUS_API_KEY = "gfsgerultiahefb4u9834tkbrfsb"" > /usr/local/lib/python2.7/dist-packages/gis_csdt/settings.py
 # Install node
 sudo apt-get install -y nodejs build-essential
 
