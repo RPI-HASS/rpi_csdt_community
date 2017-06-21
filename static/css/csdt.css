@@ -306,12 +306,16 @@ nav .btn {
 
 }
 
+.credits-footer {
+   margin: 0px;
+}
+
+
 /* overrides bootstrap.less so they don't move */
 .navbar-nav > li > a:hover {
     padding-top: 15px;
     padding-bottom: 15px;
 }
-
 
 
 @media only screen and (min-width: 768px) {
@@ -358,7 +362,9 @@ nav .btn {
         padding-left: 20%;
     }
 
-
+    .credits-footer {
+        margin: 50px 150px 0px 150px;
+    }
 
 
 }
