@@ -43,7 +43,6 @@ urlpatterns = [
     url(r'^comments/', include('django_comments_xtd.urls')),
     url(r'^blogcomments/', include("comments.urls", namespace='comments')),
     url(r'^news/', include("blogposts.urls", namespace='blogposts')),
-
     url(r'^attachments/', include('attachments.urls', namespace="attachments")),
 
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
