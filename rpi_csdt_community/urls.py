@@ -33,24 +33,18 @@ urlpatterns = [
 
     # TemplateView + Login
     url(r'^$', home, {}, 'home'),
-
     url(r'', include('project_share.urls')),
     url(r'teams/', include('django_teams.urls')),
-
     url(r'^accounts/', include('allauth.urls')),
     url(r'^captcha/', include('captcha.urls')),
-
     url(r'^comments/', include('django_comments_xtd.urls')),
     url(r'^blogcomments/', include("comments.urls", namespace='comments')),
     url(r'^news/', include("blogposts.urls", namespace='blogposts')),
-
     url(r'^attachments/', include('attachments.urls', namespace="attachments")),
-
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^api/', include(router.urls)),
     url(r'^api/files/', FileUploadView.as_view(), name='file-create'),
     url(r'^api/user', CurrentUserView.as_view(), name='user-api-detail'),
-
     url(r'^cms/', include('cms.urls')),
     url(r'^__debug__/', include(debug_toolbar.urls)),
 ]
