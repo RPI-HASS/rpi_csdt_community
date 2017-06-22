@@ -38,13 +38,12 @@ urlpatterns = [
     url(r'teams/', include('django_teams.urls')),
 
     url(r'^accounts/', include('allauth.urls')),
+    url(r'^captcha/', include('captcha.urls')),
 
     url(r'^comments/', include('django_comments_xtd.urls')),
     url(r'^blogcomments/', include("comments.urls", namespace='comments')),
     url(r'^news/', include("blogposts.urls", namespace='blogposts')),
     url(r'^guides/', include("guides.urls", namespace='guides')),
-
-
     url(r'^attachments/', include('attachments.urls', namespace="attachments")),
 
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
