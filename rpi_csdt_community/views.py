@@ -32,4 +32,3 @@ def home(request):
 class Home(ListView):
     model = Application
     template_name = "home.html"
-    

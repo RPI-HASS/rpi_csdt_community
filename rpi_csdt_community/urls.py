@@ -8,15 +8,13 @@ from django.views.generic import TemplateView
 from rest_framework import routers
 
 
-from rpi_csdt_community.views import home, Home
+from rpi_csdt_community.views import Home
 from rpi_csdt_community.viewsets import (ApplicationCategoryViewSet,
                                          ApplicationThemeViewSet,
                                          ApplicationViewSet, CurrentUserView,
                                          DemosViewSet, FileUploadView,
                                          GoalViewSet, ProjectViewSet,
                                          TeamViewSet)
-
-
 
 admin.autodiscover()
 
