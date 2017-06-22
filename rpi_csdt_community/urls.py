@@ -7,13 +7,16 @@ from django.views import static
 from django.views.generic import TemplateView
 from rest_framework import routers
 
-from rpi_csdt_community.views import home
+
+from rpi_csdt_community.views import home, Home
 from rpi_csdt_community.viewsets import (ApplicationCategoryViewSet,
                                          ApplicationThemeViewSet,
                                          ApplicationViewSet, CurrentUserView,
                                          DemosViewSet, FileUploadView,
                                          GoalViewSet, ProjectViewSet,
                                          TeamViewSet)
+
+
 
 admin.autodiscover()
 
@@ -32,7 +35,7 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
 
     # TemplateView + Login
-    url(r'^$', home, {}, 'home'),
+    url(r'^$', Home.as_view(), name='home'),
     url(r'', include('project_share.urls')),
     url(r'teams/', include('django_teams.urls')),
     url(r'^accounts/', include('allauth.urls')),

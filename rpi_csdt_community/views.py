@@ -2,7 +2,7 @@
 from django.contrib.auth.forms import AuthenticationForm
 from django.http import HttpResponse
 from django.shortcuts import render
-from django.views.generic import TemplateView
+from django.views.generic import ListView
 from django_comments.views.comments import post_comment
 
 from project_share.models import Project, Application
@@ -29,8 +29,7 @@ def home(request):
     })
 
 
-class Home(TemplateView):
+class Home(ListView):
+    model = Application
     template_name = "home.html"
-
-    def apps(self):
-        return Application.objects.all()
+    

@@ -12,15 +12,14 @@
     </div>
     <div class="row match-my-cols tiles">
 
+    {% for app in object_list %}
 
-    {% for app in view.apps %}
-
-    <a href="{ app.url }">
+    <a href="{{ app.url }}">
     <div class="card col-sm-6 col-md-3">
         <div class="card-block well" style="height: 540px">
-            <div class="thumbnail no-underline"><img class="img-responsive" src="{ app.screenshot.url }">
-            <h3 class="caption">{ app.name }</h3>
-            <p class="module-description">{ app.description }</p>
+            <div class="thumbnail no-underline"><img class="img-responsive" src="{{ app.screenshot.url }}">
+            <h3 class="caption">{{ app.name }}</h3>
+            <p class="module-description">{{ app.description }}</p>
             </div>
         </div>
     </div>
