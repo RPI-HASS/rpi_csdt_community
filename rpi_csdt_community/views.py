@@ -2,9 +2,10 @@
 from django.contrib.auth.forms import AuthenticationForm
 from django.http import HttpResponse
 from django.shortcuts import render
+from django.views.generic import TemplateView
 from django_comments.views.comments import post_comment
 
-from project_share.models import Project
+from project_share.models import Project, Application
 
 
 def comment_post_wrapper(request):
@@ -28,6 +29,8 @@ def home(request):
     })
 
 
-def return_true(req):
-    """Unused and depricated."""
-    return True
+class Home(TemplateView):
+    template_name = "home.html"
+
+    def apps(self):
+        return Application.objects.all()
