@@ -32,3 +32,7 @@ def home(request):
 class Home(ListView):
     model = Application
     template_name = "home.html"
+
+    def get_queryset(self):
+        queryset = Application.objects.filter(featured=True)
+        return queryset
