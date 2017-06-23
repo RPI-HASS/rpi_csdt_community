@@ -1,8 +1,8 @@
 from django.conf.urls import url
 
-from . import views
+from guides.views import Home, About
 
 urlpatterns = [
-    url(r"^$", views.Home.as_view(), name="all"),
-    url(r'^about/', views.About.as_view(), name="about"),
+    url(r"^$", Home.as_view(), name="all"),
+    url(r'^about/', About.as_view(), name="about"),
 ]
