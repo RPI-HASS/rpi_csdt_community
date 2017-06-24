@@ -347,10 +347,7 @@ WARNING_MESSAGE = "<strong>You are currently looking at the development site!</s
 
 USE_CACHE = False
 
-try:
-    from local_settings import *  # noqa: F403
-except:
-    pass
+
 
 if USE_CACHE:
     MIDDLEWARE += [
@@ -360,8 +357,10 @@ if USE_CACHE:
     ]
 
 
+
 if ENABLE_GIS:
-    # Make sure the database is configured as postgres
+    
+    # Make sure the database is configured as postgis for the GIS features to work
     assert DATABASES['default']['ENGINE'] == 'django.contrib.gis.db.backends.postgis'
     INSTALLED_APPS += (
         'gis_csdt',
@@ -370,10 +369,22 @@ if ENABLE_GIS:
 
     # Make sure a GOOGLE_API_KEY is defined
     try:
+<<<<<<< HEAD
         GOOGLE_API_KEY = 'f43tf89ehg45uhg;oghkse4g433fgt'  # noqa: F405
     except NameError:
         raise "To use GIS, you need to define a GOOGLE_API_KEY"
     try:
         CENSUS_API_KEY = 'fsgrkufhbg34ugugbsrkbgkshldb3c'  # noqa: F405
+=======
+        GOOGLE_API_KEY = "rgsehsfgsdfbsfdgxvfx532dfe52"  # noqa: F405
+    except NameError:
+        raise "To use GIS, you need to define a GOOGLE_API_KEY"
+    try:
+        CENSUS_API_KEY = "gfsgerultiahefb4u9834tkbrfsb"  # noqa: F405
+>>>>>>> d983c3340b8dc0542511fcd7d6175d5f3e72b035
     except NameError:
         raise "To use GIS, you need to define a CENSUS API KEY"
+try:
+    from local_settings import *  # noqa: F403
+except:
+    pass

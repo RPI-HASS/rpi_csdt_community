@@ -38,12 +38,19 @@ urlpatterns = [
     url(r'teams/', include('django_teams.urls')),
 
     url(r'^accounts/', include('allauth.urls')),
+<<<<<<< HEAD
     url(r'^captcha/', include('captcha.urls')),
+=======
+>>>>>>> d983c3340b8dc0542511fcd7d6175d5f3e72b035
 
     url(r'^comments/', include('django_comments_xtd.urls')),
     url(r'^blogcomments/', include("comments.urls", namespace='comments')),
     url(r'^news/', include("blogposts.urls", namespace='blogposts')),
+<<<<<<< HEAD
     url(r'^guides/', include("guides.urls", namespace='guides')),
+=======
+
+>>>>>>> d983c3340b8dc0542511fcd7d6175d5f3e72b035
     url(r'^attachments/', include('attachments.urls', namespace="attachments")),
 
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
@@ -59,7 +66,11 @@ urlpatterns = [
 
 
 =======
+<<<<<<< HEAD
 >>>>>>> 078c35d4b6f98e3810d7ef753d232d6067f9f333
+=======
+>>>>>>> f78128b4c9b1c75b45682f597ea20977213f018a
+>>>>>>> d983c3340b8dc0542511fcd7d6175d5f3e72b035
 if settings.ENABLE_GIS:
     urlpatterns += [
         url(r'^api-gis/', include('gis_csdt.urls')),
@@ -80,4 +91,8 @@ urlpatterns += [
     url(r'^culture/(?P<path>.*)$', static.serve, {'document_root':
                                                   settings.STATIC_ROOT + "website/www/", }),
 ]
+<<<<<<< HEAD
 >>>>>>> 078c35d4b6f98e3810d7ef753d232d6067f9f333
+=======
+>>>>>>> f78128b4c9b1c75b45682f597ea20977213f018a
+>>>>>>> d983c3340b8dc0542511fcd7d6175d5f3e72b035
