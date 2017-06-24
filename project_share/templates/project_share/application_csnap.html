@@ -55,7 +55,7 @@
             'name': '{{ project.name }}',
             'application': {{ project.application.id }},
             'approved': {{ project.approved|lower }},
-            'project_url': '{{ project.project.f.url }}'
+            'project_url': '{{ project.project.file_path.url }}'
           }
           {% elif applicationdemo %}'application_id': {{ applicationdemo.application.id }},
           'demo': {
