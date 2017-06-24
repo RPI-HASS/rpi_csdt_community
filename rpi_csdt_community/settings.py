@@ -11,7 +11,7 @@ if not DEBUG:
     GOOGLE_ANALYTICS_DOMAIN = 'rpi.edu'
 
 # Override this setting local_settings.py to enable the GIS app
-ENABLE_GIS = False
+ENABLE_GIS = True
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
@@ -32,7 +32,8 @@ if 'TRAVIS' in os.environ:
 else:
     DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.postgresql',
+            #'ENGINE': 'django.db.backends.postgresql',
+            'ENGINE': 'django.contrib.gis.db.backends.postgis',
             'NAME': 'rpi_csdt_community',
             'USER': 'postgres',
             'PASSWORD': 'postgres',
@@ -369,10 +370,10 @@ if ENABLE_GIS:
 
     # Make sure a GOOGLE_API_KEY is defined
     try:
-        GOOGLE_API_KEY  # noqa: F405
+        GOOGLE_API_KEY = 'f43tf89ehg45uhg;oghkse4g433fgt'  # noqa: F405
     except NameError:
         raise "To use GIS, you need to define a GOOGLE_API_KEY"
     try:
-        CENSUS_API_KEY  # noqa: F405
+        CENSUS_API_KEY = 'fsgrkufhbg34ugugbsrkbgkshldb3c'  # noqa: F405
     except NameError:
         raise "To use GIS, you need to define a CENSUS API KEY"

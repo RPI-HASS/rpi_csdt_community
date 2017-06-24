@@ -20,8 +20,16 @@ sudo -u postgres psql -U postgres -d postgres -c "alter user postgres with passw
 # Create the database
 sudo -u postgres createdb rpi_csdt_community
 # Add Extensions
-echo 'rpi_csdt_community; CREATE EXTENSION adminpack; CREATE EXTENSION postgis; CREATE EXTENSION postgis_topology;' | psql -U postgres
-
+#echo 'rpi_csdt_community; CREATE EXTENSION adminpack; CREATE EXTENSION postgis; CREATE EXTENSION postgis_topology;' | psql -U postgres
+#/////////////////
+sudo su - postgres
+psql rpi_csdt_community
+CREATE EXTENSION adminpack;
+CREATE EXTENSION postgis;
+CREATE EXTENSION postgis_topology;
+\q
+cd /vagrant/
+#/////////////////
 
 # Install node
 sudo apt-get install -y nodejs build-essential
