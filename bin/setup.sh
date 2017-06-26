@@ -22,10 +22,6 @@ sudo -u postgres createdb rpi_csdt_community
 # Add Extensions
 sudo -u postgres psql rpi_csdt_community -c "CREATE EXTENSION adminpack; CREATE EXTENSION postgis; CREATE EXTENSION postgis_topology;"
 
-
-
-#echo 'rpi_csdt_community; CREATE EXTENSION adminpack; CREATE EXTENSION postgis; CREATE EXTENSION postgis_topology;' | psql -U postgres -h 127.0.0.1 -d rpi_csdt_community
-
 # Install node
 sudo apt-get install -y nodejs build-essential
 
