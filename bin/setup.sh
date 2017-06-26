@@ -37,6 +37,7 @@ cd /vagrant/
 git submodule init
 git submodule update
 
+
 #add dataset
 python manage.py makemigrations gis_csdt
 
