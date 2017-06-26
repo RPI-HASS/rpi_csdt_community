@@ -6,7 +6,3 @@ from django.views.generic import TemplateView
 
 class Home(TemplateView):
     template_name = "guides/guides.html"
-
-
-class About(TemplateView):
-    template_name = "guides/about.html"
