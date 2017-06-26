@@ -2,6 +2,7 @@
 from django.contrib.auth.forms import AuthenticationForm
 from django.http import HttpResponse
 from django.shortcuts import render
+from django.views.generic import TemplateView
 from django_comments.views.comments import post_comment
 
 from project_share.models import Project
@@ -31,3 +32,8 @@ def home(request):
 def return_true(req):
     """Unused and depricated."""
     return True
+
+
+
+class About(TemplateView):
+    template_name = "rpi_csdt_community/about.html"
