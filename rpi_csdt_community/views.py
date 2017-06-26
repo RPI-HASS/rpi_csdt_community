@@ -36,3 +36,7 @@ def return_true(req):
 
 class About(TemplateView):
     template_name = "rpi_csdt_community/about.html"
+
+
+class Guides(TemplateView):
+    template_name = "rpi_csdt_community/guides.html"
