@@ -107,6 +107,7 @@ class Application(models.Model):
 
     featured = models.BooleanField(default=True)
     screenshot = models.ImageField(upload_to="application_screenshot/", null=True)
+    rank = models.IntegerField(default=100)
 
     def get_context(self):
         """return all of the context data for the application."""
