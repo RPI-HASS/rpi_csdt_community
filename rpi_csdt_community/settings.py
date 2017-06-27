@@ -346,10 +346,10 @@ WARNING_MESSAGE = "<strong>You are currently looking at the development site!</s
 
 USE_CACHE = False
 
-try:
-    from local_settings import *  # noqa: F403
-except:
-    pass
+#try:
+#    from local_settings import *  # noqa: F403
+#except:
+#    pass
 
 if USE_CACHE:
     MIDDLEWARE += [
@@ -373,8 +373,6 @@ if ENABLE_GIS:
     except NameError:
         raise "To use GIS, you need to define a GOOGLE_API_KEY"
     try:
-        CENSUS_API_KEY  = '5yw5yedfhdjryjssrthdjdrhdf' # noqa: F405
+        CENSUS_API_KEY = '5yw5yedfhdjryjssrthdjdrhdf' # noqa: F405
     except NameError:
         raise "To use GIS, you need to define a CENSUS API KEY"
-  
-  
