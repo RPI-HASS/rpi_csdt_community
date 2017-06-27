@@ -7,8 +7,7 @@ from django.views import static
 from django.views.generic import TemplateView
 from rest_framework import routers
 
-
-from rpi_csdt_community.views import Home
+from rpi_csdt_community.views import home, About, Guides
 from rpi_csdt_community.viewsets import (ApplicationCategoryViewSet,
                                          ApplicationThemeViewSet,
                                          ApplicationViewSet, CurrentUserView,
@@ -41,7 +40,8 @@ urlpatterns = [
     url(r'^comments/', include('django_comments_xtd.urls')),
     url(r'^blogcomments/', include("comments.urls", namespace='comments')),
     url(r'^news/', include("blogposts.urls", namespace='blogposts')),
-    url(r'^guides/', include("guides.urls", namespace='guides')),
+    url(r'^guides/', Guides.as_view(), name='guides'),
+    url(r'^about/', About.as_view(), name="about"),
     url(r'^attachments/', include('attachments.urls', namespace="attachments")),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^api/', include(router.urls)),
@@ -61,5 +61,5 @@ urlpatterns += [
     url(r'^media/(?P<path>.*)$', static.serve, {'document_root': settings.MEDIA_ROOT, }),
     url(r'^static/(?P<path>.*)$', static.serve, {'document_root': settings.STATIC_ROOT, }),
     url(r'^culture/(?P<path>.*)$', static.serve, {'document_root':
-                                                  settings.STATIC_ROOT + "website/www/", }),
+                                                  settings.STATIC_WEBSITE_ROOT}),
 ]

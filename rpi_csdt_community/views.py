@@ -2,7 +2,8 @@
 from django.contrib.auth.forms import AuthenticationForm
 from django.http import HttpResponse
 from django.shortcuts import render
-from django.views.generic import ListView
+from django.views.generic import ListView, TemplateView
+
 from django_comments.views.comments import post_comment
 
 from project_share.models import Project, Application
@@ -28,7 +29,7 @@ def home(request):
         'projects_newest': projects_newest
     })
 
-
+  
 class Home(ListView):
     model = Application
     template_name = "home.html"
@@ -36,3 +37,11 @@ class Home(ListView):
     def get_queryset(self):
         queryset = Application.objects.filter(featured=True)
         return queryset
+
+
+class About(TemplateView):
+    template_name = "rpi_csdt_community/about.html"
+
+
+class Guides(TemplateView):
+    template_name = "rpi_csdt_community/guides.html"
