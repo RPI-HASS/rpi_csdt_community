@@ -29,7 +29,7 @@ def home(request):
         'projects_newest': projects_newest
     })
 
-  
+
 class Home(ListView):
     model = Application
     template_name = "home.html"
