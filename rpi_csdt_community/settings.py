@@ -11,7 +11,7 @@ if not DEBUG:
     GOOGLE_ANALYTICS_DOMAIN = 'rpi.edu'
 
 # Override this setting local_settings.py to enable the GIS app
-ENABLE_GIS = False
+ENABLE_GIS = True
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
@@ -362,15 +362,15 @@ if ENABLE_GIS:
 
     # Make sure a GOOGLE_API_KEY is defined
     try:
-        GOOGLE_API_KEY   # noqa: F405
+        GOOGLE_API_KEY = None  # noqa: F405
     except NameError:
         raise "To use GIS, you need to define a GOOGLE_API_KEY"
     try:
-        CENSUS_API_KEY  # noqa: F405
+        CENSUS_API_KEY = None  # noqa: F405
     except NameError:
         raise "To use GIS, you need to define a CENSUS API KEY"
 
-try:
-    from local_settings import *  # noqa: F403
-except:
-    pass
+# try:
+#     from local_settings import *  # noqa: F403
+# except:
+#     pass
