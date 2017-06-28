@@ -39,7 +39,7 @@ git submodule update
 
 
 #add dataset
-python manage.py makemigrations gis_csdt
+#python manage.py makemigrations gis_csdt
 
 # Run migrations to init db
 python manage.py migrate
