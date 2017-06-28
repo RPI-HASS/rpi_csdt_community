@@ -372,7 +372,7 @@ try:
 except NameError:
     raise "To use GIS, you need to define a CENSUS API KEY"
 
-try:
-    from local_settings import *  # noqa: F403
-except:
-    pass
+# try:
+#     from local_settings import *  # noqa: F403
+# except:
+#     pass
