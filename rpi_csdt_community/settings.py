@@ -346,11 +346,6 @@ WARNING_MESSAGE = "<strong>You are currently looking at the development site!</s
 
 USE_CACHE = False
 
-# try:
-#    from local_settings import *  # noqa: F403
-# except:
-#    pass
-
 if USE_CACHE:
     MIDDLEWARE += [
         'django.middleware.cache.UpdateCacheMiddleware',
@@ -368,11 +363,16 @@ if ENABLE_GIS:
     )
 
     # Make sure a GOOGLE_API_KEY is defined
-    try:
-        GOOGLE_API_KEY = 'fbdthsjhgfdhnmdjsuyr3tythdf'  # noqa: F405
-    except NameError:
-        raise "To use GIS, you need to define a GOOGLE_API_KEY"
-    try:
-        CENSUS_API_KEY = '5yw5yedfhdjryjssrthdjdrhdf'  # noqa: F405
-    except NameError:
-        raise "To use GIS, you need to define a CENSUS API KEY"
+try:
+    GOOGLE_API_KEY = None  # noqa: F405
+except NameError:
+    raise "To use GIS, you need to define a GOOGLE_API_KEY"
+try:
+    CENSUS_API_KEY = None  # noqa: F405
+except NameError:
+    raise "To use GIS, you need to define a CENSUS API KEY"
+
+try:
+    from local_settings import *  # noqa: F403
+except:
+    pass
