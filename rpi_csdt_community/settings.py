@@ -21,12 +21,12 @@ MANAGERS = ADMINS
 if 'TRAVIS' in os.environ:
     DATABASES = {
         'default': {
-            'ENGINE':   'django.contrib.gis.db.backends.postgis',
-            'NAME':     'travisci',
-            'USER':     'postgres',
+            'ENGINE': 'django.contrib.gis.db.backends.postgis',
+            'NAME': 'travisci',
+            'USER': 'postgres',
             'PASSWORD': '',
-            'HOST':     'localhost',
-            'PORT':     '',
+            'HOST': 'localhost',
+            'PORT': '',
         }
     }
 else:
@@ -370,7 +370,7 @@ if ENABLE_GIS:
     except NameError:
         raise "To use GIS, you need to define a CENSUS API KEY"
 
-# try:
-#     from local_settings import *  # noqa: F403
-# except:
-#     pass
+try:
+    from local_settings import *  # noqa: F403, F401
+except:
+    pass
