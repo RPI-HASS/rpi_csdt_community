@@ -2,13 +2,23 @@ from django.conf.urls import include, url
 from django.views.generic import TemplateView, RedirectView
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
+from django.views.generic import TemplateView
+from django.contrib.staticfiles.views import serve
+from rpi_csdt_community.views import StaticView
+#from django.conf.urls.i18n import i18n_patterns
+
+
+
+
 import debug_toolbar
 
 from django.contrib import admin
 admin.autodiscover()
 
-from rpi_csdt_community.viewsets import ProjectViewSet, DemosViewSet, GoalViewSet, ApplicationViewSet, FileUploadView, CurrentUserView, TeamViewSet
+from rpi_csdt_community.viewsets import ProjectViewSet, DemosViewSet, GoalViewSet, ApplicationViewSet, FileUploadView, CurrentUserView
 from rpi_csdt_community.viewsets import ApplicationThemeViewSet, ApplicationCategoryViewSet
+from rpi_csdt_community.viewsets import TeamViewSet
+
 from rpi_csdt_community.views import home
 from django.views import static
 from rest_framework import routers
@@ -25,9 +35,10 @@ router.register(r'category', ApplicationCategoryViewSet, base_name='api-category
 urlpatterns = [
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'news/', include('news.urls')),
+
 
     # TemplateView + Login
-    url(r'^$', home, {}, 'home'),
     #url(r'^$', login_required(TemplateView.as_view(template_name="home.html")), {}, 'home'),
 
     url(r'', include('project_share.urls')),
@@ -46,7 +57,13 @@ urlpatterns = [
 
     url(r'^cms/', include('cms.urls')),
     url(r'^__debug__/', include(debug_toolbar.urls)),
+    url(r'^media/(?P<path>.*)$', static.serve, {'document_root': settings.MEDIA_ROOT,}),
+    url(r'^static/(?P<path>.*)$', static.serve, {'document_root': settings.STATIC_ROOT,}),
+    url(r'^(?P<path>.*)$', static.serve, {'document_root': settings.STATIC_ROOT+"pages/",}),
+    #url(r'^$', static.serve, {'document_root': settings.STATIC_ROOT+"pages/index.html",}, 'home'),
+
 ]
+
 
 urlpatterns += [
     url(r'^media/(?P<path>.*)$', static.serve, {'document_root': settings.MEDIA_ROOT,}),
@@ -58,3 +75,5 @@ if settings.ENABLE_GIS:
         url(r'^api-gis/', include('gis_csdt.urls')),
         url(r'^gis/', TemplateView.as_view(template_name='gis.html')),
     ]
+
+

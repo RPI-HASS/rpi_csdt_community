@@ -49,11 +49,11 @@ class TeamViewSet(viewsets.ModelViewSet):
     serializer_class = TeamSerializer
 
     def get_queryset(self):
-        queryset = self.model.objects.select_related()
-        user = self.request.query_params.get('user', None)
-        queryset = queryset.filter(user=get_object_or_404(ExtendedUser, pk=user))
-        queryset = queryset.filter(role='10') | queryset.filter(role='20')
-        return queryset
+       queryset = self.model.objects.select_related()
+       user = self.request.query_params.get('user', None)
+       queryset = queryset.filter(user=get_object_or_404(ExtendedUser, pk=user))
+       queryset = queryset.filter(role='10') | queryset.filter(role='20')
+       return queryset
 	
 class DemosViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = ApplicationDemo.objects.all()

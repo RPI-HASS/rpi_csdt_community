@@ -103,3 +103,4 @@ admin.site.register(Project, ProjectAdmin)
 admin.site.register(Classroom, ClassroomAdmin)
 admin.site.register(ExtendedUser, UserAdmin)
 admin.site.register(FileUpload)
+

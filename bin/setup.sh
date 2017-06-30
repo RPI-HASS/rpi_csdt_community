@@ -9,7 +9,7 @@ sudo apt-get update
 sudo apt-get upgrade
 
 # Install python
-sudo apt-get install -y python-pip python-dev
+sudo apt-get install -y python3-pip python3-dev
 
 # Install the database
 sudo apt-get install -y postgresql postgresql-contrib
@@ -25,8 +25,8 @@ sudo npm install -g less
 
 # Install libraries for the community site
 sudo apt-get install -y  libpq-dev libcurl4-openssl-dev
-pip install --upgrade pip
-pip install --upgrade -r /vagrant/requirements.txt
+pip3 install --upgrade pip
+pip3 install --upgrade -r /vagrant/requirements.txt
 
 # Install the git submodules
 cd /vagrant/

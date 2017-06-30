@@ -15,6 +15,8 @@ ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
 
+
+
 MANAGERS = ADMINS
 if 'TRAVIS' in os.environ:
     DATABASES = {
@@ -100,6 +102,25 @@ STATICFILES_FINDERS = (
     # 'django.contrib.staticfiles.finders.DefaultStorageFinder',
     'compressor.finders.CompressorFinder',
 )
+ALL_EMAILS = ''
+PACKAGE_NAME_FILEBROWSER = "filebrowser_safe" 
+PACKAGE_NAME_GRAPPELLI = "grappelli_safe" 
+GRAPPELLI_INSTALLED = False 
+ADMIN_REMOVAL = [] 
+RATINGS_RANGE = range(1, 5) 
+TESTING = False 
+BLOG_SLUG = '' 
+COMMENTS_UNAPPROVED_VISIBLE = True 
+COMMENTS_REMOVED_VISIBLE = False 
+COMMENTS_DEFAULT_APPROVED = True 
+COMMENTS_NOTIFICATION_EMAILS = ",".join(ALL_EMAILS) 
+COMMENT_FILTER = None
+
+TEMPLATE_PATH = os.path.join(PROJECT_ROOT, 'templates/')
+TEMPLATE_DIRS = (
+    TEMPLATE_PATH,
+)
+
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = 'n)ntn6k*y6tt5zd5m!0$&qd$y_*rpv5m87-ld4f7suj8%shd^4'
@@ -111,14 +132,21 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
 	'django.middleware.locale.LocaleMiddleware',
+    "mezzanine.core.request.CurrentRequestMiddleware", 
+    "mezzanine.core.middleware.RedirectFallbackMiddleware", 
+    "mezzanine.core.middleware.TemplateForDeviceMiddleware", 
+    "mezzanine.core.middleware.TemplateForHostMiddleware", 
+    "mezzanine.core.middleware.AdminLoginInterfaceSelectorMiddleware", 
+    "mezzanine.core.middleware.SitePermissionMiddleware",
+    "mezzanine.core.middleware.SSLRedirectMiddleware", 
+    "mezzanine.pages.middleware.PageMiddleware",
+    "django.middleware.locale.LocaleMiddleware",
 
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'cms.middleware.user.CurrentUserMiddleware',
-    'cms.middleware.page.CurrentPageMiddleware',
-    'cms.middleware.toolbar.ToolbarMiddleware',
-    'cms.middleware.language.LanguageCookieMiddleware',
 ]
+PACKAGE_NAME_FILEBROWSER = "filebrowser_safe"
+PACKAGE_NAME_GRAPPELLI = "grappelli_safe"
 
 ROOT_URLCONF = 'rpi_csdt_community.urls'
 
@@ -132,6 +160,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.redirects',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
@@ -165,7 +194,7 @@ INSTALLED_APPS = (
     #'allauth.socialaccount.providers.stackexchange',
     #'allauth.socialaccount.providers.tumblr',
     #'allauth.socialaccount.providers.twitch',
-    'allauth.socialaccount.providers.twitter',
+    #'allauth.socialaccount.providers.twitter',
     #'allauth.socialaccount.providers.vimeo',
     #'allauth.socialaccount.providers.vk',
     #'allauth.socialaccount.providers.weibo',
@@ -176,6 +205,7 @@ INSTALLED_APPS = (
     'project_share',
     'rpi_csdt_community',
     'twitter_bootstrap',
+
     'jquery',
 
 
@@ -190,6 +220,17 @@ INSTALLED_APPS = (
     'rest_framework',
     'django_teams',
     'django_comments_xtd',
+    "mezzanine.boot", 
+    "mezzanine.conf", 
+    "mezzanine.core", 
+    "mezzanine.generic", 
+    "mezzanine.blog", 
+    "mezzanine.forms", 
+    "mezzanine.pages", 
+    "mezzanine.galleries", 
+    "mezzanine.twitter",
+    'news',
+    #'twitter_bootstrap',
 
 # Django CMS
     'treebeard',
@@ -225,12 +266,15 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'sekizai.context_processors.sekizai',
-                'cms.context_processors.cms_settings'
             ],
         },
     },  
 ]
 
+TEMPLATE_DIRS = [
+    os.path.join(PROJECT_ROOT, 'news/mezzanine/mezzanine'), 
+    os.path.join(PROJECT_ROOT, 'news/mezzanine/mezzanine/blog/templates'),
+]
 
 AUTHENTICATION_BACKENDS = (
     "django.contrib.auth.backends.ModelBackend",
@@ -239,7 +283,6 @@ AUTHENTICATION_BACKENDS = (
 
 AUTH_USER_MODEL = 'project_share.ExtendedUser'
 ACCOUNT_SIGNUP_FORM_CLASS = 'project_share.forms.ExtendedSignupForm'
-
 CMS_TEMPLATES = (
     ('cms_bootstrap_templates/template_one_column.html', 'One columns'),
     ('cms_bootstrap_templates/template_two_column.html', 'Two columns'),
@@ -248,8 +291,20 @@ CMS_TEMPLATES = (
     ('cms_bootstrap_templates/template_header_two_column_left.html', 'Two columns w/ header, large left'),
     ('cms_bootstrap_templates/template_header_two_column_right.html', 'Two columns w/ header, large right'),
 )
-
 CMS_SOFTROOT = True
+
+PACKAGE_NAME_FILEBROWSER = 'filebrowser_safe'
+PACKAGE_NAME_GRAPPELLI = 'grappelli_safe'
+GRAPPELLI_INSTALLED = False
+ADMIN_REMOVAL = []
+RATINGS_RANGE = range(1, 5)
+TESTING = False
+BLOG_SLUG = ''
+COMMENTS_UNAPPROVED_VISIBLE = True
+COMMENTS_REMOVED_VISIBLE = False
+COMMENTS_DEFAULT_APPROVED = True
+# COMMENTS_NOTIFICATION_EMAILS = ','.join(ALL_EMAILS)
+COMMENT_FILTER = None
 
 REST_FRAMEWORK = {
     # Use hyperlinked styles by default.
@@ -285,17 +340,17 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 my_app_less = os.path.join(BASE_DIR, 'static', 'less')
 
 # For apps outside of your project, it's simpler to import them to find their root folders
-import twitter_bootstrap
-bootstrap_less = os.path.join(os.path.dirname(twitter_bootstrap.__file__), 'static', 'twitter_bootstrap', 'less')
+#import twitter_bootstrap
+#bootstrap_less = os.path.join(os.path.dirname(twitter_bootstrap.__file__), 'static', 'twitter_bootstrap', 'less')
 
 COMPRESS_ENABLED = False
-COMPRESS_LESSC_COMMAND = 'lessc --include-path={}'.format(os.pathsep.join([bootstrap_less, my_app_less]))
-COMPRESS_LESSC_COMMAND += " {infile} {outfile}"
+#COMPRESS_LESSC_COMMAND = 'lessc --include-path={}'.format(os.pathsep.join([bootstrap_less, my_app_less]))
+#COMPRESS_LESSC_COMMAND += " {infile} {outfile}"
 
-COMPRESS_PRECOMPILERS = (
-    ('text/less', COMPRESS_LESSC_COMMAND),
-    ('stylesheet/less', COMPRESS_LESSC_COMMAND),
-)
+#COMPRESS_PRECOMPILERS = (
+#    ('text/less', COMPRESS_LESSC_COMMAND),
+#    ('stylesheet/less', COMPRESS_LESSC_COMMAND),
+#)
 
 
 # A sample logging configuration. The only tangible logging

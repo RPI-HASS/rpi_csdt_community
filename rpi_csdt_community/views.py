@@ -4,6 +4,9 @@ from django.contrib.auth.forms import AuthenticationForm
 from django_comments.views.comments import post_comment
 from django.http import HttpResponse
 from django.db.models import Count
+from django.views.generic import TemplateView
+from django.template import TemplateDoesNotExist
+from django.http import Http404
 
 from project_share.models import Project
 
@@ -30,3 +33,12 @@ def home(request):
 def return_true(req):
     return True
 
+#static wrapper class to more easily return static pages from /pages/$tool$/page.html
+class StaticView(TemplateView):
+    def get(self, request, page, *args, **kwargs):
+        self.template_name = 'pages/' + page
+        response = super(StaticView, self).get(request, *args, **kwargs)
+        try:
+            return response.render()
+        except TemplateDoesNotExist:
+            raise Http404()

@@ -1,0 +1,67 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta name="GENERATOR" content="Microsoft FrontPage 5.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>How to reflect arcs in Graffiti Grapher</title>
+<link rel="stylesheet" type="text/css" href="../../../../ronstyle.css">
+</head>
+
+<body>
+
+<p><font face="Arial" size="4">How to reflect arcs in Graffiti Grapher:</font></p>
+<p><font face="Arial" size="4">
+<img border="0" src="img/X_reflect.jpg" align="right" width="216" height="287"></font></p>
+<font SIZE="4"> 
+<p><font face="Arial">Lets start with the two lines of the single default shape 
+  you get when you first open the applet. </font><font face="Arial">We turn shape 
+  1 border 2 into an arc, and set &quot;after each degree swept&quot; to 0 to 
+  avoid confusion about changing the radius. No</font><font face="Arial">w we 
+  have the default values radius 60, starting angle 40, ending angle 80. Now click 
+  on shape 1 border 1. Note that you again have to make the radius 60 and &quot;after 
+  each degree swept&quot; to 0. Now if you make both angles negative (sa= -40, 
+  ea = -80) then you have reflected across the X axis. </font></p>
+<p><font face="Arial">Reflection across the Y axis is a little more tricky. First, 
+  take away the negative signs so we are back to the default values. Now, I think 
+  about it this way: the Y axis is at 90 degrees. So you want to do the same thing 
+  on both sides of the 90 degree angle. The starting angle sa=40 will &quot;undershoot&quot; 
+  90 by fifty degrees. So on the other side of the Y axis, you want ea to &quot;overshoot&quot; 
+  <img border="0" src="img/Y_reflect.jpg" align="left" width="220" height="203">90 
+  by fifty degrees. Thus ea = (50 + 90) = </font><font size="4"><font face="Arial">140 
+  </font></font><font face="Arial">. Same with ending angle ea=80: it will &quot;undershoot&quot; 
+  90 by ten degrees on the right side, so you want sa to &quot;overshoot&quot; 
+  90 by 10 degrees on the left side: 10+90 = 100. Thus ea = 140, sa = 100.</font></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><font face="Arial">Now lets look at all four quadrants. </font></p>
+<p><font face="Arial">The sa=40 of the first arc is similar to sa=140 of the second 
+  arc because when we reflect the grid around the y axis, the 0 is like the 180. 
+  But after reflection you can see that red arrow <img border="0" src="img/4quad.jpg" align="right" width="528" height="522">which 
+  was going counterclockwise before is going clockwise now.</font></p>
+<p><font face="Arial">As a result as we go up in numbers from 0 to 40 for the 
+  original arc, it's like going down in numbers from the 180 to 140 in the reflected 
+  arc. Since the sa of 40 was saying that we started the arc 40 degrees away from 
+  the 0, we take 40 degrees away from the 180 and get 140. Similarly the 80 becomes 
+  100 because 180-80=100.</font></p>
+<p><font face="Arial">This way we are reflecting both the angles and the direction 
+  of the arcs which are drawn as red arrows, from the start of the arc to the 
+  end of the arc.</font></p>
+<p><font face="Arial">Now let's say we want to reflect across the x axis instead 
+  of the y axis. We start by going counterclockwise in a positive direction. After 
+  reflecting we will be going clockwise, in a negative direction again. So the 
+  0 is like 360. The 40 is like 360-40=320, and the 80 is like 360-80=280.</font></p>
+<p><font face="Arial">And finally to reflect across both the x and the y axis 
+  we can take our first reflection across the y axis and reflect it now across 
+  the x axis, now we are going counterclockwise again from 180 to 270, thus the 
+  angles are </font></p>
+<p><font face="Arial">220 and 260.</font></p>
+</font> 
+<p>&nbsp;</p>
+
+</body>
+
+</html>
