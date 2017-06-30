@@ -368,12 +368,10 @@ if ENABLE_GIS:
 
     # Make sure a GOOGLE_API_KEY is defined
     try:
-        GOOGLE_API_KEY # noqa: F405
+        GOOGLE_API_KEY  # noqa: F405
     except NameError:
         raise "To use GIS, you need to define a GOOGLE_API_KEY"
     try:
-        CENSUS_API_KEY # noqa: F405
+        CENSUS_API_KEY  # noqa: F405
     except NameError:
         raise "To use GIS, you need to define a CENSUS API KEY"
-
-
