@@ -352,6 +352,11 @@ if USE_CACHE:
         'django.middleware.cache.FetchFromCacheMiddleware',
     ]
 
+try:
+    from local_settings import *  # noqa: F403, F401
+except:
+    pass
+
 if ENABLE_GIS:
     # Make sure the database is configured as postgres
     assert DATABASES['default']['ENGINE'] == 'django.contrib.gis.db.backends.postgis'
@@ -362,15 +367,12 @@ if ENABLE_GIS:
 
     # Make sure a GOOGLE_API_KEY is defined
     try:
-        GOOGLE_API_KEY = None  # noqa: F405
+        GOOGLE_API_KEY # noqa: F405
     except NameError:
         raise "To use GIS, you need to define a GOOGLE_API_KEY"
     try:
-        CENSUS_API_KEY = None  # noqa: F405
+        CENSUS_API_KEY # noqa: F405
     except NameError:
         raise "To use GIS, you need to define a CENSUS API KEY"
 
-try:
-    from local_settings import *  # noqa: F403, F401
-except:
-    pass
+
