@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load cms_tags sekizai_tags %}
+{% load static %}
+
+{% block content %}
+        <div class="container">
+            <div class="header">
+                {% placeholder header %}
+            </div>
+            <div class="wrapper">
+                <div class="column-left">
+                    {% placeholder left_column %}
+                </div>
+                <div class="column-right">
+                    {% placeholder right_column %}
+                </div>
+            </div>
+        </div>
+{% block extra_style %}
+    <link rel="stylesheet" type="text/less" media="all" href="{% static 'cms_bootstrap_templates/less/template_header_two_columns_left.less'%}" />
+{% endblock %}
+
+{% endblock %}

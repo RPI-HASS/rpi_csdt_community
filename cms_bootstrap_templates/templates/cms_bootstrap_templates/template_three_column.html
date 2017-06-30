@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load cms_tags sekizai_tags %}
+{% load static %}
+
+{% block content %}
+        <div class="wrapper">
+            <div class="column-left">
+                {% placeholder left_column %}
+            </div>
+            <div class="column-middle">
+                {% placeholder middle_column %}
+            </div>
+            <div class="column-right">
+                {% placeholder right_column %}
+            </div>
+        </div>
+{% block extra_style %}
+    <link rel="stylesheet" type="text/less" media="all" href="{% static 'cms_bootstrap_templates/less/template_three_columns.less'%}" />
+{% endblock %}
+
+{% endblock %}
