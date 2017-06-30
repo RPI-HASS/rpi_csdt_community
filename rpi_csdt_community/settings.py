@@ -354,8 +354,9 @@ if USE_CACHE:
 
 try:
     from local_settings import *  # noqa: F403, F401
-except:
-    pass
+except ImportError:
+    GOOGLE_API_KEY = None
+    CENSUS_API_KEY = None
 
 if ENABLE_GIS:
     # Make sure the database is configured as postgres
