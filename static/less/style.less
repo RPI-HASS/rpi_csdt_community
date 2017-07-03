@@ -61,6 +61,10 @@ body {
     }*/
 }
 
+.panel {
+    background-color: #eee;
+}
+
 .thumbnail-long {
     /* Each thumbnail takes up a complete row, but splits it into two columns
         with the image on the left, description on the right */
@@ -155,91 +159,95 @@ a.liker {
 //stuff for the horizontal CMS menus
 #CMS_Menu
 {
-	margin-top:15px
+	margin-top: 15px;
+	width: 100%;
 }
 
 #CMS_Menu ul
 {
-	list-style:none;
-	position:relative;
-	float:left;
-	margin:0;
-	padding:0
+	list-style: none;
+	position: relative;
+	float: left;
+	margin: 0;
+	padding: 0;
+	width: 100%;
 }
 
 #CMS_Menu ul a
 {
-	display:block;
-	color:#333;
-	text-decoration:none;
-	font-weight:700;
-	font-size:12px;
-	line-height:32px;
-	padding:0 15px;
-	font-family:"HelveticaNeue","Helvetica Neue",Helvetica,Arial,sans-serif
+	display: block;
+	color: #333;
+	text-decoration: none;
+	font-weight: 700;
+	font-size: 12px;
+	line-height: 32px;
+	padding: 0 15px;
+	font-family: "HelveticaNeue","Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 
 #CMS_Menu ul li
 {
-	position:relative;
-	float:left;
-	margin:0;
-	padding:0
+	position: relative;
+	float: left;
+	margin: 0;
+	padding: 0;
 }
 
 
 #CMS_Menu ul li.selected
 {
-	background:#ddd;
-	font-weight:600;
-	/*font-size:24px;*/
-	font-family:"HelveticaNeue","Helvetica Neue",Helvetica,Arial,sans-serif
+	background: #ddd;
+	font-weight: 600;
+	/*font-size: 24px;*/
+	font-family:"HelveticaNeue","Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 
 #first
 {
-	background:#ddd;
-	font-weight:600;
-	font-size:24px;
-	font-family:"HelveticaNeue","Helvetica Neue",Helvetica,Arial,sans-serif
+	background: #ddd;
+	font-weight: 600;
+	font-size: 24px;
+	font-family: "HelveticaNeue","Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 
 #CMS_Menu ul li:hover
 {
-	background:#f6f6f6;
+	background: #f6f6f6;
 }
 
 #CMS_Menu ul ul
 {
-	display:none;
-	position:absolute;
-	top:100%;
-	left:0;
-	background:#fff;
-	padding:0
+	display: none;
+	position: absolute;
+	top: 100%;
+	left: 0;
+	background: #fff;
+	padding: 0;
+    z-index: 9999999;
+
 }
 
 #CMS_Menu ul ul li
 {
-	float:none;
-	width:200px
+	float: none;
+	width: 200px;
 }
 
 #CMS_Menu ul ul a
 {
-	line-height:120%;
-	padding:10px 15px
+	line-height: 120%;
+	padding: 10px 15px;
 }
 
 #CMS_Menu ul ul ul
 {
-	top:0;
-	left:100%
+	top: 0;
+	left: 100%
 }
 
 #CMS_Menu ul li:hover > ul
 {
-	display:block
+	display: block;
 }
 
 /*Responsive Styles*/
