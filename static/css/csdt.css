@@ -310,6 +310,9 @@ nav .btn {
    margin: 0px;
 }
 
+.panel {
+    background-color: #eee;
+}
 
 /* overrides bootstrap.less so they don't move */
 .navbar-nav > li > a:hover {
