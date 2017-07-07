@@ -9,6 +9,7 @@ eclipse/
 python/
 media/
 collected_static/
+.DS_Store
 local_settings.py
 static/website/
 
