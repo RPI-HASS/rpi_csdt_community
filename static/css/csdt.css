@@ -233,6 +233,8 @@ a:visited {
 }
 */
 
+
+
 .navbar{
     background-image: none;
 
@@ -275,7 +277,9 @@ nav .btn {
     background-color: #4e4456;
 }
 
+
 .navbar-custom .navbar-brand {
+   
   	color:#eeeeee;
 }
 
