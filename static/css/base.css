@@ -105,11 +105,11 @@ application .h3{
 
 /*
 * And with max cross-browser enabled.
-* Nobody should ever write this by hand. 
+* Nobody should ever write this by hand.
 * Use a preprocesser with autoprefixing.
 */
 .row.match-my-cols {
-    overflow: hidden; 
+    overflow: hidden;
 }
 
 .row.match-my-cols [class*="col-"]{
@@ -120,6 +120,16 @@ application .h3{
 .module-description {
     color: black;
 
+}
+
+/* Angular css */
+
+.application-thumbnail {
+  height: 160px;
+}
+
+.description {
+  display: none;
 }
 
 
