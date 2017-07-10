@@ -7,7 +7,7 @@ from django.views import static
 from django.views.generic import TemplateView
 from rest_framework import routers
 
-from rpi_csdt_community.views import Home, About, Guides, ApplicationList
+from rpi_csdt_community.views import About, Guides, ApplicationList
 from rpi_csdt_community.viewsets import (ApplicationCategoryViewSet,
                                          ApplicationThemeViewSet,
                                          ApplicationViewSet, CurrentUserView,

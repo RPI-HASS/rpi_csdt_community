@@ -29,6 +29,7 @@ def home(request):
         'projects_newest': projects_newest
     })
 
+
 # Replaced cards with Angular ApplicationList
 class Home(ListView):
     model = Application
@@ -37,6 +38,7 @@ class Home(ListView):
     def get_queryset(self):
         queryset = Application.objects.filter(featured=True).order_by('rank', 'name')
         return queryset
+
 
 class ApplicationList(ListView):
     model = Application
