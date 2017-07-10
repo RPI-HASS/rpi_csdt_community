@@ -15,14 +15,11 @@
     {% for app in object_list %}
 
     <a href="{{ app.url }}">
-    <div class="card col-sm-6 col-md-3" style="height: 350px">
-        <div class="card-block well" style="height: 310px">
-            <div class="thumbnail no-underline" style="height:350px;">
-              {% if app.screenshot %}
-              <img class="img-responsive" style="max-height: 325px" src="{{ app.screenshot.url }}">
-              {% endif %}
-              <h3 class="caption">{{ app.name }}</h3>
-              <!--<p class="module-description">{{ app.description }}</p> -->
+    <div class="card col-sm-6 col-md-3">
+        <div class="card-block well" style="height: 350px">
+            <div class="thumbnail no-underline">{% if app.screenshot %}<img class="img-responsive" src="{{ app.screenshot.url }}">{% endif %}
+            <h3 class="caption">{{ app.name }}</h3>
+            <!--<p class="module-description">{{ app.description }}</p> -->
             </div>
         </div>
     </div>
