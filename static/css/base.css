@@ -83,6 +83,7 @@ application .h3{
 .thumbnail {
   opacity: .75;
   cursor: pointer;
+  height: 310px;
 }
 .thumbnail:hover {
   opacity: 1;
@@ -105,11 +106,11 @@ application .h3{
 
 /*
 * And with max cross-browser enabled.
-* Nobody should ever write this by hand. 
+* Nobody should ever write this by hand.
 * Use a preprocesser with autoprefixing.
 */
 .row.match-my-cols {
-    overflow: hidden; 
+    overflow: hidden;
 }
 
 .row.match-my-cols [class*="col-"]{
