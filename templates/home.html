@@ -54,22 +54,6 @@ $(function() {
     });
 });
 </script>
-<script>
-$(function() {
-    $('.row').each(function() {
-        var intHeight = 0;
-        $(this).find('.card').each(function() {
-            if ($(this).outerHeight() > intHeight) {
-                intHeight = $(this).outerHeight()
-            }
-        });
-        console.log(intHeight);
-        $(this).find('.card').each(function() {
-            $(this).outerHeight(intHeight)
-        });
-    });
-});
-</script>
 {% endblock %}
 
 {% block css %}
