@@ -17,7 +17,7 @@
     <a href="{{ app.url }}">
     <div class="card col-sm-6 col-md-3">
         <div class="card-block well" style="height: 350px">
-            <div class="thumbnail no-underline">{% if app.screenshot %}<img class="img-responsive" style="max-height: 325px" src="{% thumbnail app.screenshot.url 220x220 crop %}">{% endif %}
+            <div class="thumbnail no-underline">{% if app.screenshot %}<img class="img-responsive" style="max-height: 325px" src="{% thumbnail app.screenshot 220x220 crop %}">{% endif %}
             <h3 class="caption">{{ app.name }}</h3>
             <!--<p class="module-description">{{ app.description }}</p> -->
             </div>
