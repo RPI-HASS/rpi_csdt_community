@@ -84,6 +84,7 @@ application .h3{
 .thumbnail {
   opacity: .75;
   cursor: pointer;
+  height: 310px;
 }
 .thumbnail:hover {
   opacity: 1;
