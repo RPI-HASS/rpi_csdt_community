@@ -30,6 +30,7 @@ def home(request):
     })
 
 
+# Replaced cards with Angular ApplicationList
 class Home(ListView):
     model = Application
     template_name = "home.html"
@@ -37,6 +38,10 @@ class Home(ListView):
     def get_queryset(self):
         queryset = Application.objects.filter(featured=True).order_by('rank', 'name')
         return queryset
+
+
+class ApplicationList(ListView):
+    model = Application
 
 
 class About(TemplateView):
