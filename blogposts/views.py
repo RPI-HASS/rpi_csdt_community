@@ -118,11 +118,10 @@ def post_list(request):
 
     # code from https://unweb.me/blog/monthly-archives-on-Django
     events = queryset_list
-    print(events)
     now = datetime.datetime.now()
     event_dict = {}
-
-    for i in range(events[0].publish.year, events[len(events)-1].publish.year-1, -1):
+    print(range(2017,2016,-1))
+    for i in range(events[len(events)-1].publish.year, events[0].publish.year-1, -1):
         event_dict[i] = {}
         for month in range(1, 13):
             event_dict[i][month] = []
