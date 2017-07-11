@@ -120,22 +120,25 @@ def post_list(request):
     events = list(queryset_list)
     now = datetime.datetime.now()
     event_dict = {}
+    try:
+        for i in range(events[0].publish.year, events[len(events)-1].publish.year-1, -1):
+            event_dict[i] = {}
+            for month in range(1, 13):
+                event_dict[i][month] = []
+        for event in events:
+            month_swapped = 13-event.publish.month
+            event_dict[event.publish.year][month_swapped].append(event)
+        event_sorted_keys = list(reversed(sorted(event_dict.keys())))
+        list_events = []
+        for key in event_sorted_keys:
+            adict = {key: event_dict[key]}
+            # changed from:
+            # list_events.append(adict)
+            list_events.insert(0, adict)
+    except IndexError:
+        pass
 
-    for i in range(events[0].publish.year, events[len(events)-1].publish.year-1, -1):
-        event_dict[i] = {}
-        for month in range(1, 13):
-            event_dict[i][month] = []
-    for event in events:
-        month_swapped = 13-event.publish.month
-        event_dict[event.publish.year][month_swapped].append(event)
-    event_sorted_keys = list(reversed(sorted(event_dict.keys())))
-    list_events = []
-    for key in event_sorted_keys:
-        adict = {key: event_dict[key]}
-        # changed from:
-        # list_events.append(adict)
-        list_events.insert(0, adict)
-    print(list_events)
+
 
     context = {
         "object_list": queryset,
