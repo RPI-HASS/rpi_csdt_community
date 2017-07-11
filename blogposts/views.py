@@ -94,7 +94,7 @@ def post_list(request):
     today = timezone.now().date()
     queryset_list = Post.objects.active()  # .order_by("-timestamp")
     if request.user.is_staff or request.user.is_superuser:
-        queryset_list = Post.objects.all()
+        queryset_list = Post.objects.all().order_by('-publish')
     query = request.GET.get("q")
     if query:
         queryset_list = queryset_list.filter(
@@ -118,8 +118,10 @@ def post_list(request):
 
     # code from https://unweb.me/blog/monthly-archives-on-Django
     events = Post.objects.filter().order_by('-publish')
+    print(events)
     now = datetime.datetime.now()
     event_dict = {}
+
     for i in range(events[0].publish.year, events[len(events)-1].publish.year-1, -1):
         event_dict[i] = {}
         for month in range(1, 13):
