@@ -29,11 +29,17 @@ angular.module('community.create', ['ngRoute', 'ngResource',])
     return $resource(config['application_api']);
 }])
 .controller('MainController', ['$scope', '$routeParams', '$location', 'applicationResource',
-    'themeResource', 'categoryResource',
-    function($scope, $routeParams, $location, applicationResource, themeResource, categoryResource) {
+    'themeResource', 'categoryResource', '$q',
+    function($scope, $routeParams, $location, applicationResource, themeResource, categoryResource, $q) {
     var applications = {};
     $scope.activeTheme = $routeParams['theme'];
     // Fetch all the categories for this theme
+    $scope.getApplication = function(id) {
+        return applications[id];
+    }
+    $scope.appComparator = function(app1, app2){
+        return this.getApplication(app1).rank - this.getApplication(app2).rank;
+    }
     $scope.applications = applicationResource.query(function() {
         for(var index in $scope.applications) {
             var application = $scope.applications[index];
@@ -41,6 +47,16 @@ angular.module('community.create', ['ngRoute', 'ngResource',])
         }
     });
     $scope.categories = categoryResource.query();
+    $q.all([
+        $scope.applications.$promise,
+        $scope.categories.$promise
+    ]).then(
+        function() {
+            var myself = $scope;
+            $scope.categories.forEach(function(category){
+                category.applications.sort(function(app1, app2){myself.appComparator(app1, app2);});
+            });
+    });
     $scope.themes = themeResource.query(function() {
         var theme = $location.search()['theme'];
         if(theme == undefined)
@@ -59,9 +75,5 @@ angular.module('community.create', ['ngRoute', 'ngResource',])
             }
         }
         $scope.activeTheme = selectedTheme;
-    }
-
-    $scope.getApplication = function(id) {
-        return applications[id];
     }
 }]);
