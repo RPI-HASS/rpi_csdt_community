@@ -133,12 +133,9 @@
                       <ul class="nav navbar-nav">
                         <li><a href="{% url 'home' %}">Applications</a></li>
                         <li><a href="{% url 'project-list' %}">Projects</a></li>
-                        <li><a href="#">Forums</a></li>
+                        <li><a href="{% url 'team-list' %}">Classrooms</a></li>
                         <li><a href="{% url 'blogposts:list' %}">News</a></li>
-                        <li><a href="{% url 'guides' %}">Guides</a></li>
                         <li><a href="{% url 'about' %}">About</a></li>
-
-
                         {% if user.is_authenticated %}
                         <li><a href="{% url 'extendeduser-detail' pk=user.id %}">My Profile</a></li>
                         {% endif %}
