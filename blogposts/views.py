@@ -117,7 +117,7 @@ def post_list(request):
     tags = Post.tags.all()
 
     # code from https://unweb.me/blog/monthly-archives-on-Django
-    events = Post.objects.filter().order_by('-publish')
+    events = queryset_list
     print(events)
     now = datetime.datetime.now()
     event_dict = {}
