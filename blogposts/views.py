@@ -122,7 +122,7 @@ def post_list(request):
     event_dict = {}
     print(range(2017,2016,-1))
     # This was swapped around because travis was giving an error. In another year (2018) it might break: Swap the ranges
-    for i in range(events[len(events)-1].publish.year, events[0].publish.year-1, 1):
+    for i in range(events[len(events)-1].publish.year-1, events[0].publish.year, 1):
         event_dict[i] = {}
         for month in range(1, 13):
             event_dict[i][month] = []
