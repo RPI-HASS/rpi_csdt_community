@@ -136,7 +136,7 @@ def post_list(request):
             # list_events.append(adict)
             list_events.insert(0, adict)
     except IndexError:
-        pass
+        list_events = []
 
 
 
