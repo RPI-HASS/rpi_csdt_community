@@ -8,7 +8,7 @@ from django.db.models.signals import pre_save
 from django.utils import timezone
 from django.utils.safestring import mark_safe
 from django.utils.text import slugify
-
+from taggit.managers import TaggableManager
 
 from markdown_deux import markdown
 from comments.models import Comment
@@ -63,7 +63,7 @@ class Post(models.Model):
     # read_time =  models.IntegerField(default=0) # models.TimeField(null=True, blank=True) #assume minutes
     updated = models.DateTimeField(auto_now=True, auto_now_add=False)
     timestamp = models.DateTimeField(auto_now=False, auto_now_add=True)
-
+    tags = TaggableManager()
     objects = PostManager()
 
     def __unicode__(self):
