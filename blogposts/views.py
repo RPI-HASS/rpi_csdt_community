@@ -138,8 +138,6 @@ def post_list(request):
     except IndexError:
         list_events = []
 
-
-
     context = {
         "object_list": queryset,
         "title": "List",
