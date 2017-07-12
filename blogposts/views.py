@@ -16,6 +16,9 @@ from django.db.models import Q
 from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
+from django.views.generic import ListView
+
+import datetime
 
 from comments.forms import CommentForm
 from comments.models import Comment
@@ -91,7 +94,7 @@ def post_list(request):
     today = timezone.now().date()
     queryset_list = Post.objects.active()  # .order_by("-timestamp")
     if request.user.is_staff or request.user.is_superuser:
-        queryset_list = Post.objects.all()
+        queryset_list = Post.objects.all().order_by('-publish')
     query = request.GET.get("q")
     if query:
         queryset_list = queryset_list.filter(
@@ -111,11 +114,38 @@ def post_list(request):
     except EmptyPage:
         # If page is out of range (e.g. 9999), deliver last page of results.
         queryset = paginator.page(paginator.num_pages)
+    tags = Post.tags.all()
+
+    # code from https://unweb.me/blog/monthly-archives-on-Django
+    events = list(queryset_list)
+    now = datetime.datetime.now()
+    event_dict = {}
+    try:
+        for i in range(events[0].publish.year, events[len(events)-1].publish.year-1, -1):
+            event_dict[i] = {}
+            for month in range(1, 13):
+                event_dict[i][month] = []
+        for event in events:
+            month_swapped = 13-event.publish.month
+            event_dict[event.publish.year][month_swapped].append(event)
+        event_sorted_keys = list(reversed(sorted(event_dict.keys())))
+        list_events = []
+        for key in event_sorted_keys:
+            adict = {key: event_dict[key]}
+            # changed from:
+            # list_events.append(adict)
+            list_events.insert(0, adict)
+    except IndexError:
+        list_events = []
+
     context = {
         "object_list": queryset,
         "title": "List",
         "page_request_var": page_request_var,
         "today": today,
+        "tags": tags,
+        'now': now,
+        'list_events': list_events,
     }
     return render(request, "post_list.html", context)
 
@@ -146,3 +176,80 @@ def post_delete(request, slug=None):
     instance.delete()
     messages.success(request, "Successfully deleted")
     return redirect("blogposts:list")
+
+
+class ViewTag(ListView):
+    template_name = "blogposts/filter.html"
+
+    def get_queryset(self):
+        tag = self.kwargs['tag']
+        queryset_list = Post.objects.filter(tags__name__in=[tag])
+        paginator = Paginator(queryset_list, 8)  # Show 25 contacts per page
+        page_request_var = "page"
+        page = self.request.GET.get(page_request_var)
+        try:
+            queryset = paginator.page(page)
+        except PageNotAnInteger:
+            # If page is not an integer, deliver first page.
+            queryset = paginator.page(1)
+        except EmptyPage:
+            # If page is out of range (e.g. 9999), deliver last page of results.
+            queryset = paginator.page(paginator.num_pages)
+        return queryset
+
+    def get_tag(self):
+        tag = self.kwargs['tag']
+        return tag
+
+    def tag_calendar(self):
+        tag = self.kwargs['tag']
+        queryset_list = Post.objects.filter(tags__name__in=[tag])
+        paginator = Paginator(queryset_list, 8)  # Show 25 contacts per page
+        page_request_var = "page"
+        page = self.request.GET.get(page_request_var)
+        try:
+            queryset = paginator.page(page)
+        except PageNotAnInteger:
+            # If page is not an integer, deliver first page.
+            queryset = paginator.page(1)
+        except EmptyPage:
+            # If page is out of range (e.g. 9999), deliver last page of results.
+            queryset = paginator.page(paginator.num_pages)
+        events = list(queryset)
+        event_dict = {}
+        try:
+            for i in range(events[0].publish.year, events[len(events)-1].publish.year-1, -1):
+                event_dict[i] = {}
+                for month in range(1, 13):
+                    event_dict[i][month] = []
+            for event in events:
+                month_swapped = 13-event.publish.month
+                event_dict[event.publish.year][month_swapped].append(event)
+            event_sorted_keys = list(reversed(sorted(event_dict.keys())))
+            list_events = []
+            for key in event_sorted_keys:
+                adict = {key: event_dict[key]}
+                # changed from:
+                # list_events.append(adict)
+                list_events.insert(0, adict)
+        except IndexError:
+            list_events = []
+        print(list_events)
+        return list_events
+
+    def tags(self):
+        return Post.tags.all()
+
+
+class DateSearch(ListView):
+    template_name = "blogposts/date.html"
+
+    def get_queryset(self):
+        year = self.kwargs['year']
+        month = self.kwargs['month']
+        day = self.kwargs['day']
+        return Post.objects.filter(publish__year=year, publish__month=month, publish__day=day)
+
+    def get_tag(self):
+        tag = self.kwargs['tag']
+        return tag

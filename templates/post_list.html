@@ -2,8 +2,8 @@
 {% load static %}
 {% block content %}
 
-
-<div class='col-sm-6 col-sm-offset-3'>
+<div class="row">
+<div class='col-sm-8 col-sm-offset-2'>
     <h1>News</h1>
 <form method='GET' action='' class='row'>
         <div class='col-sm-6'>
@@ -16,6 +16,18 @@
             </div>
         </div>
 </form>
+</div>
+</div>
+<p>
+<div class="row">
+  <div class="col-md-2">
+    Tags:
+    <p>
+    {% for tag in tags %}
+    <a href="{% url 'blogposts:tag' tag %}">{{tag}}</a>&nbsp
+    {% endfor %}
+  </div>
+  <div class="col-md-8">
 {% for obj in object_list %}
 <div class="row">
   <div class="col-sm-12">
@@ -37,6 +49,41 @@
 <hr/>
 </div>
 {% endfor %}
+  </div>
+  <div class="col-md-2">
+    {% for event_year in list_events %}
+        <ul class="year" style="list-style-type: none;margin-left:0px;padding-left:0px;">{{event_year.keys.0}}
+            {% for month, events in event_year.values.0.items %}
+                <!--show only months with events! -->
+                {% if events %}
+                    <li id="{{event_year.keys.0}}-{{month}}" class="month">
+                        <div class="month-data">
+                            <div class="collapsed">►&nbsp;<span class="name">{{events.0.publish|date:"F"}}</span>
+                            <span class="counter"> ({{events|length}})</span></div>
+                            <div class="expanded" style="display:none;">▼&nbsp;
+                            <span class="name">{{events.0.publish|date:"F"}}</span>
+                            <span class="counter"> ({{events|length}})</span>
+                            </div>
+                        </div>
+                        <ul class="events" style="display:none;">
+                        {% for event in events %}
+                            <li class="event">
+                            <a class="title" href="{% url 'blogposts:date' event.publish|date:"Y" event.publish|date:"n" event.publish|date:"d" %}">{{event.publish|date:"j M Y"}}</a>
+                            </li>
+                        {% endfor %}
+                        </ul>
+                    </li>
+                {% endif %}
+            </li>
+            {% endfor %}
+        </ul>
+    {% endfor %}
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6 col-md-offset-2">
+
+
 
 
 <div class="pagination">
@@ -59,6 +106,7 @@
 
 
 </div>
+</div>
 
 {% endblock content %}
 
@@ -66,3 +114,26 @@
 {% block css %}
 <link rel="stylesheet" href="{% static 'css/base.css' %}" >
 {% endblock %}
+
+{% block js %}
+<script>
+    // toggle month
+    var toggleMonth = function(month) {
+        $(month).children('.events').slideToggle('slow');
+        $(month).find('.month-data div.collapsed').toggle();
+        $(month).find('.month-data div.expanded').toggle();
+    }
+    let date = new Date();
+
+    // expand the current month
+    string3 = `${date.getFullYear()}-${date.getMonth()}`
+
+    toggleMonth($("#" + string3));
+
+    // intercept click to toggle month
+    $('.month-data').click(function() {
+        var month = $(this).parent();
+        toggleMonth(month);
+    });
+</script>
+{% endblock js %}
