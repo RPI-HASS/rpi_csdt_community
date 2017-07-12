@@ -216,7 +216,6 @@ class ViewTag(ListView):
             # If page is out of range (e.g. 9999), deliver last page of results.
             queryset = paginator.page(paginator.num_pages)
         events = list(queryset)
-        now = datetime.datetime.now()
         event_dict = {}
         try:
             for i in range(events[0].publish.year, events[len(events)-1].publish.year-1, -1):
