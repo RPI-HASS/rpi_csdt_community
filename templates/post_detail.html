@@ -85,7 +85,7 @@ Linkedin
         {% if request.user.is_authenticated %}
         <form method="POST" action="."> {% csrf_token %}
             {{ comment_form|crispy }}
-            <input type='submit' value='Post comment' class='btn btn-default'>
+            <input type='submit' value='Post comment' class='btn btn-success'>
         </form>
         {% else %}
         <p>You must login to comment </p>
@@ -107,7 +107,7 @@ Linkedin
             <form method="POST" action="."> {% csrf_token %}
                 {{ comment_form|crispy }}
                 <input type='hidden' name='parent_id' value='{{ comment.id }}'>
-                <input type='submit' value='Reply' class='btn btn-default'>
+                <input type='submit' value='Reply' class='btn btn-success'>
             </form>
             {% else %}
         <p>You must login to comment </p>

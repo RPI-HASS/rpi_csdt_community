@@ -2,9 +2,12 @@
 {% load static %}
 {% block content %}
 
+<div class="row">
+  <div class="col-md-2">
+  </div>
 
-<div class='col-sm-6 col-sm-offset-3'>
-    <h1>News</h1>
+<div class='col-md-8 col-sm-6'>
+    <h1>Date Search:</h1>
 <p>
 <p>
 {% if object_list %}
@@ -34,27 +37,14 @@
 {% endif %}
 
 
-<div class="pagination">
-    <span class="step-links">
-        {% if object_list.has_previous %}
-            <a href="?{{ page_request_var }}={{ object_list.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">previous</a>
-        {% endif %}
-
-        <span class="current">
-            Page {{ object_list.number }} of {{ object_list.paginator.num_pages }}.
-        </span>
-
-        {% if object_list.has_next %}
-            <a href="?{{ page_request_var }}={{ object_list.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">next</a>
-        {% endif %}
-    </span>
-</div>
 
 
 
 
 </div>
-
+<div class="col-md-2">
+</div>
+</div>
 {% endblock content %}
 
 
