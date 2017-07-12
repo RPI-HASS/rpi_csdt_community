@@ -108,28 +108,28 @@
 },
 {
   "fields": {
-    "f": "files/blob_oteM2Fi"
+    "file_path": "files/blob_oteM2Fi"
   },
   "model": "project_share.fileupload",
   "pk": 1
 },
 {
   "fields": {
-    "f": "files/blob_bDVNVHb"
+    "file_path": "files/blob_bDVNVHb"
   },
   "model": "project_share.fileupload",
   "pk": 2
 },
 {
   "fields": {
-    "f": "files/blob_IbuUev9"
+    "file_path": "files/blob_IbuUev9"
   },
   "model": "project_share.fileupload",
   "pk": 3
 },
 {
   "fields": {
-    "f": "files/blob_EPTulqc"
+    "file_path": "files/blob_EPTulqc"
   },
   "model": "project_share.fileupload",
   "pk": 4

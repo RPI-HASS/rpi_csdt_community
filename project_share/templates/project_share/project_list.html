@@ -10,9 +10,9 @@
             </a>
 
             <ul class="dropdown-menu">
-                <li><a href="{% url 'project-list' %}?orderby=-id">Newest</a></li>
-                <li><a href="{% url 'project-list' %}?orderby=id">Oldest</a></li>
-                <li><a href="{% url 'project-list' %}?orderby=name">By name</a></li>
+                <li><a href="{% url 'project-list' %}?{% if filter_val %}filter={{ filter_val }}&{% endif %}orderby=-id">Newest</a></li>
+                <li><a href="{% url 'project-list' %}?{% if filter_val %}filter={{ filter_val }}&{% endif %}orderby=id">Oldest</a></li>
+                <li><a href="{% url 'project-list' %}?{% if filter_val %}filter={{ filter_val }}&{% endif %}orderby=name">By name</a></li>
             </ul>
         </div>
 
@@ -25,14 +25,16 @@
             <ul class="dropdown-menu">
                 <li><a href="{% url 'project-list' %}">No filtering</a></li>
                 {% for application in application_list %}
-                   <li><a href="{% url 'project-list' %}?filter={{ application.id }}">{{application.name}}</a></li>
+                   <li><a href="{% url 'project-list' %}?filter={{ application.id }}{% if order %}&orderby={{ order }}{% endif %}">{{application.name}}</a></li>
                 {% endfor %}
             </ul>
       </div>
     </div>
-    {% for object in object_list %}
-       {% include "_project_thumbnail.html" %}
-    {% endfor %}
+    <div class="row">
+        {% for object in object_list %}
+           {% include "_project_thumbnail.html" %}
+        {% endfor %}
+    </div>
     <div class="footer">
       {% include '_paginate.html' %}
     </div>

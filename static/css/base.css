@@ -1,0 +1,150 @@
+.transition,
+.transition:hover,
+.transition:focus {
+
+  -webkit-transition: all 150ms ease-in-out;
+  -moz-transition: all 150ms ease-in-out;
+  -ms-transition: all 150ms ease-in-out;
+  -o-transition: all 150ms ease-in-out;
+  transition: all 150ms ease-in-out;
+}
+
+
+/*
+h3 {
+    text-align: center;
+    margin: 30px 0;
+}
+*/
+
+.card-text {
+    padding: .1rem;
+}
+.card-img-top{
+    width: 100%;
+    height: auto;
+    align-content: center;
+    padding: 2rem;
+}
+
+.card-block {
+  background-color: #FFF;
+}
+
+card-block img.card-img {
+  top: 50%;
+  margin-top: -36px;
+  width: 72px;
+  float: left;
+  position: relative;
+  z-index: 99;
+}
+.card-block .card-title {
+  float: left;
+  margin: 0;
+  margin-left: 0.5em;
+}
+
+.card-block .card-title small {
+  display: block;
+}
+
+.card-block .card-text {
+  clear: both;
+  padding-top: 0.25em;
+  margin-bottom: 1.5em;
+}
+.card-block ul a:hover {
+  text-decoration: none;
+}
+
+.tiles {
+    background-color: lightgray;
+}
+.content-wrap {
+
+  width: 100%;
+  background-color: lightgray;
+}
+.page-header {
+  border-bottom: 2px solid #444;
+  padding: 0 15px;
+  background-color: lightgray;
+}
+a.no-underline{
+    text-decoration: none;
+    color: black;
+    padding: 1em;
+}
+application .h3{
+    text-align: center;
+}
+
+
+.thumbnail {
+  opacity: .75;
+  cursor: pointer;
+}
+.thumbnail:hover {
+  opacity: 1;
+}
+
+
+.row.is-flex {
+    display: flex;
+    flex-wrap: wrap;
+}
+.row.is-flex > [class*='col-'] {
+    display: flex;
+    flex-direction: column;
+}
+.well {
+    background-color: #FFF;
+      border: 3px solid #FFF;
+    border-radius: 0.4rem;
+}
+
+/*
+* And with max cross-browser enabled.
+* Nobody should ever write this by hand.
+* Use a preprocesser with autoprefixing.
+*/
+.row.match-my-cols {
+    overflow: hidden;
+}
+
+.row.match-my-cols [class*="col-"]{
+    margin-bottom: -99999px;
+    padding-bottom: 99999px;
+}
+
+.module-description {
+    color: black;
+
+}
+
+/* Angular css */
+
+.application-thumbnail {
+  height: 160px;
+}
+
+.description {
+  display: none;
+}
+
+
+/* blog css */
+
+h1 {
+    color: #777777;
+}
+
+.wmd-panel{
+    margin-right: 0px !important;
+    margin-left: 0px !important;
+}
+
+.comment-reply{
+    display:none;
+}
