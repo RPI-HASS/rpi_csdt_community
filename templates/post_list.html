@@ -51,12 +51,8 @@
 {% endfor %}
   </div>
   <div class="col-md-2">
-    {% for month in posts_per_month %}
-      <a href="{% url 'blogposts:date' month.year month.month month.day %}">{{ month }}</a>
-    {% endfor %}
-
     {% for event_year in list_events %}
-        <ul class="year">{{event_year.keys.0}}
+        <ul class="year" style="list-style-type: none;margin-left:0px;padding-left:0px;">{{event_year.keys.0}}
             {% for month, events in event_year.values.0.items %}
                 <!--show only months with events! -->
                 {% if events %}
@@ -85,7 +81,7 @@
   </div>
 </div>
 <div class="row">
-  <div class="col-md-6 col-md-offset-2"">
+  <div class="col-md-6 col-md-offset-2">
 
 
 
@@ -127,9 +123,12 @@
         $(month).find('.month-data div.collapsed').toggle();
         $(month).find('.month-data div.expanded').toggle();
     }
+    let date = new Date();
 
     // expand the current month
-    toggleMonth($('#{{now.year}}-{{now.month}}'));
+    string3 = `${date.getFullYear()}-${date.getMonth()}`
+
+    toggleMonth($("#" + string3));
 
     // intercept click to toggle month
     $('.month-data').click(function() {
