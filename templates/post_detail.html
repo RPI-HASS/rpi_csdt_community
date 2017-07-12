@@ -16,7 +16,10 @@
 
 
 {% block content %}
-<div class='col-sm-6 col-sm-offset-3'>
+<div class="row">
+  <div class="col-md-2">
+  </div>
+<div class='col-md-8 col-sm-6 '>
     <h1>{{ title }}<br> <small>{% if instance.draft %}
         <span style='color:red;'>Draft</span> {% endif %}{{ instance.publish }}</small></h1>
     {% if instance.image %}
@@ -63,7 +66,16 @@ Linkedin
 <div class='col-sm-12 '>
 
    <div class='post-detail-item'>{{ instance.get_markdown }}</div>
+   <div class="tags" style="font-size: 1.25em;">
+     {% if instance.tags %}
+    Tags:&nbsp
+    {% for tag in instance.tags.all %}
+      <a href="{% url 'blogposts:tag' tag %}">{{ tag }}</a>&nbsp
+    {% endfor %}
+     {% else %}
 
+     {% endif %}
+    </div>
     <hr/>
     <br/>
 
@@ -111,6 +123,8 @@ Linkedin
 
 
 
+</div>
+<div class="col-md-2">
 </div>
 </div>
 </div>
