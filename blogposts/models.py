@@ -8,10 +8,13 @@ from django.db.models.signals import pre_save
 from django.utils import timezone
 from django.utils.safestring import mark_safe
 from django.utils.text import slugify
+from django.utils.translation import ugettext_lazy as _
 from taggit.managers import TaggableManager
+from taggit.models import TagBase, GenericTaggedItemBase
 
 from markdown_deux import markdown
 from comments.models import Comment
+
 
 from .utils import get_read_time
 # Create your models here.
@@ -25,6 +28,19 @@ class PostManager(models.Manager):
     def active(self, *args, **kwargs):
         # Post.objects.all() = super(PostManager, self).all()
         return super(PostManager, self).filter(draft=False).filter(publish__lte=timezone.now())
+
+
+class MyCustomTag(TagBase):
+    rank = models.IntegerField(default=100)
+
+    class Meta:
+        verbose_name = _("Tag")
+        verbose_name_plural = _("Tags")
+
+
+class TaggedPost(GenericTaggedItemBase):
+    tag = models.ForeignKey(MyCustomTag,
+                            related_name="%(app_label)s_%(class)s_items")
 
 
 def upload_location(instance, filename):
@@ -63,7 +79,7 @@ class Post(models.Model):
     # read_time =  models.IntegerField(default=0) # models.TimeField(null=True, blank=True) #assume minutes
     updated = models.DateTimeField(auto_now=True, auto_now_add=False)
     timestamp = models.DateTimeField(auto_now=False, auto_now_add=True)
-    tags = TaggableManager()
+    tags = TaggableManager(through=TaggedPost)
     objects = PostManager()
 
     def __unicode__(self):
