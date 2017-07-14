@@ -107,12 +107,17 @@ class ProjectList(SearchableListMixin, SortableListMixin, ListView):
         context['application_list'] = Application.objects.all()
         context['order'] = self.request.GET.get('orderby')
         context['filter_val'] = self.request.GET.get('filter')
+        context['term'] = self.request.GET.get('q')
         return super(ProjectList, self).render_to_response(context, **response_kwargs)
 
     def search_term(self):
         term = self.request.GET.get('q')
         return term
 
+    def return_appl(self):
+        filter_val = self.request.GET.get('filter')
+        name = Application.objects.get(id=filter_val)
+        return name
 
 class ProjectTagList(ProjectList):
     """List all the tags of various projects. Not used."""
