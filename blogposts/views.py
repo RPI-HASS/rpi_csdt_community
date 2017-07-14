@@ -9,12 +9,10 @@ from comments.models import Comment
 import datetime
 from django.contrib import messages
 from django.contrib.contenttypes.models import ContentType
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
 from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
-from django.views.generic import ListView
 from extra_views import SearchableListMixin, SortableListMixin
 from django.views.generic import ListView
 from .forms import PostForm
@@ -84,6 +82,7 @@ def post_detail(request, slug=None):
     }
     return render(request, "post_detail.html", context)
 
+
 def get_calendar(objects):
     events = list(objects)
     event_calendar = []
@@ -109,13 +108,13 @@ def get_calendar(objects):
         year.append(month)
         event_calendar.append(year)
     return event_calendar
-    
+
 
 class post_list(SearchableListMixin, SortableListMixin, ListView):
     model = Post
     template_name = "post_list.html"
     paginate_by = 6
-    
+
     def get_queryset(self):
         if self.request.user.is_staff or self.request.user.is_superuser:
             queryset = Post.objects.all().order_by('-publish')
@@ -134,7 +133,7 @@ class post_list(SearchableListMixin, SortableListMixin, ListView):
         if tags:
             queryset = queryset.filter(tags__name__in=[tags])
         return queryset
-        
+
     def render_to_response(self, context, **response_kwargs):
         available_tags = Post.tags.most_common().order_by("rank")
         selected_tags = self.request.GET.get('tag')
