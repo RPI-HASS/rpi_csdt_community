@@ -21,10 +21,10 @@
 <p>
 <div class="row">
   <div class="col-md-2">
-    Tags:
+    Catgories:
     <p>
     {% for tag in tags %}
-    <a href="{% url 'blogposts:tag' tag %}">{{tag}}</a>&nbsp
+    <a href="{% url 'blogposts:tag' tag %}">{{tag}}</a><br>
     {% endfor %}
   </div>
   <div class="col-md-8">
