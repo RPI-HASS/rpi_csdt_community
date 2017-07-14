@@ -49,7 +49,7 @@
 
 <div class="row">
     {% if view.search_term %}
-      <p style="padding-left: 20px;font-size: 2em;">Search for "{{ view.search_term }}" {% if order %}, and ordered by {% if order == "id" %}oldest{% endif %}{% if order == "-id" %}newest{% endif %}{% if order == "name" %}name{% endif %}{% endif %}{% if filter_val %}, and filtered for application {{ view.return_appl }}{% endif %}:  <a href="{% url 'project-list' %}">(clear search)</a><p>
+      <p style="padding-left: 20px;font-size: 2em;">Search for "{{ view.search_term }}"{% if order %}, and ordered by {% if order == "id" %}oldest{% endif %}{% if order == "-id" %}newest{% endif %}{% if order == "name" %}name{% endif %}{% endif %}{% if filter_val %}, and filtered for application {{ view.return_appl }}{% endif %}:  <a href="{% url 'project-list' %}">(clear search)</a><p>
     {% endif %}
     {% for object in object_list %}
        {% include "_project_thumbnail.html" %}
