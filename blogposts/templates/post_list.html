@@ -60,7 +60,7 @@
 {% for event_year in list_events %}
     <ul class="year" style="list-style-type: none;margin-left:0px;padding-left:0px;">{{event_year.0.0.publish.year}}
         {% for event_month in event_year %}
-            <li id="{{month.0.publish.month}}-{{month}}" class="month">
+            <li id="{{event_month.0.publish.year}}-{{event_month.0.publish.month}}" class="month">
                 <div class="month-data">
                     <div class="collapsed">►&nbsp;<span class="name">{{event_month.0.publish|date:"F"}}</span>
                     <span class="counter"> ({{event_month|length}})</span></div>
@@ -119,7 +119,7 @@
     let date = new Date();
 
     // expand the current month
-    string3 = `${date.getFullYear()}-${date.getMonth()}`
+    string3 = `${date.getFullYear()}-${date.getMonth()+1}`
 
     toggleMonth($("#" + string3));
 
