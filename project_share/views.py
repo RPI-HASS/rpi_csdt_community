@@ -92,6 +92,11 @@ class ProjectList(SearchableListMixin, SortableListMixin, ListView):
         filter_val = self.request.GET.get('filter')
         if filter_val is not None:
             set = set.filter(application=filter_val,)
+        term = self.request.GET.get('q')
+        if term is not None:
+            set = set.filter(Q(name__icontains=term) | Q(
+                description__icontains=term) | Q(
+                owner__username__icontains=term), approved=True)
         order = self.request.GET.get('orderby')
         if order is not None:
             set = set.order_by(order)
@@ -103,6 +108,10 @@ class ProjectList(SearchableListMixin, SortableListMixin, ListView):
         context['order'] = self.request.GET.get('orderby')
         context['filter_val'] = self.request.GET.get('filter')
         return super(ProjectList, self).render_to_response(context, **response_kwargs)
+
+    def search_term(self):
+        term = self.request.GET.get('q')
+        return term
 
 
 class ProjectTagList(ProjectList):
@@ -370,19 +379,3 @@ class AddressUpdate(UpdateView):
     def get_success_url(self):
         """Show confirmation."""
         return reverse('address-confirm')
-
-
-class Search(ListView, SearchableListMixin, SortableListMixin, ):
-    model = Project
-    template_name = "project_share/project_list.html"
-
-    def search_term(self):
-        term = self.request.GET.get('q')
-        return term
-
-    def get_queryset(self):
-        term = self.request.GET.get('q')
-        projects = Project.objects.filter(Q(
-            name__icontains=term) | Q(description__icontains=term) | Q(
-            owner__username__icontains=term), approved=True)
-        return projects
