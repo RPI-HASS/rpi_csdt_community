@@ -8,10 +8,10 @@
 <div class="row">
   <div class="col-md-2">
       <p style="height:70px;"></p>
-      Tags:
+      Categories:
       <p>
       {% for tag in view.tags %}
-      <a href="{% url 'blogposts:tag' tag %}">{{tag}}</a>&nbsp
+      <a href="{% url 'blogposts:tag' tag %}">{{tag}}</a><br>
       {% endfor %}
   </div>
   <div class="col-md-8 col-sm-12">
