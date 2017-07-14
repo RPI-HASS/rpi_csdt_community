@@ -107,7 +107,7 @@ def post_list(request):
     except EmptyPage:
         # If page is out of range (e.g. 9999), deliver last page of results.
         queryset = paginator.page(paginator.num_pages)
-    tags = Post.tags.all()
+    tags = Post.tags.most_common().order_by("rank")
     now = datetime.datetime.now()
     events = list(queryset_list)
     event_dict = []
