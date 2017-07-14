@@ -235,7 +235,7 @@ class ViewTag(ListView):
         return event_dict
 
     def tags(self):
-        return Post.tags.all()
+        return Post.tags.most_common().order_by("rank")
 
 
 class DateSearch(ListView):
