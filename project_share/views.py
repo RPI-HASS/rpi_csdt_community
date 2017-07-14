@@ -2,6 +2,7 @@
 from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import PermissionDenied
+from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView
@@ -369,3 +370,19 @@ class AddressUpdate(UpdateView):
     def get_success_url(self):
         """Show confirmation."""
         return reverse('address-confirm')
+
+
+class Search(ListView, SearchableListMixin, SortableListMixin, ):
+    model = Project
+    template_name = "project_share/project_list.html"
+
+    def search_term(self):
+        term = self.request.GET.get('q')
+        return term
+
+    def get_queryset(self):
+        term = self.request.GET.get('q')
+        projects = Project.objects.filter(Q(
+            name__icontains=term) | Q(description__icontains=term) | Q(
+            owner__username__icontains=term), approved=True)
+        return projects

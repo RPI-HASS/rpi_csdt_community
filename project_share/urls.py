@@ -9,7 +9,7 @@ from project_share.views import (AddressCreate, AddressUpdate,
                                  ProjectDelete, ProjectDetail, ProjectList,
                                  ProjectPresentDetail, ProjectRunDetail,
                                  ProjectTagList, ProjectUnpublish,
-                                 ProjectUpdate, UserDetail)
+                                 ProjectUpdate, UserDetail, Search)
 
 urlpatterns = [
     url(r'^projects/$', ProjectList.as_view(), name='project-list'),
@@ -45,4 +45,5 @@ urlpatterns = [
     url(r'address/confirm$', TemplateView.as_view(template_name='project_share/address_confirm.html'),
         name='address-confirm'),
     url(r'address/(?P<pk>.*)$', AddressUpdate.as_view(), name='address-update'),
+    url(r'projects/search/$', Search.as_view(), name='search'),
 ]
