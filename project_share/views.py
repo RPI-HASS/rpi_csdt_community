@@ -100,6 +100,8 @@ class ProjectList(SearchableListMixin, SortableListMixin, ListView):
         order = self.request.GET.get('orderby')
         if order is not None:
             set = set.order_by(order)
+        else:
+            set = set.order_by("-id")
         return set
 
     def render_to_response(self, context, **response_kwargs):
