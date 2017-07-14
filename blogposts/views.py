@@ -1,27 +1,20 @@
 try:
     from urllib import quote_plus  # python 2  # NOQA
 except:
-    pass
-
-try:
     from urllib.parse import quote_plus  # python 3  # NOQA
-except:
     pass
 
+from comments.forms import CommentForm
+from comments.models import Comment
+import datetime
 from django.contrib import messages
 from django.contrib.contenttypes.models import ContentType
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-
 from django.db.models import Q
 from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 from django.views.generic import ListView
-
-import datetime
-
-from comments.forms import CommentForm
-from comments.models import Comment
 from .forms import PostForm
 from .models import Post
 
@@ -49,7 +42,7 @@ def post_detail(request, slug=None):
     if instance.publish > timezone.now().date() or instance.draft:
         if not request.user.is_staff or not request.user.is_superuser:
             raise Http404
-    share_string = quote_plus(instance.content)
+    share_string = quote_plus(instance.content.encode('utf8'))
 
     initial_data = {
             "content_type": instance.get_content_type,
@@ -115,29 +108,30 @@ def post_list(request):
         # If page is out of range (e.g. 9999), deliver last page of results.
         queryset = paginator.page(paginator.num_pages)
     tags = Post.tags.all()
-
-    # code from https://unweb.me/blog/monthly-archives-on-Django
-    events = list(queryset_list)
     now = datetime.datetime.now()
-    event_dict = {}
-    try:
-        for i in range(events[0].publish.year, events[len(events)-1].publish.year-1, -1):
-            event_dict[i] = {}
-            for month in range(1, 13):
-                event_dict[i][month] = []
-        for event in events:
-            month_swapped = 13-event.publish.month
-            event_dict[event.publish.year][month_swapped].append(event)
-        event_sorted_keys = list(reversed(sorted(event_dict.keys())))
-        list_events = []
-        for key in event_sorted_keys:
-            adict = {key: event_dict[key]}
-            # changed from:
-            # list_events.append(adict)
-            list_events.insert(0, adict)
-    except IndexError:
-        list_events = []
-
+    events = list(queryset_list)
+    event_dict = []
+    year = []
+    month = []
+    if events:
+        month.append(events[0])
+        for i in range(1, len(events)):
+            event = events[i]
+            current = month[0]
+            if current.publish.year == event.publish.year and current.publish.month == event.publish.month:
+                month.append(event)
+            elif current.publish.year == event.publish.year:
+                year.append(month)
+                month = []
+                month.append(event)
+            else:
+                year.append(month)
+                event_dict.append(year)
+                year = []
+                month = []
+                month.append(event)
+        year.append(month)
+        event_dict.append(year)
     context = {
         "object_list": queryset,
         "title": "List",
@@ -145,7 +139,7 @@ def post_list(request):
         "today": today,
         "tags": tags,
         'now': now,
-        'list_events': list_events,
+        'list_events': event_dict,
     }
     return render(request, "post_list.html", context)
 
@@ -216,26 +210,29 @@ class ViewTag(ListView):
             # If page is out of range (e.g. 9999), deliver last page of results.
             queryset = paginator.page(paginator.num_pages)
         events = list(queryset)
-        event_dict = {}
-        try:
-            for i in range(events[0].publish.year, events[len(events)-1].publish.year-1, -1):
-                event_dict[i] = {}
-                for month in range(1, 13):
-                    event_dict[i][month] = []
-            for event in events:
-                month_swapped = 13-event.publish.month
-                event_dict[event.publish.year][month_swapped].append(event)
-            event_sorted_keys = list(reversed(sorted(event_dict.keys())))
-            list_events = []
-            for key in event_sorted_keys:
-                adict = {key: event_dict[key]}
-                # changed from:
-                # list_events.append(adict)
-                list_events.insert(0, adict)
-        except IndexError:
-            list_events = []
-        print(list_events)
-        return list_events
+        event_dict = []
+        year = []
+        month = []
+        if events:
+            month.append(events[0])
+            for i in range(1, len(events)):
+                event = events[i]
+                current = month[0]
+                if current.publish.year == event.publish.year and current.publish.month == event.publish.month:
+                    month.append(event)
+                elif current.publish.year == event.publish.year:
+                    year.append(month)
+                    month = []
+                    month.append(event)
+                else:
+                    year.append(month)
+                    event_dict.append(year)
+                    year = []
+                    month = []
+                    month.append(event)
+            year.append(month)
+            event_dict.append(year)
+        return event_dict
 
     def tags(self):
         return Post.tags.all()
