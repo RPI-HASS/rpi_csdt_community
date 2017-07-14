@@ -119,6 +119,7 @@ class ProjectList(SearchableListMixin, SortableListMixin, ListView):
         name = Application.objects.get(id=filter_val)
         return name
 
+
 class ProjectTagList(ProjectList):
     """List all the tags of various projects. Not used."""
 
