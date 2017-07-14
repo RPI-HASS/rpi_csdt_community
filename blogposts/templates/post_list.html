@@ -34,6 +34,9 @@
     </p>
   </div>
   <div class="col-md-8">
+    {% if selected_tags %}
+      <h1>Search results for tag "{{ selected_tags }}":</h1>
+    {% endif %}
 {% for obj in object_list %}
 <div class="row">
   <div class="col-sm-12">
