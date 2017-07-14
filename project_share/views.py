@@ -101,6 +101,7 @@ class ProjectList(SearchableListMixin, SortableListMixin, ListView):
         context['application_list'] = Application.objects.all()
         context['order'] = self.request.GET.get('orderby')
         context['filter_val'] = self.request.GET.get('filter')
+        print(context)
         return super(ProjectList, self).render_to_response(context, **response_kwargs)
 
 

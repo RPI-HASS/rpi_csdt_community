@@ -5,12 +5,11 @@
 <div class="row">
 <div class='col-sm-8 col-sm-offset-2'>
     <h1>News</h1>
-<form method='GET' action='' class='row'>
+      <form method='GET' action='' class='row'>
         <div class='col-sm-6'>
             <div class='input-group'>
                 <input class='form-control' type='text' name='q' placeholder='Search posts' value='{{ request.GET.q }}'/>
                 <span class='input-group-btn'>
-                    <!-- <input class='btn btn-default' type='submit' value='Search' /> -->
                     <button class='btn btn-primary' type='submit'>Search <i class="fa fa-search"></i></button>
                 </span>
             </div>
@@ -21,11 +20,18 @@
 <p>
 <div class="row">
   <div class="col-md-2">
+    {% if selected_tags %}
+      <a href="{% url 'blogposts:list' %}">Reset Categories</a>
+      <p>
+      </p>
+      Available
+    {% endif %}
     Categories:
     <p>
-    {% for tag in tags %}
-    <a href="{% url 'blogposts:tag' tag %}">{{tag}}</a><br>
-    {% endfor %}
+      {% for tag in available_tags %}
+        <a href="{% url 'blogposts:list' %}?tag={{tag}}">{{tag}}</a><br>
+      {% endfor %}
+    </p>
   </div>
   <div class="col-md-8">
 {% for obj in object_list %}
@@ -49,59 +55,50 @@
 <hr/>
 </div>
 {% endfor %}
-  </div>
-  <div class="col-md-2">
-    {% for event_year in list_events %}
-        <ul class="year" style="list-style-type: none;margin-left:0px;padding-left:0px;">{{event_year.0.0.publish.year}}
-            {% for event_month in event_year %}
-                <li id="{{month.0.publish.month}}-{{month}}" class="month">
-                    <div class="month-data">
-                        <div class="collapsed">►&nbsp;<span class="name">{{event_month.0.publish|date:"F"}}</span>
-                        <span class="counter"> ({{event_month|length}})</span></div>
-                        <div class="expanded" style="display:none;">▼&nbsp;
-                        <span class="name">{{event_month.0.publish|date:"F"}}</span>
-                        <span class="counter"> ({{event_month|length}})</span>
-                        </div>
+</div>
+<div class="col-md-2">
+{% for event_year in list_events %}
+    <ul class="year" style="list-style-type: none;margin-left:0px;padding-left:0px;">{{event_year.0.0.publish.year}}
+        {% for event_month in event_year %}
+            <li id="{{month.0.publish.month}}-{{month}}" class="month">
+                <div class="month-data">
+                    <div class="collapsed">►&nbsp;<span class="name">{{event_month.0.publish|date:"F"}}</span>
+                    <span class="counter"> ({{event_month|length}})</span></div>
+                    <div class="expanded" style="display:none;">▼&nbsp;
+                    <span class="name">{{event_month.0.publish|date:"F"}}</span>
+                    <span class="counter"> ({{event_month|length}})</span>
                     </div>
-                    <ul class="events" style="display:none;">
-                    {% for event in event_month %}
-                        <li class="event">
-                        <a class="title" href="{% url 'blogposts:date' event.publish|date:"Y" event.publish|date:"n" event.publish|date:"d" %}">{{event.publish|date:"j M Y"}}</a>
-                        </li>
-                    {% endfor %}
-                    </ul>
-                </li>
-            {% endfor %}
-        </ul>
-    {% endfor %}
-  </div>
+                </div>
+                <ul class="events" style="display:none;">
+                {% for event in event_month %}
+                    <li class="event">
+                    <a class="title" href="{{ event.get_absolute_url }}">{{event.title}}</a>
+                    </li>
+                {% endfor %}
+                </ul>
+            </li>
+        {% endfor %}
+    </ul>
+{% endfor %}
 </div>
 <div class="row">
   <div class="col-md-6 col-md-offset-2">
-
-
-
-
-<div class="pagination">
-    <span class="step-links">
-        {% if object_list.has_previous %}
-            <a href="?{{ page_request_var }}={{ object_list.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">previous</a>
-        {% endif %}
-
-        <span class="current">
-            Page {{ object_list.number }} of {{ object_list.paginator.num_pages }}.
+    <div class="footer">
+      {% if is_paginated %}
+        <span class="page-links">
+          {% if page_obj.has_previous %}
+            <a href="{% url 'blogposts:list' %}?{% if selected_tags %}tag={% for tag in selected_tags %}{{tag}}{% endfor %}&{% endif %}page={{ page_obj.previous_page_number }}">previous</a>
+          {% endif %}
+          <span class="page-current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+          </span>
+          {% if page_obj.has_next %}
+            <a href="{% url 'blogposts:list' %}?{% if selected_tags %}tag={% for tag in selected_tags %}{{tag}}{% endfor %}&{% endif %}page={{ page_obj.next_page_number }}">next</a>
+          {% endif %}
         </span>
-
-        {% if object_list.has_next %}
-            <a href="?{{ page_request_var }}={{ object_list.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">next</a>
-        {% endif %}
-    </span>
-</div>
-
-
-
-
-</div>
+      {% endif %}
+    </div>
+  </div>
 </div>
 
 {% endblock content %}

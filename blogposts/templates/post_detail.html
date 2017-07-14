@@ -70,7 +70,7 @@ Linkedin
      {% if instance.tags %}
     Tags:&nbsp
     {% for tag in instance.tags.all %}
-      <a href="{% url 'blogposts:tag' tag %}">{{ tag }}</a>&nbsp
+      <a href="{% url 'blogposts:list' %}?tag={{tag}}">&nbsp
     {% endfor %}
      {% else %}
 
