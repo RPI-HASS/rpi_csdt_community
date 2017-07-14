@@ -11,7 +11,7 @@
                 <input class='form-control' type='text' name='q' placeholder='Search posts' value='{{ request.GET.q }}'/>
                 <span class='input-group-btn'>
                     <!-- <input class='btn btn-default' type='submit' value='Search' /> -->
-                    <button class='btn btn-default' type='submit'>Search <i class="fa fa-search"></i></button>
+                    <button class='btn btn-primary' type='submit'>Search <i class="fa fa-search"></i></button>
                 </span>
             </div>
         </div>
@@ -52,29 +52,25 @@
   </div>
   <div class="col-md-2">
     {% for event_year in list_events %}
-        <ul class="year" style="list-style-type: none;margin-left:0px;padding-left:0px;">{{event_year.keys.0}}
-            {% for month, events in event_year.values.0.items %}
-                <!--show only months with events! -->
-                {% if events %}
-                    <li id="{{event_year.keys.0}}-{{month}}" class="month">
-                        <div class="month-data">
-                            <div class="collapsed">►&nbsp;<span class="name">{{events.0.publish|date:"F"}}</span>
-                            <span class="counter"> ({{events|length}})</span></div>
-                            <div class="expanded" style="display:none;">▼&nbsp;
-                            <span class="name">{{events.0.publish|date:"F"}}</span>
-                            <span class="counter"> ({{events|length}})</span>
-                            </div>
+        <ul class="year" style="list-style-type: none;margin-left:0px;padding-left:0px;">{{event_year.0.0.publish.year}}
+            {% for event_month in event_year %}
+                <li id="{{month.0.publish.month}}-{{month}}" class="month">
+                    <div class="month-data">
+                        <div class="collapsed">►&nbsp;<span class="name">{{event_month.0.publish|date:"F"}}</span>
+                        <span class="counter"> ({{event_month|length}})</span></div>
+                        <div class="expanded" style="display:none;">▼&nbsp;
+                        <span class="name">{{event_month.0.publish|date:"F"}}</span>
+                        <span class="counter"> ({{event_month|length}})</span>
                         </div>
-                        <ul class="events" style="display:none;">
-                        {% for event in events %}
-                            <li class="event">
-                            <a class="title" href="{% url 'blogposts:date' event.publish|date:"Y" event.publish|date:"n" event.publish|date:"d" %}">{{event.publish|date:"j M Y"}}</a>
-                            </li>
-                        {% endfor %}
-                        </ul>
-                    </li>
-                {% endif %}
-            </li>
+                    </div>
+                    <ul class="events" style="display:none;">
+                    {% for event in event_month %}
+                        <li class="event">
+                        <a class="title" href="{% url 'blogposts:date' event.publish|date:"Y" event.publish|date:"n" event.publish|date:"d" %}">{{event.publish|date:"j M Y"}}</a>
+                        </li>
+                    {% endfor %}
+                    </ul>
+                </li>
             {% endfor %}
         </ul>
     {% endfor %}
