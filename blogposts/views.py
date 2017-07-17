@@ -9,11 +9,11 @@ from comments.models import Comment
 import datetime
 from django.contrib import messages
 from django.contrib.contenttypes.models import ContentType
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
 from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
+from extra_views import SearchableListMixin, SortableListMixin
 from django.views.generic import ListView
 from .forms import PostForm
 from .models import Post
@@ -83,34 +83,9 @@ def post_detail(request, slug=None):
     return render(request, "post_detail.html", context)
 
 
-def post_list(request):
-    today = timezone.now().date()
-    queryset_list = Post.objects.active()  # .order_by("-timestamp")
-    if request.user.is_staff or request.user.is_superuser:
-        queryset_list = Post.objects.all().order_by('-publish')
-    query = request.GET.get("q")
-    if query:
-        queryset_list = queryset_list.filter(
-                Q(title__icontains=query) |
-                Q(content__icontains=query) |
-                Q(user__first_name__icontains=query) |
-                Q(user__last_name__icontains=query)
-                ).distinct()
-    paginator = Paginator(queryset_list, 8)  # Show 25 contacts per page
-    page_request_var = "page"
-    page = request.GET.get(page_request_var)
-    try:
-        queryset = paginator.page(page)
-    except PageNotAnInteger:
-        # If page is not an integer, deliver first page.
-        queryset = paginator.page(1)
-    except EmptyPage:
-        # If page is out of range (e.g. 9999), deliver last page of results.
-        queryset = paginator.page(paginator.num_pages)
-    tags = Post.tags.all()
-    now = datetime.datetime.now()
-    events = list(queryset_list)
-    event_dict = []
+def get_calendar(objects):
+    events = list(objects)
+    event_calendar = []
     year = []
     month = []
     if events:
@@ -126,22 +101,51 @@ def post_list(request):
                 month.append(event)
             else:
                 year.append(month)
-                event_dict.append(year)
+                event_calendar.append(year)
                 year = []
                 month = []
                 month.append(event)
         year.append(month)
-        event_dict.append(year)
-    context = {
-        "object_list": queryset,
-        "title": "List",
-        "page_request_var": page_request_var,
-        "today": today,
-        "tags": tags,
-        'now': now,
-        'list_events': event_dict,
-    }
-    return render(request, "post_list.html", context)
+        event_calendar.append(year)
+    return event_calendar
+
+
+class post_list(SearchableListMixin, SortableListMixin, ListView):
+    model = Post
+    template_name = "post_list.html"
+    paginate_by = 6
+
+    def get_queryset(self):
+        if self.request.user.is_staff or self.request.user.is_superuser:
+            queryset = Post.objects.all().order_by('-publish')
+        else:
+            queryset = Post.objects.active().order_by('-publish')
+        query = self.request.GET.get("q")
+        if query:
+            queryset = queryset.filter(
+                    Q(title__icontains=query) |
+                    Q(content__icontains=query) |
+                    Q(user__first_name__icontains=query) |
+                    Q(user__last_name__icontains=query) |
+                    Q(tags__name__icontains=query)
+                    ).distinct()
+        tags = self.request.GET.get('tag')
+        if tags:
+            queryset = queryset.filter(tags__name__in=[tags])
+        return queryset
+
+    def render_to_response(self, context, **response_kwargs):
+        available_tags = Post.tags.most_common().order_by("rank")
+        selected_tags = self.request.GET.get('tag')
+        print(selected_tags)
+        now = datetime.datetime.now()
+        today = timezone.now().date()
+        context['today'] = today
+        context['available_tags'] = available_tags
+        context['selected_tags'] = selected_tags
+        context['now'] = now
+        context['list_events'] = get_calendar(self.object_list)
+        return super(post_list, self).render_to_response(context, **response_kwargs)
 
 
 def post_update(request, slug=None):
@@ -170,83 +174,3 @@ def post_delete(request, slug=None):
     instance.delete()
     messages.success(request, "Successfully deleted")
     return redirect("blogposts:list")
-
-
-class ViewTag(ListView):
-    template_name = "blogposts/filter.html"
-
-    def get_queryset(self):
-        tag = self.kwargs['tag']
-        queryset_list = Post.objects.filter(tags__name__in=[tag])
-        paginator = Paginator(queryset_list, 8)  # Show 25 contacts per page
-        page_request_var = "page"
-        page = self.request.GET.get(page_request_var)
-        try:
-            queryset = paginator.page(page)
-        except PageNotAnInteger:
-            # If page is not an integer, deliver first page.
-            queryset = paginator.page(1)
-        except EmptyPage:
-            # If page is out of range (e.g. 9999), deliver last page of results.
-            queryset = paginator.page(paginator.num_pages)
-        return queryset
-
-    def get_tag(self):
-        tag = self.kwargs['tag']
-        return tag
-
-    def tag_calendar(self):
-        tag = self.kwargs['tag']
-        queryset_list = Post.objects.filter(tags__name__in=[tag])
-        paginator = Paginator(queryset_list, 8)  # Show 25 contacts per page
-        page_request_var = "page"
-        page = self.request.GET.get(page_request_var)
-        try:
-            queryset = paginator.page(page)
-        except PageNotAnInteger:
-            # If page is not an integer, deliver first page.
-            queryset = paginator.page(1)
-        except EmptyPage:
-            # If page is out of range (e.g. 9999), deliver last page of results.
-            queryset = paginator.page(paginator.num_pages)
-        events = list(queryset)
-        event_dict = []
-        year = []
-        month = []
-        if events:
-            month.append(events[0])
-            for i in range(1, len(events)):
-                event = events[i]
-                current = month[0]
-                if current.publish.year == event.publish.year and current.publish.month == event.publish.month:
-                    month.append(event)
-                elif current.publish.year == event.publish.year:
-                    year.append(month)
-                    month = []
-                    month.append(event)
-                else:
-                    year.append(month)
-                    event_dict.append(year)
-                    year = []
-                    month = []
-                    month.append(event)
-            year.append(month)
-            event_dict.append(year)
-        return event_dict
-
-    def tags(self):
-        return Post.tags.all()
-
-
-class DateSearch(ListView):
-    template_name = "blogposts/date.html"
-
-    def get_queryset(self):
-        year = self.kwargs['year']
-        month = self.kwargs['month']
-        day = self.kwargs['day']
-        return Post.objects.filter(publish__year=year, publish__month=month, publish__day=day)
-
-    def get_tag(self):
-        tag = self.kwargs['tag']
-        return tag

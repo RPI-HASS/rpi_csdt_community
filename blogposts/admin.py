@@ -1,7 +1,10 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import Post
+from .models import Post, MyCustomTag
+from taggit.admin import Tag
+
+admin.site.unregister(Tag)
 
 
 class PostModelAdmin(admin.ModelAdmin):
@@ -23,4 +26,12 @@ class PostModelAdmin(admin.ModelAdmin):
         exclude = ('height_field', 'width_field')
 
 
+class TaggitModelAdmin(admin.ModelAdmin):
+    class Meta:
+        model = MyCustomTag
+
+
 admin.site.register(Post, PostModelAdmin)
+
+
+admin.site.register(MyCustomTag, TaggitModelAdmin)
