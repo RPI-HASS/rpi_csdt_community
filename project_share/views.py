@@ -2,6 +2,7 @@
 from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import PermissionDenied
+from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView
@@ -91,9 +92,16 @@ class ProjectList(SearchableListMixin, SortableListMixin, ListView):
         filter_val = self.request.GET.get('filter')
         if filter_val is not None:
             set = set.filter(application=filter_val,)
+        term = self.request.GET.get('q')
+        if term is not None:
+            set = set.filter(Q(name__icontains=term) | Q(
+                description__icontains=term) | Q(
+                owner__username__icontains=term), approved=True)
         order = self.request.GET.get('orderby')
         if order is not None:
             set = set.order_by(order)
+        else:
+            set = set.order_by("-id")
         return set
 
     def render_to_response(self, context, **response_kwargs):
@@ -101,7 +109,17 @@ class ProjectList(SearchableListMixin, SortableListMixin, ListView):
         context['application_list'] = Application.objects.all()
         context['order'] = self.request.GET.get('orderby')
         context['filter_val'] = self.request.GET.get('filter')
+        context['term'] = self.request.GET.get('q')
         return super(ProjectList, self).render_to_response(context, **response_kwargs)
+
+    def search_term(self):
+        term = self.request.GET.get('q')
+        return term
+
+    def return_appl(self):
+        filter_val = self.request.GET.get('filter')
+        name = Application.objects.get(id=filter_val)
+        return name
 
 
 class ProjectTagList(ProjectList):
