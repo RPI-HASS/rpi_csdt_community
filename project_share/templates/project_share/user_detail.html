@@ -28,7 +28,7 @@
     <div class="thumbnails">
         {% for object in object|unrestricted_projects:user %}
             {% if not object.approved %}
-                {% include "_unpublished_project_thumbnail.html" %}
+                {% include "_project_thumbnail.html" %}
             {% endif %}
         {% endfor %}
     </div>
