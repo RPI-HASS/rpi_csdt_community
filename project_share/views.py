@@ -24,7 +24,23 @@ except ImportError:  # django < 1.5
 else:
     User = get_user_model()
 
-
+def filter_project_query(set, request):
+    filter_val = request.GET.get('filter')
+    if filter_val is not None:
+        set = set.filter(application=filter_val,)
+    term = request.GET.get('q')
+    if term is not None:
+        set = set.filter(Q(name__icontains=term) | Q(
+            description__icontains=term) | Q(
+            owner__username__icontains=term), approved=True)
+    order = request.GET.get('orderby')
+    if order is not None:
+        set = set.order_by(order)
+    else:
+        set = set.order_by("-id")
+    return set
+    
+    
 class RestrictPermissionMixin(object):
     """Prevent inappropriate access."""
 
@@ -88,21 +104,8 @@ class ProjectList(SearchableListMixin, SortableListMixin, ListView):
 
     def get_queryset(self):
         """Order projects based on filter or order request settings."""
-        set = Project.approved_projects()
-        filter_val = self.request.GET.get('filter')
-        if filter_val is not None:
-            set = set.filter(application=filter_val,)
-        term = self.request.GET.get('q')
-        if term is not None:
-            set = set.filter(Q(name__icontains=term) | Q(
-                description__icontains=term) | Q(
-                owner__username__icontains=term), approved=True)
-        order = self.request.GET.get('orderby')
-        if order is not None:
-            set = set.order_by(order)
-        else:
-            set = set.order_by("-id")
-        return set
+        queryset = Project.approved_projects()
+        return filter_project_query(queryset,self.request)
 
     def render_to_response(self, context, **response_kwargs):
         """List all applications for the user to choose to filter by."""
@@ -349,8 +352,19 @@ class UserDetail(DetailView):
     template_name = "project_share/user_detail.html"
 
     def render_to_response(self, context, **response_kwargs):
-        """Include the user number in the context."""
-        context['user'] = self.request.user
+        """Include define the projects, and allow search"""
+        try:
+            queryset = Project.objects.filter(Q(owner=self.object)).filter(Q(approved=True) | Q(owner=self.request.user)).order_by('-id')
+        except:
+            queryset = Project.objects.filter(Q(owner=self.object), Q(approved=True)).order_by('-id')
+            
+            
+        context['project_list'] = filter_project_query(queryset,self.request)
+        context['application_list'] = Application.objects.all()
+        context['order'] = self.request.GET.get('orderby')
+        context['filter_val'] = self.request.GET.get('filter')
+        context['term'] = self.request.GET.get('q')
+        
         return super(UserDetail, self).render_to_response(context, **response_kwargs)
 
 
