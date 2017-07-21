@@ -27,7 +27,7 @@ django-pipeline==1.6.12
 django-registration==2.2
 django-sekizai==0.10.0
 Django-Select2==5.8.10
-django-simple-captcha==0.5.5
+django-recaptcha2==1.0.3
 django-taggit==0.22.0
 django-taggit-templatetags==0.4.6.dev0
 django-taggit-templatetags2==1.6.1
