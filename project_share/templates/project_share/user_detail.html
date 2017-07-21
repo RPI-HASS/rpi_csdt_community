@@ -28,19 +28,7 @@
     <div class="thumbnails">
         {% for object in object|unrestricted_projects:user %}
             {% if not object.approved %}
-                <div class="col-sm-6 col-md-4">
-                    <div class="thumbnail">
-                            <a href="{% url 'project-update' pk=object.id %}"><img src="{% thumbnail object.screenshot.f 300x300 crop %}" alt="Screenshot of {{ object.name }}"></a>
-                         <div class="caption">
-                            <h4>{{ object.name }}</h4>
-                            <p>{{ object.description|truncatewords:10 }}</p>
-                            <p>
-                                <a href="{% url 'project-run-detail' pk=object.pk %}" class="btn btn-large btn-primary">Open</a>
-                                <a href="{% url 'project-present-detail' pk=object.pk %}" class="btn btn-large btn-info">Open for Presentation</a>
-                            </p>
-                        </div>
-                    </div>
-                </div>
+                {% include "_project_thumbnail.html" %}
             {% endif %}
         {% endfor %}
     </div>
