@@ -42,6 +42,10 @@ class ApprovalForm(ModelForm):
 class ExtendedSignupForm(forms.Form):
     """Signup form with many special placeholders for race gender etc."""
 
+    username = forms.CharField(max_length=100, label='username',
+                               widget=forms.TextInput(attrs={'placeholder': 'username (no spaces)'}), required=False)
+    email = forms.CharField(max_length=100, label='email',
+                            widget=forms.TextInput(attrs={'placeholder': 'email address'}), required=False)
     gender = forms.CharField(max_length=100, label='gender',
                              widget=forms.TextInput(attrs={'placeholder': 'gender (optional)'}), required=False)
     race = forms.CharField(max_length=100, label='race',
@@ -53,7 +57,7 @@ class ExtendedSignupForm(forms.Form):
                                    required=False)
     captcha = ReCaptchaField(widget=ReCaptchaWidget())
 
-    field_order = ['username', 'email', 'password1', 'password2', 'gender', 'race', 'age', 'classroom', 'captch']
+    field_order = ['username', 'email', 'password1', 'password2', 'gender', 'race', 'age', 'classroom', 'captcha']
 
     def signup(self, request, n_user):
         """specify where to put race / gender data, and signup for classroom"""
