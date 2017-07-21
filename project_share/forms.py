@@ -2,7 +2,8 @@
 from django import forms
 from django.forms import ModelForm
 from django_teams.models import Team, TeamStatus
-from captcha.fields import CaptchaField
+from snowpenguin.django.recaptcha2.fields import ReCaptchaField
+from snowpenguin.django.recaptcha2.widgets import ReCaptchaWidget
 
 from project_share.models import (Address, Application, ApplicationCategory,
                                   Approval, Project)
@@ -50,7 +51,7 @@ class ExtendedSignupForm(forms.Form):
     classroom = forms.IntegerField(label='classroom',
                                    widget=forms.TextInput(attrs={'placeholder': 'classroom # (optional)'}),
                                    required=False)
-    captcha = CaptchaField()
+    captcha = ReCaptchaField(widget=ReCaptchaWidget())
 
     field_order = ['username', 'email', 'password1', 'password2', 'gender', 'race', 'age', 'classroom', 'captch']
 
