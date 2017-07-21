@@ -14,8 +14,9 @@
     <div id="span12">
         <h3>My Projects</h3>
     </div>
+    {% include 'project_share/project_filter.html' %}
     <div class="thumbnails">
-        {% for object in object|unrestricted_projects:user %}
+        {% for object in project_list %}
             {% if object.approved %}
                 {% include "_project_thumbnail.html" %}
             {% endif %}
@@ -26,7 +27,7 @@
         <h3>Projects pending approval</h3>
     </div>
     <div class="thumbnails">
-        {% for object in object|unrestricted_projects:user %}
+        {% for object in project_list %}
             {% if not object.approved %}
                 {% include "_project_thumbnail.html" %}
             {% endif %}
