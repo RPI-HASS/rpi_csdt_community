@@ -1,7 +1,7 @@
 language: python
 
 node_js:
-  - "6"
+  - "7"
   - "node"
 
 python:
@@ -16,6 +16,8 @@ before_install:
   - export DJANGO_SETTINGS_MODULE="rpi_csdt_community.settings"
   - export PYTHONPATH="/usr/local/lib/python2.7/dist-packages"
   - export PIP_USE_MIRRORS=true
+  - "npm config set spin false"
+  - "npm install -g npm@^5"
 
 install:
   - sudo npm install -g less
