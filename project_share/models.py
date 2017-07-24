@@ -293,7 +293,7 @@ class ExtendedUser(AbstractUser):
     # REQUIRED_FIELDS = ["username"]
 
     def __str__(self):
-        return "@{}".format(self.username)
+        return "{}".format(self.username)
 
     def get_short_name(self):
         return self.display_name
@@ -307,7 +307,7 @@ class ExtendedUser(AbstractUser):
             imglib.resize_image(self.avatar)
 
     def __unicode__(self):
-        return "@{}".format(self.username)
+        return "{}".format(self.username)
 
 
 class FileUpload(models.Model):
