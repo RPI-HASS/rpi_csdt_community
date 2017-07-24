@@ -1,0 +1,6 @@
+{% load static %}
+{% load project_share_tags %}
+{% load teams %}
+{% with object|get_ownership_object as object %}
+    {% include object|load_fragment_template %}
+{% endwith %}
