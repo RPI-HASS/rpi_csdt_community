@@ -2,8 +2,7 @@
 from django.conf import settings
 from django.contrib.auth.models import (
     AbstractUser,
-    BaseUserManager,
-    User
+    BaseUserManager
 )
 from django.urls import reverse
 from django.db import models
