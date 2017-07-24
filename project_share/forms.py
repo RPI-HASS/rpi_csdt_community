@@ -8,6 +8,8 @@ from snowpenguin.django.recaptcha2.widgets import ReCaptchaWidget
 from project_share.models import (Address, Application, ApplicationCategory,
                                   Approval, Project)
 
+from .models import ExtendedUser
+
 
 class ProjectForm(ModelForm):
     """Form for project updating / creation."""
@@ -90,3 +92,12 @@ class ApplicationAdminForm(ModelForm):
     class Meta:
         model = Application
         exclude = ()
+
+
+class ProfileForm(forms.ModelForm):
+    class Meta:
+        model = ExtendedUser
+        fields = ['email', 'username', 'display_name', 'avatar', 'bio', 'gender', 'race', 'age']
+        widgets = {
+            'bio': forms.Textarea(attrs={'rows': 4, 'cols': 15}),
+        }

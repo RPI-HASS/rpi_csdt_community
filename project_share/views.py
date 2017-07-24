@@ -1,11 +1,15 @@
 """Defines the displays for projects, applications, demos, and goals."""
 from django.conf import settings
+from django.contrib import messages
+from django.contrib.auth.forms import UserChangeForm
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import PermissionDenied
 from django.db.models import Q
-from django.shortcuts import get_object_or_404, redirect
+from django.http import HttpResponseRedirect
+from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse, reverse_lazy
-from django.views.generic import ListView
+from django.views.generic import ListView, FormView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django_teams.models import Ownership
@@ -23,6 +27,8 @@ except ImportError:  # django < 1.5
     from django.contrib.auth.models import User
 else:
     User = get_user_model()
+
+from . import forms
 
 
 def filter_project_query(set, request):
@@ -402,3 +408,74 @@ class AddressUpdate(UpdateView):
     def get_success_url(self):
         """Show confirmation."""
         return reverse('address-confirm')
+
+
+IMAGE_FILE_TYPES = ['png', 'jpg', 'jpeg', 'gif']
+
+
+class ProfileView(LoginRequiredMixin, DetailView, FormView):
+    template_name = 'project_share/user_detail.html'
+    form_class = forms.ProfileForm
+    model = User
+
+    def get_object(self, queryset=None):
+        return self.request.user
+
+    def form_valid(self, form):
+        return HttpResponseRedirect(reverse('home'))
+
+    def get_initial(self):
+        return {'email': self.request.user.email,
+                'username': self.request.user.username,
+                'display_name': self.request.user.display_name,
+                'avatar': self.request.user.avatar,
+                'bio': self.request.user.bio}
+
+    success_url = reverse_lazy('home')
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()  # assign the object to the view
+        form = MyUserChangeForm(request.POST or None, request.FILES or None, instance=request.user)
+        if form.is_valid():
+            profile = form.save(commit=False)
+            if request.FILES:
+                profile.avatar = request.FILES['avatar']
+                file_type = profile.avatar.url.split('.')[-1]
+                file_type = file_type.lower()
+                if file_type not in IMAGE_FILE_TYPES:
+                    profile.avatar = None
+                    messages.warning(request, "Avatar must be in jpg, jpeg, gif, or png format")
+                    return render(request, "project_share/user_detail.html",
+                                  {'object': self.request.user, 'form': form})
+            profile.save()
+            form.save()
+            return self.form_valid(form)
+        else:
+            form = MyUserChangeForm(instance=request.user)
+            return self.form_invalid(form)
+
+    def render_to_response(self, context, **response_kwargs):
+        """Include define the projects, and allow search"""
+        try:
+            queryset = Project.objects.filter(
+                Q(owner=self.object)).filter(Q(approved=True) | Q(owner=self.request.user)).order_by('-id')
+        except:
+            queryset = Project.objects.filter(Q(owner=self.object), Q(approved=True)).order_by('-id')
+
+        context['project_list'] = filter_project_query(queryset, self.request)
+        context['application_list'] = Application.objects.all()
+        context['order'] = self.request.GET.get('orderby')
+        context['filter_val'] = self.request.GET.get('filter')
+        context['term'] = self.request.GET.get('q')
+
+        return super(ProfileView, self).render_to_response(context, **response_kwargs)
+
+
+class MyUserChangeForm(UserChangeForm):
+    def __init__(self, *args, **kwargs):
+        super(MyUserChangeForm, self).__init__(*args, **kwargs)
+        del self.fields['password']
+
+    class Meta:
+        model = User
+        fields = ('email', 'username', 'display_name', 'avatar', 'bio', 'gender', 'race', 'age')
