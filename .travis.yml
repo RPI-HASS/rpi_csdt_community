@@ -20,12 +20,13 @@ before_install:
   - "npm install -g npm@^5"
 
 install:
-  - sudo npm install -g less
-  - sudo npm install -g yuglify
-  - sudo pip install setuptools --upgrade
-  - sudo pip install --upgrade -r requirements.txt
-  - sudo pip install coveralls
-  - sudo pip install flake8
+  - $(type -P npm) install -g less
+  - $(type -P npm) install -g yuglify
+  - pip install setuptools --upgrade
+  - pip install --upgrade -r requirements.txt
+  - pip install coveralls
+  - pip install flake8
+
 
 before_script:
   - psql -c "CREATE DATABASE travisci;" -U postgres
