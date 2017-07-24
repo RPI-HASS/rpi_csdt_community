@@ -2,6 +2,7 @@
 from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import PermissionDenied
+from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView
@@ -22,6 +23,23 @@ except ImportError:  # django < 1.5
     from django.contrib.auth.models import User
 else:
     User = get_user_model()
+
+
+def filter_project_query(set, request):
+    filter_val = request.GET.get('filter')
+    if filter_val is not None:
+        set = set.filter(application=filter_val,)
+    term = request.GET.get('q')
+    if term is not None:
+        set = set.filter(Q(name__icontains=term) | Q(
+            description__icontains=term) | Q(
+            owner__username__icontains=term), approved=True)
+    order = request.GET.get('orderby')
+    if order is not None:
+        set = set.order_by(order)
+    else:
+        set = set.order_by("-id")
+    return set
 
 
 class RestrictPermissionMixin(object):
@@ -87,21 +105,25 @@ class ProjectList(SearchableListMixin, SortableListMixin, ListView):
 
     def get_queryset(self):
         """Order projects based on filter or order request settings."""
-        set = Project.approved_projects()
-        filter_val = self.request.GET.get('filter')
-        if filter_val is not None:
-            set = set.filter(application=filter_val,)
-        order = self.request.GET.get('orderby')
-        if order is not None:
-            set = set.order_by(order)
-        return set
+        queryset = Project.approved_projects()
+        return filter_project_query(queryset, self.request)
 
     def render_to_response(self, context, **response_kwargs):
         """List all applications for the user to choose to filter by."""
         context['application_list'] = Application.objects.all()
         context['order'] = self.request.GET.get('orderby')
         context['filter_val'] = self.request.GET.get('filter')
+        context['term'] = self.request.GET.get('q')
         return super(ProjectList, self).render_to_response(context, **response_kwargs)
+
+    def search_term(self):
+        term = self.request.GET.get('q')
+        return term
+
+    def return_appl(self):
+        filter_val = self.request.GET.get('filter')
+        name = Application.objects.get(id=filter_val)
+        return name
 
 
 class ProjectTagList(ProjectList):
@@ -181,9 +203,9 @@ class ProjectUpdate(UpdateView):
 
     def post(self, request, *args, **kwargs):
         """Submit for approval."""
-        if 'publish_project' in request.POST:
+        obj = super(ProjectUpdate, self).get_object()
+        if 'publish_project' in request.POST and not (hasattr(obj, 'approval')):
             super(ProjectUpdate, self).post(request, *args, **kwargs)
-            obj = super(ProjectUpdate, self).get_object()
             obj.save()
             return redirect('approval-create', project_pk=obj.pk)
         return super(ProjectUpdate, self).post(request, *args, **kwargs)
@@ -203,7 +225,7 @@ class ProjectUpdate(UpdateView):
     def get_object(self):
         """If the object doesn't belong to this user, throw a error 503."""
         obj = super(ProjectUpdate, self).get_object()
-        if obj.owner != self.request.user or (hasattr(obj, 'approval') or obj.approved):
+        if obj.owner != self.request.user or obj.approved:
             raise PermissionDenied()
         return obj
 
@@ -331,8 +353,19 @@ class UserDetail(DetailView):
     template_name = "project_share/user_detail.html"
 
     def render_to_response(self, context, **response_kwargs):
-        """Include the user number in the context."""
-        context['user'] = self.request.user
+        """Include define the projects, and allow search"""
+        try:
+            queryset = Project.objects.filter(
+                Q(owner=self.object)).filter(Q(approved=True) | Q(owner=self.request.user)).order_by('-id')
+        except:
+            queryset = Project.objects.filter(Q(owner=self.object), Q(approved=True)).order_by('-id')
+
+        context['project_list'] = filter_project_query(queryset, self.request)
+        context['application_list'] = Application.objects.all()
+        context['order'] = self.request.GET.get('orderby')
+        context['filter_val'] = self.request.GET.get('filter')
+        context['term'] = self.request.GET.get('q')
+
         return super(UserDetail, self).render_to_response(context, **response_kwargs)
 
 

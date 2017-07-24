@@ -2,7 +2,7 @@ language: python
 
 python:
   - 2.7
-
+  
 services: postgresql
 
 env:
@@ -12,14 +12,15 @@ before_install:
   - export DJANGO_SETTINGS_MODULE="rpi_csdt_community.settings"
   - export PYTHONPATH="/usr/local/lib/python2.7/dist-packages"
   - export PIP_USE_MIRRORS=true
+  - "npm install -g npm@^5"
 
 install:
-  - sudo $(type -P npm) install -g less
-  - sudo $(type -P npm) install -g yuglify
-  - sudo pip install setuptools --upgrade
-  - sudo pip install --upgrade -r requirements.txt
-  - sudo pip install coveralls
-  - sudo pip install flake8
+  - $(type -P npm) install -g less
+  - $(type -P npm) install -g yuglify
+  - pip install setuptools --upgrade
+  - pip install --upgrade -r requirements.txt
+  - pip install coveralls
+  - pip install flake8
   
 before_script:
   - psql -c "CREATE DATABASE travisci;" -U postgres
