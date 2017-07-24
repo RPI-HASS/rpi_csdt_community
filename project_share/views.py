@@ -422,7 +422,7 @@ class ProfileUpdate(LoginRequiredMixin, DetailView, FormView):
         return self.request.user
 
     def form_valid(self, form):
-        return HttpResponseRedirect(reverse('extendeduser-detail', kwargs={'pk':self.request.user.id}))
+        return HttpResponseRedirect(reverse('extendeduser-detail', kwargs={'pk': self.request.user.id}))
 
     def get_initial(self):
         return {'email': self.request.user.email,
