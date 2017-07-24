@@ -3,6 +3,9 @@ language: python
 python:
   - 2.7
 
+node_js:
+  - "7"
+  
 services: postgresql
 
 env:
@@ -12,6 +15,7 @@ before_install:
   - export DJANGO_SETTINGS_MODULE="rpi_csdt_community.settings"
   - export PYTHONPATH="/usr/local/lib/python2.7/dist-packages"
   - export PIP_USE_MIRRORS=true
+  - "npm config set spin false"
   - "npm install -g npm@^2"
 
 install:
