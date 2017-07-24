@@ -1,8 +1,8 @@
 language: python
 
 node_js:
-  - 6
-  - node
+  - "6"
+  - "node"
 
 python:
   - 2.7
