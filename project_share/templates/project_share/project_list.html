@@ -2,50 +2,8 @@
 {% load thumbnail %}
 
 {% block content %}
-<div class="row">
-    <div class="col-md-3">
 
-        <div class="btn-group">
-            <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-                Sort by...
-                <span class="caret"></span>
-            </a>
-
-            <ul class="dropdown-menu">
-                <li><a href="{% url 'project-list' %}?{% if filter_val %}filter={{ filter_val }}&{% endif %}orderby=-id&{% if term %}q={{ term }}{% endif %}">Newest</a></li>
-                <li><a href="{% url 'project-list' %}?{% if filter_val %}filter={{ filter_val }}&{% endif %}orderby=id&{% if term %}q={{ term }}{% endif %}">Oldest</a></li>
-                <li><a href="{% url 'project-list' %}?{% if filter_val %}filter={{ filter_val }}&{% endif %}orderby=name&{% if term %}q={{ term }}{% endif %}">By name</a></li>
-            </ul>
-        </div>
-
-        <div class="btn-group">
-            <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-                Filter by...
-                <span class="caret"></span>
-            </a>
-
-            <ul class="dropdown-menu">
-                <li><a href="{% url 'project-list' %}?{% if order %}orderby={{ order }}&{% endif %}{% if term %}q={{ term }}&{% endif %}">No filtering</a></li>
-                {% for application in application_list %}
-                   <li><a href="{% url 'project-list' %}?filter={{ application.id }}{% if order %}&orderby={{ order }}{% endif %}{% if term %}&q={{ term }}{% endif %}">{{application.name}}</a></li>
-                {% endfor %}
-            </ul>
-        </div>
-    </div>
-    <div class="col-md-3">
-      <form method='GET' action='{% url 'project-list' %}' >
-        <ul class="menu" style="list-style: none;padding-left:0px;width: 300px;">
-          <li>
-              <div class='input-group'>
-                <input class='form-control' type='search' name='q' placeholder='Search projects' />
-                <span class='input-group-btn'>
-                  <button type="submit" class=" btn btn-primary">Search</button>
-                </span>
-              </div>
-          </li>
-      </form>
-    </div>
-</div>
+{% include 'project_share/project_filter.html' %}
 
 <div class="row">
     {% if view.search_term %}
