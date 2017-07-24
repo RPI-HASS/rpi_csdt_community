@@ -199,9 +199,9 @@ class ProjectUpdate(UpdateView):
 
     def post(self, request, *args, **kwargs):
         """Submit for approval."""
-        if 'publish_project' in request.POST:
+        obj = super(ProjectUpdate, self).get_object()
+        if 'publish_project' in request.POST and not (hasattr(obj, 'approval')):
             super(ProjectUpdate, self).post(request, *args, **kwargs)
-            obj = super(ProjectUpdate, self).get_object()
             obj.save()
             return redirect('approval-create', project_pk=obj.pk)
         return super(ProjectUpdate, self).post(request, *args, **kwargs)
@@ -221,7 +221,7 @@ class ProjectUpdate(UpdateView):
     def get_object(self):
         """If the object doesn't belong to this user, throw a error 503."""
         obj = super(ProjectUpdate, self).get_object()
-        if obj.owner != self.request.user or (hasattr(obj, 'approval') or obj.approved):
+        if obj.owner != self.request.user or obj.approved:
             raise PermissionDenied()
         return obj
 
