@@ -413,8 +413,8 @@ class AddressUpdate(UpdateView):
 IMAGE_FILE_TYPES = ['png', 'jpg', 'jpeg', 'gif']
 
 
-class ProfileView(LoginRequiredMixin, DetailView, FormView):
-    template_name = 'project_share/user_detail.html'
+class ProfileUpdate(LoginRequiredMixin, DetailView, FormView):
+    template_name = 'project_share/user_update.html'
     form_class = forms.ProfileForm
     model = User
 
@@ -422,14 +422,18 @@ class ProfileView(LoginRequiredMixin, DetailView, FormView):
         return self.request.user
 
     def form_valid(self, form):
-        return HttpResponseRedirect(reverse('home'))
+        return HttpResponseRedirect(reverse('extendeduser-detail', kwargs={'pk':self.request.user.id}))
 
     def get_initial(self):
         return {'email': self.request.user.email,
                 'username': self.request.user.username,
                 'display_name': self.request.user.display_name,
                 'avatar': self.request.user.avatar,
-                'bio': self.request.user.bio}
+                'bio': self.request.user.bio,
+                'age': self.request.user.age,
+                'race': self.request.user.race,
+                'gender': self.request.user.gender,
+                }
 
     success_url = reverse_lazy('home')
 
@@ -453,22 +457,6 @@ class ProfileView(LoginRequiredMixin, DetailView, FormView):
         else:
             form = MyUserChangeForm(instance=request.user)
             return self.form_invalid(form)
-
-    def render_to_response(self, context, **response_kwargs):
-        """Include define the projects, and allow search"""
-        try:
-            queryset = Project.objects.filter(
-                Q(owner=self.object)).filter(Q(approved=True) | Q(owner=self.request.user)).order_by('-id')
-        except:
-            queryset = Project.objects.filter(Q(owner=self.object), Q(approved=True)).order_by('-id')
-
-        context['project_list'] = filter_project_query(queryset, self.request)
-        context['application_list'] = Application.objects.all()
-        context['order'] = self.request.GET.get('orderby')
-        context['filter_val'] = self.request.GET.get('filter')
-        context['term'] = self.request.GET.get('q')
-
-        return super(ProfileView, self).render_to_response(context, **response_kwargs)
 
 
 class MyUserChangeForm(UserChangeForm):

@@ -4,29 +4,25 @@
 {% load project_share_tags %}
 
 {% block content %}
-    <div class="page-header">
-        <h1>{{ object }}'s Profile <small><br><a href="{% url 'account_change_password' %}">Change password</a>
-          {% if object.address %}
-            <br><a href="{% url 'address-update' pk=object.id %}">Change address</a>
-          {% endif %}
-        </h1>
-    </div>
 
-    <h3>Update Profile:</h3>
     <div class="row">
-      <div class="col-md-6">
-            <form class="form-horizontal" role="form" action="" method="post" enctype="multipart/form-data">
-                        {% csrf_token %}
-                        {% bootstrap_form form %}
+      <div class="col-md-6" >
+        <h2>{% if object.avatar %}<img src="{{ object.avatar.url }}">&nbsp{% endif %}<b>{{ object.display_name }} ({{ object }})</b></h2>
+        <p style="font-size: 1.2em;">{{ object.bio }}</p>
+        <p>
+        {% if object.age %}Age: {{ object.age }}<p>{% endif %}
+        {% if object.gender %}Gender: {{ object.gender }}<p>{% endif %}
+        {% if object.race %}Race: {{ object.race }}<p>{% endif %}
 
-                        <div class="form-group">
-                            <div class="col-md-10">
-                                <button type="submit" class="btn btn-primary">Update</button>
-                            </div>
-                        </div>
-                    </form>
-        </div>
+        <a href="{% url 'extendeduser-update' pk=object.id %}" style=""><button class="edit-btn" style="">Update Profile</button></a>
+
+          <a href="{% url 'account_change_password' %}" style=""><button class="edit-btn" style="">Change Password</button></a>
+
+
+      </div>
     </div>
+
+
 
 
 
@@ -54,4 +50,22 @@
     </div>
 
 
+{% endblock %}
+
+{% block css %}
+<style>
+  .edit-btn {
+    padding: 7px 12px;
+    border-radius: 6px;
+    border: 2px solid lightgrey;
+    color:black;
+    background-color: white;
+    transition: border 1s;
+  }
+  .edit-btn:hover {
+    color: black;
+    border: 2px solid black;
+    transition: border 1s;
+  }
+</style>
 {% endblock %}
