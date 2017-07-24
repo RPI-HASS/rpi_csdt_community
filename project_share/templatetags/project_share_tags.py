@@ -14,5 +14,11 @@ def unrestricted_projects(user, requester):
     return obj.all()
 
 
+def get_ownership_object(ownership):
+    ct = ownership.content_type
+    return ct.get_object_for_this_type(pk=ownership.object_id)
+
+
 register = template.Library()
 register.filter('unrestricted_projects', unrestricted_projects)
+register.filter('get_ownership_object', get_ownership_object)
