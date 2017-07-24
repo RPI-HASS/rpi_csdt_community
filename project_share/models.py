@@ -233,7 +233,7 @@ class UserManager(BaseUserManager):
             raise ValueError("Users must have an email address")
         if not display_name:
             display_name = username
-        if not User.objects.filter(username__iexact=username).exists():
+        if not ExtendedUser.objects.filter(username__iexact=username).exists():
             user = self.model(
                 email=self.normalize_email(email),
                 username=username,
