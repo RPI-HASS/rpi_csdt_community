@@ -275,7 +275,7 @@ def my_awesome_upload_function(instance, filename):
 
 
 class ExtendedUser(AbstractUser):
-    email = models.EmailField(unique=True)
+    email = models.EmailField(unique=False)
     username = models.CharField(max_length=40, unique=True)
     display_name = models.CharField(max_length=70, default="")
     bio = models.CharField(max_length=240, blank=True, default="")
