@@ -14,12 +14,12 @@ before_install:
   - export PIP_USE_MIRRORS=true
 
 install:
-  - sudo $(type -P npm) install -g less
-  - sudo $(type -P npm) install -g yuglify
   - sudo pip install setuptools --upgrade
   - sudo pip install --upgrade -r requirements.txt
   - sudo pip install coveralls
   - sudo pip install flake8
+  - sudo $(type -P npm) install -g less
+  - sudo $(type -P npm) install -g yuglify
   
 before_script:
   - psql -c "CREATE DATABASE travisci;" -U postgres
