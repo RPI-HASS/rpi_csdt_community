@@ -76,6 +76,8 @@
         {% endfor %}
 
         {% for object in object_list %}
+          {% with ts=object|get_user_status:user %}
+            {% if not ts.role == 10 and not ts.role == 20 and not ts.role == 1 %}
         <tr>
             <td>
               <a href="{% url 'team-detail' pk=object.id %}">{{ object }}</a>
@@ -116,6 +118,9 @@
                 {% endif %}
             </td>
         </tr>
+        {% endif %}
+        {% endwith %}
+
         {% endfor %}
 
     </table>
