@@ -70,7 +70,7 @@ Linkedin
      {% if instance.tags %}
     Tags:&nbsp
     {% for tag in instance.tags.all %}
-      <a href="{% url 'blogposts:tag' tag %}">{{ tag }}</a>&nbsp
+       <a href="{% url 'blogposts:list' %}?tag={{tag}}">{{tag}}</a>&nbsp
     {% endfor %}
      {% else %}
 
@@ -85,7 +85,7 @@ Linkedin
         {% if request.user.is_authenticated %}
         <form method="POST" action="."> {% csrf_token %}
             {{ comment_form|crispy }}
-            <input type='submit' value='Post comment' class='btn btn-default'>
+            <input type='submit' value='Post comment' class='btn btn-primary'>
         </form>
         {% else %}
         <p>You must login to comment </p>
@@ -107,7 +107,7 @@ Linkedin
             <form method="POST" action="."> {% csrf_token %}
                 {{ comment_form|crispy }}
                 <input type='hidden' name='parent_id' value='{{ comment.id }}'>
-                <input type='submit' value='Reply' class='btn btn-default'>
+                <input type='submit' value='Reply' class='btn btn-primary'>
             </form>
             {% else %}
         <p>You must login to comment </p>
@@ -133,5 +133,5 @@ Linkedin
 {% endblock content %}
 
 {% block css %}
-<link rel="stylesheet" href="{% static 'css/base.css' %}" >
+<link rel="stylesheet" href="{% static 'css/blog.css' %}" >
 {% endblock %}
