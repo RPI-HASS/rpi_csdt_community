@@ -1,0 +1,28 @@
+/* blog css */
+
+h1 {
+    color: #777777;
+}
+
+.wmd-panel{
+    margin-right: 0px !important;
+    margin-left: 0px !important;
+}
+
+.comment-reply{
+    display:none;
+}
+
+.btn-default:hover,
+.btn:focus {
+  text-decoration: none;
+  background-position: 0 -90px;
+  -webkit-transition: background-position 9999s linear;
+  -moz-transition: background-position 9999s linear;
+  -o-transition: background-position 9999s linear;
+  transition: background-position 9999s linear;
+}
+
+.post-detail-item {
+  font-size: 1.35em;
+}

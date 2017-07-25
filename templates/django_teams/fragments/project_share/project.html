@@ -1,9 +1,21 @@
 {% load static %}
 {% load thumbnail %}
-         <a href="{% url 'project-detail' pk=object.id %}"><img src="{% thumbnail object.screenshot.f 200x200 %}" alt="Screenshot of {{ object.name }}"></a>
-         <div class="caption">
-		    <a href="{% url 'project-detail' pk=object.id %}">
-                <h4>{{ object.name }}</h4>
-			</a>
-            <p>{{ object.description|truncatewords:10 }}</p>
-        </div>
+<div class="thumbnail" style="height: 350px; overflow: auto;">
+{% if object.approved %}
+<a href="{% url 'project-detail' pk=object.id %}">
+{% else %}
+<a href="{% url 'project-update' pk=object.id %}">
+{% endif %}
+    <img src="{% thumbnail object.screenshot.file_path 200x200 crop %}" alt="Screenshot of {{ object.name }}"></a>
+     <div class="caption">
+        {% if object.approved %}
+        <a href="{% url 'project-detail' pk=object.id %}">
+        {% else %}
+        <a href="{% url 'project-update' pk=object.id %}">
+        {% endif %}
+        <h4>{{ object.name }}</h4>
+    </a>
+        <p>{{ object.description|truncatewords:10 }}</p>
+    </div>
+</div>
+
