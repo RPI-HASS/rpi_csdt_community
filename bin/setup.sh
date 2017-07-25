@@ -20,8 +20,7 @@ sudo -u postgres psql -U postgres -d postgres -c "alter user postgres with passw
 # Create the database
 sudo -u postgres createdb rpi_csdt_community
 # Add Extensions
-echo 'rpi_csdt_community; CREATE EXTENSION adminpack; CREATE EXTENSION postgis; CREATE EXTENSION postgis_topology;' | psql -U postgres
-
+sudo -u postgres psql rpi_csdt_community -c "CREATE EXTENSION adminpack; CREATE EXTENSION postgis; CREATE EXTENSION postgis_topology;"
 
 # Install node
 sudo apt-get install -y nodejs build-essential
@@ -37,6 +36,7 @@ pip install --upgrade -r /vagrant/requirements.txt
 cd /vagrant/
 git submodule init
 git submodule update
+
 
 # Run migrations to init db
 python manage.py migrate

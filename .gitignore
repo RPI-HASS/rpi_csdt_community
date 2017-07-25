@@ -8,6 +8,7 @@ eclipse/
 *.sqlite3
 python/
 media/
+.DS_Store
 collected_static/
 local_settings.py
 static/website/
