@@ -181,7 +181,7 @@ INSTALLED_APPS = (
     # 'allauth.socialaccount.providers.weibo',
     # 'allauth.socialaccount.providers.xing',
 
-    'captcha',
+    'snowpenguin.django.recaptcha2',
     'django_extensions',
     'project_share',
     'rpi_csdt_community',
