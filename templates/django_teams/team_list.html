@@ -30,7 +30,7 @@
         {% for object in object_list %}
           {% if user.is_authenticated %}
             {% with ts=object|get_user_status:user %}
-              {% if ts.role == 10 or ts.role == 20 %}
+              {% if ts.role == 10 or ts.role == 20 or ts.role == 1 %}
               <tr>
                   <td>
                     <a href="{% url 'team-detail' pk=object.id %}">{{ object }}</a>
@@ -74,7 +74,7 @@
             {% endwith %}
           {% endif %}
         {% endfor %}
-        
+
         {% for object in object_list %}
         <tr>
             <td>
