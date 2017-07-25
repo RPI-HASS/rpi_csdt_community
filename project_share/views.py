@@ -134,7 +134,7 @@ class ProjectTagList(ProjectList):
         return Project.approved_projects().filter(tags__in=[self.tag])
 
 
-class ProjectDetail(RestrictPermissionMixin, DetailView):
+class ProjectDetail(DetailView):
     """Display all the information about a project given owner is correct."""
 
     queryset = Project.objects.select_related("approval").select_related("owner").select_related("screenshot")
@@ -146,7 +146,7 @@ class ProjectDetail(RestrictPermissionMixin, DetailView):
         return super(ProjectDetail, self).render_to_response(context, **response_kwargs)
 
 
-class ProjectRunDetail(RestrictPermissionMixin, DetailView):
+class ProjectRunDetail(DetailView):
     """Run the project as the same template as application but with application,
     but with settings for application and analytics."""
 
