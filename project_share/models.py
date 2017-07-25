@@ -228,8 +228,8 @@ class Goal(models.Model):
 
 class UserManager(BaseUserManager):
     def create_user(self, email, username, display_name=None, password=None):
-        if not email:
-            raise ValueError("Users must have an email address")
+        # if not email:
+        #    raise ValueError("Users must have an email address")
         if not display_name:
             display_name = username
         if not ExtendedUser.objects.filter(username__iexact=username).exists():
@@ -243,7 +243,7 @@ class UserManager(BaseUserManager):
             return user
         raise ValueError("Account name already used")
 
-    def create_superuser(self, email, username, display_name, password):
+    def create_superuser(self, username, password, email=None, display_name=None):
         user = self.create_user(
             email,
             username,
@@ -275,9 +275,9 @@ def my_awesome_upload_function(instance, filename):
 
 
 class ExtendedUser(AbstractUser):
-    email = models.EmailField(unique=False)
+    email = models.EmailField(unique=False, blank=True)
     username = models.CharField(max_length=40, unique=True)
-    display_name = models.CharField(max_length=70, default="")
+    display_name = models.CharField(max_length=70, default="", blank=True)
     bio = models.CharField(max_length=240, blank=True, default="")
     avatar = FileField(blank=True, null=True, upload_to=my_awesome_upload_function)
     date_joined = models.DateTimeField(default=timezone.now)
@@ -289,7 +289,7 @@ class ExtendedUser(AbstractUser):
     age = models.PositiveIntegerField(null=True, blank=True)
     objects = UserManager()
 
-    # USERNAME_FIELD = "email"
+    USERNAME_FIELD = "username"
     # REQUIRED_FIELDS = ["username"]
 
     def __str__(self):
