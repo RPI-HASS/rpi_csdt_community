@@ -181,7 +181,7 @@ INSTALLED_APPS = (
     # 'allauth.socialaccount.providers.weibo',
     # 'allauth.socialaccount.providers.xing',
 
-    'captcha',
+    'snowpenguin.django.recaptcha2',
     'django_extensions',
     'project_share',
     'rpi_csdt_community',
@@ -345,6 +345,16 @@ WARNING_MESSAGE = "<strong>You are currently looking at the development site!</s
 
 USE_CACHE = False
 
+<<<<<<< HEAD
+try:
+    from local_settings import *  # noqa: F403
+except:
+    RECAPTCHA_PRIVATE_KEY = 'not a real key'
+    RECAPTCHA_PUBLIC_KEY = 'not a real key'
+    pass
+
+=======
+>>>>>>> 3b5fd59d9409c96047e2008e6b760dc4be64150a
 if USE_CACHE:
     MIDDLEWARE += [
         'django.middleware.cache.UpdateCacheMiddleware',
@@ -357,6 +367,15 @@ try:
 except ImportError:
     GOOGLE_API_KEY = None
     CENSUS_API_KEY = None
+
+try:
+    RECAPTCHA_PRIVATE_KEY  # noqa: F405
+except NameError:
+    raise "You have not defined recaptcha keys in local settings"
+try:
+    RECAPTCHA_PUBLIC_KEY  # noqa: F405
+except NameError:
+    raise "You have not defined recaptcha keys in local settings"
 
 if ENABLE_GIS:
     # Make sure the database is configured as postgres
