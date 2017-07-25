@@ -1,14 +1,14 @@
 {% load static %}
 {% load thumbnail %}
 <div class="thumbnail" style="height: 350px; overflow: auto;">
-{% if object.approved %}
+{% if object.approved or not object.owner == user%}
 <a href="{% url 'project-detail' pk=object.id %}">
 {% else %}
 <a href="{% url 'project-update' pk=object.id %}">
 {% endif %}
     <img src="{% thumbnail object.screenshot.file_path 200x200 crop %}" alt="Screenshot of {{ object.name }}"></a>
      <div class="caption">
-        {% if object.approved %}
+        {% if object.approved or not object.owner == user%}
         <a href="{% url 'project-detail' pk=object.id %}">
         {% else %}
         <a href="{% url 'project-update' pk=object.id %}">
