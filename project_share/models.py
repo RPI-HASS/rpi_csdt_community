@@ -302,7 +302,7 @@ class ExtendedUser(AbstractUser):
         return "{} (@{})".format(self.display_name, self.username)
 
     def save(self, *args, **kwargs):
-        if not self.display_name:
+        if self.display_name == "":
             self.display_name = self.username
         super(ExtendedUser, self).save(*args, **kwargs)
         if self.avatar:
