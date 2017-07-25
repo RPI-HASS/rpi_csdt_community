@@ -12,8 +12,12 @@ class PostModelAdmin(admin.ModelAdmin):
     list_display = ["title", "updated", "timestamp", 'tag_list']
     list_display_links = ["updated"]
     list_filter = ["updated", "timestamp"]
-
     search_fields = ["title", "content"]
+
+    def save_model(self, request, obj, form, change):
+        if getattr(obj, 'user', None) is None:
+            obj.user = request.user
+        obj.save()
 
     def get_queryset(self, request):
         return super(PostModelAdmin, self).get_queryset(request).prefetch_related('tags')
