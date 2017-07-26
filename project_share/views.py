@@ -358,6 +358,11 @@ class UserDetail(DetailView):
     model = User
     template_name = "project_share/user_detail.html"
 
+    def return_appl(self):
+        filter_val = self.request.GET.get('filter')
+        name = Application.objects.get(id=filter_val)
+        return name
+
     def render_to_response(self, context, **response_kwargs):
         """Include define the projects, and allow search"""
         try:
@@ -371,7 +376,6 @@ class UserDetail(DetailView):
         context['order'] = self.request.GET.get('orderby')
         context['filter_val'] = self.request.GET.get('filter')
         context['term'] = self.request.GET.get('q')
-
         return super(UserDetail, self).render_to_response(context, **response_kwargs)
 
 
