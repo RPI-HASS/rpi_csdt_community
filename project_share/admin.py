@@ -1,7 +1,4 @@
 """Admin models and settings for the projects, applications, and approvals."""
-import os
-
-import git
 from attachments.admin import AttachmentInlines
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
@@ -30,10 +27,6 @@ class ApplicationAdmin(admin.ModelAdmin):
         for category in form.cleaned_data['categories']:
             obj.categories.add(category)
         obj.save()
-        gitControl = git.Git(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
-        gitControl.execute(["git", "submodule", "foreach", "git", "stash"])
-        gitControl.execute(["git", "submodule", "foreach", "git", "pull", "origin", "master"])
-        gitControl.execute(["python", "manage.py", "collectstatic", "--noinput"])
 
     def get_form(self, request, obj=None, **kwargs):
         """Include categories in form."""

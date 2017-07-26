@@ -1,10 +1,15 @@
 """Defines the displays for projects, applications, demos, and goals."""
 from django.conf import settings
+from django.contrib import messages
+from django.contrib.auth.forms import UserChangeForm
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import PermissionDenied
-from django.shortcuts import get_object_or_404, redirect
+from django.db.models import Q
+from django.http import HttpResponseRedirect
+from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse, reverse_lazy
-from django.views.generic import ListView
+from django.views.generic import ListView, FormView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django_teams.models import Ownership
@@ -22,6 +27,25 @@ except ImportError:  # django < 1.5
     from django.contrib.auth.models import User
 else:
     User = get_user_model()
+
+from . import forms
+
+
+def filter_project_query(set, request):
+    filter_val = request.GET.get('filter')
+    if filter_val is not None:
+        set = set.filter(application=filter_val,)
+    term = request.GET.get('q')
+    if term is not None:
+        set = set.filter(Q(name__icontains=term) | Q(
+            description__icontains=term) | Q(
+            owner__username__icontains=term))
+    order = request.GET.get('orderby')
+    if order is not None:
+        set = set.order_by(order)
+    else:
+        set = set.order_by("-id")
+    return set
 
 
 class RestrictPermissionMixin(object):
@@ -87,20 +111,19 @@ class ProjectList(SearchableListMixin, SortableListMixin, ListView):
 
     def get_queryset(self):
         """Order projects based on filter or order request settings."""
-        set = Project.approved_projects()
-        filter_val = self.request.GET.get('filter')
-        if filter_val is not None:
-            set = set.filter(application=filter_val,)
-        order = self.request.GET.get('orderby')
-        if order is not None:
-            set = set.order_by(order)
-        return set
+        queryset = Project.approved_projects()
+        return filter_project_query(queryset, self.request)
 
     def render_to_response(self, context, **response_kwargs):
         """List all applications for the user to choose to filter by."""
-        context['application_list'] = Application.objects.all()
+        application_list = Application.objects.all()
+        context['application_list'] = application_list
         context['order'] = self.request.GET.get('orderby')
-        context['filter_val'] = self.request.GET.get('filter')
+        filter_val = self.request.GET.get('filter')
+        context['filter_val'] = filter_val
+        if filter_val:
+            context['name'] = application_list.get(id=filter_val)
+        context['term'] = self.request.GET.get('q')
         return super(ProjectList, self).render_to_response(context, **response_kwargs)
 
 
@@ -112,7 +135,7 @@ class ProjectTagList(ProjectList):
         return Project.approved_projects().filter(tags__in=[self.tag])
 
 
-class ProjectDetail(RestrictPermissionMixin, DetailView):
+class ProjectDetail(DetailView):
     """Display all the information about a project given owner is correct."""
 
     queryset = Project.objects.select_related("approval").select_related("owner").select_related("screenshot")
@@ -124,7 +147,7 @@ class ProjectDetail(RestrictPermissionMixin, DetailView):
         return super(ProjectDetail, self).render_to_response(context, **response_kwargs)
 
 
-class ProjectRunDetail(RestrictPermissionMixin, DetailView):
+class ProjectRunDetail(DetailView):
     """Run the project as the same template as application but with application,
     but with settings for application and analytics."""
 
@@ -181,9 +204,9 @@ class ProjectUpdate(UpdateView):
 
     def post(self, request, *args, **kwargs):
         """Submit for approval."""
-        if 'publish_project' in request.POST:
+        obj = super(ProjectUpdate, self).get_object()
+        if 'publish_project' in request.POST and not (hasattr(obj, 'approval')):
             super(ProjectUpdate, self).post(request, *args, **kwargs)
-            obj = super(ProjectUpdate, self).get_object()
             obj.save()
             return redirect('approval-create', project_pk=obj.pk)
         return super(ProjectUpdate, self).post(request, *args, **kwargs)
@@ -203,7 +226,7 @@ class ProjectUpdate(UpdateView):
     def get_object(self):
         """If the object doesn't belong to this user, throw a error 503."""
         obj = super(ProjectUpdate, self).get_object()
-        if obj.owner != self.request.user or (hasattr(obj, 'approval') or obj.approved):
+        if obj.owner != self.request.user or obj.approved:
             raise PermissionDenied()
         return obj
 
@@ -331,8 +354,22 @@ class UserDetail(DetailView):
     template_name = "project_share/user_detail.html"
 
     def render_to_response(self, context, **response_kwargs):
-        """Include the user number in the context."""
-        context['user'] = self.request.user
+        """Include define the projects, and allow search"""
+        try:
+            queryset = Project.objects.filter(
+                Q(owner=self.object)).filter(Q(approved=True) | Q(owner=self.request.user)).order_by('-id')
+        except:
+            queryset = Project.objects.filter(Q(owner=self.object), Q(approved=True)).order_by('-id')
+
+        context['project_list'] = filter_project_query(queryset, self.request)
+        application_list = Application.objects.all()
+        context['application_list'] = application_list
+        context['order'] = self.request.GET.get('orderby')
+        filter_val = self.request.GET.get('filter')
+        context['filter_val'] = filter_val
+        if filter_val:
+            context['name'] = application_list.get(id=filter_val)
+        context['term'] = self.request.GET.get('q')
         return super(UserDetail, self).render_to_response(context, **response_kwargs)
 
 
@@ -369,3 +406,62 @@ class AddressUpdate(UpdateView):
     def get_success_url(self):
         """Show confirmation."""
         return reverse('address-confirm')
+
+
+IMAGE_FILE_TYPES = ['png', 'jpg', 'jpeg', 'gif']
+
+
+class ProfileUpdate(LoginRequiredMixin, DetailView, FormView):
+    template_name = 'project_share/user_update.html'
+    form_class = forms.ProfileForm
+    model = User
+
+    def get_object(self, queryset=None):
+        return self.request.user
+
+    def form_valid(self, form):
+        return HttpResponseRedirect(reverse('extendeduser-detail', kwargs={'pk': self.request.user.id}))
+
+    def get_initial(self):
+        return {'email': self.request.user.email,
+                'username': self.request.user.username,
+                'display_name': self.request.user.display_name,
+                'avatar': self.request.user.avatar,
+                'bio': self.request.user.bio,
+                'age': self.request.user.age,
+                'race': self.request.user.race,
+                'gender': self.request.user.gender,
+                }
+
+    success_url = reverse_lazy('home')
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()  # assign the object to the view
+        form = MyUserChangeForm(request.POST or None, request.FILES or None, instance=request.user)
+        if form.is_valid():
+            profile = form.save(commit=False)
+            if request.FILES:
+                profile.avatar = request.FILES['avatar']
+                file_type = profile.avatar.url.split('.')[-1]
+                file_type = file_type.lower()
+                if file_type not in IMAGE_FILE_TYPES:
+                    profile.avatar = None
+                    messages.warning(request, "Avatar must be in jpg, jpeg, gif, or png format")
+                    return render(request, "project_share/user_detail.html",
+                                  {'object': self.request.user, 'form': form})
+            profile.save()
+            form.save()
+            return self.form_valid(form)
+        else:
+            form = MyUserChangeForm(instance=request.user)
+            return self.form_invalid(form)
+
+
+class MyUserChangeForm(UserChangeForm):
+    def __init__(self, *args, **kwargs):
+        super(MyUserChangeForm, self).__init__(*args, **kwargs)
+        del self.fields['password']
+
+    class Meta:
+        model = User
+        fields = ('email', 'username', 'display_name', 'avatar', 'bio', 'gender', 'race', 'age')

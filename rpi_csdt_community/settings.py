@@ -181,7 +181,7 @@ INSTALLED_APPS = (
     # 'allauth.socialaccount.providers.weibo',
     # 'allauth.socialaccount.providers.xing',
 
-    'captcha',
+    'snowpenguin.django.recaptcha2',
     'django_extensions',
     'project_share',
     'rpi_csdt_community',
@@ -226,6 +226,7 @@ INSTALLED_APPS = (
     'comments',
     'markdown_deux',
     'crispy_forms',
+    'bootstrap3',
 )
 
 TEMPLATES = [
@@ -348,6 +349,8 @@ USE_CACHE = False
 try:
     from local_settings import *  # noqa: F403
 except:
+    RECAPTCHA_PRIVATE_KEY = 'not a real key'
+    RECAPTCHA_PUBLIC_KEY = 'not a real key'
     pass
 
 if USE_CACHE:
@@ -357,6 +360,15 @@ if USE_CACHE:
         'django.middleware.cache.FetchFromCacheMiddleware',
     ]
 
+
+try:
+    RECAPTCHA_PRIVATE_KEY  # noqa: F405
+except NameError:
+    raise "You have not defined recaptcha keys in local settings"
+try:
+    RECAPTCHA_PUBLIC_KEY  # noqa: F405
+except NameError:
+    raise "You have not defined recaptcha keys in local settings"
 
 if ENABLE_GIS:
     # Make sure the database is configured as postgres
