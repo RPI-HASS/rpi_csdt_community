@@ -353,11 +353,6 @@ class UserDetail(DetailView):
     model = User
     template_name = "project_share/user_detail.html"
 
-    def return_appl(self):
-        filter_val = self.request.GET.get('filter')
-        name = Application.objects.get(id=filter_val)
-        return name
-
     def render_to_response(self, context, **response_kwargs):
         """Include define the projects, and allow search"""
         try:
