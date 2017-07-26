@@ -1,21 +1,40 @@
 {% extends 'base.html' %}
 {% load thumbnail %}
+{% load bootstrap3 %}
 {% load project_share_tags %}
 
 {% block content %}
-    <div class="page-header">
-        <h1>{{ object }}'s Profile <small><br><a href="{% url 'account_change_password' %}">Change password</a>
-          {% if object.address %}
-            <br><a href="{% url 'address-update' pk=object.id %}">Change address</a>
-          {% endif %}
-        </h1>
+
+    <div class="row">
+      <div class="col-md-6" >
+
+        <h2><b>{% if object.avatar %}{% thumbnail object.avatar "48x48" crop="center" as im %}<img src="{{ im.url }}">&nbsp{% endif %}{{ object.display_name }} (@{{ object }})</b></h2>
+
+
+        {% if object.bio %}<p style="font-size: 1.2em;">{{ object.bio }}</p>{% endif %}
+        <p>
+          <a href="{% url 'extendeduser-update' pk=object.id %}" style=""><button class="edit-btn" style="">Update Profile</button></a>
+
+            <a href="{% url 'account_change_password' %}" style=""><button class="edit-btn" style="">Change Password</button></a>
+
+
+
+      </div>
     </div>
+
+
+
+
 
     <div id="span12">
         <h3>My Projects</h3>
     </div>
+    {% include 'project_share/project_filter.html' %}
+    {% if term or filter_val or order %}
+      <p style="padding-left: 20px;font-size: 1.5em;">Search for {% if term %}"{{ term }}"{% if order or filter_val %}, {% endif %}{% endif %}{% if order %}ordered by {% if order == "id" %}oldest{% endif %}{% if order == "-id" %}newest{% endif %}{% if order == "name" %}name{% endif %}{% if filter_val %}, {% endif %}{% endif %}{% if filter_val %}filtered by application {{ name }}{% endif %}:  <a href="{% url 'extendeduser-detail' pk=object.id %}">(clear search)</a><p>
+    {% endif %}
     <div class="thumbnails">
-        {% for object in object|unrestricted_projects:user %}
+        {% for object in project_list %}
             {% if object.approved %}
                 {% include "_project_thumbnail.html" %}
             {% endif %}
@@ -26,24 +45,31 @@
         <h3>Projects pending approval</h3>
     </div>
     <div class="thumbnails">
-        {% for object in object|unrestricted_projects:user %}
+        {% for object in project_list %}
             {% if not object.approved %}
-                <div class="col-sm-6 col-md-4">
-                    <div class="thumbnail">
-                            <a href="{% url 'project-update' pk=object.id %}"><img src="{% thumbnail object.screenshot.f 300x300 crop %}" alt="Screenshot of {{ object.name }}"></a>
-                         <div class="caption">
-                            <h4>{{ object.name }}</h4>
-                            <p>{{ object.description|truncatewords:10 }}</p>
-                            <p>
-                                <a href="{% url 'project-run-detail' pk=object.pk %}" class="btn btn-large btn-primary">Open</a>
-                                <a href="{% url 'project-present-detail' pk=object.pk %}" class="btn btn-large btn-info">Open for Presentation</a>
-                            </p>
-                        </div>
-                    </div>
-                </div>
+                {% include "_project_thumbnail.html" %}
             {% endif %}
         {% endfor %}
     </div>
 
 
+{% endblock %}
+
+{% block css %}
+<style>
+  .edit-btn {
+    padding: 7px 12px;
+    border-radius: 6px;
+    border: 2px solid lightgrey;
+    color:black;
+    background-color: white;
+    transition: border 1s;
+  }
+  .edit-btn:hover {
+    color: black;
+    border: 2px solid black;
+    transition: border 1s;
+  }
+
+</style>
 {% endblock %}

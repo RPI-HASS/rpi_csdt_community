@@ -2,40 +2,18 @@
 {% load thumbnail %}
 
 {% block content %}
-    <div>
-        <div class="btn-group">
-            <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-                Sort by...
-                <span class="caret"></span>
-            </a>
 
-            <ul class="dropdown-menu">
-                <li><a href="{% url 'project-list' %}?{% if filter_val %}filter={{ filter_val }}&{% endif %}orderby=-id">Newest</a></li>
-                <li><a href="{% url 'project-list' %}?{% if filter_val %}filter={{ filter_val }}&{% endif %}orderby=id">Oldest</a></li>
-                <li><a href="{% url 'project-list' %}?{% if filter_val %}filter={{ filter_val }}&{% endif %}orderby=name">By name</a></li>
-            </ul>
-        </div>
+{% include 'project_share/project_filter.html' %}
 
-        <div class="btn-group">
-            <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-                Filter by...
-                <span class="caret"></span>
-            </a>
-
-            <ul class="dropdown-menu">
-                <li><a href="{% url 'project-list' %}">No filtering</a></li>
-                {% for application in application_list %}
-                   <li><a href="{% url 'project-list' %}?filter={{ application.id }}{% if order %}&orderby={{ order }}{% endif %}">{{application.name}}</a></li>
-                {% endfor %}
-            </ul>
-      </div>
-    </div>
-    <div class="row">
-        {% for object in object_list %}
-           {% include "_project_thumbnail.html" %}
-        {% endfor %}
-    </div>
-    <div class="footer">
-      {% include '_paginate.html' %}
-    </div>
+<div class="row">
+  {% if term or filter_val or order %}
+    <p style="padding-left: 20px;font-size: 1.5em;">Search for {% if term %}"{{ term }}"{% if order or filter_val %}, {% endif %}{% endif %}{% if order %}ordered by {% if order == "id" %}oldest{% endif %}{% if order == "-id" %}newest{% endif %}{% if order == "name" %}name{% endif %}{% if filter_val %}, {% endif %}{% endif %}{% if filter_val %}filtered by application {{ name }}{% endif %}:  <a href="{% url 'project-list' %}">(clear search)</a><p>
+  {% endif %}
+    {% for object in object_list %}
+       {% include "_project_thumbnail.html" %}
+    {% endfor %}
+</div>
+<div class="footer">
+  {% include '_paginate.html' %}
+</div>
 {% endblock %}

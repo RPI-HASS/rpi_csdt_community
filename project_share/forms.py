@@ -2,10 +2,13 @@
 from django import forms
 from django.forms import ModelForm
 from django_teams.models import Team, TeamStatus
-from captcha.fields import CaptchaField
+from snowpenguin.django.recaptcha2.fields import ReCaptchaField
+from snowpenguin.django.recaptcha2.widgets import ReCaptchaWidget
 
 from project_share.models import (Address, Application, ApplicationCategory,
                                   Approval, Project)
+
+from .models import ExtendedUser
 
 
 class ProjectForm(ModelForm):
@@ -41,6 +44,10 @@ class ApprovalForm(ModelForm):
 class ExtendedSignupForm(forms.Form):
     """Signup form with many special placeholders for race gender etc."""
 
+    username = forms.CharField(max_length=100, label='username',
+                               widget=forms.TextInput(attrs={'placeholder': 'username (no spaces)'}), required=False)
+    email = forms.CharField(max_length=100, label='email',
+                            widget=forms.TextInput(attrs={'placeholder': 'email address'}), required=False)
     gender = forms.CharField(max_length=100, label='gender',
                              widget=forms.TextInput(attrs={'placeholder': 'gender (optional)'}), required=False)
     race = forms.CharField(max_length=100, label='race',
@@ -50,9 +57,9 @@ class ExtendedSignupForm(forms.Form):
     classroom = forms.IntegerField(label='classroom',
                                    widget=forms.TextInput(attrs={'placeholder': 'classroom # (optional)'}),
                                    required=False)
-    captcha = CaptchaField()
+    captcha = ReCaptchaField(widget=ReCaptchaWidget())
 
-    field_order = ['username', 'email', 'password1', 'password2', 'gender', 'race', 'age', 'classroom', 'captch']
+    field_order = ['username', 'email', 'password1', 'password2', 'gender', 'race', 'age', 'classroom', 'captcha']
 
     def signup(self, request, n_user):
         """specify where to put race / gender data, and signup for classroom"""
@@ -85,3 +92,12 @@ class ApplicationAdminForm(ModelForm):
     class Meta:
         model = Application
         exclude = ()
+
+
+class ProfileForm(forms.ModelForm):
+    class Meta:
+        model = ExtendedUser
+        fields = ['email', 'username', 'display_name', 'avatar', 'bio', 'gender', 'race', 'age']
+        widgets = {
+            'bio': forms.Textarea(attrs={'rows': 4, 'cols': 15}),
+        }
