@@ -1,11 +1,15 @@
 """Defines the displays for projects, applications, demos, and goals."""
 from django.conf import settings
+from django.contrib import messages
+from django.contrib.auth.forms import UserChangeForm
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import PermissionDenied
 from django.db.models import Q
-from django.shortcuts import get_object_or_404, redirect
+from django.http import HttpResponseRedirect
+from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse, reverse_lazy
-from django.views.generic import ListView
+from django.views.generic import ListView, FormView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django_teams.models import Ownership
@@ -23,6 +27,8 @@ except ImportError:  # django < 1.5
     from django.contrib.auth.models import User
 else:
     User = get_user_model()
+
+from . import forms
 
 
 def filter_project_query(set, request):
@@ -134,7 +140,7 @@ class ProjectTagList(ProjectList):
         return Project.approved_projects().filter(tags__in=[self.tag])
 
 
-class ProjectDetail(RestrictPermissionMixin, DetailView):
+class ProjectDetail(DetailView):
     """Display all the information about a project given owner is correct."""
 
     queryset = Project.objects.select_related("approval").select_related("owner").select_related("screenshot")
@@ -146,7 +152,7 @@ class ProjectDetail(RestrictPermissionMixin, DetailView):
         return super(ProjectDetail, self).render_to_response(context, **response_kwargs)
 
 
-class ProjectRunDetail(RestrictPermissionMixin, DetailView):
+class ProjectRunDetail(DetailView):
     """Run the project as the same template as application but with application,
     but with settings for application and analytics."""
 
@@ -402,3 +408,62 @@ class AddressUpdate(UpdateView):
     def get_success_url(self):
         """Show confirmation."""
         return reverse('address-confirm')
+
+
+IMAGE_FILE_TYPES = ['png', 'jpg', 'jpeg', 'gif']
+
+
+class ProfileUpdate(LoginRequiredMixin, DetailView, FormView):
+    template_name = 'project_share/user_update.html'
+    form_class = forms.ProfileForm
+    model = User
+
+    def get_object(self, queryset=None):
+        return self.request.user
+
+    def form_valid(self, form):
+        return HttpResponseRedirect(reverse('extendeduser-detail', kwargs={'pk': self.request.user.id}))
+
+    def get_initial(self):
+        return {'email': self.request.user.email,
+                'username': self.request.user.username,
+                'display_name': self.request.user.display_name,
+                'avatar': self.request.user.avatar,
+                'bio': self.request.user.bio,
+                'age': self.request.user.age,
+                'race': self.request.user.race,
+                'gender': self.request.user.gender,
+                }
+
+    success_url = reverse_lazy('home')
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()  # assign the object to the view
+        form = MyUserChangeForm(request.POST or None, request.FILES or None, instance=request.user)
+        if form.is_valid():
+            profile = form.save(commit=False)
+            if request.FILES:
+                profile.avatar = request.FILES['avatar']
+                file_type = profile.avatar.url.split('.')[-1]
+                file_type = file_type.lower()
+                if file_type not in IMAGE_FILE_TYPES:
+                    profile.avatar = None
+                    messages.warning(request, "Avatar must be in jpg, jpeg, gif, or png format")
+                    return render(request, "project_share/user_detail.html",
+                                  {'object': self.request.user, 'form': form})
+            profile.save()
+            form.save()
+            return self.form_valid(form)
+        else:
+            form = MyUserChangeForm(instance=request.user)
+            return self.form_invalid(form)
+
+
+class MyUserChangeForm(UserChangeForm):
+    def __init__(self, *args, **kwargs):
+        super(MyUserChangeForm, self).__init__(*args, **kwargs)
+        del self.fields['password']
+
+    class Meta:
+        model = User
+        fields = ('email', 'username', 'display_name', 'avatar', 'bio', 'gender', 'race', 'age')
