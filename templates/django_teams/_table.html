@@ -1,0 +1,41 @@
+{% load teams %}
+<tr>
+    <td>
+      <a href="{% url 'team-detail' pk=object.id %}">{{ object }}</a>
+      {% if user.is_authenticated %}
+        {% with ts=object|get_user_status:user %}
+          {% if ts.role == 20 %}
+              (<a href="{% url 'team-edit' pk=object.pk %}">Admin</a>)
+          {% endif %}
+        {% endwith %}
+      {% endif %}
+    </td>
+    <td>{% if object.description %}{{ object.description|truncatewords:15 }}{% endif %}</td>
+    <td>
+        {% for owner in object.owners %}
+            {% if forloop.last %}
+                {{ owner }}
+            {% else %}
+                {{ owner}},
+            {% endif %}
+        {% endfor %}
+    </td>
+    <td>{{ object.member_count }}</td>
+    <td>
+        {% if user.is_authenticated %}
+            {% with ts=object|get_user_status:user %}
+                {% if ts == None %}
+                    <a href="{% url 'teamstatus-create' team_pk=object.pk %}">Join</a>
+                {% elif ts.role == 1 %}
+                    Pending approval
+                {% elif ts.role == 10 %}
+                    Member
+                {% elif ts.role == 20 %}
+                    Teacher (<a href="{% url 'team-edit' pk=object.pk %}">Admin</a>)
+                {% endif %}
+            {% endwith %}
+        {% else %}
+            You're not logged in!
+        {% endif %}
+    </td>
+</tr>

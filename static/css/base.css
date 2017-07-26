@@ -82,7 +82,7 @@ application .h3{
 
 
 .thumbnail {
-  opacity: .75;
+  opacity: 1;
   cursor: pointer;
 }
 .thumbnail:hover {
@@ -147,4 +147,14 @@ h1 {
 
 .comment-reply{
     display:none;
+}
+
+.btn-default:hover,
+.btn:focus {
+  text-decoration: none;
+  background-position: 0 -90px;
+  -webkit-transition: background-position 9999s linear;
+  -moz-transition: background-position 9999s linear;
+  -o-transition: background-position 9999s linear;
+  transition: background-position 9999s linear;
 }
