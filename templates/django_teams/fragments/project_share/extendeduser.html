@@ -1,5 +1,5 @@
 {% load static %}
-	<img src="{% static 'img/user-icon.png' %}" width="100">
+	<img src="{% if object.avatar %}{{ object.avatar.url }}{% else %}{% static 'img/user-icon.png' %}{% endif %}" width="100">
 		<div class="caption">
 			<h3>{{ object }}</h3>
 		</div>
