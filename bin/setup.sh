@@ -12,6 +12,8 @@ sudo apt-get upgrade
 sudo apt-get install -y python-pip python-dev
 # Install postgis
 sudo apt-get install -y libpq-dev libcurl4-openssl-dev postgresql postgis
+###
+sudo apt-get install binutils libproj-dev gdal-bin
 
 # Install the database
 sudo apt-get install -y postgresql postgresql-contrib 
