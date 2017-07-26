@@ -127,8 +127,6 @@ class ProjectList(SearchableListMixin, SortableListMixin, ListView):
         return super(ProjectList, self).render_to_response(context, **response_kwargs)
 
 
-
-
 class ProjectTagList(ProjectList):
     """List all the tags of various projects. Not used."""
 
