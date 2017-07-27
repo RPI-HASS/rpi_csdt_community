@@ -45,7 +45,7 @@
 <div class="row">
   <div class="col-md-12">
     {% if term or filter_val or order %}
-      <p style="padding-left: 20px;font-size: 1.5em;">{% if term or filter_val %}({{ object_list|length }} result{% if not object_list|length == 1 %}s{% endif %}) {% endif %}Search for {% if term %}"{{ term }}"{% if order or filter_val %}, {% endif %}{% endif %}{% if order %}ordered by {% if order == "id" %}oldest{% endif %}{% if order == "-id" %}newest{% endif %}{% if order == "name" %}name{% endif %}{% if filter_val %}, {% endif %}{% endif %}{% if filter_val %}filtered by application {{ name }}{% endif %}:  <a href="{{ request.path }}">(clear search)</a><p>
+      <p style="padding-left: 20px;font-size: 1.5em;">{% if term or filter_val %}({{ object_list|length }} result{% if not object_list|length == 1 %}s{% endif %}) {% endif %}{% if term %}Search for "{{ term }}"{% if order or filter_val %}, {% endif %}{% endif %}{% endif %}{% if filter_val %}{% if not term %}F{% else %}f{% endif %}iltered by application {{ name }}{% if order %}, {% endif %}{% endif %}{% if order %}{% if not term and not filter_val %}O{% else %}o{% endif %}rdered by {% if order == "id" %}oldest{% endif %}{% if order == "-id" %}newest{% endif %}{% if order == "name" %}name{% endif %}:  <a href="{{ request.path }}">(clear search)</a><p>
     {% endif %}
   </div>
 </div>
