@@ -11,7 +11,7 @@ if not DEBUG:
     GOOGLE_ANALYTICS_DOMAIN = 'rpi.edu'
 
 # Override this setting local_settings.py to enable the GIS app
-ENABLE_GIS = False
+ENABLE_GIS = True
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
@@ -21,18 +21,18 @@ MANAGERS = ADMINS
 if 'TRAVIS' in os.environ:
     DATABASES = {
         'default': {
-            'ENGINE':   'django.db.backends.postgresql_psycopg2',
-            'NAME':     'travisci',
-            'USER':     'postgres',
+            'ENGINE': 'django.contrib.gis.db.backends.postgis',
+            'NAME': 'travisci',
+            'USER': 'postgres',
             'PASSWORD': '',
-            'HOST':     'localhost',
-            'PORT':     '',
+            'HOST': 'localhost',
+            'PORT': '',
         }
     }
 else:
     DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.postgresql',
+            'ENGINE': 'django.contrib.gis.db.backends.postgis',
             'NAME': 'rpi_csdt_community',
             'USER': 'postgres',
             'PASSWORD': 'postgres',
@@ -360,6 +360,11 @@ if USE_CACHE:
         'django.middleware.cache.FetchFromCacheMiddleware',
     ]
 
+try:
+    from local_settings import *  # noqa: F403, F401
+except ImportError:
+    GOOGLE_API_KEY = None
+    CENSUS_API_KEY = None
 
 try:
     RECAPTCHA_PRIVATE_KEY  # noqa: F405
