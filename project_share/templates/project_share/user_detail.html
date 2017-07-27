@@ -30,6 +30,9 @@
         <h3>My Projects</h3>
     </div>
     {% include 'project_share/project_filter.html' %}
+    {% if term or filter_val or order %}
+      <p style="padding-left: 20px;font-size: 1.5em;">Search for {% if term %}"{{ term }}"{% if order or filter_val %}, {% endif %}{% endif %}{% if order %}ordered by {% if order == "id" %}oldest{% endif %}{% if order == "-id" %}newest{% endif %}{% if order == "name" %}name{% endif %}{% if filter_val %}, {% endif %}{% endif %}{% if filter_val %}filtered by application {{ name }}{% endif %}:  <a href="{% url 'extendeduser-detail' pk=object.id %}">(clear search)</a><p>
+    {% endif %}
     <div class="thumbnails">
         {% for object in project_list %}
             {% if object.approved %}

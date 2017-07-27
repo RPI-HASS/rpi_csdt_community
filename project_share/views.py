@@ -39,7 +39,7 @@ def filter_project_query(set, request):
     if term is not None:
         set = set.filter(Q(name__icontains=term) | Q(
             description__icontains=term) | Q(
-            owner__username__icontains=term), approved=True)
+            owner__username__icontains=term))
     order = request.GET.get('orderby')
     if order is not None:
         set = set.order_by(order)
@@ -116,20 +116,15 @@ class ProjectList(SearchableListMixin, SortableListMixin, ListView):
 
     def render_to_response(self, context, **response_kwargs):
         """List all applications for the user to choose to filter by."""
-        context['application_list'] = Application.objects.all()
+        application_list = Application.objects.all()
+        context['application_list'] = application_list
         context['order'] = self.request.GET.get('orderby')
-        context['filter_val'] = self.request.GET.get('filter')
+        filter_val = self.request.GET.get('filter')
+        context['filter_val'] = filter_val
+        if filter_val:
+            context['name'] = application_list.get(id=filter_val)
         context['term'] = self.request.GET.get('q')
         return super(ProjectList, self).render_to_response(context, **response_kwargs)
-
-    def search_term(self):
-        term = self.request.GET.get('q')
-        return term
-
-    def return_appl(self):
-        filter_val = self.request.GET.get('filter')
-        name = Application.objects.get(id=filter_val)
-        return name
 
 
 class ProjectTagList(ProjectList):
@@ -367,11 +362,14 @@ class UserDetail(DetailView):
             queryset = Project.objects.filter(Q(owner=self.object), Q(approved=True)).order_by('-id')
 
         context['project_list'] = filter_project_query(queryset, self.request)
-        context['application_list'] = Application.objects.all()
+        application_list = Application.objects.all()
+        context['application_list'] = application_list
         context['order'] = self.request.GET.get('orderby')
-        context['filter_val'] = self.request.GET.get('filter')
+        filter_val = self.request.GET.get('filter')
+        context['filter_val'] = filter_val
+        if filter_val:
+            context['name'] = application_list.get(id=filter_val)
         context['term'] = self.request.GET.get('q')
-
         return super(UserDetail, self).render_to_response(context, **response_kwargs)
 
 
