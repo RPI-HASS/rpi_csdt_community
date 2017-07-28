@@ -7,6 +7,7 @@ from django.views import static
 from django.views.generic import TemplateView
 from rest_framework import routers
 
+from guides import urls as guides_url
 from rpi_csdt_community.views import About, Guides, ApplicationList
 from rpi_csdt_community.viewsets import (ApplicationCategoryViewSet,
                                          ApplicationThemeViewSet,
@@ -39,7 +40,7 @@ urlpatterns = [
     url(r'^comments/', include('django_comments_xtd.urls')),
     url(r'^blogcomments/', include("comments.urls", namespace='comments')),
     url(r'^news/', include("blogposts.urls", namespace='blogposts')),
-    url(r'^guides/', Guides.as_view(), name='guides'),
+    url(r'^guides/', include(guides_url, namespace='guides')),
     url(r'^about/', About.as_view(), name="about"),
     url(r'^attachments/', include('attachments.urls', namespace="attachments")),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
