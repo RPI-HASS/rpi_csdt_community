@@ -361,7 +361,7 @@ class UserDetail(DetailView):
         except:
             queryset = Project.objects.filter(Q(owner=self.object), Q(approved=True)).order_by('-id')
 
-        context['project_list'] = filter_project_query(queryset, self.request)
+        context['object_list'] = filter_project_query(queryset, self.request)
         application_list = Application.objects.all()
         context['application_list'] = application_list
         context['order'] = self.request.GET.get('orderby')
