@@ -27,6 +27,7 @@ install:
   - pip install coveralls
   - pip install flake8
   - sudo apt-get install -y postgresql-9.5-postgis-2.3
+  - sudo service postgresql restart
 
 before_script:
   - psql -c "CREATE DATABASE travisci;" -U postgres
