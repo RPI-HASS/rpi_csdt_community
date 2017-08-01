@@ -26,7 +26,7 @@ install:
   - pip install --upgrade -r requirements.txt
   - pip install coveralls
   - pip install flake8
-
+  - apt-get install binutils libproj-dev gdal-bin
 
 before_script:
   - psql -c "CREATE DATABASE travisci;" -U postgres
