@@ -227,6 +227,7 @@ INSTALLED_APPS = (
     'markdown_deux',
     'crispy_forms',
     'bootstrap3',
+    'django_pre_post',
 )
 
 TEMPLATES = [

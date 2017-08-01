@@ -57,6 +57,7 @@ requests-oauthlib==0.8.0
 six==1.10.0
 git+https://github.com/bartTC/django-attachments.git
 git+https://github.com/CSnap/django-likes.git
+git+https://github.com/CSnap/Django-pre-post.git
 git+https://github.com/CSnap/django_teams.git
 git+https://github.com/CSnap/django-templatetag-sugar.git
 git+https://github.com/CSnap/SGIS-backend.git
