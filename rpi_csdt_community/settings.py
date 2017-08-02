@@ -347,7 +347,7 @@ WARNING_MESSAGE = "<strong>You are currently looking at the development site!</s
 USE_CACHE = False
 
 try:
-    from local_settings import *  # noqa: F403
+    from local_settings import *  # noqa: F403, F401
 except:
     RECAPTCHA_PRIVATE_KEY = 'not a real key'
     RECAPTCHA_PUBLIC_KEY = 'not a real key'
@@ -361,12 +361,6 @@ if USE_CACHE:
         'django.middleware.common.CommonMiddleware',
         'django.middleware.cache.FetchFromCacheMiddleware',
     ]
-
-#try:
-#    from local_settings import *  # noqa: F403, F401
-#except ImportError:
-#    GOOGLE_API_KEY = None
-#    CENSUS_API_KEY = None
 
 try:
     RECAPTCHA_PRIVATE_KEY  # noqa: F405
