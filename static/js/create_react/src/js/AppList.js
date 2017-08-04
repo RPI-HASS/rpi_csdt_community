@@ -19,14 +19,46 @@ export default class AppList extends React.Component {
   }
 
   render() {
-    const { filter, clearComplete, filteredTodos, todos } = this.props.store;
+    const { categoryList, currentThemeNum, appList, isLoading } = this.props.store;
     //const todoList = filteredTodos.map((todo, i) => (<li key={todo.id}><input type="checkbox" value={todo.complete } onChange={this.toggleComplete.bind(this, todo)} checked={todo.complete}/>{todo.value} </li>));
+    console.log('currentThemeNum', currentThemeNum);
+    console.log('appList', appList);
+    const currentList = categoryList.map((category, i) => {
+        if (category.theme === 1) {
+          console.log('category.applications', category.applications)
+
+
+          const objects = category.applications.map((app, i) => {
+            if (app != undefined ) {
+              if (appList[app]) {
+                const app1 = appList[app]
+                return <li key={app1.id}>App #{app1.name}</li>
+              }else
+              {
+                fetch(`/api/application/${app}`).then(function(response) {
+                  return response.json()
+                }).then(function(json) {
+                  app1 = json
+                  return <li key={app1.id}>App #{app1.name}</li>
+                }.bind(this)).catch(function(ex) {
+                  console.log('parsing failed', ex)
+                });
+              }
+            }
+          })
+          return <li key={category.id}>{category.name}<ul>{objects}</ul></li>
+      } else {
+        return null;
+      }
+    });
+    console.log('currentList', currentList);
     return (
-            <div><h1>todos</h1>
-            <div><input className = "create" onKeyPress = {this.createNew.bind(this)} /></div>
-            <input className="filter" value={filter} onChange={this.filter.bind(this)}/>
-            <ul>{ todoList } </ul>
-            <a href="#" onClick ={this.props.store.clearComplete} >Clear Complete</a>
+            <div>
+              <h1>Categories</h1>
+
+
+            <ul>{ currentList }</ul>
+
           </div>
 
           )
