@@ -347,7 +347,7 @@ WARNING_MESSAGE = "<strong>You are currently looking at the development site!</s
 USE_CACHE = False
 
 try:
-    from local_settings import *  # noqa: F403, F401
+    from local_settings import *  # noqa: F401,F403
 except:
     RECAPTCHA_PRIVATE_KEY = 'not a real key'
     RECAPTCHA_PUBLIC_KEY = 'not a real key'
