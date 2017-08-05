@@ -5,7 +5,7 @@
 
 {% block content %}
 
-    <h3>{% if object.avatar %}<img src="{{ object.avatar.url }}">{% endif %}&nbspUpdate {{ object }}'s Profile:</h3>
+    <h3>{% if object.avatar %}{% thumbnail object.avatar "48x48" crop="center" as im %}<img src="{{ im.url }}">&nbsp{% endif %}Update {{ object }}'s Profile:</h3>
     <div class="row">
       <div class="col-md-6">
             <form class="form-horizontal" role="form" action="" method="post" enctype="multipart/form-data">
