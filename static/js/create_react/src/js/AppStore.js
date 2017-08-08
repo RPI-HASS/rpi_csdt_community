@@ -14,6 +14,14 @@ class Theme {
   }
 }
 
+class Application {
+  @observable id
+  @observable name
+  @observable description
+  @observable url
+  @observable featured
+}
+
 class Category {
   @observable id
   @observable name
@@ -68,7 +76,10 @@ class AppStore {
       return response.json()
     }).then(function(json) {
       var arr = Object.values(json);
-      let arr2 = [];
+      // arr.sort(function(a, b) {
+      //   return a.rank - b.rank;
+      // });
+      // let arr2 = [];
       console.log('arr', arr);
       for (var obj in arr) {
         console.log('arr[obj].id', arr[obj].id);
