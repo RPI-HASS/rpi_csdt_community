@@ -18,6 +18,12 @@ export default class AppList extends React.Component {
     todo.complete = !todo.complete
   }
 
+  changeTheme(e) {
+    console.log('e', e);
+    this.props.store.changeCurrentTheme(e);
+
+  }
+
   render() {
     const { categoryList, currentThemeNum, appList, isLoading, themeList } = this.props.store;
     //const todoList = filteredTodos.map((todo, i) => (<li key={todo.id}><input type="checkbox" value={todo.complete } onChange={this.toggleComplete.bind(this, todo)} checked={todo.complete}/>{todo.value} </li>));
@@ -56,9 +62,9 @@ export default class AppList extends React.Component {
           });
 
           const objects = fullArray.map((app, i) => {
-              return <li key={app.id}><img src={app.screenshot} />{app.name}</li>
+              return <li key={app.id}><div className="bubble col-md-2" ><img className="img-div" src={app.screenshot}/><div className="center-text">{app.name}</div></div></li>
           })
-          return <li key={category.id}>{category.name}<ul>{objects}</ul></li>
+          return <li key={category.id}><div className="row category">{category.name}<ul>{objects}</ul></div></li>
       } else {
         return null;
       }
@@ -66,22 +72,25 @@ export default class AppList extends React.Component {
     const themeOutput = themeList.map((theme, i) => {
       console.log('theme', theme);
         if (theme.id == currentThemeNum) {
-            return <button key={theme.id} className="btn btn-selected btn-primary">{theme.name}</button>
+            return <button key={theme.id} type="button" className="btn btn-primary themeBtn active" >{theme.name}</button>
         }
         else {
-          return <button key={theme.id} className="btn btn-primary">{theme.name}</button>
+          let hello = theme.id
+          return <button key={theme.id} type="button" className="btn btn-default themeBtn" onClick={() => {this.props.store.post(hello)}}>{theme.name}</button>
         }
     });
     console.log('themeList pretest', themeList);
     console.log('currentList', currentList);
     return (
             <div>
-              <h1>Categories</h1>
+              <h1>Applications</h1>
+              <h2>Theme</h2>
+
               { themeOutput }
 
-            <ul>{ currentList }</ul>
+                  <ul className="categories-ul">{ currentList }</ul>
 
-          </div>
+            </div>
 
           )
   }

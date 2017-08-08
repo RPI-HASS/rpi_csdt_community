@@ -44,6 +44,12 @@ class AppStore {
     this.loadCategories();
   }
 
+  post (id) {
+    console.log('id', id);
+    console.log("HELLO THAR!");
+    this.currentThemeNum = id
+  }
+
   @action
   loadCategories() {
     var qs = (function(a) {
@@ -127,7 +133,19 @@ class AppStore {
 
   }
 
-
+  @action changeTheme(num) {
+    fetch(`/api/theme/${num}`).then(function(response) {
+      return response.json()
+    }).then(function(json) {
+      console.log('theme json', json);
+      let newTheme = new Theme(json.id, json.name, json.description)
+      this.currentTheme = newTheme;
+      console.log('currentTheme', this.currentTheme);
+      this.currentThemeNum = json.id
+    }.bind(this)).catch(function(ex) {
+      console.log('parsing failed', ex)
+    });
+  }
 
 }
 
