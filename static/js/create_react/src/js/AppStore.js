@@ -14,13 +14,7 @@ class Theme {
   }
 }
 
-class Application {
-  @observable id
-  @observable name
-  @observable description
-  @observable url
-  @observable featured
-}
+
 
 class Category {
   @observable id
