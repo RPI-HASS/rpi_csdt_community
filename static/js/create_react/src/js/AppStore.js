@@ -14,8 +14,6 @@ class Theme {
   }
 }
 
-
-
 class Category {
   @observable id
   @observable name
@@ -38,6 +36,7 @@ class AppStore {
   @observable categoryList = []
   @observable currentTheme
   @observable currentThemeNum
+  @observable themeList = []
   @observable appList = []
   @observable isLoading = true;
 
@@ -97,6 +96,19 @@ class AppStore {
     });
     let themeNum = qs["theme"];
     console.log('themeNum', themeNum)
+    fetch(`/api/theme/`).then(function(response) {
+      return response.json()
+    }).then(function(json) {
+      var arr = Object.values(json);
+      // When implemented, uncomment:
+      // arr.sort(function(a, b) {
+      //   return a.rank - b.rank;
+      // });
+      for (var obj in arr) {
+        let newTheme = new Theme(arr[obj].id, arr[obj].name, arr[obj].description)
+        this.themeList.push(newTheme);
+      }
+    });
     fetch(`/api/theme/${themeNum}`).then(function(response) {
       return response.json()
     }).then(function(json) {

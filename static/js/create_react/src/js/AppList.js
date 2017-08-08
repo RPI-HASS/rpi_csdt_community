@@ -23,6 +23,9 @@ export default class AppList extends React.Component {
     //const todoList = filteredTodos.map((todo, i) => (<li key={todo.id}><input type="checkbox" value={todo.complete } onChange={this.toggleComplete.bind(this, todo)} checked={todo.complete}/>{todo.value} </li>));
     console.log('currentThemeNum', currentThemeNum);
     console.log('appList', appList);
+
+
+
     const currentList = categoryList.map((category, i) => {
         if (category.theme === currentThemeNum) {
           console.log('category.applications', category.applications)
