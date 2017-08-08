@@ -73,7 +73,7 @@ class AppStore {
       // arr.sort(function(a, b) {
       //   return a.rank - b.rank;
       // });
-      // let arr2 = [];
+      let arr2 = [];
       console.log('arr', arr);
       for (var obj in arr) {
         console.log('arr[obj].id', arr[obj].id);
