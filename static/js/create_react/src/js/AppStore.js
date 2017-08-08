@@ -44,17 +44,11 @@ class AppStore {
   @observable categoryList = []
   @observable currentTheme
   @observable currentThemeNum
-  @observable themeList = []
   @observable appList = []
   @observable isLoading = true;
 
   constructor() {
     this.loadCategories();
-  }
-
-  changeTheme(num) {
-    this.currentThemeNum = num;
-    this.currentTheme = themeList[num];
   }
 
   @action
@@ -91,20 +85,6 @@ class AppStore {
     }.bind(this)).catch(function(ex) {
       console.log('parsing failed', ex)
     });
-    fetch(`/api/theme/`).then(function(response) {
-      return response.json()
-    }).then(function(json) {
-      var arr = Object.values(json);
-      let arr2 = [];
-      for (var obj in arr) {
-        arr2[arr[obj].id] = arr[obj];
-      }
-      console.log('themesArray', arr2);
-      this.themeList = arr2;
-
-    }.bind(this)).catch(function(ex) {
-      console.log('parsing failed', ex)
-    });
     fetch('/api/category/').then(function(response) {
       return response.json()
     }).then(function(json) {
@@ -134,7 +114,6 @@ class AppStore {
     }.bind(this)).catch(function(ex) {
       console.log('parsing failed', ex)
     });
-
 
 
   }

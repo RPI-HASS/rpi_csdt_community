@@ -17,4 +17,3 @@ static/website/
 *.log
 
 .coverage
-node_modules
