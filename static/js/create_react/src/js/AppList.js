@@ -19,7 +19,7 @@ export default class AppList extends React.Component {
   }
 
   render() {
-    const { categoryList, currentThemeNum, appList, isLoading } = this.props.store;
+    const { categoryList, currentThemeNum, appList, isLoading, themeList } = this.props.store;
     //const todoList = filteredTodos.map((todo, i) => (<li key={todo.id}><input type="checkbox" value={todo.complete } onChange={this.toggleComplete.bind(this, todo)} checked={todo.complete}/>{todo.value} </li>));
     console.log('currentThemeNum', currentThemeNum);
     console.log('appList', appList);
@@ -63,11 +63,21 @@ export default class AppList extends React.Component {
         return null;
       }
     });
+    const themeOutput = themeList.map((theme, i) => {
+      console.log('theme', theme);
+        if (theme.id == currentThemeNum) {
+            return <button key={theme.id} className="btn btn-selected btn-primary">{theme.name}</button>
+        }
+        else {
+          return <button key={theme.id} className="btn btn-primary">{theme.name}</button>
+        }
+    });
+    console.log('themeList pretest', themeList);
     console.log('currentList', currentList);
     return (
             <div>
               <h1>Categories</h1>
-
+              { themeOutput }
 
             <ul>{ currentList }</ul>
 

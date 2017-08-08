@@ -106,8 +106,11 @@ class AppStore {
       // });
       for (var obj in arr) {
         let newTheme = new Theme(arr[obj].id, arr[obj].name, arr[obj].description)
+        console.log('newTheme', newTheme);
         this.themeList.push(newTheme);
       }
+    }.bind(this)).catch(function(ex) {
+      console.log('parsing failed', ex)
     });
     fetch(`/api/theme/${themeNum}`).then(function(response) {
       return response.json()
