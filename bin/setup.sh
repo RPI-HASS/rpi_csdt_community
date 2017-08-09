@@ -5,6 +5,8 @@ curl -sL https://deb.nodesource.com/setup_6.x -o nodesource_setup.sh
 sudo bash nodesource_setup.sh
 rm nodesource_setup.sh
 
+sudo apt-get install binutils libproj-dev gdal-bin
+
 sudo apt-get update
 sudo apt-get upgrade
 
@@ -20,8 +22,7 @@ sudo -u postgres psql -U postgres -d postgres -c "alter user postgres with passw
 # Create the database
 sudo -u postgres createdb rpi_csdt_community
 # Add Extensions
-echo 'rpi_csdt_community; CREATE EXTENSION adminpack; CREATE EXTENSION postgis; CREATE EXTENSION postgis_topology;' | psql -U postgres
-
+sudo -u postgres psql rpi_csdt_community -c "CREATE EXTENSION adminpack; CREATE EXTENSION postgis; CREATE EXTENSION postgis_topology;"
 
 # Install node
 sudo apt-get install -y nodejs build-essential
@@ -37,6 +38,7 @@ pip install --upgrade -r /vagrant/requirements.txt
 cd /vagrant/
 git submodule init
 git submodule update
+
 
 # Run migrations to init db
 python manage.py migrate

@@ -8,6 +8,7 @@ eclipse/
 *.sqlite3
 python/
 media/
+.DS_Store
 collected_static/
 local_settings.py
 static/website/
@@ -18,3 +19,4 @@ static/website/
 node_modules/
 package-lock.json
 .coverage
+
