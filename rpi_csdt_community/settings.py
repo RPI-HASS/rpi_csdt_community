@@ -227,7 +227,6 @@ INSTALLED_APPS = (
     'markdown_deux',
     'crispy_forms',
     'bootstrap3',
-    'guides',
 )
 
 TEMPLATES = [
