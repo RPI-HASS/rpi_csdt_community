@@ -8,7 +8,7 @@ from django.views.generic import TemplateView
 from rest_framework import routers
 
 from guides import urls as guides_url
-from rpi_csdt_community.views import About, Guides, ApplicationList
+from rpi_csdt_community.views import About, Guides, ReactAppList
 from rpi_csdt_community.viewsets import (ApplicationCategoryViewSet,
                                          ApplicationThemeViewSet,
                                          ApplicationViewSet, CurrentUserView,
@@ -33,7 +33,7 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
 
     # TemplateView + Login
-    url(r'^$', ApplicationList.as_view(), name='home'),
+    url(r'^$', ReactAppList.as_view(), name='home'),
     url(r'', include('project_share.urls')),
     url(r'teams/', include('django_teams.urls')),
     url(r'^accounts/', include('allauth.urls')),

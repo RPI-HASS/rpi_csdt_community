@@ -40,8 +40,9 @@ class Home(ListView):
         return queryset
 
 
-class ApplicationList(ListView):
+class ReactAppList(ListView):
     model = Application
+    template_name = "project_share/application_list_react.html"
 
 
 class About(TemplateView):

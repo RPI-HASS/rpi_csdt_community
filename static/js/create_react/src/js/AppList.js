@@ -62,9 +62,9 @@ export default class AppList extends React.Component {
           });
 
           const objects = fullArray.map((app, i) => {
-              return <li key={app.id}><div className="bubble col-md-2" ><img className="img-div" src={app.screenshot}/><div className="center-text">{app.name}</div></div></li>
+              return <li key={app.id}><a href={app.url}><div className="bubble col-md-2 col-sm-3 col-xs-5" ><img className="img-div" src={app.screenshot}/><div className="center-text">{app.name}</div></div></a></li>
           })
-          return <li key={category.id}><div className="row category">{category.name}<ul>{objects}</ul></div></li>
+          return <li key={category.id}><div className="row category">{category.name}<ul className="app-ul">{objects}</ul></div></li>
       } else {
         return null;
       }
@@ -82,14 +82,18 @@ export default class AppList extends React.Component {
     console.log('themeList pretest', themeList);
     console.log('currentList', currentList);
     return (
-            <div>
-              <h1>Applications</h1>
-              <h2>Theme</h2>
+            <div class="container-fluid">
+              <div class="row">
+                <h1>Applications</h1>
+                <h2>Theme:</h2>
+              </div>
+              <div class="row">
+                { themeOutput }
+              </div>
 
-              { themeOutput }
-
+              <div class="row">
                   <ul className="categories-ul">{ currentList }</ul>
-
+              </div>
             </div>
 
           )

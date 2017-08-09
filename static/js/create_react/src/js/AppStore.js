@@ -100,7 +100,7 @@ class AppStore {
     }.bind(this)).catch(function(ex) {
       console.log('parsing failed', ex)
     });
-    let themeNum = qs["theme"];
+    let themeNum = qs["theme"] || 1;
     console.log('themeNum', themeNum)
     fetch(`/api/theme/`).then(function(response) {
       return response.json()
