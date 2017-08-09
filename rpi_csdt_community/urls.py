@@ -36,6 +36,7 @@ urlpatterns = [
     url(r'^$', ReactAppList.as_view(), name='home'),
     url(r'', include('project_share.urls')),
     url(r'teams/', include('django_teams.urls')),
+    url(r'^questionnaire/', include('django_pre_post.urls')),
     url(r'^accounts/', include('allauth.urls')),
     url(r'^comments/', include('django_comments_xtd.urls')),
     url(r'^blogcomments/', include("comments.urls", namespace='comments')),
