@@ -94,7 +94,7 @@ class ApplicationSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Application
-        fields = ('id', 'name', 'version', 'description', 'url', 'application_file', 'featured', 'rank',
+        fields = ('id', 'name', 'version', 'description', 'url', 'application_file', 'featured', 'rankApp',
                   'application_type', 'categories', 'screenshot')
 
 
@@ -103,7 +103,7 @@ class ApplicationCategorySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = ApplicationCategory
-        fields = ('id', 'theme', 'name', 'description', 'applications', 'rank')
+        fields = ('id', 'theme', 'name', 'description', 'applications', 'rankCat')
 
 
 class ApplicationThemeSerializer(serializers.ModelSerializer):
