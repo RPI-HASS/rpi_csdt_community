@@ -69,9 +69,9 @@ class AppStore {
       return response.json()
     }).then(function(json) {
       var arr = Object.values(json);
-      arr.sort(function(a, b) {
-        return a.rankApp - b.rankApp;
-      });
+      // arr.sort(function(a, b) {
+      //   return a.rankApp - b.rankApp;
+      // });
       let arr2 = [];
       console.log('arr', arr);
       for (var obj in arr) {
