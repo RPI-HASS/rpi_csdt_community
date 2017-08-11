@@ -58,13 +58,13 @@ export default class AppList extends React.Component {
           })
           console.log('fullarray', fullArray);
           fullArray.sort(function(a, b) {
-            return a.rank - b.rank;
+            return a.rankApp - b.rankApp;
           });
 
           const objects = fullArray.map((app, i) => {
-              return <li key={app.id}><a href={app.url}><div className="bubble col-md-2 col-sm-3 col-xs-5" ><img className="img-div" src={app.screenshot}/><div className="center-text">{app.name}</div></div></a></li>
+              return <li key={app.id}><a href={app.url}><div className="bubble col-md-2 col-sm-3 col-xs-9" ><img className="img-div" src={app.screenshot}/><div className="center-text">{app.name}</div></div></a></li>
           })
-          return <li key={category.id}><div className="row category">{category.name}<ul className="app-ul">{objects}</ul></div></li>
+          return <li key={category.id}><div className="row category"><div className="cat-name">{category.name}</div><ul className="app-ul">{objects}</ul></div></li>
       } else {
         return null;
       }

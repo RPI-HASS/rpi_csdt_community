@@ -114,7 +114,7 @@ class Application(models.Model):
 
     featured = models.BooleanField(default=True)
     screenshot = models.ImageField(upload_to="application_screenshot/", null=True)
-    rank = models.IntegerField(default=100)
+    rankApp = models.IntegerField(default=100)
 
     def get_context(self):
         """return all of the context data for the application."""
@@ -358,7 +358,7 @@ class ApplicationCategory(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField(blank=True, null=True)
     applications = models.ManyToManyField('project_share.Application', related_name='categories', blank=True)
-    rank = models.IntegerField(default=100)
+    rankCat = models.IntegerField(default=100)
 
     def __unicode__(self):
         return self.name
