@@ -358,6 +358,7 @@ class ApplicationCategory(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField(blank=True, null=True)
     applications = models.ManyToManyField('project_share.Application', related_name='categories', blank=True)
+    rank = models.IntegerField(default=100)
 
     def __unicode__(self):
         return self.name

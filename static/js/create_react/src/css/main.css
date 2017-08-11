@@ -1,0 +1,51 @@
+
+
+.themeBtn {
+  margin: 5px;
+  border: 1px solid darkgrey;
+}
+
+ul {
+
+
+  padding-left: 0px;
+}
+
+.categories-ul li {
+  font-size: 2rem;
+  list-style: none;
+}
+
+.app-ul li {
+  list-style: none;
+  font-size: 3rem;
+}
+
+.bubble {
+  border-radius: 5px;
+
+  border: 1px solid lightgrey;
+  margin-right: 20px;
+  padding: 0px;
+  background-color: white;
+
+}
+
+
+.img-div {
+  object-fit: contain; /* Do not scale the image */
+ object-position: center; /* Center the image within the element */
+ height: 200px;
+ width: 100%;
+}
+
+
+
+.category {
+  margin: 7px;
+}
+
+.center-text {
+  text-align: center;
+  font-size: 1.75rem;
+}

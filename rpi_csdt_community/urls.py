@@ -7,7 +7,8 @@ from django.views import static
 from django.views.generic import TemplateView
 from rest_framework import routers
 
-from rpi_csdt_community.views import About, Guides, ApplicationList
+
+from rpi_csdt_community.views import About, ReactAppList
 from rpi_csdt_community.viewsets import (ApplicationCategoryViewSet,
                                          ApplicationThemeViewSet,
                                          ApplicationViewSet, CurrentUserView,
@@ -32,7 +33,7 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
 
     # TemplateView + Login
-    url(r'^$', ApplicationList.as_view(), name='home'),
+    url(r'^$', ReactAppList.as_view(), name='home'),
     url(r'', include('project_share.urls')),
     url(r'teams/', include('django_teams.urls')),
     url(r'^questionnaire/', include('django_pre_post.urls')),
@@ -40,7 +41,6 @@ urlpatterns = [
     url(r'^comments/', include('django_comments_xtd.urls')),
     url(r'^blogcomments/', include("comments.urls", namespace='comments')),
     url(r'^news/', include("blogposts.urls", namespace='blogposts')),
-    url(r'^guides/', Guides.as_view(), name='guides'),
     url(r'^about/', About.as_view(), name="about"),
     url(r'^attachments/', include('attachments.urls', namespace="attachments")),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),

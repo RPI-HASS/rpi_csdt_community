@@ -16,5 +16,7 @@ static/website/
 # Vagrant stuff
 .vagrant
 *.log
-
+node_modules/
+package-lock.json
 .coverage
+
