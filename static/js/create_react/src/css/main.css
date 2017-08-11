@@ -25,9 +25,9 @@ ul {
   border-radius: 5px;
 
   border: 1px solid lightgrey;
-  margin-right: 20px;
-  padding: 0px;
+  margin-right: 0px;
   background-color: white;
+  margin-bottom: 20px;
 
 }
 
@@ -42,10 +42,14 @@ ul {
 
 
 .category {
-  margin: 7px;
+  margin: 20px 7px;
 }
 
 .center-text {
   text-align: center;
   font-size: 1.75rem;
+}
+
+.cat-name {
+  margin: 20px 0px;
 }

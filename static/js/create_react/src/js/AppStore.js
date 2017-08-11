@@ -20,15 +20,15 @@ class Category {
   @observable theme
   @observable description
   @observable applications
-  @observable rank
+  @observable rankCat
 
-  constructor(id, name, theme, description, applications, rank=100){
+  constructor(id, name, theme, description, applications, rankCat=100){
     this.id = id;
     this.name = name;
     this.theme = theme;
     this.description = description;
     this.applications = applications;
-    this.rank = rank;
+    this.rankCat = rankCat;
   }
 }
 
@@ -70,7 +70,7 @@ class AppStore {
     }).then(function(json) {
       var arr = Object.values(json);
       // arr.sort(function(a, b) {
-      //   return a.rank - b.rank;
+      //   return a.rankApp - b.rankApp;
       // });
       let arr2 = [];
       console.log('arr', arr);
@@ -89,11 +89,11 @@ class AppStore {
     }).then(function(json) {
       var arr = Object.values(json);
       arr.sort(function(a, b) {
-        return a.rank - b.rank;
+        return a.rankCat - b.rankCat;
       });
       console.log(arr);
       for (var obj in arr) {
-        let newCategory = new Category(arr[obj].id, arr[obj].name, arr[obj].theme, arr[obj].description, arr[obj].applications, arr[obj].rank)
+        let newCategory = new Category(arr[obj].id, arr[obj].name, arr[obj].theme, arr[obj].description, arr[obj].applications, arr[obj].rankCat)
         console.log('newCategory', newCategory);
         this.categoryList.push(newCategory);
       }
