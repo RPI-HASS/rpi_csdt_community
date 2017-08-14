@@ -32,28 +32,15 @@ export default class AppList extends React.Component {
 
 
 
-    const currentList = categoryList.map((category, i) => {
+    const currentList = (!appList) ? <li>Loading...</li> : categoryList.map((category, i) => {
         if (category.theme === currentThemeNum) {
           console.log('category.applications', category.applications)
 
           const fullArray = category.applications.map((app, i) => {
             if (app != undefined) {
-              if (appList[app]) {
-                const app1 = appList[app]
-                return app1
-                //<li key={app1.id}>App #{app1.name}</li>
-              }else
-              {
-                fetch(`/api/application/${app}`).then(function(response) {
-                  return response.json()
-                }).then(function(json) {
-                  app1 = json
-                  return app1
-                  //<li key={app1.id}>App #{app1.name}</li>
-                }.bind(this)).catch(function(ex) {
-                  console.log('parsing failed', ex)
-                });
-              }
+              const app1 = appList[app]
+              console.log('appList[app] OKAY', app1);
+              return app1
             }
           })
           console.log('fullarray', fullArray);
