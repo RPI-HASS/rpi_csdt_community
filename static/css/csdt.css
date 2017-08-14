@@ -330,6 +330,24 @@ nav .btn {
   margin: 0px;
 }
 
+.btn:hover {
+  background-position: 0px 0px;
+}
+
+.btn-info:hover {
+  background-position: 0px 0px;
+}
+
+.btn-default:hover {
+  background-position: 0px 0px;
+  background-image: none;
+}
+
+.btn-primary:hover {
+  background-position: 0px 0px;
+}
+
+
 
 @media only screen and (min-width: 768px) {
     .welcome-container {
