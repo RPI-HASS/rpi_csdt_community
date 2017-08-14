@@ -340,6 +340,7 @@ nav .btn {
 
 .btn-default:hover {
   background-position: 0px 0px;
+  background-image: none;
 }
 
 .btn-primary:hover {
