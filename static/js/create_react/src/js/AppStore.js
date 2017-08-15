@@ -52,6 +52,7 @@ class AppStore {
 
   @action
   loadCategories() {
+    this.isLoading = true;
     var qs = (function(a) {
         if (a == "") return {};
         var b = {};
@@ -81,6 +82,7 @@ class AppStore {
       console.log('arr2', arr2);
       this.appList = arr2;
       console.log('this.appList internal', this.appList);
+      this.isLoading = false;
     }.bind(this)).catch(function(ex) {
       console.log('parsing failed', ex)
     });

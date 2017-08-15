@@ -27,20 +27,31 @@ export default class AppList extends React.Component {
   render() {
     const { categoryList, currentThemeNum, appList, isLoading, themeList } = this.props.store;
     //const todoList = filteredTodos.map((todo, i) => (<li key={todo.id}><input type="checkbox" value={todo.complete } onChange={this.toggleComplete.bind(this, todo)} checked={todo.complete}/>{todo.value} </li>));
-    console.log('currentThemeNum', currentThemeNum);
-    console.log('appList', appList);
+    
 
 
-
-    const currentList = (!appList) ? <li>Loading...</li> : categoryList.map((category, i) => {
+    const currentList = (isLoading) ? <li>Loading...</li> : categoryList.map((category, i) => {
         if (category.theme === currentThemeNum) {
           console.log('category.applications', category.applications)
 
           const fullArray = category.applications.map((app, i) => {
             if (app != undefined) {
-              const app1 = appList[app]
-              console.log('appList[app] OKAY', app1);
-              return app1
+              if (appList[app]) {
+                const app1 = appList[app]
+                console.log('appList[app] OKAY', app1);
+                return app1
+              }
+              else {
+                fetch(`/api/application/${app}`).then(function(response) {
+                  return response.json()
+                }).then(function(json) {
+                  app1 = json
+                  return app1
+                  //<li key={app1.id}>App #{app1.name}</li>
+                }.bind(this)).catch(function(ex) {
+                  console.log('parsing failed', ex)
+                });
+              }
             }
           })
           console.log('fullarray', fullArray);
@@ -69,16 +80,16 @@ export default class AppList extends React.Component {
     console.log('themeList pretest', themeList);
     console.log('currentList', currentList);
     return (
-            <div class="container-fluid">
-              <div class="row">
+            <div className="container-fluid">
+              <div className="row">
                 <h1>Applications</h1>
                 <h2>Theme</h2>
               </div>
-              <div class="row">
+              <div className="row">
                 { themeOutput }
               </div>
 
-              <div class="row">
+              <div className="row">
                   <ul className="categories-ul">{ currentList }</ul>
               </div>
             </div>
