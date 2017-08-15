@@ -45,8 +45,6 @@ class AppStore {
   }
 
   post (id) {
-    console.log('id', id);
-    console.log("HELLO THAR!");
     this.currentThemeNum = id
   }
 
@@ -74,14 +72,10 @@ class AppStore {
       //   return a.rankApp - b.rankApp;
       // });
       let arr2 = [];
-      console.log('arr', arr);
       for (var obj in arr) {
-        console.log('arr[obj].id', arr[obj].id);
         arr2[arr[obj].id] = arr[obj];
       }
-      console.log('arr2', arr2);
       this.appList = arr2;
-      console.log('this.appList internal', this.appList);
       this.isLoading = false;
     }.bind(this)).catch(function(ex) {
       console.log('parsing failed', ex)
@@ -93,17 +87,14 @@ class AppStore {
       arr.sort(function(a, b) {
         return a.rankCat - b.rankCat;
       });
-      console.log(arr);
       for (var obj in arr) {
         let newCategory = new Category(arr[obj].id, arr[obj].name, arr[obj].theme, arr[obj].description, arr[obj].applications, arr[obj].rankCat)
-        console.log('newCategory', newCategory);
         this.categoryList.push(newCategory);
       }
     }.bind(this)).catch(function(ex) {
       console.log('parsing failed', ex)
     });
     let themeNum = qs["theme"] || 1;
-    console.log('themeNum', themeNum)
     fetch(`/api/theme/`).then(function(response) {
       return response.json()
     }).then(function(json) {
@@ -114,7 +105,6 @@ class AppStore {
       // });
       for (var obj in arr) {
         let newTheme = new Theme(arr[obj].id, arr[obj].name, arr[obj].description)
-        console.log('newTheme', newTheme);
         this.themeList.push(newTheme);
       }
     }.bind(this)).catch(function(ex) {
@@ -123,13 +113,10 @@ class AppStore {
     fetch(`/api/theme/${themeNum}`).then(function(response) {
       return response.json()
     }).then(function(json) {
-      console.log('theme json', json);
       let newTheme = new Theme(json.id, json.name, json.description)
       this.currentTheme = newTheme;
-      console.log('currentTheme', this.currentTheme);
       this.currentThemeNum = json.id
     }.bind(this)).catch(function(ex) {
-      console.log('parsing failed', ex)
     });
 
 
@@ -139,13 +126,10 @@ class AppStore {
     fetch(`/api/theme/${num}`).then(function(response) {
       return response.json()
     }).then(function(json) {
-      console.log('theme json', json);
       let newTheme = new Theme(json.id, json.name, json.description)
       this.currentTheme = newTheme;
-      console.log('currentTheme', this.currentTheme);
       this.currentThemeNum = json.id
     }.bind(this)).catch(function(ex) {
-      console.log('parsing failed', ex)
     });
   }
 

@@ -19,7 +19,6 @@ export default class AppList extends React.Component {
   }
 
   changeTheme(e) {
-    console.log('e', e);
     this.props.store.changeCurrentTheme(e);
 
   }
@@ -27,18 +26,16 @@ export default class AppList extends React.Component {
   render() {
     const { categoryList, currentThemeNum, appList, isLoading, themeList } = this.props.store;
     //const todoList = filteredTodos.map((todo, i) => (<li key={todo.id}><input type="checkbox" value={todo.complete } onChange={this.toggleComplete.bind(this, todo)} checked={todo.complete}/>{todo.value} </li>));
-    
+
 
 
     const currentList = (isLoading) ? <li>Loading...</li> : categoryList.map((category, i) => {
         if (category.theme === currentThemeNum) {
-          console.log('category.applications', category.applications)
 
           const fullArray = category.applications.map((app, i) => {
             if (app != undefined) {
               if (appList[app]) {
                 const app1 = appList[app]
-                console.log('appList[app] OKAY', app1);
                 return app1
               }
               else {
@@ -54,7 +51,6 @@ export default class AppList extends React.Component {
               }
             }
           })
-          console.log('fullarray', fullArray);
           fullArray.sort(function(a, b) {
             return a.rankApp - b.rankApp;
           });
@@ -68,7 +64,6 @@ export default class AppList extends React.Component {
       }
     });
     const themeOutput = themeList.map((theme, i) => {
-      console.log('theme', theme);
         if (theme.id == currentThemeNum) {
             return <button key={theme.id} type="button" className="btn btn-primary themeBtn active" >{theme.name}</button>
         }
@@ -77,8 +72,6 @@ export default class AppList extends React.Component {
           return <button key={theme.id} type="button" className="btn btn-default themeBtn" onClick={() => {this.props.store.post(hello)}}>{theme.name}</button>
         }
     });
-    console.log('themeList pretest', themeList);
-    console.log('currentList', currentList);
     return (
             <div className="container-fluid">
               <div className="row">

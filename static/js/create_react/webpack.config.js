@@ -3,6 +3,7 @@ var webpack = require('webpack');
 var path = require('path');
 
 module.exports = {
+
   context: path.join(__dirname, "src"),
   devtool: debug ? "inline-sourcemap" : null,
   entry: ['whatwg-fetch', "./js/main.js"],
@@ -22,8 +23,16 @@ module.exports = {
     filename: "main.min.js"
   },
   plugins: debug ? [] : [
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify('production')
+      }
+    }),
+    new webpack.optimize.UglifyJsPlugin(),
     new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.optimize.UglifyJsPlugin({ mangle: false, sourcemap: false }),
+    new webpack.optimize.OccurenceOrderPlugin()
+    //new webpack.optimize.UglifyJsPlugin({ mangle: false, sourcemap: false }),
+
+
   ],
 };
