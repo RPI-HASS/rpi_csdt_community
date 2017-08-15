@@ -136,7 +136,7 @@ class AppStore {
 }
 
 
-var store = window.store = new AppStore
+var store = new AppStore
 export default store
 
 // autorun(() => {
