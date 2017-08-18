@@ -47,7 +47,7 @@
     {% if term or filter_val or order %}
       <p style="padding-left: 20px;font-size: 1.5em;">
         {% if term or filter_val %}
-          ({{ object_list|length }} result{% if not object_list|length == 1 %}s{% endif %})
+          ({{ paginator.count }} result{% if not object_list|length == 1 %}s{% endif %})
         {% endif %}
         {% if term %}
           Search for "{{ term }}"
