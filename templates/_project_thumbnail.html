@@ -1,6 +1,6 @@
 {% load thumbnail %}
 <div class="col-sm-4 col-md-3">
-    <div class="thumbnail" style="height: 320px; overflow: auto;">
+    <div class="thumbnail" style="height: 340px; overflow: auto;">
     {% if object.approved  or not object.owner == user%}
 	<a href="{% url 'project-detail' pk=object.id %}">
     {% else %}
