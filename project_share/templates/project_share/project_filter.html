@@ -48,7 +48,7 @@
       <p style="padding-left: 20px;font-size: 1.5em;">
         {% if term or filter_val %}
           {% if paginator %}
-          ({{ paginator.count }} result{% if not paginator.count == 1 %}s{% endif %}
+          ({{ paginator.count }} result{% if not paginator.count == 1 %}s{% endif %})
           {% else %}
           ({{ object_list|length }} result{% if not object_list|length == 1 %}s{% endif %})
           {% endif %}
