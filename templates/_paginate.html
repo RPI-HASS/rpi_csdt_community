@@ -1,5 +1,6 @@
         {% if is_paginated %}
-            <span class="page-links">
+          <div style="font-size: 2rem;">
+            <span class="page-links" >
               {% if page_obj.has_previous %}
                 {% if page_obj.previous_page_number is not 1 %}<a href="{% url 'project-list' %}?{% if filter_val %}filter={{ filter_val }}&{% endif %}{% if order %}orderby={{ order }}&{% endif %}{% if term %}q={{ term }}&{% endif %}page=1">first.</a>{% endif %}
                 <a href="{% url 'project-list' %}?{% if filter_val %}filter={{ filter_val }}&{% endif %}{% if order %}orderby={{ order }}&{% endif %}{% if term %}q={{ term }}&{% endif %}page={{ page_obj.previous_page_number }}">previous</a>
@@ -12,4 +13,5 @@
                 {% if page_obj.next_page_number is not paginator.num_pages %}<a href="{% url 'project-list' %}?{% if filter_val %}filter={{ filter_val }}&{% endif %}{% if order %}orderby={{ order }}&{% endif %}{% if term %}q={{ term }}&{% endif %}page={{ paginator.num_pages }}">last</a>{% endif %}
               {% endif %}
             </span>
+          </div>
         {% endif %}
