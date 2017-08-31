@@ -75,7 +75,7 @@ export default class AppList extends React.Component {
     return (
             <div className="container-fluid">
               <div className="row">
-                <h1>Applications</h1>
+                
                 <h2>Theme</h2>
               </div>
               <div className="row">
