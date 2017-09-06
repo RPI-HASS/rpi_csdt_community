@@ -95,7 +95,6 @@ class GoalViewSet(viewsets.ReadOnlyModelViewSet):
 class ApplicationViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Application.objects.all()
     serializer_class = ApplicationSerializer
-    lookup_field = 'name'
 
 
 class ApplicationCategoryViewSet(viewsets.ReadOnlyModelViewSet):

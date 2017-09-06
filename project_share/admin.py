@@ -15,7 +15,7 @@ class ApplicationAdmin(admin.ModelAdmin):
     """Innumerate application updating from admin."""
 
     fields = ('name', 'url', 'description', 'application_type', 'application_file', 'featured', 'categories',
-              'screenshot', 'rank')
+              'screenshot', 'rankApp')
 
     form = ApplicationAdminForm
 

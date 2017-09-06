@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block js %}
+{{ super }}
+  <script type="text/javascript" src="{% static "js/create_react/src/main.min.js" %}"></script>
+{% endblock %}
+
+{% block extra_style %}
+{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="col-md-11">
+    <p><h1>Applications</h1>
+    </p>
+    <div style="padding:10px;border-radius: 5px;border: 1px darkgrey solid;background-color:silver;">
+      <p class="lead" style="margin: 0px 0px 10px;">Learn, create, and share your work with Culturally Situated Design Tools. Combine cultural education with STEM. </p>
+     <p class="lead" style="margin: 0px;">Many cultural designs are based on math and computing principles. This software will help students learn these principles as they simulate the original artifacts, and develop their own creations.</p>
+   </div>
+  </div>
+</div>
+      <div id="app"></div>
+{% endblock %}

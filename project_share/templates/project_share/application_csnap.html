@@ -10,7 +10,7 @@
 	{% if GOOGLE_ANALYTICS_PROPERTY_ID %}
       <script type="text/javascript" src="{% static 'js/ga.js'%}"></script>
     {% endif %}
-    
+
   </head>
   <body>
     <canvas id="world" tabindex="1" style="position: absolute; top: 64px; left: 0px; width:100%; height: 100%" />
@@ -92,9 +92,10 @@
     <script type="text/javascript" src="{% static 'csnap/locale.js'%}"></script>
     <script type="text/javascript" src="{% static 'csnap/cloud.js'%}"></script>
     <script type="text/javascript" src="{% static 'csnap/sha512.js'%}"></script>
-	<script type="text/javascript" src="{% static 'csnap/threejs/three.js'%}"></script>
-	<script type="text/javascript" src="{% static 'csnap/threejs/helvetiker_regular.typeface.js'%}"></script>
+  	<script type="text/javascript" src="{% static 'csnap/threejs/three.js'%}"></script>
+  	<script type="text/javascript" src="{% static 'csnap/threejs/helvetiker_regular.typeface.js'%}"></script>
     <script type="text/javascript" src="{% static 'csnap/Charles_Changes_To_IDE_Morph.js'%}"></script>
+    <script type="text/javascript" src="{% static 'csnap/FileSaver.min.js'%}"></script>
 
     <script type="text/javascript">
         var world;
