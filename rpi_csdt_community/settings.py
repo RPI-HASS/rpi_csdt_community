@@ -1,7 +1,7 @@
 """Django settings for rpi_csdt_community project."""
 import os
-
 import twitter_bootstrap
+import warnings
 
 PROJECT_ROOT = os.path.dirname(os.path.dirname(__file__))
 
@@ -228,6 +228,8 @@ INSTALLED_APPS = (
     'crispy_forms',
     'bootstrap3',
     'django_pre_post',
+    'gis_csdt',
+    'django.contrib.gis',
 )
 
 TEMPLATES = [
@@ -364,28 +366,23 @@ if USE_CACHE:
     ]
 
 try:
+    assert DATABASES['default']['ENGINE'] == 'django.contrib.gis.db.backends.postgis'
+except:
+    warnings.warn("Your database is not using the postgis engine")
+try:
     RECAPTCHA_PRIVATE_KEY  # noqa: F405
 except NameError:
-    raise "You have not defined recaptcha keys in local settings"
+    warnings.warn("You have not defined recaptcha keys in local settings")
 try:
     RECAPTCHA_PUBLIC_KEY  # noqa: F405
 except NameError:
-    raise "You have not defined recaptcha keys in local settings"
-
-if ENABLE_GIS:
-    # Make sure the database is configured as postgres
-    assert DATABASES['default']['ENGINE'] == 'django.contrib.gis.db.backends.postgis'
-    INSTALLED_APPS += (
-        'gis_csdt',
-        'django.contrib.gis',
-    )
-
-    # Make sure a GOOGLE_API_KEY is defined
-    try:
-        GOOGLE_API_KEY  # noqa: F405
-    except NameError:
-        raise "To use GIS, you need to define a GOOGLE_API_KEY"
-    try:
-        CENSUS_API_KEY  # noqa: F405
-    except NameError:
-        raise "To use GIS, you need to define a CENSUS API KEY"
+    warnings.warn("You have not defined recaptcha keys in local settings")
+# Make sure a GOOGLE_API_KEY is defined
+try:
+    GOOGLE_API_KEY  # noqa: F405
+except NameError:
+    warnings.warn("You have not defined the Google API key in local settings")
+try:
+    CENSUS_API_KEY  # noqa: F405
+except NameError:
+    warnings.warn("You have not defined the Census API key in local settings")
