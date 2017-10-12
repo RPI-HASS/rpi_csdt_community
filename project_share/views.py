@@ -9,14 +9,12 @@ from django.db.models import Q
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse, reverse_lazy
-from django.utils.translation import ugettext_lazy as _
 from django.views.generic import ListView, FormView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django_teams.models import Ownership
 from extra_views import SearchableListMixin, SortableListMixin
 from taggit.models import Tag
-from allauth.account.adapter import DefaultAccountAdapter
 
 from project_share.forms import (AddressForm, ApprovalForm, ProjectForm,
                                  ProjectUnpublishForm)

@@ -298,7 +298,6 @@ TEXT_HTML_SANITIZE = False
 
 LOGIN_REDIRECT_URL = '/'
 
-
 # Track where my LESS things live
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
