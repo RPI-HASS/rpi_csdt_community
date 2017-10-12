@@ -466,11 +466,3 @@ class MyUserChangeForm(UserChangeForm):
     class Meta:
         model = User
         fields = ('email', 'username', 'display_name', 'avatar', 'bio', 'gender', 'race', 'age')
-
-
-class CustomAccountAdapter(DefaultAccountAdapter):
-    def __init__(self, request=None):
-        super(CustomAccountAdapter, self).__init__(request)
-        self.error_messages['email_taken'] = _('A user is already registered with this e-mail address.')
-        self.error_messages['username_taken'] = _('A user with that username already exists.')
-        self.error_messages['unique'] = _('A user with that username already exists.')
