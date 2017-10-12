@@ -15,7 +15,15 @@
                 {% for field in form.visible_fields %}
                     <div class="text-input">
                         {{ field }}
-                        {{ field.errors }}
+                        {% if field.errors %}
+                          {% for error in field.errors %}
+                            {% if error == '%(model_name)s with this %(field_label)s already exists.' %}
+                              User with that username already exists.<br>
+                            {% else %}
+                              {{ error }}
+                            {% endif %}
+                          {% endfor %}
+                        {% endif %}
                     </div>
                 {% endfor %}
                 {% csrf_token %}
