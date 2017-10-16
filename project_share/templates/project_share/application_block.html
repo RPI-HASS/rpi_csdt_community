@@ -7,14 +7,16 @@
   </iframe>
   <script>
     var x = document.getElementById("scratch-iframe");
-    var y = (x.contentWindow || x.contentDocument);
-    if (y.document)y = y.document;
-    {% for extension in object.extensions.all %}
-      var script = document.createElement('script');
-      script.type = 'text/javascript';
-      script.src = '{{extension.path}}';
-      y.body.appendChild(script);
-    {% endfor %}
+    x.onload = function() {
+      var y = (x.contentWindow || x.contentDocument);
+      if (y.document)y = y.document;
+      {% for extension in object.extensions.all %}
+        var script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.src = '{{extension.path}}';
+        y.body.appendChild(script);
+      {% endfor %}
+    }
   </script>
 </body>
 
