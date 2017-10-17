@@ -1,0 +1,6 @@
+{% extends 'base.html' %}
+{% block content %}
+  {% for extension in object.extensions.all %}
+    <iframe src="{{extension.path}}" class="col-xs-12" style="height: 85vh">
+  {% endfor %}
+{% endblock %}

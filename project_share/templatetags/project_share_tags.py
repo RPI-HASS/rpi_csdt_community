@@ -3,8 +3,6 @@ from django.db.models import Q
 
 from project_share.models import Project
 
-register = template.Library()
-
 
 def unrestricted_projects(user, requester):
     try:
