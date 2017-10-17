@@ -16,6 +16,7 @@ class ExtensionOrderInline(admin.TabularInline):
     model = ExtensionOrder
     extra = 1
 
+
 class ExtensionAdmin(admin.ModelAdmin):
     """Enable filters for classrooms and sets the display for projects."""
 

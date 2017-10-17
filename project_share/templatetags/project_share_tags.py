@@ -1,9 +1,8 @@
 from django import template
 from django.db.models import Q
-from django.contrib.staticfiles import finders
-from django.utils.html import escape
 
 from project_share.models import Project
+
 
 def unrestricted_projects(user, requester):
     try:

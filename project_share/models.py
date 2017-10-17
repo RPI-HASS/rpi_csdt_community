@@ -94,7 +94,6 @@ class Approval(models.Model):
         return "%s approval for %s" % (self.project.owner, self.project)
 
 
-
 class Extension(models.Model):
     """The object that determines whether a project is viewable to the public."""
     name = models.CharField(max_length=255, unique=True)
