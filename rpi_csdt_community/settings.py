@@ -349,8 +349,6 @@ WARNING_MESSAGE = "<strong>You are currently looking at the development site!</s
 
 USE_CACHE = False
 
-ACCOUNT_ADAPTER = 'project_share.views.CustomAccountAdapter'
-
 try:
     from local_settings import *  # noqa: F401,F403
 except:
