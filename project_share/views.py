@@ -207,7 +207,6 @@ class ProjectUpdate(UpdateView):
         obj = super(ProjectUpdate, self).get_object()
         if 'publish_project' in request.POST and not (hasattr(obj, 'approval')):
             super(ProjectUpdate, self).post(request, *args, **kwargs)
-            obj.save()
             return redirect('approval-create', project_pk=obj.pk)
         return super(ProjectUpdate, self).post(request, *args, **kwargs)
 

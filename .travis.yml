@@ -24,6 +24,7 @@ before_install:
   - export PIP_USE_MIRRORS=true
   - "npm config set spin false"
   - "npm install -g npm@^5"
+  - "npm install -g request"
 
 install:
   - $(type -P npm) install -g less

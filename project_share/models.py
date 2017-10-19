@@ -94,6 +94,15 @@ class Approval(models.Model):
         return "%s approval for %s" % (self.project.owner, self.project)
 
 
+class Extension(models.Model):
+    """The object that determines whether a project is viewable to the public."""
+    name = models.CharField(max_length=255, unique=True)
+    path = models.CharField(max_length=255, unique=True)
+
+    def __unicode__(self):
+        return self.name + " has file location: " + self.path
+
+
 class Application(models.Model):
     """The base application for which all projects are based."""
 
@@ -108,13 +117,15 @@ class Application(models.Model):
     more_info_url = models.URLField(null=True, blank=True)
 
     application_type = models.CharField(max_length=5, choices=(
-        ('CSNAP', 'cSnap'),
-        ('BLOCK', 'Blockly/Scratch')))
+        ('CSNAP', 'CSnap'),
+        ('BLOCK', 'C-Scratch'),
+        ('SPA', 'SinglePageApplication')))
     application_file = models.FileField(upload_to=application_application, null=True, blank=True)
 
     featured = models.BooleanField(default=True)
     screenshot = models.ImageField(upload_to="application_screenshot/", null=True)
     rankApp = models.IntegerField(default=100)
+    extensions = models.ManyToManyField(Extension, through='ExtensionOrder')
 
     def get_context(self):
         """return all of the context data for the application."""
@@ -138,6 +149,16 @@ class Application(models.Model):
 
     def __unicode__(self):
         return self.name
+
+
+class ExtensionOrder(models.Model):
+    """The object that determines whether a project is viewable to the public."""
+    extension = models.ForeignKey(Extension, on_delete=models.CASCADE)
+    application = models.ForeignKey(Application, on_delete=models.CASCADE)
+    rank = models.IntegerField()
+
+    class Meta:
+        ordering = ('rank',)
 
 
 class ApplicationContext(models.Model):
