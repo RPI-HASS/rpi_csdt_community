@@ -1,0 +1,12 @@
+input {
+  width: 40px;
+  margin: 5px 20px;
+  border-radius: 5px;
+  border: 1px solid darkgrey;
+  box-shadow: 3px 3px 1px silver;
+  text-align: center;
+}
+
+* {
+  color: PaleVioletRed;
+}
