@@ -45,8 +45,8 @@ def post_detail(request, slug=None):
     share_string = quote_plus(instance.content.encode('utf8'))
 
     initial_data = {
-            "content_type": instance.get_content_type,
-            "object_id": instance.id
+        "content_type": instance.get_content_type,
+        "object_id": instance.id
     }
     form = CommentForm(request.POST or None, initial=initial_data)
     if form.is_valid() and request.user.is_authenticated():
@@ -65,12 +65,12 @@ def post_detail(request, slug=None):
             if parent_qs.exists() and parent_qs.count() == 1:
                 parent_obj = parent_qs.first()
         new_comment, created = Comment.objects.get_or_create(
-                            user=request.user,
-                            content_type=content_type,
-                            object_id=obj_id,
-                            content=content_data,
-                            parent=parent_obj,
-                        )
+            user=request.user,
+            content_type=content_type,
+            object_id=obj_id,
+            content=content_data,
+            parent=parent_obj,
+        )
         return HttpResponseRedirect(new_comment.content_object.get_absolute_url())
     comments = instance.comments
     context = {
