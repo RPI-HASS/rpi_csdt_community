@@ -30,7 +30,6 @@ else:
     User = get_user_model()
 
 
-
 def filter_project_query(set, request):
     filter_val = request.GET.get('filter')
     if filter_val is not None:

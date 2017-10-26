@@ -36,10 +36,10 @@ class Home(ListView):
 
     def get_queryset(self):
         cache_key = 'ApplicationListForHome'
-        cache_time = 1800 # time to live in seconds
+        cache_time = 1800  # time to live in seconds
         queryset = cache.get(cache_key)
         if not queryset:
-    	    queryset = Application.objects.filter(featured=True).order_by('rankApp', 'name')
+            queryset = Application.objects.filter(featured=True).order_by('rankApp', 'name')
             cache.set(cache_key, queryset, cache_time)
         return queryset
 

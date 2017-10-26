@@ -358,9 +358,9 @@ except:
 CACHE_BACKEND = 'memcached://127.0.0.1:11211/'
 
 MIDDLEWARE += [
-	'django.middleware.cache.UpdateCacheMiddleware',
-	'django.middleware.common.CommonMiddleware',
-	'django.middleware.cache.FetchFromCacheMiddleware',
+    'django.middleware.cache.UpdateCacheMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'django.middleware.cache.FetchFromCacheMiddleware',
 ]
 
 CACHES = {

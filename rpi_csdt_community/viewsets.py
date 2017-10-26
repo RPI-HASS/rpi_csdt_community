@@ -25,6 +25,7 @@ except ImportError:  # django < 1.5
 else:
     User = get_user_model()
 
+
 class ProjectViewSet(viewsets.ModelViewSet):
     model = Project
     serializer_class = ProjectSerializer
@@ -71,7 +72,7 @@ class DemosViewSet(viewsets.ReadOnlyModelViewSet):
 
     def get_queryset(self):
         cache_key = 'DemosList'
-        cache_time = 1800 # time to live in seconds
+        cache_time = 1800  # time to live in seconds
         queryset = cache.get(cache_key)
         if not queryset:
             queryset = self.queryset
@@ -98,7 +99,7 @@ class GoalViewSet(viewsets.ReadOnlyModelViewSet):
 
 class ApplicationViewSet(viewsets.ReadOnlyModelViewSet):
     cache_key = 'ApplicationViewSet'
-    cache_time = 1800 # time to live in seconds
+    cache_time = 1800  # time to live in seconds
     queryset = cache.get(cache_key)
     if not queryset:
         queryset = Application.objects.all()
@@ -108,7 +109,7 @@ class ApplicationViewSet(viewsets.ReadOnlyModelViewSet):
 
 class ApplicationCategoryViewSet(viewsets.ReadOnlyModelViewSet):
     cache_key = 'ApplicationCategoryViewSet'
-    cache_time = 1800 # time to live in seconds
+    cache_time = 1800  # time to live in seconds
     queryset = cache.get(cache_key)
     if not queryset:
         queryset = ApplicationCategory.objects.all()
@@ -118,7 +119,7 @@ class ApplicationCategoryViewSet(viewsets.ReadOnlyModelViewSet):
 
 class ApplicationThemeViewSet(viewsets.ReadOnlyModelViewSet):
     cache_key = 'ApplicationThemeViewSet'
-    cache_time = 1800 # time to live in seconds
+    cache_time = 1800  # time to live in seconds
     queryset = cache.get(cache_key)
     if not queryset:
         queryset = ApplicationTheme.objects.all()
