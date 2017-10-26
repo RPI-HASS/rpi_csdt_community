@@ -9,17 +9,18 @@ from django.db.models import Q
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse, reverse_lazy
-from django.views.generic import ListView, FormView
+from django.views.generic import FormView, ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django_teams.models import Ownership
 from extra_views import SearchableListMixin, SortableListMixin
-from taggit.models import Tag
-
 from project_share.forms import (AddressForm, ApprovalForm, ProjectForm,
                                  ProjectUnpublishForm)
 from project_share.models import (Address, Application, ApplicationDemo,
                                   Approval, Project)
+from taggit.models import Tag
+
+from . import forms
 
 try:
     from django.contrib.auth import get_user_model
@@ -28,7 +29,6 @@ except ImportError:  # django < 1.5
 else:
     User = get_user_model()
 
-from . import forms
 
 
 def filter_project_query(set, request):

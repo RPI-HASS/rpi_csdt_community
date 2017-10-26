@@ -2,15 +2,15 @@ import os
 import sys
 
 from django.conf import settings
+from django.core.cache import cache
 from django.shortcuts import get_object_or_404
 from django_teams.models import TeamStatus
-from rest_framework import views, viewsets
-from rest_framework.parsers import FileUploadParser
-from rest_framework.response import Response
-
 from project_share.models import (Application, ApplicationCategory,
                                   ApplicationDemo, ApplicationTheme,
                                   ExtendedUser, FileUpload, Goal, Project)
+from rest_framework import views, viewsets
+from rest_framework.parsers import FileUploadParser
+from rest_framework.response import Response
 from rpi_csdt_community.serializers import (ApplicationCategorySerializer,
                                             ApplicationSerializer,
                                             ApplicationThemeSerializer,
@@ -24,7 +24,6 @@ except ImportError:  # django < 1.5
     from django.contrib.auth.models import User
 else:
     User = get_user_model()
-
 
 class ProjectViewSet(viewsets.ModelViewSet):
     model = Project
@@ -71,11 +70,16 @@ class DemosViewSet(viewsets.ReadOnlyModelViewSet):
     lookup_field = 'application'
 
     def get_queryset(self):
-        queryset = self.queryset
-        application = self.request.query_params.get('application', None)
-        if application is not None:
-            queryset = queryset.filter(application__name=application)
-        queryset = queryset.order_by('order')
+        cache_key = 'DemosList'
+        cache_time = 1800 # time to live in seconds
+        queryset = cache.get(cache_key)
+        if not queryset:
+            queryset = self.queryset
+            application = self.request.query_params.get('application', None)
+            if application is not None:
+                queryset = queryset.filter(application__name=application)
+                queryset = queryset.order_by('order')
+                cache.set(cache_key, queryset, cache_time)
         return queryset
 
 
@@ -93,17 +97,32 @@ class GoalViewSet(viewsets.ReadOnlyModelViewSet):
 
 
 class ApplicationViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = Application.objects.all()
+    cache_key = 'ApplicationViewSet'
+    cache_time = 1800 # time to live in seconds
+    queryset = cache.get(cache_key)
+    if not queryset:
+        queryset = Application.objects.all()
+        cache.set(cache_key, queryset, cache_time)
     serializer_class = ApplicationSerializer
 
 
 class ApplicationCategoryViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = ApplicationCategory.objects.all()
+    cache_key = 'ApplicationCategoryViewSet'
+    cache_time = 1800 # time to live in seconds
+    queryset = cache.get(cache_key)
+    if not queryset:
+        queryset = ApplicationCategory.objects.all()
+        cache.set(cache_key, queryset, cache_time)
     serializer_class = ApplicationCategorySerializer
 
 
 class ApplicationThemeViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = ApplicationTheme.objects.all()
+    cache_key = 'ApplicationThemeViewSet'
+    cache_time = 1800 # time to live in seconds
+    queryset = cache.get(cache_key)
+    if not queryset:
+        queryset = ApplicationTheme.objects.all()
+        cache.set(cache_key, queryset, cache_time)
     serializer_class = ApplicationThemeSerializer
 
 

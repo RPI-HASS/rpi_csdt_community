@@ -5,10 +5,9 @@ from django.db.models.signals import pre_save
 from django.dispatch import receiver
 # from rest_framework.test import APITestCase, APITransactionTestCase
 from django.test import LiveServerTestCase
+from project_share.models import Project
 from rest_framework import status
 from rest_framework.test import APIClient
-
-from project_share.models import Project
 
 User = get_user_model()
 

@@ -1,15 +1,14 @@
 """Directs URLs for the project_share sub-app to relevant views."""
 from django.conf.urls import url
 from django.views.generic.base import TemplateView
-
 from project_share.views import (AddressCreate, AddressUpdate,
                                  ApplicationDetail, ApplicationList,
                                  ApplicationRunDetail, ApprovalCreate,
-                                 DemoDetail, DemoList, ProjectCreate,
-                                 ProjectDelete, ProjectDetail, ProjectList,
-                                 ProjectPresentDetail, ProjectRunDetail,
-                                 ProjectTagList, ProjectUnpublish,
-                                 ProjectUpdate, UserDetail, ProfileUpdate)
+                                 DemoDetail, DemoList, ProfileUpdate,
+                                 ProjectCreate, ProjectDelete, ProjectDetail,
+                                 ProjectList, ProjectPresentDetail,
+                                 ProjectRunDetail, ProjectTagList,
+                                 ProjectUnpublish, ProjectUpdate, UserDetail)
 
 urlpatterns = [
     url(r'^projects/$', ProjectList.as_view(), name='project-list'),

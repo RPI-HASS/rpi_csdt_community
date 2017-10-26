@@ -1,14 +1,12 @@
 """Django settings for rpi_csdt_community project."""
 import os
-import twitter_bootstrap
 import warnings
+
+import twitter_bootstrap
 
 PROJECT_ROOT = os.path.dirname(os.path.dirname(__file__))
 
 DEBUG = True
-if not DEBUG:
-    GOOGLE_ANALYTICS_PROPERTY_ID = 'UA-77115650-1'
-    GOOGLE_ANALYTICS_DOMAIN = 'rpi.edu'
 
 # Override this setting local_settings.py to enable the GIS app
 ENABLE_GIS = True
@@ -347,7 +345,6 @@ LOGGING = {
 
 WARNING_MESSAGE = "<strong>You are currently looking at the development site!</strong> None of this is real!"
 
-USE_CACHE = False
 
 try:
     from local_settings import *  # noqa: F401,F403
@@ -358,12 +355,23 @@ except:
     CENSUS_API_KEY = None
     pass
 
-if USE_CACHE:
-    MIDDLEWARE += [
-        'django.middleware.cache.UpdateCacheMiddleware',
-        'django.middleware.common.CommonMiddleware',
-        'django.middleware.cache.FetchFromCacheMiddleware',
-    ]
+CACHE_BACKEND = 'memcached://127.0.0.1:11211/'
+
+MIDDLEWARE += [
+	'django.middleware.cache.UpdateCacheMiddleware',
+	'django.middleware.common.CommonMiddleware',
+	'django.middleware.cache.FetchFromCacheMiddleware',
+]
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'LOCATION': '127.0.0.1:11211',
+    }
+}
+
+GOOGLE_ANALYTICS_PROPERTY_ID = 'UA-77115650-1'
+GOOGLE_ANALYTICS_DOMAIN = 'rpi.edu'
 
 try:
     assert DATABASES['default']['ENGINE'] == 'django.contrib.gis.db.backends.postgis'

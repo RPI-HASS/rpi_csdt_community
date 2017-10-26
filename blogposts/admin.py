@@ -1,8 +1,8 @@
 from django.contrib import admin
+from taggit.admin import Tag
 
 # Register your models here.
-from .models import Post, MyCustomTag
-from taggit.admin import Tag
+from .models import MyCustomTag, Post
 
 admin.site.unregister(Tag)
 

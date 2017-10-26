@@ -1,5 +1,6 @@
 from __future__ import unicode_literals
 
+from comments.models import Comment
 from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
 from django.core.urlresolvers import reverse
@@ -9,14 +10,12 @@ from django.utils import timezone
 from django.utils.safestring import mark_safe
 from django.utils.text import slugify
 from django.utils.translation import ugettext_lazy as _
-from taggit.managers import TaggableManager
-from taggit.models import TagBase, GenericTaggedItemBase
-
 from markdown_deux import markdown
-from comments.models import Comment
-
+from taggit.managers import TaggableManager
+from taggit.models import GenericTaggedItemBase, TagBase
 
 from .utils import get_read_time
+
 # Create your models here.
 # MVC MODEL VIEW CONTROLLER
 

@@ -3,13 +3,12 @@ from attachments.admin import AttachmentInlines
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.utils.translation import ugettext_lazy as _
-
 from project_share.forms import ApplicationAdminForm
 from project_share.models import (Address, Application, ApplicationCategory,
                                   ApplicationContext, ApplicationDemo,
                                   ApplicationTheme, Approval, Classroom,
-                                  ExtendedUser, FileUpload, Goal, Project,
-                                  ExtensionOrder, Extension)
+                                  ExtendedUser, Extension, ExtensionOrder,
+                                  FileUpload, Goal, Project)
 
 
 class ExtensionOrderInline(admin.TabularInline):

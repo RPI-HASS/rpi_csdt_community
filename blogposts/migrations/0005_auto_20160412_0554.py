@@ -10,5 +10,3 @@ class Migration(migrations.Migration):
     dependencies = [
         ('blogposts', '0004_post_read_time'),
     ]
-
-    

@@ -6,8 +6,6 @@ from django.contrib import admin
 from django.views import static
 from django.views.generic import TemplateView
 from rest_framework import routers
-
-
 from rpi_csdt_community.views import About, ReactAppList
 from rpi_csdt_community.viewsets import (ApplicationCategoryViewSet,
                                          ApplicationThemeViewSet,

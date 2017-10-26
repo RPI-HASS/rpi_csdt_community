@@ -4,17 +4,19 @@ except:
     from urllib.parse import quote_plus  # python 3  # NOQA
     pass
 
+import datetime
+
 from comments.forms import CommentForm
 from comments.models import Comment
-import datetime
 from django.contrib import messages
 from django.contrib.contenttypes.models import ContentType
 from django.db.models import Q
-from django.http import HttpResponseRedirect, Http404
-from django.shortcuts import render, get_object_or_404, redirect
+from django.http import Http404, HttpResponseRedirect
+from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
-from extra_views import SearchableListMixin, SortableListMixin
 from django.views.generic import ListView
+from extra_views import SearchableListMixin, SortableListMixin
+
 from .forms import PostForm
 from .models import Post
 
