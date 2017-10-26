@@ -35,12 +35,14 @@ install:
   - pip install flake8
   - sudo apt-get install -y postgresql-9.6-postgis-2.3
   - sudo service postgresql restart
+  - sudo apt-get install memcached
+  - sudo apt-get install python-memcache
 
 before_script:
   - psql -c "CREATE DATABASE travisci;" -U postgres
 
 script:
-  - flake8 --ignore=E722 . 
+  - flake8 --ignore=E722 .
   - python manage.py migrate
   - coverage run --source=rpi_csdt_community manage.py test
 

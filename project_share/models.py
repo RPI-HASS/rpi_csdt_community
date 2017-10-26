@@ -1,17 +1,14 @@
 """Models for making, uploading, and owning projects and their owning applications."""
+import os
+
 from django.conf import settings
-from django.contrib.auth.models import (
-    AbstractUser,
-    BaseUserManager
-)
-from django.urls import reverse
+from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.db import models
-from taggit.managers import TaggableManager
 from django.template.defaultfilters import slugify
+from django.urls import reverse
 from django.utils import timezone
 from django_comments.moderation import CommentModerator, moderator
-
-import os
+from taggit.managers import TaggableManager
 
 from . import imglib
 

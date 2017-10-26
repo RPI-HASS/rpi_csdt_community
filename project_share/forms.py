@@ -2,11 +2,10 @@
 from django import forms
 from django.forms import ModelForm
 from django_teams.models import Team, TeamStatus
-from snowpenguin.django.recaptcha2.fields import ReCaptchaField
-from snowpenguin.django.recaptcha2.widgets import ReCaptchaWidget
-
 from project_share.models import (Address, Application, ApplicationCategory,
                                   Approval, Project)
+from snowpenguin.django.recaptcha2.fields import ReCaptchaField
+from snowpenguin.django.recaptcha2.widgets import ReCaptchaWidget
 
 from .models import ExtendedUser
 

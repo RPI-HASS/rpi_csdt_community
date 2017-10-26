@@ -1,12 +1,11 @@
 """Display the id, name, description, and url for the demo."""
 from django.contrib.auth.forms import AuthenticationForm
+from django.core.cache import cache
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.views.generic import ListView, TemplateView
-
 from django_comments.views.comments import post_comment
-
-from project_share.models import Project, Application
+from project_share.models import Application, Project
 
 
 def comment_post_wrapper(request):
@@ -36,7 +35,12 @@ class Home(ListView):
     template_name = "home.html"
 
     def get_queryset(self):
-        queryset = Application.objects.filter(featured=True).order_by('rankApp', 'name')
+        cache_key = 'ApplicationListForHome'
+        cache_time = 1800  # time to live in seconds
+        queryset = cache.get(cache_key)
+        if not queryset:
+            queryset = Application.objects.filter(featured=True).order_by('rankApp', 'name')
+            cache.set(cache_key, queryset, cache_time)
         return queryset
 
 

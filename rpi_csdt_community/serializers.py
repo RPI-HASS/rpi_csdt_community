@@ -1,10 +1,9 @@
 """Serialize the models from projectshare into displayable items for admin / forms."""
 from django_teams.models import TeamStatus
-from rest_framework import serializers
-
 from project_share.models import (Application, ApplicationCategory,
                                   ApplicationDemo, ApplicationTheme, Goal,
                                   Project)
+from rest_framework import serializers
 
 try:
     from django.contrib.auth import get_user_model

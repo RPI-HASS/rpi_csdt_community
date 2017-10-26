@@ -3,11 +3,10 @@ from __future__ import unicode_literals
 
 import django.core.validators
 import django.utils.timezone
+import project_share.models
 import taggit.managers
 from django.conf import settings
 from django.db import migrations, models
-
-import project_share.models
 
 
 class Migration(migrations.Migration):

@@ -16,7 +16,7 @@ sudo apt-get install -y python-pip python-dev
 sudo apt-get install -y libpq-dev libcurl4-openssl-dev postgresql postgis
 
 # Install the database
-sudo apt-get install -y postgresql postgresql-contrib 
+sudo apt-get install -y postgresql postgresql-contrib
 # Set password
 sudo -u postgres psql -U postgres -d postgres -c "alter user postgres with password 'postgres';"
 # Create the database
@@ -39,6 +39,9 @@ cd /vagrant/
 git submodule init
 git submodule update
 
+# Setup the cache
+sudo apt-get install memcached
+sudo apt-get install python-memcache
 
 # Run migrations to init db
 python manage.py migrate

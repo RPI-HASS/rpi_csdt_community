@@ -4,7 +4,6 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django_comments_xtd.models import XtdComment
 from django_teams.models import Ownership
-
 from project_share.models import Approval, Project
 
 

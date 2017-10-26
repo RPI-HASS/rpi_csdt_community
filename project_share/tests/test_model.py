@@ -1,5 +1,4 @@
 from django.test import TestCase
-
 from project_share.models import Project
 
 
