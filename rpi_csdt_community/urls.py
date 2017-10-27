@@ -5,8 +5,8 @@ from django.conf.urls import include, url
 from django.contrib import admin
 from django.views import static
 from django.views.generic import TemplateView
+from django.views.generic.base import RedirectView
 from rest_framework import routers
-
 
 from rpi_csdt_community.views import About, ReactAppList
 from rpi_csdt_community.viewsets import (ApplicationCategoryViewSet,
@@ -27,10 +27,13 @@ router.register(r'application', ApplicationViewSet, base_name='api-modules')
 router.register(r'theme', ApplicationThemeViewSet, base_name='api-themes')
 router.register(r'category', ApplicationCategoryViewSet, base_name='api-category')
 
+favicon_view = RedirectView.as_view(url='/static/favicon.ico', permanent=True)
+
 
 urlpatterns = [
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^favicon\.ico$', favicon_view),
 
     # TemplateView + Login
     url(r'^$', ReactAppList.as_view(), name='home'),
