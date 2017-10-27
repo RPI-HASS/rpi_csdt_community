@@ -41,16 +41,12 @@ def application_library(instance, filename):
 
 def project_project(instance, filename):
     """Create URL for getting to project."""
-    return "applications/files/" + slugify(instance.owner.__unicode__()
-                                           + '/' + '.'.join(filename.split('.')[:-1]))\
-           + "." + slugify(filename.split('.')[-1])
+    return "applications/files/" + slugify(instance.owner.__unicode__() + '/' + '.'.join(filename.split('.')[:-1])) + "." + slugify(filename.split('.')[-1]) # noqa E501
 
 
 def project_screenshot(instance, filename):
     """Create URL for getting to screenshot."""
-    return "applications/screenshots/" + slugify(instance.owner.__unicode__()
-                                                 + '/' + '.'.join(filename.split('.')[:-1]))\
-           + "." + slugify(filename.split('.')[-1])
+    return "applications/screenshots/" + slugify(instance.owner.__unicode__() + '/' +'.'.join(filename.split('.')[:-1])) + "." + slugify(filename.split('.')[-1]) # noqa E501
 
 
 # These need to be removed someday; not removed now as it causes an error message
@@ -174,7 +170,7 @@ class ApplicationContext(models.Model):
     def level(self):
         """Deprecated in favor of CMS and should be removed."""
         if self.parent is not None:
-            return self.parent.level()+1
+            return self.parent.level() + 1
         return 1
 
     def __unicode__(self):
