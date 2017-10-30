@@ -4,3 +4,14 @@
 [submodule "static/applications/CSnap-Modules"]
 	path = static/applications/CSnap-Modules
 	url = https://github.com/CSnap/CSnap-Modules
+[submodule "static/CSDT_Single_Page"]
+	path = static/CSDT_Single_Page
+	url = https://github.com/CSnap/CSDT_Single_Page
+	branch = master
+[submodule "static/applications/CScratch-Modules"]
+	path = static/applications/CScratch-Modules
+	url = https://github.com/CSnap/CScratch-Modules
+	branch = master
+[submodule "static/CScratch"]
+	path = static/CScratch
+	url = https://github.com/CSnap/CScratch

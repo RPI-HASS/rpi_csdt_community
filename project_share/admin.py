@@ -8,7 +8,19 @@ from project_share.forms import ApplicationAdminForm
 from project_share.models import (Address, Application, ApplicationCategory,
                                   ApplicationContext, ApplicationDemo,
                                   ApplicationTheme, Approval, Classroom,
-                                  ExtendedUser, FileUpload, Goal, Project)
+                                  ExtendedUser, FileUpload, Goal, Project,
+                                  ExtensionOrder, Extension)
+
+
+class ExtensionOrderInline(admin.TabularInline):
+    model = ExtensionOrder
+    extra = 1
+
+
+class ExtensionAdmin(admin.ModelAdmin):
+    """Enable filters for classrooms and sets the display for projects."""
+
+    list_display = ('name', 'path')
 
 
 class ApplicationAdmin(admin.ModelAdmin):
@@ -18,6 +30,7 @@ class ApplicationAdmin(admin.ModelAdmin):
               'screenshot', 'rankApp')
 
     form = ApplicationAdminForm
+    inlines = (ExtensionOrderInline,)
 
     def save_model(self, request, obj, form, change):
         """Update submodules when applications are updated."""
@@ -127,3 +140,4 @@ admin.site.register(Project, ProjectAdmin)
 admin.site.register(Classroom, ClassroomAdmin)
 admin.site.register(ExtendedUser, UserAdmin)
 admin.site.register(FileUpload)
+admin.site.register(Extension, ExtensionAdmin)

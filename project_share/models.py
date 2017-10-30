@@ -41,16 +41,12 @@ def application_library(instance, filename):
 
 def project_project(instance, filename):
     """Create URL for getting to project."""
-    return "applications/files/" + slugify(instance.owner.__unicode__()
-                                           + '/' + '.'.join(filename.split('.')[:-1]))\
-           + "." + slugify(filename.split('.')[-1])
+    return "applications/files/" + slugify(instance.owner.__unicode__() + '/' + '.'.join(filename.split('.')[:-1])) + "." + slugify(filename.split('.')[-1]) # noqa E501
 
 
 def project_screenshot(instance, filename):
     """Create URL for getting to screenshot."""
-    return "applications/screenshots/" + slugify(instance.owner.__unicode__()
-                                                 + '/' + '.'.join(filename.split('.')[:-1]))\
-           + "." + slugify(filename.split('.')[-1])
+    return "applications/screenshots/" + slugify(instance.owner.__unicode__() + '/' +'.'.join(filename.split('.')[:-1])) + "." + slugify(filename.split('.')[-1]) # noqa E501
 
 
 # These need to be removed someday; not removed now as it causes an error message
@@ -94,6 +90,15 @@ class Approval(models.Model):
         return "%s approval for %s" % (self.project.owner, self.project)
 
 
+class Extension(models.Model):
+    """The object that determines whether a project is viewable to the public."""
+    name = models.CharField(max_length=255, unique=True)
+    path = models.CharField(max_length=255, unique=True)
+
+    def __unicode__(self):
+        return self.name + " has file location: " + self.path
+
+
 class Application(models.Model):
     """The base application for which all projects are based."""
 
@@ -108,13 +113,15 @@ class Application(models.Model):
     more_info_url = models.URLField(null=True, blank=True)
 
     application_type = models.CharField(max_length=5, choices=(
-        ('CSNAP', 'cSnap'),
-        ('BLOCK', 'Blockly/Scratch')))
+        ('CSNAP', 'CSnap'),
+        ('BLOCK', 'C-Scratch'),
+        ('SPA', 'SinglePageApplication')))
     application_file = models.FileField(upload_to=application_application, null=True, blank=True)
 
     featured = models.BooleanField(default=True)
     screenshot = models.ImageField(upload_to="application_screenshot/", null=True)
     rankApp = models.IntegerField(default=100)
+    extensions = models.ManyToManyField(Extension, through='ExtensionOrder')
 
     def get_context(self):
         """return all of the context data for the application."""
@@ -140,6 +147,16 @@ class Application(models.Model):
         return self.name
 
 
+class ExtensionOrder(models.Model):
+    """The object that determines whether a project is viewable to the public."""
+    extension = models.ForeignKey(Extension, on_delete=models.CASCADE)
+    application = models.ForeignKey(Application, on_delete=models.CASCADE)
+    rank = models.IntegerField()
+
+    class Meta:
+        ordering = ('rank',)
+
+
 class ApplicationContext(models.Model):
     """Has been deprecated in favor of CMS and should be removed."""
 
@@ -153,7 +170,7 @@ class ApplicationContext(models.Model):
     def level(self):
         """Deprecated in favor of CMS and should be removed."""
         if self.parent is not None:
-            return self.parent.level()+1
+            return self.parent.level() + 1
         return 1
 
     def __unicode__(self):
