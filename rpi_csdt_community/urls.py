@@ -5,7 +5,6 @@ from django.conf.urls import include, url
 from django.contrib import admin
 from django.views import static
 from django.views.generic import TemplateView
-from django.views.generic.base import RedirectView
 from rest_framework import routers
 
 from rpi_csdt_community.views import About, ReactAppList
@@ -26,7 +25,6 @@ router.register(r'goals', GoalViewSet, base_name='api-goals')
 router.register(r'application', ApplicationViewSet, base_name='api-modules')
 router.register(r'theme', ApplicationThemeViewSet, base_name='api-themes')
 router.register(r'category', ApplicationCategoryViewSet, base_name='api-category')
-
 
 
 urlpatterns = [
