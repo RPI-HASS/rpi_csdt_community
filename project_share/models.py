@@ -215,6 +215,7 @@ class Project(models.Model):
 
     parent = models.ForeignKey('project_share.Project', null=True, blank=True, related_name="children",
                                on_delete=models.SET_NULL)
+    mark = models.CharField(max_length=3, null=True, blank=True)
 
     @staticmethod
     def approved_projects():

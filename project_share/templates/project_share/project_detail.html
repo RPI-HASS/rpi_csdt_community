@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load attachments_tags %}
 {% load thumbnail %}
+{% load comments %}
 
 {% block content %}
     <h2>{{ object.name }}<small> by {{ object.owner }}</small></h2>
@@ -35,5 +36,24 @@
     </ul>
 
     {% endif %}
+    <div id="comment" style="padding-top: 20px;">
+    {% if user.is_authenticated %}
+      {% get_comment_form for project as form %}
+      <form action="{% comment_form_target %}" method="POST">
+        {% csrf_token %}
+        <div class="container row" >{{ form.comment }}</div>
+        <div class="container row" style="display: none;">{{ form.honeypot }}</div>
+        <div class="container row" >{{ form.content_type }}</div>
+        <div class="container row" >{{ form.object_pk }}</div>
+        <div class="container row" >{{ form.timestamp }}</div>
+        <div class="container row" >{{ form.security_hash }}</div>
+        <div class="container row" ><input type="hidden" name="next" value="{% url 'project-detail' pk=object.id %}" /></div>
+        <div class="container row" ><input type="submit" value="Add comment" id="id_submit" /></div>
+      </form>
+    {% else %}
+        <p>Please <a  href="{% url 'account_login' %}">log in</a> to leave a comment.</p>
+    {% endif %}
+  </div>
+    {% render_comment_list for object %}
 
 {% endblock %}
