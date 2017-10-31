@@ -1,5 +1,4 @@
 """Defines the displays for projects, applications, demos, and goals."""
-from allauth.account.adapter import DefaultAccountAdapter
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.forms import UserChangeForm
@@ -10,7 +9,6 @@ from django.db.models import Q
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse, reverse_lazy
-from django.utils.translation import ugettext_lazy as _
 from django.views.generic import ListView, FormView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
@@ -466,11 +464,3 @@ class MyUserChangeForm(UserChangeForm):
     class Meta:
         model = User
         fields = ('email', 'username', 'display_name', 'avatar', 'bio', 'gender', 'race', 'age')
-
-
-class CustomAccountAdapter(DefaultAccountAdapter):
-    def __init__(self, request=None):
-        super(CustomAccountAdapter, self).__init__(request)
-        self.error_messages['email_taken'] = _('A user is already registered with this e-mail address.')
-        self.error_messages['username_taken'] = _('A user with that username already exists.')
-        self.error_messages['unique'] = _('A user with that username already exists.')
