@@ -34,7 +34,7 @@ class UrlTests(StaticLiveServerTestCase):
            url.startswith('//'):
             return
 
-        #ignore mailto links
+        # Ignore mailto links
         if url.startswith('mailto:'):
             return
 
