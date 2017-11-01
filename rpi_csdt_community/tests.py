@@ -34,6 +34,10 @@ class UrlTests(StaticLiveServerTestCase):
            url.startswith('//'):
             return
 
+        #ignore mailto links
+        if url.startswith('mailto:'):
+            return
+
         # Ignore URL that simply point to media...
         if url.startswith(settings.MEDIA_URL):
             return
