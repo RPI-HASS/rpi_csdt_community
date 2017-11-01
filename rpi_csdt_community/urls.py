@@ -38,7 +38,7 @@ urlpatterns = [
     url(r'teams/', include('django_teams.urls')),
     url(r'^questionnaire/', include('django_pre_post.urls')),
     url(r'^accounts/', include('allauth.urls')),
-    url(r'^comments/', include('django_comments_xtd.urls')),
+    url(r'^comments/', include('django_comments.urls')),
     url(r'^blogcomments/', include("comments.urls", namespace='comments')),
     url(r'^news/', include("blogposts.urls", namespace='blogposts')),
     url(r'^about/', About.as_view(), name="about"),

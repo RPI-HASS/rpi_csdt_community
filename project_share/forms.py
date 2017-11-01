@@ -22,7 +22,7 @@ class ProjectForm(ModelForm):
 
     class Meta:
         model = Project
-        exclude = ('owner', 'approved', 'application', 'project', 'screenshot', 'parent')
+        exclude = ('owner', 'approved', 'application', 'project', 'screenshot', 'parent', 'mark', 'comment')
 
 
 class ProjectUnpublishForm(ModelForm):
