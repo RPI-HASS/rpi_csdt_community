@@ -26,18 +26,6 @@
             </div>
         </div>
         <div class="column-right">
-            <h3>Or using a social network...</h3>
-            <p>Please sign in with one
-            of your existing third party accounts. Or, <a href="{{ signup_url }}">sign up</a>
-            for a CSDT Community account and sign in below:</p>
-            <div class="socialaccount_ballot">
-                <ul class="socialaccount_providers">
-                {% include "socialaccount/snippets/provider_list.html" with process="login" %}
-                </ul>
-            </div>
-            {% if form.errors %}
-                <p>{{ form.non_field_errors.as_text }}</p>
-            {% endif %}
         </div>
     </div>
 </form>
