@@ -47,7 +47,7 @@ GitPython==2.1.7
 Markdown==2.6.9
 markdown2==2.3.4
 numpy==1.13.3
-oauthlib==2.0.2
+oauthlib==2.0.6
 Pillow==4.1.0
 psycopg2==2.7.1
 pybbm==0.18.4
