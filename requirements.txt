@@ -35,7 +35,7 @@ django-templatetag-sugar==1.0
 django-twitter-bootstrap==3.3.0
 djangocms-admin-style==1.2.7
 djangocms-file==2.0.2
-djangocms-link==2.1.1
+djangocms-link==2.1.2
 djangocms-picture==2.0.4
 djangocms-text-ckeditor==3.4.0
 djangocms-video==2.0.3
