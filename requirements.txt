@@ -38,7 +38,6 @@ Django-Select2==5.11.1
 django-taggit==0.22.1
 django-taggit-templatetags==0.4.6.dev0
 django-taggit-templatetags2==1.6.1
-django-teams==1.1.1
 django-templatetag-sugar==1.0
 django-treebeard==4.1.2
 django-twitter-bootstrap==3.3.0
@@ -56,7 +55,6 @@ docutils==0.14
 easy-thumbnails==2.5
 futures==3.1.1
 geopy==1.11.0
-gis-csdt==1.0.0
 gitdb2==2.0.3
 GitPython==2.1.7
 idna==2.6
