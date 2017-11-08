@@ -28,7 +28,7 @@ django-registration==2.3
 django-sekizai==0.10.0
 Django-Select2==5.11.1
 django-recaptcha2==1.0.3
-django-taggit==0.22.0
+django-taggit==0.22.1
 django-taggit-templatetags==0.4.6.dev0
 django-taggit-templatetags2==1.6.1
 django-templatetag-sugar==1.0
