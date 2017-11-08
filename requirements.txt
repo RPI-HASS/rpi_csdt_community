@@ -51,7 +51,7 @@ oauthlib==2.0.6
 Pillow==4.3.0
 psycopg2==2.7.3.2
 pybbm==0.18.4
-pytz==2017.2
+pytz==2017.3
 PyYAML==3.12
 requests-oauthlib==0.8.0
 six==1.10.0
