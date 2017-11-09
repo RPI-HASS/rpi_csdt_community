@@ -24,7 +24,7 @@ django-markup==1.2
 django-mptt==0.8.7
 django-pagedown==0.1.1
 django-pipeline==1.6.12
-django-registration==2.2
+django-registration==2.3
 django-sekizai==0.10.0
 Django-Select2==5.8.10
 django-recaptcha2==1.0.3
