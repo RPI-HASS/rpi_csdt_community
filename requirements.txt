@@ -2,7 +2,7 @@ bbcode==1.0.24
 BeautifulSoup==3.2.1
 coverage==4.3.4
 Django==1.10.6
-django-allauth==0.31.0
+django-allauth==0.34.0
 django-analytical==2.2.2
 django-annoying==0.10.3
 django-appconf==1.0.2
