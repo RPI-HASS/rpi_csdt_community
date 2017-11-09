@@ -49,7 +49,7 @@ markdown2==2.3.1
 numpy==1.12.1
 oauthlib==2.0.2
 Pillow==4.1.0
-psycopg2==2.7.1
+psycopg2==2.7.3.2
 pybbm==0.18.4
 pytz==2017.2
 PyYAML==3.12
