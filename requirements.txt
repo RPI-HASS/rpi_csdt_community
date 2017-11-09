@@ -33,7 +33,7 @@ django-taggit-templatetags==0.4.6.dev0
 django-taggit-templatetags2==1.6.1
 django-templatetag-sugar==1.0
 django-twitter-bootstrap==3.3.0
-djangocms-admin-style==1.2.6.2
+djangocms-admin-style==1.2.7
 djangocms-file==2.0.2
 djangocms-link==2.1.1
 djangocms-picture==2.0.4
