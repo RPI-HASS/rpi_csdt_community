@@ -59,7 +59,7 @@ gitdb2==2.0.3
 GitPython==2.1.7
 idna==2.6
 Markdown==2.6.9
-markdown2==2.3.4
+markdown2==2.3.5
 numpy==1.13.3
 oauthlib==2.0.6
 olefile==0.44
