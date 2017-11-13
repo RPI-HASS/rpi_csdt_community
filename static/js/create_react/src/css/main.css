@@ -48,6 +48,7 @@ ul {
 .center-text {
   text-align: center;
   font-size: 1.75rem;
+  min-height: 50px;
 }
 
 .cat-name {
