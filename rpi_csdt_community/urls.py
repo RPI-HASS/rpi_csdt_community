@@ -63,5 +63,5 @@ urlpatterns += [
     url(r'^culture/(?P<path>.*)$', static.serve, {'document_root':
                                                   settings.STATIC_WEBSITE_ROOT}),
     url(r'^about/(?P<path>.*)$', static.serve, {'document_root':
-                                                settings.STATIC_WEBSITE_ROOT}),
+                                                settings.STATIC_WEBSITE_ROOT}, name="about"),
 ]
