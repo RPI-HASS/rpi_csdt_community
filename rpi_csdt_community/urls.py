@@ -41,7 +41,7 @@ urlpatterns = [
     url(r'^comments/', include('django_comments.urls')),
     url(r'^blogcomments/', include("comments.urls", namespace='comments')),
     url(r'^news/', include("blogposts.urls", namespace='blogposts')),
-    url(r'^about/', About.as_view(), name="about"),
+    #url(r'^about/', About.as_view(), name="about"),
     url(r'^attachments/', include('attachments.urls', namespace="attachments")),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^api/', include(router.urls)),
@@ -61,5 +61,7 @@ urlpatterns += [
     url(r'^media/(?P<path>.*)$', static.serve, {'document_root': settings.MEDIA_ROOT, }),
     url(r'^static/(?P<path>.*)$', static.serve, {'document_root': settings.STATIC_ROOT, }),
     url(r'^culture/(?P<path>.*)$', static.serve, {'document_root':
+                                                  settings.STATIC_WEBSITE_ROOT}),
+    url(r'^about/(?P<path>.*)$', static.serve, {'document_root':
                                                   settings.STATIC_WEBSITE_ROOT}),
 ]
