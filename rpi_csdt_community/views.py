@@ -36,7 +36,7 @@ class Home(ListView):
     template_name = "home.html"
 
     def get_queryset(self):
-        queryset = Application.objects.filter(featured=True).order_by('rankApp', 'name')
+        queryset = Application.objects.filter(featured=True).order_by('rankApp', 'name').select_related("screenshot")
         return queryset
 
 

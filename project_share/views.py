@@ -91,7 +91,7 @@ class ApplicationRunDetail(DetailView):
     def render_to_response(self, context, **response_kwargs):
         try:
             context['GOOGLE_ANALYTICS_PROPERTY_ID'] = settings.GOOGLE_ANALYTICS_PROPERTY_ID
-        except:
+        except AttributeError:
             pass
         return super(ApplicationRunDetail, self).render_to_response(context, **response_kwargs)
 
@@ -159,7 +159,7 @@ class ProjectRunDetail(DetailView):
         context['application'] = context['project'].application
         try:
             context['GOOGLE_ANALYTICS_PROPERTY_ID'] = settings.GOOGLE_ANALYTICS_PROPERTY_ID
-        except:
+        except AttributeError:
             pass
         return super(ProjectRunDetail, self).render_to_response(context, **response_kwargs)
 
@@ -261,14 +261,14 @@ class ProjectUnpublish(UpdateView):
             try:
                 approval = Approval.objects.get(project_id=proj.id)
                 approval.delete()
-            except:
+            except:  # noqa: F722
                 pass
 
             try:
                 ownership = Ownership.objects.filter(content_type_id=ContentType.objects.get_for_model(proj)).get(
                     object_id=proj.id)
                 ownership.delete()
-            except:
+            except:  # noqa: F722
                 pass
             return redirect(reverse_lazy('project-unpublish-success'))
         return super(ProjectUnpublish, self).post(request, *args, **kwargs)
@@ -304,7 +304,7 @@ class DemoDetail(DetailView):
         """Set the analytics property."""
         try:
             context['GOOGLE_ANALYTICS_PROPERTY_ID'] = settings.GOOGLE_ANALYTICS_PROPERTY_ID
-        except:
+        except AttributeError:
             pass
         return super(DemoDetail, self).render_to_response(context, **response_kwargs)
 
@@ -357,7 +357,7 @@ class UserDetail(DetailView):
         try:
             queryset = Project.objects.filter(
                 Q(owner=self.object)).filter(Q(approved=True) | Q(owner=self.request.user)).order_by('-id')
-        except:
+        except:  # noqa: F722
             queryset = Project.objects.filter(Q(owner=self.object), Q(approved=True)).order_by('-id')
 
         context['object_list'] = filter_project_query(queryset, self.request)

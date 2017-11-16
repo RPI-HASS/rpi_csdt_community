@@ -351,7 +351,7 @@ USE_CACHE = False
 
 try:
     from local_settings import *  # noqa: F401,F403
-except:
+except ImportError:
     RECAPTCHA_PRIVATE_KEY = 'not a real key'
     RECAPTCHA_PUBLIC_KEY = 'not a real key'
     GOOGLE_API_KEY = None
@@ -367,7 +367,7 @@ if USE_CACHE:
 
 try:
     assert DATABASES['default']['ENGINE'] == 'django.contrib.gis.db.backends.postgis'
-except:
+except AssertionError:
     warnings.warn("Your database is not using the postgis engine")
 try:
     RECAPTCHA_PRIVATE_KEY  # noqa: F405
