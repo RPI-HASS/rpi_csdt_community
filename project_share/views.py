@@ -360,7 +360,7 @@ class UserDetail(DetailView):
         except:  # noqa: F722
             queryset = Project.objects.filter(Q(owner=self.object), Q(approved=True)).order_by('-id').select_related("screenshot")
 
-        context['object_list'] = filter_project_query(queryset, self.request)
+        context['object_list'] = filter_project_query(queryset, self.request).select_related("screenshot")
         application_list = Application.objects.all()
         context['application_list'] = application_list
         context['order'] = self.request.GET.get('orderby')
