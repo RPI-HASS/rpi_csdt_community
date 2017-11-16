@@ -356,9 +356,9 @@ class UserDetail(DetailView):
         """Include define the projects, and allow search"""
         try:
             queryset = Project.objects.filter(
-                Q(owner=self.object)).filter(Q(approved=True) | Q(owner=self.request.user)).order_by('-id').select_related("screenshot")
+                Q(owner=self.object)).filter(Q(approved=True) | Q(owner=self.request.user)).order_by('-id')
         except:  # noqa: F722
-            queryset = Project.objects.filter(Q(owner=self.object), Q(approved=True)).order_by('-id').select_related("screenshot")
+            queryset = Project.objects.filter(Q(owner=self.object), Q(approved=True)).order_by('-id')
 
         context['object_list'] = filter_project_query(queryset, self.request).select_related("screenshot")
         application_list = Application.objects.all()
