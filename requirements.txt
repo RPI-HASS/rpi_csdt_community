@@ -12,11 +12,11 @@ django-bootstrap-static-files==3.0.0
 django-bootstrap3==9.1.0
 django-classy-tags==0.8.0
 django-cms==3.4.5
-django-comments-xtd==2.0.8
+django-comments-xtd==2.0.9
 django-compressor==2.2
 django-contrib-comments==1.8.0
 django-crispy-forms==1.7.0
-django-debug-toolbar==1.8
+django-debug-toolbar==1.9.1
 django-extensions==1.9.7
 django-extra-views==0.9.0
 django-filer==1.3.0
@@ -50,7 +50,7 @@ djangocms-text-ckeditor==3.5.1
 djangocms-video==2.0.4
 djangorestframework==3.7.3
 djangorestframework-csv==2.0.0
-djangorestframework-gis==0.11.2
+djangorestframework-gis==0.12
 docutils==0.14
 easy-thumbnails==2.5
 futures==3.1.1
