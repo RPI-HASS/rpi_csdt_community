@@ -112,7 +112,7 @@ class ProjectList(SearchableListMixin, SortableListMixin, ListView):
     def get_queryset(self):
         """Order projects based on filter or order request settings."""
         queryset = Project.approved_projects()
-        return filter_project_query(queryset, self.request)
+        return filter_project_query(queryset, self.request).select_related("screenshot")
 
     def render_to_response(self, context, **response_kwargs):
         """List all applications for the user to choose to filter by."""
@@ -138,7 +138,7 @@ class ProjectTagList(ProjectList):
 class ProjectDetail(DetailView):
     """Display all the information about a project given owner is correct."""
 
-    queryset = Project.objects.select_related("approval").select_related("owner").select_related("screenshot")
+    queryset = Project.objects.select_related("approval").select_related("owner")
 
     def render_to_response(self, context, **response_kwargs):
         """Check owner or approval."""
@@ -356,9 +356,9 @@ class UserDetail(DetailView):
         """Include define the projects, and allow search"""
         try:
             queryset = Project.objects.filter(
-                Q(owner=self.object)).filter(Q(approved=True) | Q(owner=self.request.user)).order_by('-id')
+                Q(owner=self.object)).filter(Q(approved=True) | Q(owner=self.request.user)).order_by('-id').select_related("screenshot")
         except:  # noqa: F722
-            queryset = Project.objects.filter(Q(owner=self.object), Q(approved=True)).order_by('-id')
+            queryset = Project.objects.filter(Q(owner=self.object), Q(approved=True)).order_by('-id').select_related("screenshot")
 
         context['object_list'] = filter_project_query(queryset, self.request)
         application_list = Application.objects.all()
