@@ -47,10 +47,10 @@ class UrlTests(StaticLiveServerTestCase):
 
         self.assertTrue(response.status_code == 200 or response.status_code == 302,
                         msg="Got code %s on %s" % (response.status_code, url))
-
-        for link in BeautifulSoup(response.content, parseOnlyThese=SoupStrainer('a')):
-            if any('href' in el for el in link.attrs):
-                self.test_all_site_links(link['href'])
+        if hasattr(response, 'content'):
+            for link in BeautifulSoup(response.content, parseOnlyThese=SoupStrainer('a')):
+                if any('href' in el for el in link.attrs):
+                    self.test_all_site_links(link['href'])
 
     """
     # For the time being, this test doesn't serve any purpose
