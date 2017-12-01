@@ -53,7 +53,7 @@ djangorestframework-csv==2.0.0
 djangorestframework-gis==0.12
 docutils==0.14
 easy-thumbnails==2.5
-futures==3.1.1
+futures==3.2.0
 geopy==1.11.0
 gitdb2==2.0.3
 GitPython==2.1.7
