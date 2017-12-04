@@ -16,13 +16,19 @@ class ProjectForm(ModelForm):
 
     def __init__(self, *args, **kwargs):
         user = kwargs.pop('user')
+        classrooms = Team.objects.filter(users=user)
+        kwargs.update(initial={
+            # 'field': 'value'
+            'classroom': classrooms.first()
+        })
         super(ProjectForm, self).__init__(*args, **kwargs)  # populates the post
         # make sure we're only getting the right classrooms
-        self.fields['classroom'].queryset = Team.objects.filter(users=user)
+        self.fields['classroom'].queryset = classrooms
 
     class Meta:
         model = Project
-        exclude = ('owner', 'approved', 'application', 'project', 'screenshot', 'parent', 'mark', 'comment')
+        exclude = ('owner', 'approved', 'when_created', 'when_modified',
+                   'application', 'project', 'screenshot', 'parent', 'mark', 'comment')
 
 
 class ProjectUnpublishForm(ModelForm):
