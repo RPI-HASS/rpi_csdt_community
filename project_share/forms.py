@@ -17,10 +17,11 @@ class ProjectForm(ModelForm):
     def __init__(self, *args, **kwargs):
         user = kwargs.pop('user')
         classrooms = Team.objects.filter(users=user)
-        kwargs.update(initial={
-            # 'field': 'value'
-            'classroom': classrooms.first()
-        })
+        if kwargs['instance'].classroom is None:
+            kwargs.update(initial={
+                # 'field': 'value'
+                'classroom': classrooms.first()
+            })
         super(ProjectForm, self).__init__(*args, **kwargs)  # populates the post
         # make sure we're only getting the right classrooms
         self.fields['classroom'].queryset = classrooms
