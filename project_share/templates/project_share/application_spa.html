@@ -2,9 +2,9 @@
 {% load project_share_tags %}
 {% block content %}
   {% for extension in object.extensions.all %}
-    <base href="{{extension.path}}">
+    <base href="/static/{{extension.path}}">
     {% autoescape off %}
-      {% includestatic 'CSDT_Single_Page/Rhythm Wheels/rhythm_wheels.html'%}
+      {% includestatic extension.path %}
     {% endautoescape %}
     </base>
   {% endfor %}
