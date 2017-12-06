@@ -1,6 +1,11 @@
 {% extends 'base.html' %}
+{% load project_share_tags %}
 {% block content %}
   {% for extension in object.extensions.all %}
-    <iframe src="{{extension.path}}" class="col-xs-12" style="height: 85vh">
+    <base href="{{extension.path}}">
+    {% autoescape off %}
+      {% includestatic 'CSDT_Single_Page/Rhythm Wheels/rhythm_wheels.html'%}
+    {% endautoescape %}
+    </base>
   {% endfor %}
 {% endblock %}
