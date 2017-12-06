@@ -1,9 +1,7 @@
 from django import template
 from django.db.models import Q
-
 from project_share.models import Project
 from django.contrib.staticfiles import finders
-from django.utils.html import escape
 register = template.Library()
 
 
@@ -26,6 +24,7 @@ def includestatic(path, encoding='UTF-8'):
     with open(file_path, "r") as f:
         string = f.read()
         return string
+
 
 register.filter('unrestricted_projects', unrestricted_projects)
 register.filter('get_ownership_object', get_ownership_object)
