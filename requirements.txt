@@ -4,7 +4,7 @@ certifi==2017.11.5
 coverage==4.4.2
 Django==1.11.7
 django-allauth==0.34.0
-django-analytical==2.3.0
+django-analytical==2.4.0
 django-annoying==0.10.3
 django-appconf==1.0.2
 django-attachments==1.1.1
@@ -66,7 +66,7 @@ olefile==0.44
 Pillow==4.3.0
 psycopg2==2.7.3.2
 pybbm==0.19.0
-pycurl==7.43.0
+pycurl==7.43.0.1
 python-dateutil==2.6.1
 python-openid==2.2.5
 pytz==2017.3
