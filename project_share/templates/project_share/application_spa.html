@@ -1,6 +1,10 @@
-{% extends 'base.html' %}
+{% load project_share_tags %}
 {% block content %}
   {% for extension in object.extensions.all %}
-    <iframe src="{{extension.path}}" class="col-xs-12" style="height: 85vh">
+    <base href="/static/{{extension.path}}">
+    {% autoescape off %}
+      {% includestatic extension.path %}
+    {% endautoescape %}
+    </base>
   {% endfor %}
 {% endblock %}
