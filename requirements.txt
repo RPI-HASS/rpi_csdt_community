@@ -39,7 +39,7 @@ django-taggit==0.22.1
 django-taggit-templatetags==0.4.6.dev0
 django-taggit-templatetags2==1.6.1
 django-templatetag-sugar==1.0
-django-treebeard==4.1.2
+django-treebeard==4.2.0
 django-twitter-bootstrap==3.3.0
 djangocms-admin-style==1.2.7
 djangocms-attributes-field==0.3.0
@@ -58,7 +58,7 @@ geopy==1.11.0
 gitdb2==2.0.3
 GitPython==2.1.7
 idna==2.6
-Markdown==2.6.9
+Markdown==2.6.10
 markdown2==2.3.5
 numpy==1.13.3
 oauthlib==2.0.6
