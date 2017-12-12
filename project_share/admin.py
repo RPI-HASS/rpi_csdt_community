@@ -89,7 +89,7 @@ class ProjectAdmin(admin.ModelAdmin):
 
     inlines = [AttachmentInlines, ApprovalInline]
     list_filter = (ClassListFilter,)
-    list_display = ('name', 'owner', 'application', 'classroom', 'approved', 'when_created', 'when_modified',)
+    list_display = ('name', 'owner', 'application', 'classroom', 'approved', 'when_created', 'when_modified', 'parent')
     search_fields = ['owner__username', 'owner__first_name', 'owner__last_name', 'name']
 
     def approve(modeladmin, request, queryset):
