@@ -5,7 +5,7 @@ coverage==4.4.2
 Django==1.11.8
 django-allauth==0.34.0
 django-analytical==2.4.0
-django-annoying==0.10.3
+django-annoying==0.10.4
 django-appconf==1.0.2
 django-attachments==1.1.1
 django-bootstrap-static-files==3.0.0
