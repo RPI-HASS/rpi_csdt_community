@@ -48,7 +48,7 @@ djangocms-link==2.1.2
 djangocms-picture==2.0.6
 djangocms-text-ckeditor==3.5.1
 djangocms-video==2.0.4
-djangorestframework==3.7.3
+djangorestframework==3.7.4
 djangorestframework-csv==2.0.0
 djangorestframework-gis==0.12
 docutils==0.14
