@@ -63,7 +63,7 @@ markdown2==2.3.5
 numpy==1.13.3
 oauthlib==2.0.6
 olefile==0.44
-Pillow==4.3.0
+Pillow==5.0.0
 psycopg2==2.7.3.2
 pybbm==0.19.0
 pycurl==7.43.0.1
