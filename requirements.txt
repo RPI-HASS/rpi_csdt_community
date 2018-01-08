@@ -81,7 +81,7 @@ South==1.0.2
 sqlparse==0.2.4
 typing==3.6.2
 unicodecsv==0.14.1
-Unidecode==0.4.21
+Unidecode==1.0.22
 urllib3==1.22
 webencodings==0.5.1
 git+https://github.com/bartTC/django-attachments.git
