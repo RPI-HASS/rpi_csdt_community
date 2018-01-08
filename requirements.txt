@@ -60,7 +60,7 @@ GitPython==2.1.8
 idna==2.6
 Markdown==2.6.11
 markdown2==2.3.5
-numpy==1.13.3
+numpy==1.14.0
 oauthlib==2.0.6
 olefile==0.44
 Pillow==5.0.0
