@@ -24,7 +24,6 @@
                         <li><a href="{% url 'team-list' %}">Classrooms</a></li>
                         <li><a href="{% url 'blogposts:list' %}">News</a></li>
                         <li><a href="{% url 'about' %}">About</a></li>
-                        <li><a href="{% url 'publications' %}">Publications</a></li>
                         {% if user.is_authenticated %}
                         <li><a href="{% url 'extendeduser-detail' pk=user.id %}">My Profile</a></li>
                         {% endif %}
