@@ -42,6 +42,10 @@ class UrlTests(StaticLiveServerTestCase):
         if url.startswith(settings.MEDIA_URL):
             return
 
+        # Ignore URL that simply point to media...
+        if url.startswith(settings.STATIC_URL):
+            return
+
         # We need the HTTP_REFERER here to get past Django-likes checking
         response = self.client.get(url, **{'HTTP_REFERER': url})
 
