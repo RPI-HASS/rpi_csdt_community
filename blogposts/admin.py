@@ -25,6 +25,11 @@ class PostModelAdmin(admin.ModelAdmin):
     def tag_list(self, obj):
         return u", ".join(o.name for o in Post.tags.all())
 
+    def get_form(self, request, obj=None, **kwargs):
+        form = super(PostModelAdmin, self).get_form(request, obj, **kwargs)
+        form.base_fields['user'].initial = request.user
+        return form
+
     class Meta:
         model = Post
         exclude = ('height_field', 'width_field')
