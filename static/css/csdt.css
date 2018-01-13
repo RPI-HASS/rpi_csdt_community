@@ -1,7 +1,34 @@
 
 
+#svg-logo-color {
+  fill: #d8d8d8;
+  transition: .15s;
+}
+
+.navbar-inverse .navbar-nav>li>a {
+  color: #d8d8d8;
+  transition: .15s;
+}
+
+#svg-box {
+  height: 40px;
+  margin-top: -8px;
+  margin-right: -10px;
+  margin-left: -10px;
+}
+
+.navbar-inverse .navbar-nav>li>a:hover {
+  transition: .25s;
+}
 
 
+
+/* CSDT Logo hover color/animation #661441;*/
+#svg-box:hover #svg-logo-color  {
+    fill: #ffffff;
+    transition: .25s;
+    /* transform: rotate(0.5deg); */
+}
 
 #welcome-logo {
     text-align: center;
@@ -180,6 +207,7 @@
 #toolbar-logo:hover .toolbar-logo-text {
     fill: #ffffff;
 
+
     /* transform: rotate(0.5deg); */
 
 
@@ -268,6 +296,7 @@ nav .btn {
 .navbar-custom .navbar-nav > .active > a, .navbar-nav > .active > a:hover, .navbar-nav > .active > a:focus {
     color: #ffffff;
 	background-color:transparent;
+
 }
 
 /* hover background */
