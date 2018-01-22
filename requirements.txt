@@ -12,7 +12,7 @@ django-bootstrap-static-files==3.0.0
 django-bootstrap3==9.1.0
 django-classy-tags==0.8.0
 django-cms==3.4.5
-django-comments-xtd==2.0.9
+django-comments-xtd==2.0.10
 django-compressor==2.2
 django-contrib-comments==1.8.0
 django-crispy-forms==1.7.0
