@@ -46,7 +46,7 @@ djangocms-attributes-field==0.3.0
 djangocms-file==2.0.2
 djangocms-link==2.1.2
 djangocms-picture==2.0.6
-djangocms-text-ckeditor==3.5.1
+djangocms-text-ckeditor==3.5.3
 djangocms-video==2.0.4
 djangorestframework==3.7.7
 djangorestframework-csv==2.0.0
