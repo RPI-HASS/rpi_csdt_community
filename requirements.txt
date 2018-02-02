@@ -79,7 +79,7 @@ six==1.11.0
 smmap2==2.0.3
 South==1.0.2
 sqlparse==0.2.4
-typing==3.6.2
+typing==3.6.4
 unicodecsv==0.14.1
 Unidecode==1.0.22
 urllib3==1.22
