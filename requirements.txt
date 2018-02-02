@@ -3,7 +3,7 @@ BeautifulSoup==3.2.1
 certifi==2018.1.18
 coverage==4.4.2
 Django==1.11.9
-django-allauth==0.34.0
+django-allauth==0.35.0
 django-analytical==2.4.0
 django-annoying==0.10.4
 django-appconf==1.0.2
