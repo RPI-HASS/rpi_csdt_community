@@ -1,9 +1,29 @@
 {% extends 'base.html' %}
 {% load attachments_tags %}
+{% load thumbnail %}
 
 {% block content %}
+    <h2>{{ object.name }}<small> by {{ object.owner }}</small></h2>
+    <div class="container row">
+        <div class="span4">
+              <a href="{% url 'project-detail' pk=project.id %}"><img src="{% thumbnail object.screenshot.file_path 400x400 crop %}" alt="Screenshot of {{ object.name }}"></a>
+        </div>
+        <div class="span7 lead">
+          {{ object.description }}
+        </div>
+    </div>
+    <a href="{% url 'project-run-detail' pk=object.pk %}" class="btn btn-large btn-primary">Open</a>
+    <a href="{% url 'project-present-detail' pk=object.pk %}" class="btn btn-large btn-info">Open for Presentation</a>
+    {% if object.owner.id == user.id %}
+  		{% if hasApproval %}
+  			<a href="{% url 'project-unpublish' pk=object.pk %}" class="btn btn-large btn-primary">Unpublish</a>
+  		{% else %}
+  			<a href="{% url 'project-delete' pk=object.pk %}" class="btn btn-large btn-primary">Delete</a>
+  		{% endif %}
+  	{% endif %}
+    <div style="margin: 40px;">
+    </div>
     <h3>Editing {{ object }}</h3>
-    <h4><a href="{% url 'project-detail' pk=object.id %}">Preview Project</a></h4>
     <p class="lead">When you are sure everything is how you want it, click publish to publish (down at the bottom) your project<p>
     {% include 'generic_form.html' %}
     {% get_attachments_for object as "attachments_list" %}
@@ -18,7 +38,7 @@
     </ul>
 
     {% attachment_form object %}
-	
+
 	<input type="submit" form="generic_form" name="publish_project" class="btn btn-large btn-primary" value="Publish Project"></input>
 
 {% endblock %}
