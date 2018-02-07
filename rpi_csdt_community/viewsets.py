@@ -18,12 +18,8 @@ from rpi_csdt_community.serializers import (ApplicationCategorySerializer,
                                             ProjectSerializer, TeamSerializer,
                                             UserSerializer)
 
-try:
-    from django.contrib.auth import get_user_model
-except ImportError:  # django < 1.5
-    from django.contrib.auth.models import User
-else:
-    User = get_user_model()
+from django.contrib.auth import get_user_model
+User = get_user_model()
 
 
 class ProjectViewSet(viewsets.ModelViewSet):
@@ -36,7 +32,6 @@ class ProjectViewSet(viewsets.ModelViewSet):
             original_pk = obj.pk
             obj.pk = None
             if original_pk is not None:
-                sys.stdout.write("Updating parent")
                 obj.parent = Project.objects.get(pk=original_pk)
         # If this project is published, create a new one by resetting pk
         if obj.approved:
