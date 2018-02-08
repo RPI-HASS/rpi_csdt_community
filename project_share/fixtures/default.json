@@ -78,7 +78,7 @@
     "name": "Cornrow Curves",
     "codebase_url": "",
     "url": "",
-    "application_type": 1,
+    "application_type": "csnap",
     "class_name": "",
     "version": "2ce62ed",
     "application_file": "applications/cornrow-curves.zip",
