@@ -90,6 +90,28 @@
 },
 {
   "fields": {
+    "name": "Fake Demo",
+    "application": 1,
+    "description": "",
+    "order": 1,
+    "zipfile": "applications/cornrow-curves.zip"
+  },
+  "model": "project_share.applicationdemo",
+  "pk": 1
+},
+{
+  "fields": {
+    "name": "Fake Goal",
+    "description": "",
+    "application": 1,
+    "thumbnail": "applications/cornrow-curves.zip",
+    "image": "applications/cornrow-curves.zip"
+  },
+  "model": "project_share.goal",
+  "pk": 1
+},
+{
+  "fields": {
     "username": "test",
     "first_name": "",
     "last_name": "",
