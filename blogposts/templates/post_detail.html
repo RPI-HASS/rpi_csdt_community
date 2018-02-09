@@ -31,8 +31,8 @@
 
 
 
-{% if instance.user.get_full_name %}
-<p>Author: {{ instance.user.get_full_name }}</p>
+{% if instance.user %}
+<p>Author: {{ instance.user }}</p>
 {% endif %}
 
 
