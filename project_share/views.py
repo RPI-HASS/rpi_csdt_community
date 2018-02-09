@@ -7,26 +7,21 @@ from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import PermissionDenied
 from django.db.models import Q
 from django.http import HttpResponseRedirect
-from django.shortcuts import get_object_or_404, redirect, render
+from django.shortcuts import redirect, render
 from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, FormView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django_teams.models import Ownership
 from extra_views import SearchableListMixin, SortableListMixin
-from taggit.models import Tag
 
-from project_share.forms import (AddressForm, ApprovalForm, ProjectForm,
+from project_share.forms import (ApprovalForm, ProjectForm,
                                  ProjectUnpublishForm)
-from project_share.models import (Address, Application, ApplicationDemo,
+from project_share.models import (Application, ApplicationDemo,
                                   Approval, Project)
 
-try:
-    from django.contrib.auth import get_user_model
-except ImportError:  # django < 1.5
-    from django.contrib.auth.models import User
-else:
-    User = get_user_model()
+from django.contrib.auth import get_user_model
+User = get_user_model()   # NOQA
 
 from . import forms
 
@@ -46,28 +41,6 @@ def filter_project_query(set, request):
     else:
         set = set.order_by("-id")
     return set
-
-
-class RestrictPermissionMixin(object):
-    """Prevent inappropriate access."""
-
-    def dispatch(self, request, *args, **kwargs):
-        """Same keywords and request."""
-        self.kwargs = kwargs
-        self.request = request
-        return super(RestrictPermissionMixin, self).dispatch(request, *args, **kwargs)
-
-    def get_object(self):
-        """Return object is right owner or public, else permision denied."""
-        if hasattr(self, 'object'):
-            return self.object
-        obj = super(RestrictPermissionMixin, self).get_object()
-
-        # If the object doesn't belong to this user and isn't published, throw a error 403
-        if (not obj.approved and obj.owner != self.request.user) and not self.request.user.is_superuser:
-            raise PermissionDenied()
-        self.object = obj
-        return obj
 
 
 class ApplicationList(ListView):
@@ -125,14 +98,6 @@ class ProjectList(SearchableListMixin, SortableListMixin, ListView):
             context['name'] = application_list.get(id=filter_val)
         context['term'] = self.request.GET.get('q')
         return super(ProjectList, self).render_to_response(context, **response_kwargs)
-
-
-class ProjectTagList(ProjectList):
-    """List all the tags of various projects. Not used."""
-
-    def get_queryset(self):
-        self.tag = get_object_or_404(Tag, pk=self.kwargs['tag_pk'])
-        return Project.approved_projects().filter(tags__in=[self.tag])
 
 
 class ProjectDetail(DetailView):
@@ -370,41 +335,6 @@ class UserDetail(DetailView):
             context['name'] = application_list.get(id=filter_val)
         context['term'] = self.request.GET.get('q')
         return super(UserDetail, self).render_to_response(context, **response_kwargs)
-
-
-class AddressCreate(CreateView):
-    """Not used."""
-
-    model = Address
-    form_class = AddressForm
-
-    def form_valid(self, form):
-        """set the teacher who is requesting the creation."""
-        form.instance.teacher = self.request.user
-        return super(AddressCreate, self).form_valid(form)
-
-    def get_success_url(self):
-        """Go to the user page."""
-        return u'/'
-
-
-class AddressUpdate(UpdateView):
-    """Not used."""
-
-    model = Address
-    form_class = AddressForm
-
-    template_name = "project_share/address_form.html"
-
-    def dispatch(self, request, *args, **kwargs):
-        """Only the user can change this."""
-        if(not request.user.id == int(self.kwargs['pk'])):
-            raise PermissionDenied
-        return super(AddressUpdate, self).dispatch(request, *args, **kwargs)
-
-    def get_success_url(self):
-        """Show confirmation."""
-        return reverse('address-confirm')
 
 
 IMAGE_FILE_TYPES = ['png', 'jpg', 'jpeg', 'gif']

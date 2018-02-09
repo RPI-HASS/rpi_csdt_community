@@ -7,34 +7,14 @@ except:
 from comments.forms import CommentForm
 from comments.models import Comment
 import datetime
-from django.contrib import messages
 from django.contrib.contenttypes.models import ContentType
 from django.db.models import Q
 from django.http import HttpResponseRedirect, Http404
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
 from extra_views import SearchableListMixin, SortableListMixin
 from django.views.generic import ListView
-from .forms import PostForm
 from .models import Post
-
-
-def post_create(request):
-    if not request.user.is_staff or not request.user.is_superuser:
-        raise Http404
-
-    form = PostForm(request.POST or None, request.FILES or None)
-    if form.is_valid():
-        instance = form.save(commit=False)
-        instance.user = request.user
-        instance.save()
-        # message success
-        messages.success(request, "Successfully Created")
-        return HttpResponseRedirect(instance.get_absolute_url())
-    context = {
-        "form": form,
-    }
-    return render(request, "post_form.html", context)
 
 
 def post_detail(request, slug=None):
@@ -145,31 +125,3 @@ class post_list(SearchableListMixin, SortableListMixin, ListView):
         context['now'] = now
         context['list_events'] = get_calendar(self.object_list)
         return super(post_list, self).render_to_response(context, **response_kwargs)
-
-
-def post_update(request, slug=None):
-    if not request.user.is_staff or not request.user.is_superuser:
-        raise Http404
-    instance = get_object_or_404(Post, slug=slug)
-    form = PostForm(request.POST or None, request.FILES or None, instance=instance)
-    if form.is_valid():
-        instance = form.save(commit=False)
-        instance.save()
-        messages.success(request, "<a href='#'>Item</a> Saved", extra_tags='html_safe')
-        return HttpResponseRedirect(instance.get_absolute_url())
-
-    context = {
-        "title": instance.title,
-        "instance": instance,
-        "form": form,
-    }
-    return render(request, "post_form.html", context)
-
-
-def post_delete(request, slug=None):
-    if not request.user.is_staff or not request.user.is_superuser:
-        raise Http404
-    instance = get_object_or_404(Post, slug=slug)
-    instance.delete()
-    messages.success(request, "Successfully deleted")
-    return redirect("blogposts:list")

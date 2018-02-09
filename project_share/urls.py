@@ -2,18 +2,16 @@
 from django.conf.urls import url
 from django.views.generic.base import TemplateView
 
-from project_share.views import (AddressCreate, AddressUpdate,
-                                 ApplicationDetail, ApplicationList,
+from project_share.views import (ApplicationDetail, ApplicationList,
                                  ApplicationRunDetail, ApprovalCreate,
                                  DemoDetail, DemoList, ProjectCreate,
                                  ProjectDelete, ProjectDetail, ProjectList,
                                  ProjectPresentDetail, ProjectRunDetail,
-                                 ProjectTagList, ProjectUnpublish,
-                                 ProjectUpdate, UserDetail, ProfileUpdate)
+                                 ProjectUnpublish, ProjectUpdate,
+                                 UserDetail, ProfileUpdate)
 
 urlpatterns = [
     url(r'^projects/$', ProjectList.as_view(), name='project-list'),
-    url(r'^projects/tag/(?P<tag_pk>\d+)/$', ProjectTagList.as_view(), name='project-tag-list'),
     url(r'^projects/(?P<pk>\d+)/$', ProjectDetail.as_view(), name='project-detail'),
     url(r'^projects/(?P<pk>\d+)/run$', ProjectRunDetail.as_view(), name='project-run-detail'),
     url(r'^projects/(?P<pk>\d+)/present$', ProjectPresentDetail.as_view(), name='project-present-detail'),
@@ -41,9 +39,4 @@ urlpatterns = [
 
     url(r'users/(?P<pk>\d+)$', UserDetail.as_view(), name='extendeduser-detail'),
     url(r'users/edit/(?P<pk>\d+)$', ProfileUpdate.as_view(), name='extendeduser-update'),
-
-    url(r'address/create$', AddressCreate.as_view(), name='address-create'),
-    url(r'address/confirm$', TemplateView.as_view(template_name='project_share/address_confirm.html'),
-        name='address-confirm'),
-    url(r'address/(?P<pk>.*)$', AddressUpdate.as_view(), name='address-update'),
 ]
