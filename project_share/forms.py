@@ -5,7 +5,7 @@ from django_teams.models import Team, TeamStatus
 from snowpenguin.django.recaptcha2.fields import ReCaptchaField
 from snowpenguin.django.recaptcha2.widgets import ReCaptchaWidget
 
-from project_share.models import (Address, Application, ApplicationCategory,
+from project_share.models import (Application, ApplicationCategory,
                                   Approval, Project)
 
 from .models import ExtendedUser
@@ -77,14 +77,6 @@ class ExtendedSignupForm(forms.Form):
         team = self.cleaned_data['classroom']
         if team is not None:
             TeamStatus(team=Team.objects.get(pk=team), role=1, user=n_user, comment='just signed up').save()
-
-
-class AddressForm(ModelForm):
-    """Not used."""
-
-    class Meta:
-        model = Address
-        exclude = ('teacher',)
 
 
 class ApplicationAdminForm(ModelForm):
