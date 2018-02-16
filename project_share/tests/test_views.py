@@ -2,7 +2,6 @@ from django.contrib.auth import get_user_model
 # from rest_framework.test import APITestCase, APITransactionTestCase
 from django.test import LiveServerTestCase
 from rest_framework.test import APIClient
-from project_share.views import MyUserChangeForm
 
 User = get_user_model()
 
@@ -41,7 +40,7 @@ class ProjectTests(LiveServerTestCase):
         response = self.client.get(url, **{'HTTP_REFERER': url})
         self.assertTrue(response.status_code == 300 or response.status_code == 200,
                         msg="Got code %s on %s" % (response.status_code, url))
-        response = self.client.post(url, {'publish_project':'publish_project'})
+        response = self.client.post(url, {'publish_project': 'publish_project'})
         self.assertTrue(response.status_code == 302 or response.status_code == 200,
                         msg="Got code %s on %s" % (response.status_code, url))
         url = '/projects/1/unpublish'
@@ -71,7 +70,9 @@ class ProjectTests(LiveServerTestCase):
         self.assertTrue(response.status_code == 300 or response.status_code == 200,
                         msg="Got code %s on %s" % (response.status_code, url))
         self.user = User.objects.get(username="test")
-        data = {u'username': [u'test'], u'bio': [u'I am the best.'], u'display_name': [u'test'], u'gender': [u'test'], u'age': [u'1'], u'race': [u'test'], u'avatar': [u''], u'email': [u'test@test.com']}
+        data = {u'username': [u'test'], u'bio': [u'I am the best.'],
+                u'display_name': [u'test'], u'gender': [u'test'], u'age': [u'1'],
+                u'race': [u'test'], u'avatar': [u''], u'email': [u'test@test.com']}
         response = self.client.post(url, data)
         self.assertTrue(response.status_code == 302,
                         msg="Got code %s on %s" % (response.status_code, url))
