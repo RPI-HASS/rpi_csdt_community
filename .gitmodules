@@ -15,3 +15,6 @@
 [submodule "static/CScratch"]
 	path = static/CScratch
 	url = https://github.com/CSnap/CScratch
+[submodule "static/fracexpl"]
+	path = static/fracexpl
+	url = https://github.com/CSDTs/fracexpl
