@@ -4,6 +4,7 @@ from rest_framework.test import APIClient
 from blogposts.models import Post
 from comments.models import Comment
 from blogposts.views import get_calendar
+from blogposts.forms import PostForm
 
 User = get_user_model()
 
@@ -59,6 +60,10 @@ class tests(LiveServerTestCase):
     def test_blog_views(self):
         self.user = User.objects.get(username="test")
         self.assertTrue(self.client.login(username='test', password='test'))
+        url = '/blogcomments/1000/'
+        response = self.client.get(url, **{'HTTP_REFERER': url})
+        self.assertTrue(response.status_code == 404,
+                        msg="Got code %s on %s" % (response.status_code, url))
         self.post = Post.objects.create(user=self.user, title="example", slug="example", content="example",
                                         publish="2018-10-08")
         self.assertTrue(self.client.login(username='test', password='test'))
@@ -72,4 +77,15 @@ class tests(LiveServerTestCase):
         self.assertTrue(len(event_calendar) == 1, 
             msg="Got length %d on get_calendar" %(len(event_calendar)))
 
-
+    def test_blog_forms(self):
+        form = PostForm({
+            "title": "example",
+            "content": "example",
+            "image": "",
+            "draft": "example",
+            "publish": "2018-02-20",
+            })
+        self.assertTrue(form.is_valid())
+        post = form.save()
+        self.assertTrue(post.title == "example")
+        self.assertTrue(post.content == "example")
