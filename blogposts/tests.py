@@ -32,14 +32,27 @@ class tests(LiveServerTestCase):
         self.assertTrue(self.client.login(username='test', password='test'))
         self.post = Post.objects.create(user=self.user, title="example", slug="example", content="example",
                                         publish="2018-02-08")
+        self.post = Post.objects.create(user=self.user, title="example2", slug="example2", content="example2",
+                                        publish="2018-02-08")
+        self.post = Post.objects.create(user=self.user, title="example3", slug="example3", content="example3",
+                                        publish="2018-01-08")
+        self.post = Post.objects.create(user=self.user, title="example4", slug="example4", content="example4",
+                                        publish="2017-02-08")
         self.assertTrue(self.client.login(username='test', password='test'))
+        url = '/news/'
+        response = self.client.get(url, **{'HTTP_REFERER': url})
+        self.assertTrue(response.status_code == 300 or response.status_code == 200,
+                        msg="Got code %s on %s" % (response.status_code, url))
+        url = '/news/?tag=Events'
+        response = self.client.get(url, **{'HTTP_REFERER': url})
+        self.assertTrue(response.status_code == 300 or response.status_code == 200,
+                        msg="Got code %s on %s" % (response.status_code, url))
         url = '/news/example/'
         response = self.client.get(url, **{'HTTP_REFERER': url})
         self.assertTrue(response.status_code == 300 or response.status_code == 200,
                         msg="Got code %s on %s" % (response.status_code, url))
         response = self.client.post(url, {'content_type': 'post', 'object_id': 1,
-                                          'content': 'hello'},
-                                    content_type="application/x-www-form-urlencoded")
+                                          'content': 'hello'})
         self.assertTrue(response.status_code == 302 or response.status_code == 200,
                         msg="Got code %s on %s" % (response.status_code, url))
         Comment.objects.create(user=self.user, content_type=self.post.get_content_type, object_id=1, content="example")
@@ -54,6 +67,6 @@ class tests(LiveServerTestCase):
         response = self.client.get(url, **{'HTTP_REFERER': url})
         self.assertTrue(response.status_code == 300 or response.status_code == 200,
                         msg="Got code %s on %s" % (response.status_code, url))
-        response = self.client.post(url, response.content, content_type="application/x-www-form-urlencoded")
+        response = self.client.post(url, {})
         self.assertTrue(response.status_code == 302 or response.status_code == 200,
                         msg="Got code %s on %s" % (response.status_code, url))
