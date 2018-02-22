@@ -40,15 +40,15 @@ class ProjectTests(LiveServerTestCase):
         response = self.client.get(url, **{'HTTP_REFERER': url})
         self.assertTrue(response.status_code == 300 or response.status_code == 200,
                         msg="Got code %s on %s" % (response.status_code, url))
-        response = self.client.post(url, response.content, content_type="application/x-www-form-urlencoded")
-        self.assertTrue(response.status_code == 300 or response.status_code == 200,
+        response = self.client.post(url, {'publish_project': 'publish_project'})
+        self.assertTrue(response.status_code == 302 or response.status_code == 200,
                         msg="Got code %s on %s" % (response.status_code, url))
         url = '/projects/1/unpublish'
         response = self.client.get(url, **{'HTTP_REFERER': url})
-        self.assertTrue(response.status_code == 300 or response.status_code == 200,
+        self.assertTrue(response.status_code == 200,
                         msg="Got code %s on %s" % (response.status_code, url))
-        response = self.client.post(url, {'Unpublish': 'true'}, content_type="application/x-www-form-urlencoded")
-        self.assertTrue(response.status_code == 300 or response.status_code == 200,
+        response = self.client.post(url, {'Unpublish': 'Unpublish'})
+        self.assertTrue(response.status_code == 302,
                         msg="Got code %s on %s" % (response.status_code, url))
         url = '/projects/1/delete'
         response = self.client.get(url, **{'HTTP_REFERER': url})
@@ -68,6 +68,13 @@ class ProjectTests(LiveServerTestCase):
         url = '/users/edit/1'
         response = self.client.get(url, **{'HTTP_REFERER': url})
         self.assertTrue(response.status_code == 300 or response.status_code == 200,
+                        msg="Got code %s on %s" % (response.status_code, url))
+        self.user = User.objects.get(username="test")
+        data = {u'username': [u'test'], u'bio': [u'I am the best.'],
+                u'display_name': [u'test'], u'gender': [u'test'], u'age': [u'1'],
+                u'race': [u'test'], u'avatar': [u''], u'email': [u'test@test.com']}
+        response = self.client.post(url, data)
+        self.assertTrue(response.status_code == 302,
                         msg="Got code %s on %s" % (response.status_code, url))
 
     def test_application_view(self):
