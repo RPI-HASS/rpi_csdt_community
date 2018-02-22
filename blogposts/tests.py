@@ -3,6 +3,7 @@ from django.test import LiveServerTestCase
 from rest_framework.test import APIClient
 from blogposts.models import Post
 from comments.models import Comment
+from blogposts.forms import PostForm
 
 User = get_user_model()
 
@@ -50,8 +51,7 @@ class tests(LiveServerTestCase):
         response = self.client.get(url, **{'HTTP_REFERER': url})
         self.assertTrue(response.status_code == 300 or response.status_code == 200,
                         msg="Got code %s on %s" % (response.status_code, url))
-        response = self.client.post(url, {'content_type': 'post', 'object_id': 1,
-                                          'content': 'hello'})
+        response = self.client.post(url, {'content_type': 'post', 'object_id': 1,'content': 'hello'})
         self.assertTrue(response.status_code == 302 or response.status_code == 200,
                         msg="Got code %s on %s" % (response.status_code, url))
         Comment.objects.create(user=self.user, content_type=self.post.get_content_type, object_id=1, content="example")
@@ -78,7 +78,6 @@ class tests(LiveServerTestCase):
         response = self.client.post(url, {})
         self.assertTrue(response.status_code == 302 or response.status_code == 200,
                         msg="Got code %s on %s" % (response.status_code, url))
-
 
     def test_blog_forms(self):
         form = PostForm({
@@ -110,6 +109,3 @@ class tests(LiveServerTestCase):
         self.client.logout()
         response = self.client.get(url, **{'HTTP_REFERER': url})
         self.assertTrue(response.status_code == 404, msg="Got code %s on %s" % (response.status_code, url))
-        event_calendar = get_calendar([self.post])
-        self.assertTrue(len(event_calendar) == 1, 
-            msg="Got length %d on get_calendar" %(len(event_calendar)))
