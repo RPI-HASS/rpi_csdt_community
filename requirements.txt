@@ -1,8 +1,8 @@
-bbcode==1.0.27
+bbcode==1.0.28
 BeautifulSoup==3.2.1
 certifi==2018.1.18
-coverage==4.5
-Django==1.11.9
+coverage==4.5.1
+Django==1.11.10
 django-allauth==0.35.0
 django-analytical==2.4.0
 django-annoying==0.10.4
