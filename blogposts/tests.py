@@ -101,7 +101,7 @@ class tests(LiveServerTestCase):
             "image": "",
             "draft": "formtest",
             "publish": "2018-02-20",
-            })
+        })
         self.assertTrue(form.is_valid())
         post = form.save()
         self.assertTrue(post.title == "formtest")
