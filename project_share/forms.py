@@ -15,16 +15,19 @@ class ProjectForm(ModelForm):
     """Form for project updating / creation."""
 
     def __init__(self, *args, **kwargs):
-        user = kwargs.pop('user')
-        classrooms = Team.objects.filter(users=user)
-        if kwargs['instance'].classroom is None:
-            kwargs.update(initial={
-                # 'field': 'value'
-                'classroom': classrooms.first()
-            })
+        classrooms = None
+        if 'user' in kwargs:
+            user = kwargs.pop('user')
+            classrooms = Team.objects.filter(users=user)
+            if kwargs['instance'].classroom is None:
+                kwargs.update(initial={
+                    # 'field': 'value'
+                    'classroom': classrooms.first()
+                })
         super(ProjectForm, self).__init__(*args, **kwargs)  # populates the post
         # make sure we're only getting the right classrooms
-        self.fields['classroom'].queryset = classrooms
+        if classrooms is not None:
+            self.fields['classroom'].queryset = classrooms
 
     class Meta:
         model = Project
