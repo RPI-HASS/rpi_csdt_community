@@ -7,7 +7,7 @@ from django.utils.translation import ugettext_lazy as _
 from project_share.forms import ApplicationAdminForm
 from project_share.models import (Address, Application, ApplicationCategory,
                                   ApplicationContext, ApplicationDemo,
-                                  ApplicationTheme, Approval, Classroom,
+                                  ApplicationTheme, Approval,
                                   ExtendedUser, FileUpload, Goal, Project,
                                   ExtensionOrder, Extension)
 

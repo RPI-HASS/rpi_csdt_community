@@ -80,7 +80,7 @@ class ProjectTests(LiveServerTestCase):
             self.assertTrue(response.status_code == 302,
                             msg="Got code %s on %s" % (response.status_code, url))
         self.superUser = User.objects.create_superuser(username="test2", password='test2')
-        self.assertTrue(self.superUser.is_superuser) 
+        self.assertTrue(self.superUser.is_superuser)
 
     def test_application_view(self):
         """update your profile"""

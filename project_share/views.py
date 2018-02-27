@@ -1,13 +1,12 @@
 """Defines the displays for projects, applications, demos, and goals."""
 from django.conf import settings
-from django.contrib import messages
 from django.contrib.auth.forms import UserChangeForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import PermissionDenied
 from django.db.models import Q
 from django.http import HttpResponseRedirect
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect
 from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, FormView
 from django.views.generic.detail import DetailView

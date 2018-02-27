@@ -24,7 +24,9 @@ class ProjectTests(LiveServerTestCase):
 
     def setUp(self):
         self.client = APIClient()
-        self.user = User.objects.create_superuser(username='adminTest', email='adminTest@test.test', password='adminTest')
+        self.user = User.objects.create_superuser(username='adminTest',
+                                                  email='adminTest@test.test',
+                                                  password='adminTest')
         self.assertTrue(self.client.login(username='adminTest', password='adminTest'))
 
     def test_project_views(self):
