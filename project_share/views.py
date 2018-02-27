@@ -1,13 +1,12 @@
 """Defines the displays for projects, applications, demos, and goals."""
 from django.conf import settings
-from django.contrib import messages
 from django.contrib.auth.forms import UserChangeForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import PermissionDenied
 from django.db.models import Q
 from django.http import HttpResponseRedirect
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect
 from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, FormView
 from django.views.generic.detail import DetailView
@@ -135,28 +134,6 @@ class ProjectPresentDetail(ProjectRunDetail):
     def render_to_response(self, context, **response_kwargs):
         context['present'] = True
         return super(ProjectPresentDetail, self).render_to_response(context, **response_kwargs)
-
-
-class ProjectCreate(CreateView):
-    """Simple create view but sets owner and returns to project when done."""
-
-    model = Project
-    form_class = ProjectForm
-
-    def get_success_url(self):
-        """Return to project when done."""
-        return reverse('project-update', kwargs={'pk': self.object.id})
-
-    def dispatch(self, request, *args, **kwargs):
-        """Keep everything and create."""
-        self.kwargs = kwargs
-        self.request = request
-        return super(ProjectCreate, self).dispatch(request, *args, **kwargs)
-
-    def form_valid(self, form):
-        """Owner is project creator."""
-        form.instance.owner = self.request.user
-        return super(ProjectCreate, self).form_valid(form)
 
 
 class ProjectUpdate(UpdateView):
@@ -337,9 +314,6 @@ class UserDetail(DetailView):
         return super(UserDetail, self).render_to_response(context, **response_kwargs)
 
 
-IMAGE_FILE_TYPES = ['png', 'jpg', 'jpeg', 'gif']
-
-
 class ProfileUpdate(LoginRequiredMixin, DetailView, FormView):
     template_name = 'project_share/user_update.html'
     form_class = forms.ProfileForm
@@ -371,18 +345,10 @@ class ProfileUpdate(LoginRequiredMixin, DetailView, FormView):
             profile = form.save(commit=False)
             if request.FILES:
                 profile.avatar = request.FILES['avatar']
-                file_type = profile.avatar.url.split('.')[-1]
-                file_type = file_type.lower()
-                if file_type not in IMAGE_FILE_TYPES:
-                    profile.avatar = None
-                    messages.warning(request, "Avatar must be in jpg, jpeg, gif, or png format")
-                    return render(request, "project_share/user_detail.html",
-                                  {'object': self.request.user, 'form': form})
             profile.save()
             form.save()
             return self.form_valid(form)
         else:
-            form = MyUserChangeForm(instance=request.user)
             return self.form_invalid(form)
 
 
