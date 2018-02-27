@@ -4,7 +4,7 @@ from django.views.generic.base import TemplateView
 
 from project_share.views import (ApplicationDetail, ApplicationList,
                                  ApplicationRunDetail, ApprovalCreate,
-                                 DemoDetail, DemoList, ProjectCreate,
+                                 DemoDetail, DemoList,
                                  ProjectDelete, ProjectDetail, ProjectList,
                                  ProjectPresentDetail, ProjectRunDetail,
                                  ProjectUnpublish, ProjectUpdate,
@@ -15,7 +15,6 @@ urlpatterns = [
     url(r'^projects/(?P<pk>\d+)/$', ProjectDetail.as_view(), name='project-detail'),
     url(r'^projects/(?P<pk>\d+)/run$', ProjectRunDetail.as_view(), name='project-run-detail'),
     url(r'^projects/(?P<pk>\d+)/present$', ProjectPresentDetail.as_view(), name='project-present-detail'),
-    url(r'^projects/create$', ProjectCreate.as_view(), name='project-create'),
     url(r'^projects/(?P<pk>\d+)/edit$', ProjectUpdate.as_view(), name='project-update'),
     url(r'^projects/(?P<pk>\d+)/delete$', ProjectDelete.as_view(), name='project-delete'),
     url(r'^projects/(?P<pk>\d+)/unpublish$', ProjectUnpublish.as_view(), name='project-unpublish'),

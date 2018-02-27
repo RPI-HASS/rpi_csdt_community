@@ -10,10 +10,14 @@ from taggit.managers import TaggableManager
 from django.template.defaultfilters import slugify
 from django.utils import timezone
 from django_comments.moderation import CommentModerator, moderator
+from django.core.validators import validate_image_file_extension
 
 import os
 
 from . import imglib
+
+
+IMAGE_FILE_TYPES = ['png', 'jpg', 'jpeg', 'gif']
 
 
 def application_application(instance, filename):
@@ -65,7 +69,6 @@ class AutoDateTimeField(models.DateTimeField):
 
     def pre_save(self, model_instance, add):
         return timezone.now()
-
 
 class Classroom(models.Model):
     """This class has been deprecated for teams and should be removed."""
@@ -297,7 +300,7 @@ class ExtendedUser(AbstractUser):
     username = models.CharField(max_length=40, unique=True)
     display_name = models.CharField(max_length=70, default="", blank=True)
     bio = models.CharField(max_length=240, blank=True, default="")
-    avatar = FileField(blank=True, null=True, upload_to=my_awesome_upload_function)
+    avatar = FileField(blank=True, null=True, validators=[validate_image_file_extension], upload_to=my_awesome_upload_function)
     date_joined = models.DateTimeField(default=timezone.now)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)

@@ -107,20 +107,6 @@ class ApprovalAdmin(admin.ModelAdmin):
     pass
 
 
-class ClassroomAdmin(admin.ModelAdmin):
-    """Deprecated, should be removed."""
-
-    # exclude = ('teacher',)
-    filter_horizontal = ('students',)
-
-    def formfield_for_foreignkey(self, db_field, request, **kwargs):
-        """Deprecated, should be removed."""
-        if db_field.name == 'teacher':
-            kwargs['initial'] = request.user.id
-            return db_field.formfield(**kwargs)
-        return super(ClassroomAdmin, self).formfield_for_foreignkey(db_field, request, **kwargs)
-
-
 class GoalAdmin(admin.ModelAdmin):
     """Goals merely need to display name and app."""
 
@@ -136,8 +122,6 @@ admin.site.register(ApplicationCategory)
 admin.site.register(Goal, GoalAdmin)
 admin.site.register(Address)
 admin.site.register(Project, ProjectAdmin)
-# admin.site.register(Approval, ApprovalAdmin)
-admin.site.register(Classroom, ClassroomAdmin)
 admin.site.register(ExtendedUser, UserAdmin)
 admin.site.register(FileUpload)
 admin.site.register(Extension, ExtensionAdmin)
