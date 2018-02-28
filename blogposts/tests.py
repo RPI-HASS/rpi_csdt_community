@@ -63,7 +63,10 @@ class tests(LiveServerTestCase):
         response = self.client.get(url, **{'HTTP_REFERER': url})
         self.assertTrue(response.status_code == 300 or response.status_code == 200,
                         msg="Got code %s on %s" % (response.status_code, url))
-        response = self.client.post(url, {'content': 'example99', 'parent_id': 1, 'object_id': 1, 'content_type': 'post'})
+        response = self.client.post(url, {'content': 'example99',
+                                          'parent_id': 1,
+                                          'object_id': 1,
+                                          'content_type': 'post'})
         self.assertTrue(response.status_code == 302 or response.status_code == 200,
                         msg="Got code %s on %s" % (response.status_code, url))
         url = '/blogcomments/1/delete/'
