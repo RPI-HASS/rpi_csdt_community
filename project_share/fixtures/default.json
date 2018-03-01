@@ -90,6 +90,26 @@
 },
 {
   "fields": {
+    "application": 1,
+    "parent": null,
+    "title": "context1",
+    "html_data": ""
+  },
+  "model": "project_share.ApplicationContext",
+  "pk": 1
+},
+{
+  "fields": {
+    "application": 1,
+    "parent": 1,
+    "title": "context2",
+    "html_data": ""
+  },
+  "model": "project_share.ApplicationContext",
+  "pk": 2
+},
+{
+  "fields": {
     "username": "test",
     "first_name": "",
     "last_name": "",

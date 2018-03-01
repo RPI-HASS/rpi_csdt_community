@@ -116,7 +116,6 @@ class post_list(SearchableListMixin, SortableListMixin, ListView):
     def render_to_response(self, context, **response_kwargs):
         available_tags = Post.tags.most_common().order_by("rank")
         selected_tags = self.request.GET.get('tag')
-        print(selected_tags)
         now = datetime.datetime.now()
         today = timezone.now().date()
         context['today'] = today
