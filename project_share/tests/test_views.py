@@ -89,3 +89,7 @@ class ProjectTests(LiveServerTestCase):
         response = self.client.get(url, **{'HTTP_REFERER': url})
         self.assertTrue(response.status_code == 300 or response.status_code == 200,
                         msg="Got code %s on %s" % (response.status_code, url))
+        url = '/applications/1'
+        response = self.client.get(url, **{'HTTP_REFERER': url})
+        self.assertTrue(response.status_code == 300 or response.status_code == 200,
+                        msg="Got code %s on %s" % (response.status_code, url))

@@ -2,7 +2,7 @@ bbcode==1.0.28
 BeautifulSoup==3.2.1
 certifi==2018.1.18
 coverage==4.5.1
-Django==1.11.10
+Django==1.11.11 # pyup: < 2.0.0 until 2020-04-01
 django-allauth==0.35.0
 django-analytical==2.4.0
 django-annoying==0.10.4
@@ -11,14 +11,14 @@ django-attachments==1.3
 django-bootstrap-static-files==3.0.0
 django-bootstrap3==9.1.0
 django-classy-tags==0.8.0
-django-cms==3.5.0
+django-cms==3.5.1
 django-comments-xtd==2.1.0
 django-compressor==2.2
 django-contrib-comments==1.8.0
-django-crispy-forms==1.7.0
+django-crispy-forms==1.7.1
 django-debug-toolbar==1.9.1
 django-extensions==2.0.0
-django-extra-views==0.9.0
+django-extra-views==0.10.0
 django-filer==1.3.0
 django-formtools==2.1
 django-jquery==3.1.0
