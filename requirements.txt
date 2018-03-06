@@ -15,7 +15,7 @@ django-cms==3.5.1
 django-comments-xtd==2.1.0
 django-compressor==2.2
 django-contrib-comments==1.8.0
-django-crispy-forms==1.7.0
+django-crispy-forms==1.7.1
 django-debug-toolbar==1.9.1
 django-extensions==2.0.0
 django-extra-views==0.10.0
