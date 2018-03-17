@@ -26,53 +26,8 @@
                 <th>Your status</th>
             </tr>
         </thead>
-        {% if user.is_authenticated %}
-          {% for object in object_list %}
-
-            {% with ts=object|get_user_status:user %}
-              {% if ts.role == 20 %}
-                {% include "django_teams/_table.html" %}
-
-              {% endif %}
-            {% endwith %}
-          {% endfor %}
-          {% for object in object_list %}
-
-            {% with ts=object|get_user_status:user %}
-              {% if ts.role == 10 %}
-                {% include "django_teams/_table.html" %}
-
-              {% endif %}
-            {% endwith %}
-          {% endfor %}
-          {% for object in object_list %}
-
-            {% with ts=object|get_user_status:user %}
-              {% if ts.role == 1 %}
-                {% include "django_teams/_table.html" %}
-
-              {% endif %}
-            {% endwith %}
-          {% endfor %}
-        {% endif %}
-        {% if user.is_anonymous %}
-          {% for object in object_list %}
-            {% include "django_teams/_table.html" %}
-
-          {% endfor %}
-        {% else %}
-          {% for object in object_list %}
-
-            {% with ts=object|get_user_status:user %}
-
-              {% if not ts.role == 10 and not ts.role == 20 and not ts.role == 1 %}
-
-                {% include "django_teams/_table.html" %}
-
-              {% endif %}
-            {% endwith %}
-
-          {% endfor %}
-        {% endif %}
+        {% for object in object_list %}
+              {% include "django_teams/_table.html" %}
+        {% endfor %}
     </table>
 {% endblock %}

@@ -1,6 +1,10 @@
 {% extends 'base.html' %}
 {% load teams %}
 
+{% block page-header %}
+<h1>{{ object }} <small>admin page, <a href="{% url 'team-info-edit' pk=object.pk %}">change name</a></small></h1>
+<p class="lead">{% if object.description %}{{ object.description }}{% endif %}</p>
+{% endblock %}
 
 {% block extra_head %}
     <style>
@@ -17,10 +21,13 @@
 {{ block.super }}
     <script>
         var toggleSelected = function(selectId, objectId) {
+            console.log("Changing object " + selectId);
             var selectObject = $('#'+selectId+'_'+objectId);
+            selectObject.toggleClass('active');
             var values = $("#"+selectId).val();
             if(values == null || values == "")
                 values = [];
+            console.log(values);
             if(values.indexOf(objectId) > -1) {
                 values.splice(values.indexOf(objectId), 1);
             } else {
@@ -28,17 +35,13 @@
             }
 
             $("#"+selectId).val(values);
+            console.log(values);
         };
     </script>
 {% endblock %}
 
-
-
 {% block content %}
 
-<h1>{{ object }} <small>admin page</small></h1>
-<p>Description: {% if object.description %}{{ object.description }}{% endif %}</p>
-<a href="{% url 'team-info-edit' pk=object.pk %}">Edit Name and Description</a>
     <form class="form-horizontal" method="post" action="{% url 'team-edit' pk=object.pk %}">
 
     {% for f in form %}
@@ -56,7 +59,7 @@
             <div class="user-list row">
                 {% for object in f.queryset %}
                     <div class="col-sm-6 col-md-2">
-                    <input type="checkbox"  style="width:30px; height:30px" id="{{ f.items.id_for_label }}_{{ object.id }}" name="{{ object.id }}" value="newsletter" onclick="toggleSelected('{{ f.items.id_for_label }}', '{{ object.id }}')">{% include object|load_fragment_template %}
+                    <a class="thumbnail" onclick="toggleSelected('{{ f.items.id_for_label }}', '{{ object.id }}')" id="{{ f.items.id_for_label }}_{{ object.id }}">{% include object|load_fragment_template %}</a>
                     </div>
                 {% endfor %}
                 {{ f.items }}
