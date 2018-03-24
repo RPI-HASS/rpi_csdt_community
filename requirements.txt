@@ -56,7 +56,7 @@ easy-thumbnails==2.5
 futures==3.2.0
 geopy==1.12.0
 gitdb2==2.0.3
-GitPython==2.1.8
+GitPython==2.1.9
 idna==2.6
 Markdown==2.6.11
 markdown2==2.3.5
