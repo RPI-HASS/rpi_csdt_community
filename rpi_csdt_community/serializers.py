@@ -5,6 +5,7 @@ from rest_framework import serializers
 from project_share.models import (Application, ApplicationCategory,
                                   ApplicationDemo, ApplicationTheme, Goal,
                                   Project)
+from django.core.exceptions import PermissionDenied
 
 try:
     from django.contrib.auth import get_user_model
@@ -50,7 +51,7 @@ class ProjectSerializer(serializers.ModelSerializer):
         """Validate owner."""
         print 'creating'
         if not self.request.user.is_authenticated():
-            raise PermissionDenied('Not Signed In')
+            raise PermissionDenied
         validated_data['owner'] = self.request.user
         return super(ProjectSerializer, self).create(validated_data)
 
