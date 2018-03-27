@@ -36,8 +36,8 @@ class ProjectViewSet(viewsets.ModelViewSet):
         if obj.approved:
             obj.pk = None
             obj.approved = False
-        if self.request.user.is_authenticated:
-            obj.owner = self.request.user
+            if self.request.user.is_authenticated:
+                obj.owner = self.request.user
         return obj
 
     def get_queryset(self):

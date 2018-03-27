@@ -48,8 +48,19 @@ class ProjectSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         """Validate owner."""
+        print 'creating'
+        if not self.request.user.is_authenticated():
+            raise PermissionDenied('Not Signed In')
         validated_data['owner'] = self.request.user
         return super(ProjectSerializer, self).create(validated_data)
+
+    def update(self, instance, validated_data):
+        """Validate owner."""
+        print instance.owner
+        if instance.owner != self.request.user:
+            return self.create(validated_data)
+        else:
+            return super(ProjectSerializer, self).update(instance, validated_data)
 
     class Meta:
         model = Project
