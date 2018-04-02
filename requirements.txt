@@ -18,7 +18,7 @@ django-likes==1.11
 django-markdown-deux==1.0.5
 django-markup==1.2
 django-pagedown==1.0.4
-django-pre-post==1.0.0
+django-pre-post==1.1.0
 django-recaptcha2==1.0.3
 django-taggit==0.22.2
 django-taggit-templatetags==0.4.6.dev0
