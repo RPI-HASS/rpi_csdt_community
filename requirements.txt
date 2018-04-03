@@ -38,7 +38,7 @@ geopy==1.12.0
 markdown2==2.3.5
 numpy==1.14.2
 oauthlib==2.0.7
-Pillow==5.0.0
+Pillow==5.1.0
 psycopg2==2.7.4
 pytz==2018.3
 six==1.11.0
