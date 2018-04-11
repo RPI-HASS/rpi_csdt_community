@@ -8,7 +8,7 @@ from django.db.models import Q
 from django.http import HttpResponseRedirect
 from django.shortcuts import redirect
 from django.urls import reverse, reverse_lazy
-from django.views.generic import ListView, FormView
+from django.views.generic import ListView, FormView, TemplateView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django_teams.models import Ownership
@@ -126,6 +126,17 @@ class ProjectRunDetail(DetailView):
         except:
             pass
         return super(ProjectRunDetail, self).render_to_response(context, **response_kwargs)
+
+
+class FractalDetail(TemplateView):
+    """Pumps in the project id to the fractal app."""
+
+    template_name = "project_share/SPA-fractal.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(FractalDetail, self).get_context_data(**kwargs)
+        context['pk_num'] = self.kwargs['pk']
+        return context
 
 
 class ProjectPresentDetail(ProjectRunDetail):
