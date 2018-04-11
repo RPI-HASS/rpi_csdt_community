@@ -8,7 +8,7 @@ from project_share.views import (ApplicationDetail, ApplicationList,
                                  ProjectDelete, ProjectDetail, ProjectList,
                                  ProjectPresentDetail, ProjectRunDetail,
                                  ProjectUnpublish, ProjectUpdate,
-                                 UserDetail, ProfileUpdate)
+                                 UserDetail, ProfileUpdate, FractalDetail)
 
 urlpatterns = [
     url(r'^projects/$', ProjectList.as_view(), name='project-list'),
@@ -24,6 +24,8 @@ urlpatterns = [
     url(r'^projects/unpublish/success$',
         TemplateView.as_view(template_name='project_share/project_unpublish_success.html'),
         name='project-unpublish-success'),
+    # individual SPA applications:
+    url(r'^projects/fractal/(?P<pk>\d+)/$', FractalDetail.as_view(), name='fractal-detail'),
 
     url(r'projects/(?P<project_pk>\d+)/publish$', ApprovalCreate.as_view(), name='approval-create'),
     url(r'approval/confirm$', TemplateView.as_view(template_name='project_share/approval_confirm.html'),

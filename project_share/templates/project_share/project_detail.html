@@ -13,8 +13,12 @@
           {{ object.description }}
         </div>
     </div>
+    {% if object.application == 69 %}
+    <a href="{% url 'fractal-detail' pk=object.pk %}" class="btn btn-large btn-primary">Open</a>
+    {% else %}
     <a href="{% url 'project-run-detail' pk=object.pk %}" class="btn btn-large btn-primary">Open</a>
     <a href="{% url 'project-present-detail' pk=object.pk %}" class="btn btn-large btn-info">Open for Presentation</a>
+    {% endif %}
 	{% if object.owner.id == user.id %}
 		{% if hasApproval %}
 			<a href="{% url 'project-unpublish' pk=object.pk %}" class="btn btn-large btn-primary">Unpublish</a>
