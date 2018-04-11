@@ -65,7 +65,7 @@ class ProjectTests(LiveServerTestCase):
                         msg="Got code %s on %s" % (response.status_code, url))
         url = '/projects/fractal/1'
         response = self.client.get(url, **{'HTTP_REFERER': url})
-        self.assertTrue(response.status_code == 302,
+        self.assertTrue(response.status_code == 301,
                         msg="Got code %s on %s" % (response.status_code, url))
 
     def test_user_views(self):
