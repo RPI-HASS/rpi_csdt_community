@@ -138,9 +138,6 @@ class FractalDetail(RedirectView):
         if args:
             url = "%s?project=%s" % (url, args)
         return url
-            
-
-
 
 
 class ProjectPresentDetail(ProjectRunDetail):
