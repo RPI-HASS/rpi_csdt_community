@@ -24,7 +24,7 @@ django-taggit==0.22.2
 django-taggit-templatetags==0.4.6.dev0
 django-taggit-templatetags2==1.6.1
 django-treebeard==4.2.1
-django-teams-community==1.2.1
+django-teams-community==1.4.0
 django-twitter-bootstrap==3.3.0
 djangocms-admin-style==1.2.7
 djangocms-file==2.0.2
