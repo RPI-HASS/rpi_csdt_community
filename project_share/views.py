@@ -127,6 +127,7 @@ class ProjectRunDetail(DetailView):
             pass
         return super(ProjectRunDetail, self).render_to_response(context, **response_kwargs)
 
+
 class FractalDetail(TemplateView):
     """Pumps in the project id to the fractal app."""
 
@@ -136,6 +137,7 @@ class FractalDetail(TemplateView):
         context = super(FractalDetail, self).get_context_data(**kwargs)
         context['pk_num'] = self.kwargs['pk']
         return context
+
 
 class ProjectPresentDetail(ProjectRunDetail):
     """Set the project into present (full screen) mode."""
