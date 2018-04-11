@@ -65,6 +65,7 @@
 
   </div>
   <script>
+    $( document ).ready(function() {
       setTimeout(function(){  
         var btn1 = $("button[title='Regular']");
         btn1.children('img').attr('src', 'https://dev.csdt.rpi.edu/static/fracexpl/src/button1.png');
@@ -78,7 +79,8 @@
         btn5.children('img').attr('src', 'https://dev.csdt.rpi.edu/static/fracexpl/src/button5.png');
         var btn4 = $("button[title='Invisible']");
         btn4.children('img').attr('src', 'https://dev.csdt.rpi.edu/static/fracexpl/src/button6.png');
-      }, 1000);
+      }, 500);
+    });
     </script>
 
 </body>
