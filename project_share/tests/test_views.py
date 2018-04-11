@@ -63,6 +63,10 @@ class ProjectTests(LiveServerTestCase):
         response = self.client.post(url, response.content, content_type="application/x-www-form-urlencoded")
         self.assertTrue(response.status_code == 302,
                         msg="Got code %s on %s" % (response.status_code, url))
+        url = '/projects/fractal/1'
+        response = self.client.get(url, **{'HTTP_REFERER': url})
+        self.assertTrue(response.status_code == 302,
+                        msg="Got code %s on %s" % (response.status_code, url))
 
     def test_user_views(self):
         """update your profile"""
