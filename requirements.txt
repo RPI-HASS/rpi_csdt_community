@@ -39,7 +39,7 @@ numpy==1.14.2
 oauthlib==2.0.7
 Pillow==5.1.0
 psycopg2==2.7.4
-pytz==2018.3
+pytz==2018.4
 six==1.11.0
 git+https://github.com/bartTC/django-attachments.git
 git+https://github.com/CSnap/django-likes.git
