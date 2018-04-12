@@ -24,7 +24,6 @@ urlpatterns = [
     url(r'^projects/unpublish/success$',
         TemplateView.as_view(template_name='project_share/project_unpublish_success.html'),
         name='project-unpublish-success'),
-
     url(r'projects/(?P<project_pk>\d+)/publish$', ApprovalCreate.as_view(), name='approval-create'),
     url(r'approval/confirm$', TemplateView.as_view(template_name='project_share/approval_confirm.html'),
         name='approval-confirm'),
