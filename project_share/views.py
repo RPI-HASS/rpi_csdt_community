@@ -9,7 +9,6 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import redirect
 from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, FormView
-from django.views.generic.base import RedirectView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django_teams.models import Ownership
@@ -127,17 +126,6 @@ class ProjectRunDetail(DetailView):
         except:
             pass
         return super(ProjectRunDetail, self).render_to_response(context, **response_kwargs)
-
-
-class FractalDetail(RedirectView):
-    """Pumps in the project id to the fractal app."""
-
-    def get_redirect_url(self, *args, **kwargs):
-        url = 'https://csdt.rpi.edu/static/fracexpl/src/example.html'
-        args = self.kwargs['pk']
-        if args:
-            url = "%s?project=%s" % (url, args)
-        return url
 
 
 class ProjectPresentDetail(ProjectRunDetail):
