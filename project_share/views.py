@@ -127,7 +127,11 @@ class ProjectRunDetail(DetailView):
         return super(ProjectRunDetail, self).render_to_response(context, **response_kwargs)
 
     def get_template_names(self):
-        return ['project_share/application_%s.html' % self.object.application.application_type.lower()]
+        if not int(self.object.application.application_type.lower()):
+            return ['project_share/application_%s.html' % self.object.application.application_type.lower()]
+        else:
+            return ['project_share/application_csnap.html']    
+        
 
 
 class ProjectPresentDetail(ProjectRunDetail):
