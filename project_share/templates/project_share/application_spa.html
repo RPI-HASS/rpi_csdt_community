@@ -1,7 +1,14 @@
 {% load project_share_tags %}
 {% block content %}
-  {% for extension in object.extensions.all %}
+  {% for extension in object.application.extensions.all %}
     <base href="/static/{{extension.path}}">
+    <script>
+      var config = {
+        'project': {
+              'id': {{project.id}}
+        }
+      }
+    </script>
     {% autoescape off %}
       {% includestatic extension.path %}
     {% endautoescape %}

@@ -116,7 +116,6 @@ class ProjectRunDetail(DetailView):
     but with settings for application and analytics."""
 
     model = Project
-    template_name = "project_share/application_csnap.html"
     context_object_name = 'project'
 
     def render_to_response(self, context, **response_kwargs):
@@ -126,6 +125,9 @@ class ProjectRunDetail(DetailView):
         except:
             pass
         return super(ProjectRunDetail, self).render_to_response(context, **response_kwargs)
+
+    def get_template_names(self):
+        return ['project_share/application_%s.html' % self.object.application.application_type.lower()]
 
 
 class ProjectPresentDetail(ProjectRunDetail):
