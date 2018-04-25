@@ -1,0 +1,37 @@
+{% load thumbnail %}
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-md-12">
+        <a href="{% url 'oral_history:upload' slug=self.request.slug %}">Upload</a>
+    </div>
+</div>
+
+ {% for project in view.project %}
+ <div class="row">
+    <div class="col-md-3 col-sm-3">
+        <p>{{ project.project_name}}</p>
+        {% if project.byline %}<p>{{ project.byline }}</p>{% endif %}
+        {% if project.summary %}<p>{{ project.summary|safe }}</p>{% endif %}
+
+    </div>
+    <div class="col-md-9 col-sm-9" style="background-color:moccasin;">
+    {% for interview in object_list %}
+        <div class="col-md-2 col-sm-3">
+            <div style="border:1px solid gray;background-color:white;padding: 6px;margin: 10px;">
+                {% thumbnail interview.pic "230x230" crop as im %}
+                <img src="{{ im.url }}" width="100%" class="img-responsive"/>
+                {% endthumbnail %}
+                <p style="color:purple;">{{ interview.full_name }}</p>
+                {% if interview.summary %}<p>{{ interview.summary|truncatewords:50 }}</p>{% endif %}
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+ </div>
+ {% endif %}
+
+
+{% endblock %}

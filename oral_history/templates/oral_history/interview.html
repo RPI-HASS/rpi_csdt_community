@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% for interview in view.interview %}
+<div class="row">
+    <div class="col-md-3 col-sm-3">
+        {% if interview.pic %}<img width="100%" class="img-responsive" src="{{ interview.pic.url }}"/>
+        {% endif %}
+    </div>
+    <div class="col-md-9 col-sm-9">
+        {% if interview.full_name %}<p style="font-size:2rem;" class="text-uppercase">{{ interview.full_name }}</p>{% endif %}
+        {% if interview.interview_by %}<p>Interviewed by {{ interview.interview_by }}</p>{% endif %}
+        {% if interview.mp3 %}<p><audio controls>
+            <source src="{{ interview.mp3.url }}" type="audio/mpeg">
+            Your browser does not support the audio element.
+            </audio>
+            </p>
+        {% else %}
+        <p>There is no mp3 associated with this interview</p>
+        {% endif %}
+        {% if interview.summary %}<p>{{ interview.summary|safe }}</p>
+        {% endif %}
+        
+    </div>
+</div>
+
+{% endblock %}

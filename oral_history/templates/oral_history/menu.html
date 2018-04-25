@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load thumbnail %}
+
+{% block content %}
+<style>
+    .content:before {
+        {% thumbnail ohp.pic "300x300" crop as im %}
+        background-image: url('{{ im.url }}');
+        {% endthumbnail %}
+        filter: sepia(100%);
+        content: "";
+        position: fixed;
+        left: 0;
+        right: 0;
+        z-index: -1;
+    }
+    .content {
+        position: fixed;
+        left: 0;
+        right: 0;
+        z-index: 0;
+        background-color:grey;
+        border-radius: 5px;
+        border: 1px solid darkorchid;
+        margin: 5px;
+        padding: 5px;
+        height: 300px;
+        
+    },
+    .header {
+        position: absolute;
+        bottom: 0;
+        color: white;
+    },
+    .project-name {
+        font-size: 2rem;
+    },
+    .byline {
+        font-size: 1.25rem;
+    }
+</style>
+<div class="row">
+    <div class="col-md-12">
+        Choose an oral history project to listen to:
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        {% for ohp in object_list %}
+
+            <div class="col-md-3 col-sm-4 col-xs-6">
+                <div class="content">
+                    <div class="header">
+                        <p class="project-name">{{ ohp.project_name }}</p>
+                        <p class="byline">{{ ohp.byline }}</p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}
