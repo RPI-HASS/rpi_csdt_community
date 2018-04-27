@@ -231,6 +231,7 @@ INSTALLED_APPS = (
     'django_pre_post',
     'gis_csdt',
     'django.contrib.gis',
+    'oral_history',
 )
 
 TEMPLATES = [

@@ -1,37 +1,60 @@
+{% extends 'base_sans_theme.html' %}
 {% load thumbnail %}
-{% extends 'base.html' %}
+
 
 {% block content %}
+<style>
+    
+    .container {
+        padding-right:0;
+        padding-left:0;
+        margin-right:auto;
+        margin-left:auto
+    }
+</style>
 
 <div class="row">
     <div class="col-md-12">
-        <a href="{% url 'oral_history:upload' slug=self.request.slug %}">Upload</a>
+        <p style="font-size: 1.75rem;" class="pull-left"><a href="{% url 'oral_history:menu' %}"><< Back to Oral Histories</a></p>
+        
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <p style="font-size:1.75rem;" ><a href="{% url 'oral_history:upload' slug=view.slug_return %}">+ Upload New Interview</a></p>
     </div>
 </div>
 
  {% for project in view.project %}
  <div class="row">
-    <div class="col-md-3 col-sm-3">
-        <p>{{ project.project_name}}</p>
-        {% if project.byline %}<p>{{ project.byline }}</p>{% endif %}
-        {% if project.summary %}<p>{{ project.summary|safe }}</p>{% endif %}
+    <div class="col-md-4 col-sm-4 col-xs-12">
+        <p style="font-size:3rem;">{{ project.project_name}}</p>
+        {% if project.byline %}<p style="font-size:2.0rem;">{{ project.byline }}</p>{% endif %}
+        {% if project.summary %}<p style="font-size:1.5rem;">{{ project.summary|safe }}</p>{% endif %}
 
     </div>
-    <div class="col-md-9 col-sm-9" style="background-color:moccasin;">
+    <div class="col-md-8 col-sm-8 col-xs-12" style="display: flex;flex-direction: row;flex-wrap: wrap;">
+        
     {% for interview in object_list %}
-        <div class="col-md-2 col-sm-3">
-            <div style="border:1px solid gray;background-color:white;padding: 6px;margin: 10px;">
-                {% thumbnail interview.pic "230x230" crop as im %}
-                <img src="{{ im.url }}" width="100%" class="img-responsive"/>
-                {% endthumbnail %}
-                <p style="color:purple;">{{ interview.full_name }}</p>
-                {% if interview.summary %}<p>{{ interview.summary|truncatewords:50 }}</p>{% endif %}
+        <a href="{% url 'oral_history:interview' slug=view.slug_return slug_interview=interview.slug %} ">
+            <div class="col-md-4 col-sm-4 col-xs-6" >
+                <div style="border:1px solid gray;background-color:white;padding: 6px;margin: 10px 0px 10px 0px;width: 210px;">
+                    
+                    <img src="{% thumbnail interview.pic "230x230" crop %}" width="100%" class="img-responsive"/>
+                    
+                    <p style="color:purple;font-size:2.5rem;margin-bottom: 0px;">{{ interview.full_name }}</p>
+                    {% if interview.summary %}<p style="font-size: 1.5rem;margin-top: -5px;margin-bottom: -5px;">{{ interview.summary|striptags|truncatewords:50 }}</p>{% else %}
+                    No summary given.
+                    {% endif %}
+                </div>
             </div>
-        </div>
+        </a>
+        
     {% endfor %}
+    
     </div>
  </div>
- {% endif %}
+ {% endfor %}
 
 
 {% endblock %}

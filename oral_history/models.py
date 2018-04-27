@@ -1,8 +1,12 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+import os
+
 from django.core.validators import FileExtensionValidator, validate_image_file_extension
 from django.db import models
+from django.template.defaultfilters import slugify
+
 
 
 from filer.fields.image import FilerImageField
@@ -19,7 +23,7 @@ class Interview(models.Model):
                        null=True,
                        validators=[FileExtensionValidator(['mp3'])],
                        upload_to=my_awesome_upload_function)
-    pic = models.ImageField(null=True, blank=True, validators=[validate_image_file_extension] upload_to=my_awesome_upload_function)
+    pic = models.ImageField(null=True, blank=True, validators=[validate_image_file_extension], upload_to=my_awesome_upload_function)
     full_name = models.TextField(max_length=60)
     date = models.CharField(blank=True, null=True, max_length=40)
     location = models.TextField(blank=True, null=True, max_length=70)
@@ -27,9 +31,17 @@ class Interview(models.Model):
     birthplace = models.TextField(blank=True, null=True, max_length=60)
     occupation = models.TextField(blank=True, null=True, max_length=70)
     birth_year = models.TextField(blank=True, null=True, max_length=30)
-    summary = models.TextField(blank=True, null=True, max_length=2000)
+    summary = models.TextField(blank=True, null=True, max_length=15000)
     slug = models.SlugField(unique=True, blank=False, null=False)
     approved = models.BooleanField(default=False)
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.full_name)
+        super(Interview, self).save(*args, **kwargs)
+
+
+    def __unicode__(self):
+        return "Interview: " + self.project.project_name + "=> " + self.full_name
 
 
 class OralHistory(models.Model):
@@ -41,8 +53,14 @@ class OralHistory(models.Model):
     url = models.CharField(max_length=80)
     slug = models.SlugField(unique=True, blank=False, null=False)
 
+    def __unicode__(self):
+        return "Project: " + self.project_name
+
 
 class Tag(models.Model):
     timestamp = models.IntegerField()
     tag = models.CharField(max_length=40)
     interview = models.ForeignKey('Interview', on_delete=models.CASCADE)
+
+    def __unicode__(self):
+        return "Tag: " + self.interview.project.project_name + ": " + self.interview.full_name + "=> " + self.tag + " (" + self.timestamp + ")secs"
