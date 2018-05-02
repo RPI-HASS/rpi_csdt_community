@@ -1,5 +1,10 @@
 {% extends 'base_sans_theme.html' %}
 
+{% block title %}
+    {% for interview in view.interview %}
+    {{ interview.full_name }} | {{ block.super }}
+    {% endfor %}
+{% endblock %}
 
 {% block css %}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mediaelement/4.2.9/mediaelementplayer.css">
@@ -13,16 +18,16 @@
 
 {% block content %}
 
-{% for interview in view.interview %}
+{% for interview in interview_context %}
 
 <div class="row">
     <div class="col-md-12">
-        <p class="pull-left" style="font-size: 1.75rem;"><a href="{% url 'oral_history:menu' %}"><< Back to Oral Histories</a></p>
+        <p class="pull-left" style="font-size: 1.5rem;"><a href="{% url 'oral_history:menu' %}">Oral History Projects</a> / <a href="{% url 'oral_history:oral_history' slug=interview.project.slug %}">{{ interview.project.project_name }}</a></p>
     </div>
 </div>
 <div class="row">
     <div class="col-md-12">
-        <p class="pull-left" style="font-size: 1.75rem;"><a href="{% url 'oral_history:oral_history' slug=interview.project.slug %}"><< Back to {{ interview.project.project_name }} - Oral History Project</a></p>
+        </p>
     </div>
 </div>
 <div class="row">
@@ -44,7 +49,7 @@
         {% else %}
         <p>There is no mp3 associated with this interview</p>
         {% endif %}
-        {% if interview.summary %}<p>{{ interview.summary|linebreaks|safe }}</p>
+        {% if interview.summary %}<p>{{ interview.summary|safe|linebreaks }}</p>
         {% endif %}
         
     </div>
