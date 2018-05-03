@@ -11,6 +11,8 @@ from django.template.defaultfilters import slugify
 
 from filer.fields.image import FilerImageField
 
+from project_share.models import Project
+
 User = get_user_model()
 
 # Create your models here.
@@ -40,6 +42,7 @@ class Interview(models.Model):
     slug = models.SlugField(unique=True, blank=False, null=False)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, on_delete=models.SET_NULL)
     approved = models.BooleanField(default=False)
+    csdt_project = models.ForeignKey('project_share.Project', null=True, blank=True, on_delete=models.SET_NULL)
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.full_name)
@@ -55,13 +58,15 @@ class Interview(models.Model):
 
 class OralHistory(models.Model):
     project_name = models.TextField(max_length=60, unique=True)
-    pic = FilerImageField(null=True, blank=True, related_name="oralhistory_pic")
+    pic = models.ImageField(null=True, blank=True,
+                            validators=[validate_image_file_extension],
+                            upload_to='oralhistoryproject/%Y-%m-%d/')
     byline = models.TextField(blank=True, null=True, max_length=100)
     summary = models.TextField(blank=True, null=True, max_length=2000)
     about_html = models.TextField(blank=True, null=True, max_length=1000)
     slug = models.SlugField(unique=True, blank=False, null=False)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, on_delete=models.SET_NULL)
-    is_classroom = models.BooleanField(default=True)
+    is_official = models.BooleanField(default=False)
     approved = models.BooleanField(default=False)
 
     def __unicode__(self):

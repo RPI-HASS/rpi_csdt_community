@@ -27,8 +27,15 @@
         filter: sepia(100%);
         
     },
+}
     
 </style>
+
+<div class="row">
+    <div class="col-md-12">
+        <p><a href="{% url 'oral_history:upload_ohp' %}">Start a new Oral History Project</a></p>
+    </div>
+</div>
 <div class="row">
     <div class="col-md-12">
         <p style="font-size:2rem;">Choose an oral history project to explore:</p>
@@ -38,10 +45,34 @@
     {% for ohp in object_list %}
     <a href="{% url 'oral_history:oral_history' slug=ohp.slug %}">
         <div class="col-md-3 col-sm-4 col-xs-12">
-            <div class="content" style="background-image: url('{% thumbnail ohp.pic "300x300" crop %}');">
-                <div class="project-name" style="color: white;font-size:3rem;line-height:3rem;" >{{ ohp.project_name }}</div>
-                <div class="byline" style="color: white;font-size: 1.5rem;">{{ ohp.byline }}</div>
-                
+            <div class="content" style="background-image: url('{% thumbnail ohp.pic  300x300  crop %}');">
+                <div class="project-name" style="text-shadow:
+                -1px -1px 0 #000,
+                1px -1px 0 #000,
+                -1px 1px 0 #000,
+                1px 1px 0 #000;color: white;font-size:3rem;line-height:3rem;">{{ ohp.project_name }}</div>
+                <div class="byline" style="text-shadow:
+                -1px -1px 0 #000,
+                1px -1px 0 #000,
+                -1px 1px 0 #000,
+                1px 1px 0 #000;color: white;font-size: 1.5rem;">{{ ohp.byline }}</div>
+
+            </div>
+        </div>
+    </a>
+    {% endfor %}
+</div>
+<div style="height:60px;"></div>
+<div class="row">
+    <p style="font-size:2rem;">User-made oral history projects:</p>
+    {% for ohp in view.get_classrooms %}
+    <a href="{% url 'oral_history:oral_history' slug=ohp.slug %}">
+        <div class="col-md-3 col-sm-4 col-xs-12">
+            <div class="content" style="background-image: url('{% thumbnail ohp.pic  300x300  crop %}');">
+                <div style="color: white;">User: {{ ohp.user.username }}</div>
+                <div class="project-name" style="color: white;font-size:2rem;line-height:3rem;">{{ ohp.project_name }}</div>
+                <div class="byline" style="color: white;font-size: 1.5rem;">{{ ohp.byline|truncatewords:40 }}</div>
+
             </div>
         </div>
     </a>
