@@ -7,6 +7,54 @@ from .models import OralHistory, Interview, Tag
 
 # Register your models here.
 
-admin.site.register(OralHistory)
-admin.site.register(Interview)
-admin.site.register(Tag)
+
+def approve_tags(modeladmin, request, queryset):
+    queryset.update(approved=True)
+
+
+def approve_interviews(modeladmin, request, queryset):
+    queryset.update(approved=True)
+
+
+def approve_ohps(modeladmin, request, queryset):
+    queryset.update(approved=True)
+
+
+def deapprove_tags(modeladmin, request, queryset):
+    queryset.update(approved=False)
+
+
+def deapprove_interviews(modeladmin, request, queryset):
+    queryset.update(approved=False)
+
+
+def deapprove_ohps(modeladmin, request, queryset):
+    queryset.update(approved=False)
+
+
+approve_tags.short_description = "Approve selected tags"
+approve_interviews.short_description = "Approve selected interviews"
+approve_ohps.short_description = "Approve selected OHPs"
+deapprove_tags.short_description = "De-approve selected tags"
+deapprove_interviews.short_description = "De-approve selected interviews"
+deapprove_ohps.short_description = "De-approve selected OHPs"
+
+
+class TagAdmin(admin.ModelAdmin):
+    list_display = ('approved', '__unicode__')
+    actions = [approve_tags, deapprove_tags]
+
+
+class InterviewAdmin(admin.ModelAdmin):
+    list_display = ('approved', '__unicode__')
+    actions = [approve_interviews, deapprove_interviews]
+
+
+class OHPAdmin(admin.ModelAdmin):
+    list_display = ('approved', '__unicode__')
+    actions = [approve_ohps, deapprove_ohps]
+
+
+admin.site.register(OralHistory, OHPAdmin)
+admin.site.register(Interview, InterviewAdmin)
+admin.site.register(Tag, TagAdmin)

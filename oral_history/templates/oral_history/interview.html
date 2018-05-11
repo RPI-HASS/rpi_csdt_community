@@ -1,59 +1,101 @@
-{% extends 'base_sans_theme.html' %}
-
-{% block title %}
-    {% for interview in view.interview %}
-    {{ interview.full_name }} | {{ block.super }}
-    {% endfor %}
-{% endblock %}
-
-{% block css %}
+{% extends 'base_sans_theme.html' %} {% load bootstrap3 %} {% block title %} {% for interview in view.interview %} {{ interview.full_name
+}} | {{ block.super }} {% endfor %} {% endblock %} {% block css %}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mediaelement/4.2.9/mediaelementplayer.css">
-{% endblock %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mediaelement-plugins/2.5.0/skip-back/skip-back.min.css">
+<style>
+    .tag-btn {
+        background: linear-gradient(to right, #00ccff 0%, #66ffff 100%);
+        border: 1px solid lightgray;
+        box-shadow: 2px 2px lightgray;
+        border-radius:5px;
+        margin:3px;
+        color: black;
+        padding:3px;
+    }
+</style>
+ {% endblock %}
+ 
+ {% block js %}
 
-{% block js %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mediaelement/4.2.9/mediaelement-and-player.min.js"></script> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mediaelement-plugins/2.5.0/skip-back/skip-back.min.js"></script> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mediaelement-plugins/2.5.0/skip-back/skip-back-i18n.js"></script> 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mediaelement/4.2.9/mediaelement-and-player.min.js"></script>
 
-{% endblock %}
 
-{% block content %}
+{% endblock %} 
 
+{% block content %} 
 {% for interview in interview_context %}
 
 <div class="row">
     <div class="col-md-12">
-        <p class="pull-left" style="font-size: 1.5rem;"><a href="{% url 'oral_history:menu' %}">Oral History Projects</a> / <a href="{% url 'oral_history:oral_history' slug=interview.project.slug %}">{{ interview.project.project_name }}</a></p>
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-12">
+        <p class="pull-left" style="font-size: 1.5rem;">
+            <a href="{% url 'oral_history:menu' %}">Oral History Projects</a> /
+            <a href="{% url 'oral_history:oral_history' slug=interview.project.slug %}">{{ interview.project.project_name }}</a>
+            
         </p>
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-3 col-sm-3">
-        {% if interview.pic %}<img width="100%" class="img-responsive" src="{{ interview.pic.url }}"/>
-        {% endif %}
-    </div>
-    <div class="col-md-9 col-sm-9">
-        {% if interview.full_name %}<p style="font-size:2rem;" class="text-uppercase">{{ interview.full_name }}</p>{% endif %}
-        {% if interview.interview_by %}<p>Interviewed by {{ interview.interview_by }}</p>{% endif %}
-        {% if interview.mp3_file %}<p>
-            <div class="audioWrapper">
-            <audio  class="mejs__player" width="100%" height="40" >
-            <source src="{{ interview.mp3_file.url }}"  type="audio/mpeg">
-            Your browser does not support the audio element.
-            </audio>
-            </div>
-            </p>
-        {% else %}
-        <p>There is no mp3 associated with this interview</p>
-        {% endif %}
-        {% if interview.summary %}<p>{{ interview.summary|safe|linebreaks }}</p>
-        {% endif %}
         
     </div>
 </div>
-{% endfor %}
+{% if request.user == interview.user or request.user.is_superuser %}
+<div class="row">
+    <div class="col-md-12">
+        <p class="" style="font-size: 1.5rem;">
+            <a href="{% url 'oral_history:interview_update' slug=interview.project.slug slug_interview=interview.slug %}">** Update interview **</a>
+        </p>
+    </div>
+</div>
+{% endif %}
+<div class="row">
+    <div class="col-md-3 col-sm-3">
+        {% if interview.pic %}
+        <img width="100%" class="img-responsive" src="{{ interview.pic.url }}" /> {% endif %}
+    </div>
+    <div class="col-md-9 col-sm-9">
+        {% if interview.full_name %}
+        <p style="font-size:2rem;" class="text-uppercase">{{ interview.full_name }}</p>{% endif %} {% if interview.interview_by %}
+        <p>Interviewed by {{ interview.interview_by }}</p>{% endif %} {% if interview.mp3_file %}
+        <p>
+            <div class="audioWrapper">
+                <audio id="ohp-player" class="mejs__player" width="100%" height="40">
+                    <source src="{{ interview.mp3_file.url }}" type="audio/mpeg"> Your browser does not support the audio element.
+                </audio>
+            </div>
+        </p>
+        {% else %}
+        <p>There is no mp3 associated with this interview</p>
+        {% endif %} 
+        {% if tags %}
+        <strong>Tags:</strong>
+        <div style="display: flex;flex-direction: row;flex-wrap:wrap;justify-content: flex-start;">
+            {% for tag in tags %}
+
+            <div class="tag-btn">{{ tag.to_timestamp }} - {{ tag.tag }}</div>
+
+            {% endfor %}
+        </div>
+        {% endif %}
+        <div>
+            <button data-toggle="collapse" class="btn" style="box-shadow: 2px 2px lightgray;;background-color: lightgreen;border: 1px solid forestgreen; margin:4px;border-radius:5px;" data-target="#demo">Add A Tag</button>
+            <div id="demo" class="collapse">
+                <form action="" method="post">
+                    {% csrf_token %} 
+                    {% bootstrap_form form %}
+                    <button type="submit" class="btn btn-primary">Add Tag</button>
+                </form>
+            </div>
+        </div>
+        {% if interview.summary %}
+        <p style="margin-top:10px;">
+            <strong>Summary:</strong>
+        </p>
+        <p>{{ interview.summary|safe|linebreaks }}</p>
+        {% endif %}
+
+    </div>
+</div>
+
+{% endfor %} 
 
 {% endblock %}

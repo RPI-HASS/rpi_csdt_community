@@ -6,15 +6,18 @@ import json
 
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import HttpResponseRedirect
+from django.core.mail import send_mail
+from django.http import HttpResponseRedirect, Http404
 from django.template.defaultfilters import slugify
 from django.urls import reverse, reverse_lazy
-from django.views.generic import TemplateView, ListView, FormView
+from django.views.generic import TemplateView, ListView, FormView, UpdateView
 from django.views.generic.detail import DetailView
 
 
-from .models import Interview, OralHistory
-from .forms import InterviewForm, OHPForm
+
+
+from .models import Interview, OralHistory, Tag
+from .forms import InterviewForm, OHPForm, TagForm
 from project_share.models import Project, FileUpload, Application
 
 from django_teams.models import Team
@@ -52,8 +55,9 @@ class InterviewIndexView(ListView):
         return queryset
 
 
-class InterviewView(TemplateView):
+class InterviewView(TemplateView, FormView):
     template_name = 'oral_history/interview.html'
+    form_class = TagForm
 
     def slug_return(self):
         return self.kwargs['slug']
@@ -63,8 +67,48 @@ class InterviewView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(InterviewView, self).get_context_data(**kwargs)
-        context['interview_context'] = Interview.objects.filter(slug=self.kwargs['slug_interview'])
+        slug_interview = self.kwargs['slug_interview']
+        context['interview_context'] = Interview.objects.filter(slug=slug_interview)
+        pk = context['interview_context'][0].pk
+        context['tags'] = Tag.objects.filter(interview__pk=pk,approved=True).order_by('timestamp')
         return context
+    
+    def get_initial(self):
+        initial = super(InterviewView, self).get_initial()
+        slug_interview = self.kwargs['slug_interview']
+        initial['interview'] = Interview.objects.get(slug=slug_interview)
+        return initial
+
+    def form_valid(self, form):
+        return HttpResponseRedirect(reverse('oral_history:thank_you_tag', kwargs={'slug':self.kwargs['slug'], 'slug_interview':self.kwargs['slug_interview']}))
+
+    def form_invalid(self, form):
+        return HttpResponseRedirect(reverse('oral_history:error'))
+
+
+    def post(self, request, *args, **kwargs):
+        form = TagForm(request.POST or None)
+        if form.is_valid():
+            new_tag = form.save(commit=False)
+            new_tag.interview = Interview.objects.get(slug=self.kwargs['slug_interview'])
+            new_tag.tag = form.cleaned_data['tag']
+            hours = form.cleaned_data['hours']
+            mins = form.cleaned_data['mins']
+            secs = form.cleaned_data['secs']
+            total_time = (hours * 3600) + (mins * 60) + secs
+            new_tag.timestamp = total_time
+            if not new_tag.interview.user == self.request.user:
+                send_mail('CSDT: New Oral History Project Tag needs approval', 'There is a new oral history project tag that needs approval on the CSDT server admin. Please approve it.', 'csdtrpi@gmail.com', ['holmr@rpi.edu'], fail_silently=True)
+                new_tag.approved = False
+            else:
+                new_tag.approved = True
+            new_tag.save()
+            form.save()
+            
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
+
 
 
 class UploadInterview(LoginRequiredMixin, DetailView, FormView):
@@ -131,6 +175,7 @@ class UploadInterview(LoginRequiredMixin, DetailView, FormView):
             new_interview.csdt_project = new_proj
             new_interview.save()
             form.save()
+            send_mail('CSDT: New Oral History Project Interview needs approval', 'There is a new oral history project interview that needs approval on the CSDT server admin. Please approve it.', 'csdtrpi@gmail.com', ['holmr@rpi.edu'], fail_silently=True)
             return self.form_valid(form)
         else:
             return self.form_invalid(form)
@@ -169,6 +214,7 @@ class UploadOHP(LoginRequiredMixin, DetailView, FormView):
                 form.pic = request.FILES['pic']
             new_ohp.save()
             form.save()
+            send_mail('CSDT: New Oral History Project needs approval', 'There is a new oral history project that needs approval on the CSDT server admin. Please approve it.', 'csdtrpi@gmail.com', ['holmr@rpi.edu'], fail_silently=True)
             return self.form_valid(form)
         else:
             return self.form_invalid(form)
@@ -179,8 +225,64 @@ class ThankYou(TemplateView):
 
 
 class ThankYouOHP(TemplateView):
-    template_name = 'oral_history/thankyou.html'
+    template_name = 'oral_history/thankyou_ohp.html'
+
+
+class ThankYouTag(TemplateView):
+    template_name = 'oral_history/thankyou_tag.html'
+
+    def get_slug(self):
+        return self.kwargs['slug']
+
+    def get_slug_interview(self):
+        return self.kwargs['slug_interview']
 
 
 class Error(TemplateView):
     template_name = 'oral_history/error.html'
+
+
+class InterviewUpdate(LoginRequiredMixin, UpdateView):
+    template_name = 'oral_history/upload_update.html'
+    form_class = InterviewForm
+    model = Interview
+
+    def get_object(self, queryset=None):
+        
+        obj = Interview.objects.get(slug=self.kwargs['slug_interview'])
+        if not obj.user == self.request.user or self.request.user.is_superuser:
+            raise Http404
+        return obj
+
+    def form_valid(self, form):
+        return HttpResponseRedirect(reverse('oral_history:thank_you'))
+    
+    def form_invalid(self, form):
+        return HttpResponseRedirect(reverse('oral_history:error'))
+
+    def get_initial(self):
+        return {
+                'mp3_file': self.object.mp3_file,
+                'pic': self.object.pic,
+                'full_name': self.object.full_name,
+                'date': self.object.date,
+                'location': self.object.location,
+                'interview_by': self.object.interview_by,
+                'birthplace': self.object.birthplace,
+                'occupation': self.object.occupation,
+                'birth_year': self.object.birth_year,
+                'summary': self.object.summary,
+                'project': self.object.project,
+                'classroom': self.object.csdt_project.classroom,
+                }
+
+    success_url = reverse_lazy('home')
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()  # assign the object to the view
+        form = InterviewForm(request.POST or None, request.FILES or None, instance=self.object)
+        if form.is_valid():
+            form.save()
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
