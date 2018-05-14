@@ -65,8 +65,11 @@ class InterviewTestCase(TestCase):
     def test_tag_form(self):
         interv = self.interview.pk
         # Interview.objects.get(slug='john-doe')
-        form_data = {'timestamp': 45,
+        form_data = {'hours': 0,
+                     'mins': 1,
+                     'secs': 25,
                      'tag': 'talks about the city',
+                     'honeypot': '',
                      'interview': interv,
                      'approved': True}
         form = TagForm(data=form_data)
