@@ -71,6 +71,7 @@ class InterviewTestCase(TestCase):
                      'tag': 'talks about the city',
                      'honeypot': '',
                      'interview': interv,
+                     'timestamp': 85,
                      'approved': True}
         form = TagForm(data=form_data)
         self.assertTrue(form.is_valid(), form.errors)
