@@ -12,7 +12,7 @@ from project_share.models import Project, Application
 
 class InterviewTestCase(TestCase):
     def setUp(self):
-        self.user = get_user_model().objects.create_user('test-user')
+        self.user = get_user_model().objects.create_user(username='test-user', email='test@test.com', password='testpassword')
         ohp = OralHistory.objects.create(project_name="Test OHP", byline="OHP Byline",
                                          summary="OHP Summary", slug="test-ohp", is_official=True, approved=True)
         app = Application.objects.create(name="test_app", application_type="OHP")
