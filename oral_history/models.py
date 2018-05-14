@@ -9,10 +9,6 @@ from django.core.validators import FileExtensionValidator, validate_image_file_e
 from django.db import models
 from django.template.defaultfilters import slugify
 
-from filer.fields.image import FilerImageField
-
-from project_share.models import Project
-
 User = get_user_model()
 
 # Create your models here.

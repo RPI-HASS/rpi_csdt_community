@@ -1,6 +1,9 @@
 from django.conf.urls import url
 
-from .views import OralHistoryIndexView, InterviewIndexView, InterviewView, UploadInterview, ThankYou, Error, UploadOHP, ThankYouOHP, ThankYouTag, InterviewUpdate
+from .views import (OralHistoryIndexView,
+                    InterviewIndexView, InterviewView, UploadInterview,
+                    ThankYou, Error, UploadOHP, ThankYouOHP,
+                    ThankYouTag, InterviewUpdate)
 
 urlpatterns = [
     url(r'^$', OralHistoryIndexView.as_view(), name='menu'),

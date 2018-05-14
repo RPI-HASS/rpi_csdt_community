@@ -18,7 +18,7 @@ from project_share.forms import (ApprovalForm, ProjectForm,
                                  ProjectUnpublishForm)
 from project_share.models import (Application, ApplicationDemo,
                                   Approval, Project)
-from oral_history.models import OralHistory as OHP_Project, Interview
+from oral_history.models import Interview
 from django.contrib.auth import get_user_model
 User = get_user_model()   # NOQA
 

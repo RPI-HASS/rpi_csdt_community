@@ -3,8 +3,8 @@ from __future__ import unicode_literals
 
 from django.contrib.auth import get_user_model
 from django.test import TestCase
-from .models import Tag, Interview, OralHistory
-from .forms import InterviewForm, OHPForm, TagForm
+from .models import Interview, OralHistory
+from .forms import OHPForm, TagForm
 from project_share.models import Project, Application
 
 # Create your tests here.
@@ -13,15 +13,21 @@ from project_share.models import Project, Application
 class InterviewTestCase(TestCase):
     def setUp(self):
         self.user = get_user_model().objects.create_user('test-user')
-        self.ohp = OralHistory.objects.create(project_name="Test OHP", byline="OHP Byline",
-                                              summary="OHP Summary", slug="test-ohp", is_official=True, approved=True)
-        self.app = Application.objects.create(name="test_app", application_type="OHP")
-        self.csdt = Project.objects.create(name="csdt_proj", application=app)
-        self.interview = Interview.objects.create(project=ohp, full_name="John Doe", date="Nov 20, 2018", location="Troy, NY", interview_by="Jane Doe",
-                                                  birthplace="Anytown, USA", occupation="Worker", birth_year="1960", slug="john-doe", approved=True, csdt_project=csdt)
-
-    def test_interview_views(self):
-        
+        ohp = OralHistory.objects.create(project_name="Test OHP", byline="OHP Byline",
+                                         summary="OHP Summary", slug="test-ohp", is_official=True, approved=True)
+        app = Application.objects.create(name="test_app", application_type="OHP")
+        csdt = Project.objects.create(name="csdt_proj", application=app)
+        self.interview = Interview.objects.create(project=ohp,
+                                                  full_name="John Doe",
+                                                  date="Nov 20, 2018",
+                                                  location="Troy, NY",
+                                                  interview_by="Jane Doe",
+                                                  birthplace="Anytown, USA",
+                                                  occupation="Worker",
+                                                  birth_year="1960",
+                                                  slug="john-doe",
+                                                  approved=True,
+                                                  csdt_project=csdt)
 
     def test_ohp_views(self):
         url = '/oralhistory/test-ohp/'
@@ -32,7 +38,6 @@ class InterviewTestCase(TestCase):
         response = self.client.get(url, **{'HTTP_REFERER': url})
         self.assertTrue(response.status_code == 300 or response.status_code == 200,
                         msg="Got code %s on %s" % (response.status_code, url))
-
 
     def test_interview_form(self):
         form = OHPForm({'user': self.user, 'is_official': False, 'approved': True, 'project_name': 'test-OHP',
