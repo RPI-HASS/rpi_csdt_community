@@ -63,7 +63,7 @@ class InterviewTestCase(TestCase):
         self.assertEqual(ohp_form.user, self.user)
 
     def test_tag_form(self):
-        interv = Interview.objects.get(pk=1).pk
+        interv = Interview.objects.get(slug="john-doe").pk
         # Interview.objects.get(slug='john-doe')
         form_data = {'hours': 0,
                      'mins': 1,
