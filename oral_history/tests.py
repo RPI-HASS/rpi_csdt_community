@@ -46,7 +46,6 @@ class InterviewTestCase(TestCase):
     def test_oralhistory_form(self):
         form_data = {
             'is_official': False,
-            'approved': True,
             'project_name': 'test-OHP',
             'byline': 'new oralhistory project',
             'summary': 'ohp summary',
@@ -59,7 +58,7 @@ class InterviewTestCase(TestCase):
         self.assertEqual(ohp_form.byline, 'new oralhistory project')
         self.assertEqual(ohp_form.slug, 'test-ohp-2')
         self.assertEqual(ohp_form.project_name, 'test-OHP')
-        self.assertEqual(ohp_form.approved, True)
+        self.assertEqual(ohp_form.approved, False)
         self.assertEqual(ohp_form.is_official, False)
         self.assertEqual(ohp_form.user, self.user)
 
