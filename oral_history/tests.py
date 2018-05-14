@@ -63,9 +63,10 @@ class InterviewTestCase(TestCase):
         self.assertEqual(ohp_form.user, self.user)
 
     def test_tag_form(self):
+        interv = Interview.objects.get(slug='john-doe')
         form_data = {'timestamp': 45,
                      'tag': 'talks about the city',
-                     'interview': self.interview.pk,
+                     'interview': interv,
                      'approved': True}
         form = TagForm(data=form_data)
         self.assertTrue(form.is_valid())
