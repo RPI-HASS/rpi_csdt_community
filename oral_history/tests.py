@@ -12,9 +12,13 @@ from project_share.models import Project, Application
 
 class InterviewTestCase(TestCase):
     def setUp(self):
-        self.user = get_user_model().objects.create_user(username='test-user', email='test@test.com', password='testpassword')
+        self.user = get_user_model().objects.create_user(username='test-user',
+                                                         email='test@test.com',
+                                                         password='testpassword')
         ohp = OralHistory.objects.create(project_name="Test OHP", byline="OHP Byline",
-                                         summary="OHP Summary", slug="test-ohp", is_official=True, approved=True)
+                                         summary="OHP Summary", slug="test-ohp",
+                                         is_official=True,
+                                         approved=True)
         app = Application.objects.create(name="test_app", application_type="OHP")
         csdt = Project.objects.create(name="csdt_proj", application=app)
         self.interview = Interview.objects.create(project=ohp,
@@ -39,9 +43,15 @@ class InterviewTestCase(TestCase):
         self.assertTrue(response.status_code == 300 or response.status_code == 200,
                         msg="Got code %s on %s" % (response.status_code, url))
 
-    def test_interview_form(self):
-        form = OHPForm({'user': self.user, 'is_official': False, 'approved': True, 'project_name': 'test-OHP',
-                        'byline': 'new oralhistory project', 'summary': 'ohp summary', 'slug': 'test-ohp'})
+    def test_oralhistory_form(self):
+        form_data = {'user': self.user,
+                     'is_official': False,
+                     'approved': True,
+                     'project_name': 'test-OHP',
+                     'byline': 'new oralhistory project', 
+                     'summary': 'ohp summary', 
+                     'slug': 'test-ohp'}
+        form = OHPForm(data=form_data)
         self.assertTrue(form.is_valid())
         ohp_form = form.save()
         self.assertEqual(ohp_form.summary, 'ohp summary')
