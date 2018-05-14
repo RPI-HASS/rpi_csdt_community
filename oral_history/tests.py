@@ -44,13 +44,13 @@ class InterviewTestCase(TestCase):
                         msg="Got code %s on %s" % (response.status_code, url))
 
     def test_oralhistory_form(self):
-        form_data = {'user': self.user,
-                     'is_official': False,
-                     'approved': True,
-                     'project_name': 'test-OHP',
-                     'byline': 'new oralhistory project', 
-                     'summary': 'ohp summary', 
-                     'slug': 'test-ohp'}
+        form_data = {
+            'is_official': False,
+            'approved': True,
+            'project_name': 'test-OHP',
+            'byline': 'new oralhistory project',
+            'summary': 'ohp summary',
+            'slug': 'test-ohp'}
         form = OHPForm(data=form_data)
         self.assertTrue(form.is_valid())
         ohp_form = form.save()
