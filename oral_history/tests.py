@@ -50,9 +50,10 @@ class InterviewTestCase(TestCase):
             'project_name': 'test-OHP',
             'byline': 'new oralhistory project',
             'summary': 'ohp summary',
-            'slug': 'test-ohp'}
+            'slug': 'test-ohp',
+            'user': self.user.pk}
         form = OHPForm(data=form_data)
-        self.assertTrue(form.is_valid())
+        self.assertTrue(form.is_valid(), form.errors)
         ohp_form = form.save()
         self.assertEqual(ohp_form.summary, 'ohp summary')
         self.assertEqual(ohp_form.byline, 'new oralhistory project')
