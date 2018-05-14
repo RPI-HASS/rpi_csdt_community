@@ -70,7 +70,7 @@ class InterviewTestCase(TestCase):
                      'interview': interv,
                      'approved': True}
         form = TagForm(data=form_data)
-        self.assertTrue(form.is_valid())
+        self.assertTrue(form.is_valid(), form.errors)
         tag_form = form.save()
         self.assertEqual(tag_form.tag, 'talks about the city')
         self.assertEqual(tag_form.timestamp, 45)
