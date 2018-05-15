@@ -70,12 +70,12 @@ class InterviewTestCase(TestCase):
                      'secs': 25,
                      'tag': 'talks about the city',
                      'honeypot': '',
-                     'interview': str(interv.id),
                      'approved': True}
         form = TagForm(data=form_data)
         self.assertTrue(form.is_valid(), form.errors)
         tag_form = form.save(commit=False)
         tag_form.timestamp = 85
+        tag_form.interview = interv.id
         form.save()
         tag_form.save()
         self.assertEqual(tag_form.tag, 'talks about the city')
