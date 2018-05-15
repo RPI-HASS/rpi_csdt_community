@@ -79,6 +79,6 @@ class InterviewTestCase(TestCase):
         form.save()
         tag_form.save()
         self.assertEqual(tag_form.tag, 'talks about the city')
-        self.assertEqual(tag_form.timestamp, 45)
+        self.assertEqual(tag_form.timestamp, 85)
         self.assertEqual(tag_form.interview, self.interview)
         self.assertEqual(tag_form.approved, True)
