@@ -75,7 +75,7 @@ class InterviewTestCase(TestCase):
         self.assertTrue(form.is_valid(), form.errors)
         tag_form = form.save(commit=False)
         tag_form.timestamp = 85
-        tag_form.interview.id = interv.id
+        tag_form.interview = interv
         form.save()
         tag_form.save()
         self.assertEqual(tag_form.tag, 'talks about the city')
