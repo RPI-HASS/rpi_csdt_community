@@ -15,7 +15,8 @@ User = get_user_model()
 
 
 def my_awesome_upload_function(instance, filename):
-    return os.path.join('oralhistoryproject/%s/' % instance.id, filename)
+    """ this function has to return the location to upload the file """
+    return os.path.join('/media/%s/' % instance.id, filename)
 
 
 class Interview(models.Model):
@@ -45,15 +46,11 @@ class Interview(models.Model):
         super(Interview, self).save(*args, **kwargs)
 
     def __unicode__(self):
-        if self.approved:
-            status = ""
-        else:
-            status = "NOT_APPROVED"
         try:
             username = self.user.username or 'null'
         except AttributeError:
             username = 'null'
-        return self.project.project_name + " => " + self.full_name + " by " + username + " " + status
+        return self.project.project_name + " => " + self.full_name + " by " + username
 
 
 class OralHistory(models.Model):

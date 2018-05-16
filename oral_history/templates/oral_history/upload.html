@@ -8,6 +8,11 @@
         <p style="font-size:1.5rem;"><a href="{% url 'oral_history:oral_history' slug=view.get_slug %}"><< Cancel and return to {{ view.get_slug }}</a></p>
         <p style="font-size:2rem;">Upload a new interview for {{ view.get_slug }}</p>
         <form class="form-horizontal" role="form" action="" method="post" enctype="multipart/form-data">
+            {% if messages %}
+                {% for message in messages %}
+                    alert(message);
+                {% endfor %}
+            {% endif %}
 
             {% csrf_token %}
             {% bootstrap_form form %}
