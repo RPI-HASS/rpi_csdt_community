@@ -109,30 +109,34 @@ class InterviewTestCase(TestCase):
         self.assertTrue(Interview.objects.get(slug='jane-doe').approved)
         self.int_admin.actions[1](self.int_admin, request, queryset)
         self.assertFalse(Interview.objects.get(slug='jane-doe').approved)
-        # form_data2 = {
-        #     'full_name': "Joe Doe",
-        #     'date': 'October',
-        #     'location': 'Albany, NY',
-        #     'interview_by': 'Mr. Noone',
-        #     'birthplace': 'Mexico',
-        #     'occupation': 'Writer',
-        #     'birth_year': '1955',
-        #     'summary': 'Summary of Interview',
-        #     'user': self.user.pk,
-        #     'project': self.ohp.pk,
-        #     'classroom': self.classroom.pk,
-        # }
-        # self.assertTrue(self.client.login(username='test-user', password='testpassword'))
 
-        # response = self.client.post(reverse('oral_history:upload', kwargs={'slug':self.ohp.slug}),
-        #                             data=form_data2, follow=True)
-        # self.assertTrue(response.status_code == 200,
-        #                   msg="Got code %s" % (response.status_code))
-        # print response.content
+        # test update view
 
-        # self.assertContains(response, 'error')
+        form_data2 = {
+            'full_name': "Joe Doe",
+            'date': 'October',
+            'location': 'Albany, NY',
+            'interview_by': 'Mr. Noone',
+            'birthplace': 'Mexico',
+            'occupation': 'Writer',
+            'birth_year': '1955',
+            'summary': 'Summary of Interview',
+            'user': self.user.pk,
+            'project': self.ohp.pk,
+            'classroom': self.classroom.pk,
+        }
+        self.assertTrue(self.client.login(username='test-user', password='testpassword'))
 
-        # self.assertEqual(Interview.objects.all(), 2)
+        response = self.client.post(reverse('oral_history:interview_update',
+                                            kwargs={'slug': 'test-ohp',
+                                                    'slug_interview': 'jane-doe'}),
+                                    data=form_data2, follow=True)
+        self.assertTrue(response.status_code == 200,
+                        msg="Got code %s" % (response.status_code))
+
+        self.assertContains(response, 'Thank you')
+
+        self.assertEqual(Interview.objects.all().count(), 2)
 
     def test_oralhistory_form(self):
         form_data = {

@@ -122,6 +122,7 @@ class ProjectRunDetail(DetailView):
     def render_to_response(self, context, **response_kwargs):
         context['application'] = context['project'].application
         try:
+            # needs interview context anyway, so might as well redirect here:
             if self.object.application.application_type.lower() == 'ohp':
                 interview = Interview.objects.get(csdt_project__pk=context['project'].id)
                 ohp = interview.project.slug

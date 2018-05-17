@@ -1,5 +1,13 @@
-{% extends 'base_sans_theme.html' %} {% load bootstrap3 %} {% block title %} {% for interview in view.interview %} {{ interview.full_name
-}} | {{ block.super }} {% endfor %} {% endblock %} {% block css %}
+{% extends 'base_sans_theme.html' %} {% load bootstrap3 %} 
+
+{% block title %} 
+{% for interview in view.interview %} 
+{{ interview.full_name
+}} | {{ block.super }} 
+{% endfor %} 
+{% endblock %} 
+
+{% block css %}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mediaelement/4.2.9/mediaelementplayer.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mediaelement-plugins/2.5.0/skip-back/skip-back.min.css">
 <style>
@@ -11,6 +19,9 @@
         margin:3px;
         color: black;
         padding:3px;
+    },
+    .notes-topic {
+        font-size: 1.5em;
     }
 </style>
  {% endblock %}
@@ -92,7 +103,50 @@
         </p>
         <p>{{ interview.summary|safe|linebreaks }}</p>
         {% endif %}
-
+        <p>&nbsp;</p>
+        <div class="row">
+            <div class="col-md-12 col-sm-12">
+                <p style="font-size:1.5em;"><strong>Interview Notes</strong></p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 col-sm-3">
+                <p class="notes-topic"><strong>Date of Interview</strong></p>
+            </div>
+            <div class="col-md-3 col-sm-3">
+                <p class="notes-topic"><strong>Location of Interview</strong></p>
+            </div>
+            <div class="col-md-3 col-sm-3">
+                <p class="notes-topic"><strong>Birthplace</strong></p>
+            </div>
+            <div class="col-md-3 col-sm-3">
+                <p class="notes-topic"><strong>Occupation</strong></p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 col-sm-3">
+                <p>{% if interview.date %}{{interview.date}}{% endif %}</p>
+            </div>
+            <div class="col-md-3 col-sm-3">
+                <p>{% if interview.location %}{{ interview.location}}{% endif %}</p>
+            </div>
+            <div class="col-md-3 col-sm-3">
+                <p>{% if interview.birthplace %}{{ interview.birthplace }}{% endif %}</p>
+            </div>
+            <div class="col-md-3 col-sm-3">
+                <p>{% if interview.occupation %}{{ interview.occupation }}{% endif %}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 col-sm-3">
+                <p class="notes-topic"><strong>Birth Year</strong></p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 col-sm-3">
+                <p>{% if interview.birth_year %}{{ interview.birth_year }}{% endif %}</p>
+            </div>
+        </div>
     </div>
 </div>
 

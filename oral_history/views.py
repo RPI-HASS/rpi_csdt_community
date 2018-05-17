@@ -7,6 +7,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.mail import send_mail
 from django.http import HttpResponseRedirect, Http404
+# from django.shortcuts import render
 from django.template.defaultfilters import slugify
 from django.urls import reverse, reverse_lazy
 from django.views.generic import TemplateView, ListView, FormView, UpdateView

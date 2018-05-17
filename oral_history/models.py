@@ -14,6 +14,7 @@ User = get_user_model()
 # Create your models here.
 
 
+# can't delete bc of migrations, even though it's not used anymore:
 def my_awesome_upload_function(instance, filename):
     """ this function has to return the location to upload the file """
     return os.path.join('/media/%s/' % instance.id, filename)
