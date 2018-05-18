@@ -33,7 +33,7 @@ djangocms-text-ckeditor==3.6.0
 djangocms-video==2.0.4
 djangorestframework==3.8.2
 easy-thumbnails==2.5
-geopy==1.13.0
+geopy==1.14.0
 gis-csdt==1.2.3
 markdown2==2.3.5
 numpy==1.14.3
