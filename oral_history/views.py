@@ -7,7 +7,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.mail import send_mail
 from django.http import HttpResponseRedirect, Http404
-# from django.shortcuts import render
+from django.shortcuts import render
 from django.template.defaultfilters import slugify
 from django.urls import reverse, reverse_lazy
 from django.views.generic import TemplateView, ListView, FormView, UpdateView
@@ -161,9 +161,9 @@ class UploadInterview(LoginRequiredMixin, DetailView, FormView):
                 form.mp3_file = request.FILES['mp3_file']
                 form.pic = request.FILES['pic']
 
-            text_dump = json.dumps([self.kwargs['slug'], slugify(form.cleaned_data['full_name'])])
-            project_blob = FileUpload(file_path=text_dump)
-            project_blob.save()
+            # text_dump = json.dumps([self.kwargs['slug'], slugify(form.cleaned_data['full_name'])])
+            # project_blob = FileUpload(file_path=text_dump)
+            # project_blob.save()
             image_blob = FileUpload(file_path=form.pic)
             image_blob.save()
             # find curr classroom
@@ -174,7 +174,6 @@ class UploadInterview(LoginRequiredMixin, DetailView, FormView):
                                description=form.cleaned_data['summary'],
                                owner=request.user,
                                application=application,
-                               project=project_blob,
                                classroom=classroom,
                                screenshot=image_blob, )
             new_proj.save()
@@ -190,8 +189,7 @@ class UploadInterview(LoginRequiredMixin, DetailView, FormView):
                        Please approve it.', 'csdtrpi@gmail.com',
                       ['holmr@rpi.edu'], fail_silently=True)
             return self.form_valid(form)
-        else:
-            return self.form_invalid(form)
+        return render(request, 'oral_history/upload.html', {'form':form, 'slug': self.kwargs['slug']})
 
 
 class UploadOHP(LoginRequiredMixin, DetailView, FormView):

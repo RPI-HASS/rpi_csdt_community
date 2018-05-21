@@ -30,7 +30,7 @@ class Interview(models.Model):
                             validators=[validate_image_file_extension],
                             upload_to='oralhistoryproject/%Y-%m-%d/')
     full_name = models.TextField(max_length=60)
-    date = models.CharField(blank=True, null=True, max_length=40)
+    date = models.DateField(blank=True, null=True)
     location = models.TextField(blank=True, null=True, max_length=70)
     interview_by = models.TextField(blank=True, null=True, max_length=60)
     birthplace = models.TextField(blank=True, null=True, max_length=60)
