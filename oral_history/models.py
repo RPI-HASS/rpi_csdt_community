@@ -36,7 +36,7 @@ class Interview(models.Model):
     birthplace = models.TextField(blank=True, null=True, max_length=60)
     occupation = models.TextField(blank=True, null=True, max_length=70)
     birth_year = models.TextField(blank=True, null=True, max_length=30)
-    summary = models.TextField(blank=True, null=True, max_length=45000)
+    summary = models.TextField(blank=True, null=True, max_length=85000)
     slug = models.SlugField(unique=True, blank=False, null=False)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, on_delete=models.SET_NULL)
     approved = models.BooleanField(default=False)
