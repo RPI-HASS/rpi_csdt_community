@@ -299,5 +299,4 @@ class InterviewUpdate(LoginRequiredMixin, UpdateView):
         if form.is_valid():
             form.save()
             return self.form_valid(form)
-        else:
-            return self.form_invalid(form)
+        return return render(request, 'oral_history/upload_update.html', {'form':form, 'slug': self.kwargs['slug'], 'slug_interview': self.kwargs['slug_interview']})
