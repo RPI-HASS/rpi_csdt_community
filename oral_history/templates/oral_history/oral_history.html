@@ -20,15 +20,25 @@
 
 <div class="row">
     <div class="col-md-12">
-        <p style="font-size: 1.5rem;" class="pull-left"><a href="{% url 'oral_history:menu' %}">Oral History Projects</a></p>
+        <p style="font-size: 1.5rem;" class="pull-left"><a href="{% url 'oral_history:menu' %}"><< Oral History Projects</a></p>
         
     </div>
 </div>
+{% if request.user == project.user or request.user.is_superuser %}
+<div class="row">
+    <div class="col-md-12">
+        <p class="" style="font-size: 1.5rem;">
+            <a href="{% url 'oral_history:update_ohp' slug=view.slug_return %}">** Update Project Details **</a>
+        </p>
+    </div>
+</div>
+{% endif %}
 <div class="row">
     <div class="col-md-12">
         <p style="font-size:1.5rem;" ><a href="{% url 'oral_history:upload' slug=view.slug_return %}">++ Upload New Interview</a></p>
     </div>
 </div>
+
 
  {% for project in view.project %}
  <div class="row">

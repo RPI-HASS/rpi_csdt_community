@@ -6,7 +6,7 @@
 <div class="row">
     <div class="col-md-12">
         
-        <p style="font-size:2rem;">Upload a new interview for {{ view.get_slug }}</p>
+        <p style="font-size:2rem;">Update project</p>
         {% if form.errors %}
             {% for field in form %}
                 {% for error in field.errors %}
@@ -22,6 +22,7 @@
             {% endfor %}
         {% endif %}
         <form class="form-horizontal" role="form" action="" method="post" enctype="multipart/form-data">
+
             {% csrf_token %}
             {% bootstrap_form form %}
 

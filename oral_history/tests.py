@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+import datetime
+
 from django.contrib.admin.sites import AdminSite
 from django.contrib.auth import get_user_model
 from django.core.urlresolvers import reverse
@@ -44,7 +46,7 @@ class InterviewTestCase(TestCase):
         self.csdt = Project.objects.create(name="csdt_proj", application=app)
         self.interview = Interview.objects.create(project=self.ohp,
                                                   full_name="John Doe",
-                                                  date="Nov 20, 2018",
+                                                  date="2018-11-11",
                                                   location="Troy, NY",
                                                   interview_by="Jane Doe",
                                                   birthplace="Anytown, USA",
@@ -74,7 +76,7 @@ class InterviewTestCase(TestCase):
     def test_interview_form(self):
         form_data = {
             'full_name': "Jane Doe",
-            'date': 'November',
+            'date': '2011-11-11',
             'location': 'Troy, NY',
             'interview_by': 'Django',
             'birthplace': 'New York',
@@ -100,7 +102,7 @@ class InterviewTestCase(TestCase):
         self.assertEqual(int_form.birthplace, 'New York')
         self.assertEqual(int_form.interview_by, 'Django')
         self.assertEqual(int_form.location, 'Troy, NY')
-        self.assertEqual(int_form.date, 'November')
+        self.assertEqual(int_form.date, datetime.date(2011, 11, 11))
         self.assertEqual(int_form.full_name, 'Jane Doe')
         self.assertEqual(int_form.slug, 'jane-doe')
         # test admin actions:
@@ -114,7 +116,7 @@ class InterviewTestCase(TestCase):
 
         form_data2 = {
             'full_name': "Joe Doe",
-            'date': 'October',
+            'date': '2018-10-10',
             'location': 'Albany, NY',
             'interview_by': 'Mr. Noone',
             'birthplace': 'Mexico',

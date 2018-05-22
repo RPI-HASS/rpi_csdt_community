@@ -1,23 +1,16 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-import os
-
 from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.core.validators import FileExtensionValidator, validate_image_file_extension
 from django.db import models
 from django.template.defaultfilters import slugify
+from django.urls import reverse
 
 User = get_user_model()
 
 # Create your models here.
-
-
-# can't delete bc of migrations, even though it's not used anymore:
-def my_awesome_upload_function(instance, filename):
-    """ this function has to return the location to upload the file """
-    return os.path.join('/media/%s/' % instance.id, filename)
 
 
 class Interview(models.Model):
@@ -41,6 +34,12 @@ class Interview(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, on_delete=models.SET_NULL)
     approved = models.BooleanField(default=False)
     csdt_project = models.ForeignKey('project_share.Project', null=True, blank=True, on_delete=models.SET_NULL)
+
+    def get_absolute_url(self):
+        return reverse(
+            'oral_history:interview',
+            kwargs={'slug': self.project.slug,
+                    'slug_interview': self.slug})
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.full_name)
@@ -66,6 +65,13 @@ class OralHistory(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, on_delete=models.SET_NULL)
     is_official = models.BooleanField(default=False)
     approved = models.BooleanField(default=False)
+
+    def get_absolute_url(self):
+        return reverse('oral_history:oral_history', kwargs={'slug': self.slug})
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.project_name)
+        super(OralHistory, self).save(*args, **kwargs)
 
     def __unicode__(self):
         try:

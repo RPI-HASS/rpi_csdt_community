@@ -2,12 +2,6 @@
 
 {% block content %}
 
-{% if messages %}
-    {% for message in messages %}
-        alert(message);
-    {% endfor %}
-{% endif %}
-
 Thank you for uploading your interview. After it is approved, it will appear on the oral history page's index of interviews.
 <p>
 <a href="{% url 'oral_history:menu' %}"><< Back to Oral Histories</a>

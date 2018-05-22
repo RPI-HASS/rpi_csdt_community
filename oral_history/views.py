@@ -1,14 +1,11 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-import json
-
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.mail import send_mail
-from django.http import HttpResponseRedirect, Http404
+from django.http import HttpResponseRedirect, Http404, HttpResponse
 from django.shortcuts import render
-from django.template.defaultfilters import slugify
 from django.urls import reverse, reverse_lazy
 from django.views.generic import TemplateView, ListView, FormView, UpdateView
 from django.views.generic.detail import DetailView
@@ -169,7 +166,10 @@ class UploadInterview(LoginRequiredMixin, DetailView, FormView):
             # find curr classroom
             # classroom =
             application = Application.objects.get(id=70)
-            classroom = Team.objects.get(pk=form.cleaned_data['classroom'])
+            if form.cleaned_data['classroom']:
+                classroom = Team.objects.get(pk=form.cleaned_data['classroom'])
+            else:
+                classroom = None
             new_proj = Project(name=form.cleaned_data['full_name'],
                                description=form.cleaned_data['summary'],
                                owner=request.user,
@@ -189,7 +189,8 @@ class UploadInterview(LoginRequiredMixin, DetailView, FormView):
                        Please approve it.', 'csdtrpi@gmail.com',
                       ['holmr@rpi.edu'], fail_silently=True)
             return self.form_valid(form)
-        return render(request, 'oral_history/upload.html', {'form':form, 'slug': self.kwargs['slug']})
+        # return HttpResponseRedirect(reverse('oral_history:upload'))
+        return HttpResponse(render(request, 'oral_history/upload.html', {'form': form, }))
 
 
 class UploadOHP(LoginRequiredMixin, DetailView, FormView):
@@ -265,7 +266,7 @@ class InterviewUpdate(LoginRequiredMixin, UpdateView):
     def get_object(self, queryset=None):
 
         obj = Interview.objects.get(slug=self.kwargs['slug_interview'])
-        if not obj.user == self.request.user or self.request.user.is_superuser:
+        if not obj.user == self.request.user:
             raise Http404
         return obj
 
@@ -299,4 +300,49 @@ class InterviewUpdate(LoginRequiredMixin, UpdateView):
         if form.is_valid():
             form.save()
             return self.form_valid(form)
-        return return render(request, 'oral_history/upload_update.html', {'form':form, 'slug': self.kwargs['slug'], 'slug_interview': self.kwargs['slug_interview']})
+        return render(
+            request,
+            'oral_history/upload_update.html',
+            {'form': form, })
+
+
+class OHPUpdate(LoginRequiredMixin, UpdateView):
+    template_name = 'oral_history/update_ohp.html'
+    form_class = OHPForm
+    model = OralHistory
+
+    def get_object(self, queryset=None):
+
+        obj = OralHistory.objects.get(slug=self.kwargs['slug'])
+        if not obj.user == self.request.user:
+            raise Http404
+        return obj
+
+    def form_valid(self, form):
+        return HttpResponseRedirect(reverse('oral_history:thank_you'))
+
+    def form_invalid(self, form):
+        return HttpResponseRedirect(reverse('oral_history:error'))
+
+    def get_initial(self):
+        return {
+            'project_name': self.object.project_name,
+            'pic': self.object.pic,
+            'byline': self.object.byline,
+            'summary': self.object.summary,
+            'about_html': self.object.about_html,
+            'user': self.object.user,
+        }
+
+    success_url = reverse_lazy('home')
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()  # assign the object to the view
+        form = OHPForm(request.POST or None, request.FILES or None, instance=self.object)
+        if form.is_valid():
+            form.save()
+            return self.form_valid(form)
+        return render(
+            request,
+            'oral_history/update_ohp.html',
+            {'form': form, })

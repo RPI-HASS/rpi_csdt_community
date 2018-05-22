@@ -5,7 +5,9 @@ from django_teams.models import Team
 
 
 class InterviewForm(forms.ModelForm):
-    classroom = forms.ChoiceField()
+    classroom = forms.ChoiceField(required=False)
+    date = forms.DateField(label='Date in format YYYY-MM-DD')
+    location = forms.TextField(label='Location of Interview')
 
     class Meta:
         model = Interview
@@ -34,7 +36,7 @@ class InterviewForm(forms.ModelForm):
 class OHPForm(forms.ModelForm):
     class Meta:
         model = OralHistory
-        exclude = ['is_official', 'approved']
+        exclude = ['is_official', 'approved', 'slug']
 
         widgets = {
             'user': forms.TextInput(attrs={'readonly': 'readonly'}),

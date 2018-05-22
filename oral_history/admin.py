@@ -41,17 +41,17 @@ deapprove_ohps.short_description = "De-approve selected OHPs"
 
 
 class TagAdmin(admin.ModelAdmin):
-    list_display = ('approved', '__unicode__')
+    list_display = ('__unicode__', 'approved',)
     actions = [approve_tags, deapprove_tags]
 
 
 class InterviewAdmin(admin.ModelAdmin):
-    list_display = ('approved', '__unicode__')
+    list_display = ('__unicode__', 'approved',)
     actions = [approve_interviews, deapprove_interviews]
 
 
 class OHPAdmin(admin.ModelAdmin):
-    list_display = ('approved', '__unicode__')
+    list_display = ('__unicode__', 'is_official', 'approved',)
     actions = [approve_ohps, deapprove_ohps]
 
 
