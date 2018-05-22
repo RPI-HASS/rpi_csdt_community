@@ -143,7 +143,7 @@ class InterviewTestCase(TestCase):
     def test_oralhistory_form(self):
         form_data = {
             'is_official': False,
-            'project_name': 'test-OHP',
+            'project_name': 'test-OHP-2',
             'byline': 'new oralhistory project',
             'summary': 'ohp summary',
             'slug': 'test-ohp-2',
@@ -154,7 +154,7 @@ class InterviewTestCase(TestCase):
         self.assertEqual(ohp_form.summary, 'ohp summary')
         self.assertEqual(ohp_form.byline, 'new oralhistory project')
         self.assertEqual(ohp_form.slug, 'test-ohp-2')
-        self.assertEqual(ohp_form.project_name, 'test-OHP')
+        self.assertEqual(ohp_form.project_name, 'test-OHP-2')
         self.assertEqual(ohp_form.approved, False)
         self.assertEqual(ohp_form.is_official, False)
         self.assertEqual(ohp_form.user, self.user)
@@ -196,6 +196,28 @@ class InterviewTestCase(TestCase):
         self.assertTrue(response.status_code == 200,
                         msg="Got code %s" % (response.status_code))
         self.assertContains(response, 'error')
+        self.assertEqual(OralHistory.objects.all().count(), 3)
+
+        # test the update form view
+        form_data2 = {
+            'is_official': False,
+            'project_name': 'test-OHP-3',
+            'byline': 'new oralhistory project',
+            'summary': 'ohp summary',
+            'slug': 'test-ohp-3',
+            'user': self.user.pk,
+        }
+        self.assertTrue(self.client.login(username='test-user', password='testpassword'))
+
+        response = self.client.post(reverse('oral_history:update_ohp',
+                                            kwargs={'slug': 'test-ohp-3',
+                                                    }),
+                                    data=form_data2, follow=True)
+        self.assertTrue(response.status_code == 200,
+                        msg="Got code %s" % (response.status_code))
+
+        self.assertContains(response, 'Thank you')
+
         self.assertEqual(OralHistory.objects.all().count(), 3)
 
     def test_tag_form(self):

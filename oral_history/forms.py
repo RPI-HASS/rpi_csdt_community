@@ -7,7 +7,7 @@ from django_teams.models import Team
 class InterviewForm(forms.ModelForm):
     classroom = forms.ChoiceField(required=False)
     date = forms.DateField(label='Date in format YYYY-MM-DD')
-    location = forms.TextField(label='Location of Interview')
+    location = forms.CharField(label='Location of Interview', max_length=70)
 
     class Meta:
         model = Interview
