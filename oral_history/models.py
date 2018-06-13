@@ -82,7 +82,7 @@ class OralHistory(models.Model):
 
 
 class Tag(models.Model):
-    timestamp = models.IntegerField()
+    timestamp = models.DurationField()
     tag = models.CharField(max_length=40)
     interview = models.ForeignKey('Interview', on_delete=models.CASCADE)
     approved = models.BooleanField(default=False)
@@ -90,16 +90,17 @@ class Tag(models.Model):
     def __unicode__(self):
         return "Tag: " + self.interview.project.project_name + \
             ": " + self.interview.full_name + " => \"" + self.tag + \
-            "\", " + str(self.timestamp) + " secs"
+            "\", " + str(self.to_timestamp()) + " secs"
 
     def to_timestamp(self):
-        hours = int(self.timestamp / 3600)
-        if hours > 0:
-            mins = int((self.timestamp - (hours * 3600)) / 60)
-        else:
-            mins = int(self.timestamp / 60)
-        secs = self.timestamp % 60
-        if hours > 0:
-            return "{}:{}:{}".format(str(hours).zfill(2), str(mins).zfill(2), str(secs).zfill(2))
-        else:
-            return "{}:{}".format(str(mins).zfill(2), str(secs).zfill(2))
+        return self.timestamp.strftime("%H:%M:%S")
+        # hours = int(self.timestamp / 3600)
+        # if hours > 0:
+        #     mins = int((self.timestamp - (hours * 3600)) / 60)
+        # else:
+        #     mins = int(self.timestamp / 60)
+        # secs = self.timestamp % 60
+        # if hours > 0:
+        #     return "{}:{}:{}".format(str(hours).zfill(2), str(mins).zfill(2), str(secs).zfill(2))
+        # else:
+        #     return "{}:{}".format(str(mins).zfill(2), str(secs).zfill(2))

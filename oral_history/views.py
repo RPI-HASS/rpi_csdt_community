@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+import datetime
+
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.mail import send_mail
@@ -92,7 +94,7 @@ class InterviewView(TemplateView, FormView):
             mins = form.cleaned_data['mins']
             secs = form.cleaned_data['secs']
             total_time = (hours * 3600) + (mins * 60) + secs
-            new_tag.timestamp = total_time
+            new_tag.timestamp = datetime.timedelta(seconds=total_time)
             if not new_tag.interview.user == self.request.user:
                 send_mail('CSDT: New Oral History Project Tag needs approval',
                           'There is a new oral history project tag that \
@@ -177,9 +179,6 @@ class UploadInterview(LoginRequiredMixin, DetailView, FormView):
                                classroom=classroom,
                                screenshot=image_blob, )
             new_proj.save()
-            # save_proj = Project.objects.get(id=new_proj.id)
-            # print('save_proj', save_proj)
-            # TODO: Not working
             new_interview.csdt_project = new_proj
             new_interview.save()
             form.save()

@@ -140,6 +140,29 @@ class InterviewTestCase(TestCase):
 
         self.assertEqual(Interview.objects.all().count(), 2)
 
+        # test post form
+
+        form_data2 = {
+            'full_name': "John Doe",
+            'date': '2018-10-10',
+            'location': 'Albany, NY',
+            'interview_by': 'Mr. Noone',
+            'birthplace': 'Mexico',
+            'occupation': 'Writer',
+            'birth_year': '1955',
+            'summary': 'Summary of Interview',
+            'user': self.user.pk,
+            'project': self.ohp.pk,
+            'classroom': self.classroom.pk,
+        }
+
+        self.assertTrue(self.client.login(username='test-user', password='testpassword'))
+
+        response = self.client.post(reverse('oral_history:interview_update',
+                                            kwargs={'slug': 'test-ohp',
+                                                    }),
+                                    data=form_data2, follow=True)
+
     def test_oralhistory_form(self):
         form_data = {
             'is_official': False,
