@@ -36,7 +36,7 @@ easy-thumbnails==2.5
 geopy==1.14.0
 gis-csdt==1.2.3
 markdown2==2.3.5
-numpy==1.14.3
+numpy==1.14.4
 oauthlib==2.0.7
 Pillow==5.1.0
 psycopg2==2.7.4
