@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+import datetime
+
 from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.core.validators import FileExtensionValidator, validate_image_file_extension
@@ -93,7 +95,8 @@ class Tag(models.Model):
             "\", " + str(self.to_timestamp()) + " secs"
 
     def to_timestamp(self):
-        return self.timestamp.strftime("%H:%M:%S")
+        date_time = datetime.datetime.strptime(str(self.timestamp), "%H:%M:%S")
+        return date_time.strftime("%H:%M:%S")
         # hours = int(self.timestamp / 3600)
         # if hours > 0:
         #     mins = int((self.timestamp - (hours * 3600)) / 60)
