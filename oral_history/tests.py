@@ -143,7 +143,7 @@ class InterviewTestCase(TestCase):
         # test post form
 
         form_data2 = {
-            'full_name': "John Doe",
+            'full_name': "Johnny Doe",
             'date': '2018-10-10',
             'location': 'Albany, NY',
             'interview_by': 'Mr. Noone',
@@ -160,6 +160,7 @@ class InterviewTestCase(TestCase):
 
         response = self.client.post(reverse('oral_history:interview_update',
                                             kwargs={'slug': 'test-ohp',
+                                                    'slug_interview': 'joe-doe',
                                                     }),
                                     data=form_data2, follow=True)
 
@@ -255,19 +256,19 @@ class InterviewTestCase(TestCase):
         form = TagForm(data=form_data)
         self.assertTrue(form.is_valid(), form.errors)
         tag_form = form.save(commit=False)
-        tag_form.timestamp = 85
+        tag_form.timestamp = datetime.timedelta(seconds=85)
         tag_form.approved = True
         tag_form.interview = interv
         form.save()
         tag_form.save()
         self.assertEqual(tag_form.tag, 'talks about the city')
-        self.assertEqual(tag_form.timestamp, 85)
+        self.assertEqual(tag_form.timestamp, datetime.timedelta(seconds=85))
         self.assertEqual(tag_form.interview, self.interview)
         self.assertEqual(tag_form.approved, True)
         self.assertEqual(tag_form.__unicode__(),
-                         "Tag: Test OHP: John Doe => \"talks about the city\", 85 secs")
-        self.assertEqual(tag_form.to_timestamp(), "01:25")
-        tag_form.timestamp = 3601
+                         "Tag: Test OHP: John Doe => \"talks about the city\", 00:01:25")
+        self.assertEqual(tag_form.to_timestamp(), "00:01:25")
+        tag_form.timestamp = datetime.timedelta(seconds=3601)
         tag_form.save()
         self.assertEqual(tag_form.to_timestamp(), "01:00:01")
         # test honeypot

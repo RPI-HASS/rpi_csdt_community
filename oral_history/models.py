@@ -92,18 +92,8 @@ class Tag(models.Model):
     def __unicode__(self):
         return "Tag: " + self.interview.project.project_name + \
             ": " + self.interview.full_name + " => \"" + self.tag + \
-            "\", " + str(self.to_timestamp()) + " secs"
+            "\", " + str(self.to_timestamp())
 
     def to_timestamp(self):
         date_time = datetime.datetime.strptime(str(self.timestamp), "%H:%M:%S")
         return date_time.strftime("%H:%M:%S")
-        # hours = int(self.timestamp / 3600)
-        # if hours > 0:
-        #     mins = int((self.timestamp - (hours * 3600)) / 60)
-        # else:
-        #     mins = int(self.timestamp / 60)
-        # secs = self.timestamp % 60
-        # if hours > 0:
-        #     return "{}:{}:{}".format(str(hours).zfill(2), str(mins).zfill(2), str(secs).zfill(2))
-        # else:
-        #     return "{}:{}".format(str(mins).zfill(2), str(secs).zfill(2))
