@@ -39,7 +39,7 @@ markdown2==2.3.5
 numpy==1.14.3
 oauthlib==2.0.7
 Pillow==5.1.0
-psycopg2==2.7.4
+psycopg2==2.7.5
 pytz==2018.4
 six==1.11.0
 git+https://github.com/bartTC/django-attachments.git
