@@ -231,6 +231,7 @@ INSTALLED_APPS = (
     'django_pre_post',
     'gis_csdt',
     'django.contrib.gis',
+    'oral_history',
 )
 
 TEMPLATES = [
@@ -316,6 +317,7 @@ COMPRESS_PRECOMPILERS = (
     ('stylesheet/less', COMPRESS_LESSC_COMMAND),
 )
 
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
