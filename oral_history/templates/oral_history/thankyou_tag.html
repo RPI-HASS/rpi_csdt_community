@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+Thank you for adding a tag. After it is approved, it will appear on the interview page. You can continue to add tags for other times while you wait.
+<p>
+<a href="{% url 'oral_history:interview' slug=view.get_slug slug_interview=view.get_slug_interview %}"><< Back to Interview</a>
+</p>
+{% endblock %}

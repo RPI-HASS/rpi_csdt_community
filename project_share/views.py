@@ -18,9 +18,10 @@ from project_share.forms import (ApprovalForm, ProjectForm,
                                  ProjectUnpublishForm)
 from project_share.models import (Application, ApplicationDemo,
                                   Approval, Project)
-
+from oral_history.models import Interview
 from django.contrib.auth import get_user_model
 User = get_user_model()   # NOQA
+
 
 from . import forms
 
@@ -120,6 +121,14 @@ class ProjectRunDetail(DetailView):
 
     def render_to_response(self, context, **response_kwargs):
         context['application'] = context['project'].application
+        try:
+            # needs interview context anyway, so might as well redirect here:
+            if self.object.application.application_type.lower() == 'ohp':
+                interview = Interview.objects.get(csdt_project__pk=context['project'].id)
+                ohp = interview.project.slug
+                return redirect('oral_history:interview', slug=ohp, slug_interview=interview.slug)
+        except:
+            pass
         try:
             context['GOOGLE_ANALYTICS_PROPERTY_ID'] = settings.GOOGLE_ANALYTICS_PROPERTY_ID
         except:
