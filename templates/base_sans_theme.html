@@ -1,0 +1,71 @@
+{% load sekizai_tags %}
+{% load rpi_csdt_community_tags %}
+{% load compress %}
+{% load static %}
+{% load analytical %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% analytical_head_top %}
+    <meta charset="utf-8">
+    <title>{% block title %}CSDT | RPI | Troy, NY{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Learn how to program by reading about heritage algorithms from cultures around the world. Then create similar works of art using code in a design simulation.">
+    <meta name="keywords" content="learn to program k-12, learn to code k-12, k-12 programming, k-12 coding, k-12 programming tutorial, k-12 coding tutorial, programming lessons, programming tutorials, coding tutorials, learn programming, learn coding, k-12">
+
+    {% block css %}{% endblock %}
+    {% render_block "css" %}
+    {% compress css %}
+        {% block extra_style %}
+        <link rel="stylesheet" href="{% static "less/style.less" %}" type="text/less" charset="utf-8">
+        {% endblock %}
+    {% endcompress %}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Khula:400,700" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/csdt.css' %}" >
+
+
+    {% block extra_head %}{% endblock %}
+    {% analytical_head_bottom %}
+  </head>
+
+  <body>
+    {% analytical_body_top %}
+     {% include "_nav.html" %}
+
+
+    {% block pre-body %}
+    {% endblock %}
+
+
+
+    {% block base_content %}{% endblock %}
+
+
+    <div class="container">
+
+        {% block breadcrumb %}
+        {% endblock breadcrumb %}
+        {% block content %}{% endblock %}
+
+    </div>
+
+        <script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+    {% render_block "js" %}
+    {% if GOOGLE_ANALYTICS_PROPERTY_ID %}
+        <script type="text/javascript" src="{% static "js/ga.js" %}"></script>
+    {% endif %}
+
+    {% block js %}
+    {% endblock %}
+
+    {% block extra_script %}{% endblock %}
+    {% analytical_body_bottom %}
+  </body>
+</html>
