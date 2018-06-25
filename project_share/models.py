@@ -119,7 +119,8 @@ class Application(models.Model):
     application_type = models.CharField(max_length=5, choices=(
         ('CSNAP', 'CSnap'),
         ('BLOCK', 'C-Scratch'),
-        ('SPA', 'SinglePageApplication')))
+        ('SPA', 'SinglePageApplication'),
+        ('OHP', 'Oral History Project')))
     application_file = models.FileField(upload_to=application_application, null=True, blank=True)
 
     featured = models.BooleanField(default=True)

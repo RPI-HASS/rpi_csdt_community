@@ -39,6 +39,7 @@ urlpatterns = [
     url(r'^questionnaire/', include('django_pre_post.urls')),
     url(r'^accounts/', include('allauth.urls')),
     url(r'^comments/', include('django_comments.urls')),
+    url(r'^oralhistory/', include('oral_history.urls', namespace="oral_history")),
     url(r'^blogcomments/', include("comments.urls", namespace='comments')),
     url(r'^news/', include("blogposts.urls", namespace='blogposts')),
     url(r'^about/', About.as_view(), name="about"),
