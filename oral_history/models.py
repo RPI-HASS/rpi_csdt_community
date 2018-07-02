@@ -62,7 +62,6 @@ class OralHistory(models.Model):
                             upload_to='oralhistoryproject/%Y-%m-%d/')
     byline = models.TextField(blank=True, null=True, max_length=100)
     summary = models.TextField(blank=True, null=True, max_length=2000)
-    about_html = models.TextField(blank=True, null=True, max_length=1000)
     slug = models.SlugField(unique=True, blank=False, null=False)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, on_delete=models.SET_NULL)
     is_official = models.BooleanField(default=False)
@@ -97,3 +96,6 @@ class Tag(models.Model):
     def to_timestamp(self):
         date_time = datetime.datetime.strptime(str(self.timestamp), "%H:%M:%S")
         return date_time.strftime("%H:%M:%S")
+
+    def to_secs(self):
+        return self.timestamp.total_seconds()
