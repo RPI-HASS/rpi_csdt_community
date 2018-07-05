@@ -310,12 +310,12 @@ MY_LESS_APP = os.path.join(BASE_DIR, 'static', 'less')
 
 COMPRESS_ENABLED = False
 # COMPRESS_LESSC_COMMAND = 'lessc --include-path={}'.format(os.pathsep.join([BOOTSTRAP_LESS, MY_LESS_APP]))
-COMPRESS_LESSC_COMMAND += " {infile} {outfile}"
+# COMPRESS_LESSC_COMMAND += " {infile} {outfile}"
 
-COMPRESS_PRECOMPILERS = (
-    ('text/less', COMPRESS_LESSC_COMMAND),
-    ('stylesheet/less', COMPRESS_LESSC_COMMAND),
-)
+# COMPRESS_PRECOMPILERS = (
+#     ('text/less', COMPRESS_LESSC_COMMAND),
+#     ('stylesheet/less', COMPRESS_LESSC_COMMAND),
+# )
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
