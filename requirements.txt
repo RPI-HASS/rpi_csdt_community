@@ -1,6 +1,6 @@
 BeautifulSoup==3.2.1
 coverage==4.5.1
-Django==1.11.13 # pyup: < 2.0.0 until 2020-04-01
+Django==1.11.14 # pyup: < 2.0.0 until 2020-04-01
 django-allauth==0.36.0
 django-analytical==2.4.0
 django-attachments==1.3
