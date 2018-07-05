@@ -309,7 +309,7 @@ MY_LESS_APP = os.path.join(BASE_DIR, 'static', 'less')
 # BOOTSTRAP_LESS = os.path.join(os.path.dirname(twitter_bootstrap.__file__), 'static', 'twitter_bootstrap', 'less')
 
 COMPRESS_ENABLED = False
-COMPRESS_LESSC_COMMAND = 'lessc --include-path={}'.format(os.pathsep.join([BOOTSTRAP_LESS, MY_LESS_APP]))
+# COMPRESS_LESSC_COMMAND = 'lessc --include-path={}'.format(os.pathsep.join([BOOTSTRAP_LESS, MY_LESS_APP]))
 COMPRESS_LESSC_COMMAND += " {infile} {outfile}"
 
 COMPRESS_PRECOMPILERS = (
