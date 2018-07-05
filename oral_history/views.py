@@ -167,7 +167,7 @@ class UploadInterview(LoginRequiredMixin, DetailView, FormView):
             image_blob.save()
             # find curr classroom
             # classroom =
-            application = Application.objects.get(id=76)
+            application = Application.objects.get(name="Oral Histories")
             if form.cleaned_data['classroom']:
                 classroom = Team.objects.get(pk=form.cleaned_data['classroom'])
             else:

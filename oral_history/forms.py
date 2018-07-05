@@ -5,7 +5,7 @@ from django_teams.models import Team
 
 
 class InterviewForm(forms.ModelForm):
-    mp3_file = forms.FileField(label="Mp3 file that's <50mb \
+    mp3_file = forms.FileField(required=False, label="Mp3 file that's <50mb \
         (tip: make mono and <=96kbps bitrate)")
     classroom = forms.ChoiceField(required=False)
     date = forms.DateField(label='Date of interview in format YYYY-MM-DD')
