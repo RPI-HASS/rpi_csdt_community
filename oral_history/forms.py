@@ -35,7 +35,6 @@ class InterviewForm(forms.ModelForm):
         self.fields['classroom'].choices.append(('', '---------------'))
         test = [(choice.pk, choice) for choice in Team.objects.filter(users=self.user)]
         self.fields['classroom'].choices += test
-        
 
 
 class OHPForm(forms.ModelForm):
