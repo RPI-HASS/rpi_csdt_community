@@ -169,7 +169,10 @@ class UploadInterview(LoginRequiredMixin, DetailView, FormView):
             # classroom =
             application = Application.objects.get(name="Oral Histories")
             if form.cleaned_data['classroom']:
-                classroom = Team.objects.get(pk=form.cleaned_data['classroom'])
+                if form.cleaned_data['classroom'] == '':
+                    classroom = None
+                else:
+                    classroom = Team.objects.get(pk=form.cleaned_data['classroom'])
             else:
                 classroom = None
             new_proj = Project(name=form.cleaned_data['full_name'],

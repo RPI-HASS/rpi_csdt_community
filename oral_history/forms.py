@@ -31,8 +31,10 @@ class InterviewForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user', None)
         super(InterviewForm, self).__init__(*args, **kwargs)
-        self.fields['classroom'].choices = [
-            (choice.pk, choice) for choice in Team.objects.filter(users=self.user)]
+        self.fields['classroom'].choices = []
+        self.fields['classroom'].choices.append(('', '---------------'))
+        test = [(choice.pk, choice) for choice in Team.objects.filter(users=self.user)]
+        self.fields['classroom'].choices += test
 
 
 class OHPForm(forms.ModelForm):
