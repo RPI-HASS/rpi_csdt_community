@@ -167,9 +167,12 @@ class UploadInterview(LoginRequiredMixin, DetailView, FormView):
             image_blob.save()
             # find curr classroom
             # classroom =
-            application = Application.objects.get(id=70)
+            application = Application.objects.get(name="Oral Histories")
             if form.cleaned_data['classroom']:
-                classroom = Team.objects.get(pk=form.cleaned_data['classroom'])
+                if form.cleaned_data['classroom'] == '':
+                    classroom = None
+                else:
+                    classroom = Team.objects.get(pk=form.cleaned_data['classroom'])
             else:
                 classroom = None
             new_proj = Project(name=form.cleaned_data['full_name'],
@@ -269,6 +272,12 @@ class InterviewUpdate(LoginRequiredMixin, UpdateView):
             raise Http404
         return obj
 
+    def get_slug(self):
+        return self.kwargs['slug']
+
+    def get_slug_interview(self):
+        return self.kwargs['slug_interview']
+
     def form_valid(self, form):
         return HttpResponseRedirect(reverse('oral_history:thank_you'))
 
@@ -329,7 +338,6 @@ class OHPUpdate(LoginRequiredMixin, UpdateView):
             'pic': self.object.pic,
             'byline': self.object.byline,
             'summary': self.object.summary,
-            'about_html': self.object.about_html,
             'user': self.object.user,
         }
 

@@ -30,7 +30,10 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mediaelement/4.2.9/mediaelement-and-player.min.js"></script> 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mediaelement-plugins/2.5.0/skip-back/skip-back.min.js"></script> 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mediaelement-plugins/2.5.0/skip-back/skip-back-i18n.js"></script> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mediaelement-plugins/2.5.0/skip-back/skip-back-i18n.js"></script>
+<script>
+    let mediaplayer = $('#ohp-player');
+</script>
 
 
 
@@ -82,7 +85,7 @@
         <div style="display: flex;flex-direction: row;flex-wrap:wrap;justify-content: flex-start;">
             {% for tag in tags %}
 
-            <div class="tag-btn">{{ tag.to_timestamp }} - {{ tag.tag }}</div>
+            <div class="tag-btn" onclick="mediaplayer[0].setCurrentTime({{ tag.to_secs }});">{{ tag.to_timestamp }} - {{ tag.tag }}</div>
 
             {% endfor %}
         </div>

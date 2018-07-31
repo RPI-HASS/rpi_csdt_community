@@ -5,8 +5,10 @@ from django_teams.models import Team
 
 
 class InterviewForm(forms.ModelForm):
+    mp3_file = forms.FileField(required=False, label="Mp3 file that's <50mb \
+        (tip: make mono and <=96kbps bitrate)")
     classroom = forms.ChoiceField(required=False)
-    date = forms.DateField(label='Date in format YYYY-MM-DD')
+    date = forms.DateField(label='Date of interview in format YYYY-MM-DD')
     location = forms.CharField(label='Location of Interview', max_length=70)
 
     class Meta:
@@ -29,8 +31,10 @@ class InterviewForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user', None)
         super(InterviewForm, self).__init__(*args, **kwargs)
-        self.fields['classroom'].choices = [
-            (choice.pk, choice) for choice in Team.objects.filter(users=self.user)]
+        self.fields['classroom'].choices = []
+        self.fields['classroom'].choices.append(('', '---------------'))
+        test = [(choice.pk, choice) for choice in Team.objects.filter(users=self.user)]
+        self.fields['classroom'].choices += test
 
 
 class OHPForm(forms.ModelForm):
