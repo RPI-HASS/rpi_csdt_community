@@ -3,18 +3,18 @@
 	url = https://github.com/GK-12/Snap--Build-Your-Own-Blocks.git
 [submodule "static/applications/CSnap-Modules"]
 	path = static/applications/CSnap-Modules
-	url = https://github.com/CSnap/CSnap-Modules
+	url = https://github.com/CSDTs/CSnap-Modules
 [submodule "static/CSDT_Single_Page"]
 	path = static/CSDT_Single_Page
-	url = https://github.com/CSnap/CSDT_Single_Page
+	url = https://github.com/CSDTs/CSDT_Single_Page
 	branch = master
 [submodule "static/applications/CScratch-Modules"]
 	path = static/applications/CScratch-Modules
-	url = https://github.com/CSnap/CScratch-Modules
+	url = https://github.com/CSDTs/CScratch-Modules
 	branch = master
 [submodule "static/CScratch"]
 	path = static/CScratch
-	url = https://github.com/CSnap/CScratch
+	url = https://github.com/CSDTs/CScratch
 [submodule "static/fracexpl"]
 	path = static/fracexpl
 	url = https://github.com/CSDTs/fracexpl
