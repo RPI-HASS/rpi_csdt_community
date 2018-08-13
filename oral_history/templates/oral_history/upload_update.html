@@ -5,8 +5,8 @@
 
 <div class="row">
     <div class="col-md-12">
-        
-        <p style="font-size:2rem;">Update interview for {{ view.get_slug }}</p>
+        <p><a href="{% url 'oral_history:interview' slug=view.get_slug slug_interview=view.get_slug_interview %}"><< return to {{ view.get_slug_interview }} interview</a></p>
+        <p style="font-size:2rem;">Update interview for {{ view.get_slug_interview }}</p>
         {% if form.errors %}
             {% for field in form %}
                 {% for error in field.errors %}
