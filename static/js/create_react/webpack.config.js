@@ -20,13 +20,11 @@ module.exports = {
   },
   output: {
     path: path.join(__dirname, "src"),
-    filename: "main.min.js"
+    filename: "main.production.min.js"
   },
-  plugins: debug ? [] : [
+  plugins:  [
     new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: JSON.stringify('production')
-      }
+      'process.env.NODE_ENV': JSON.stringify('production')
     }),
     new webpack.optimize.UglifyJsPlugin(),
     new webpack.optimize.DedupePlugin(),
