@@ -1,4 +1,9 @@
 {% extends "base.html" %}
+
+{% block title %}
+About Culturally Situated Design Tools
+{% endblock %}
+
 {% block content %}
 <div class="container-fluid">
   <div class="row">
@@ -36,7 +41,7 @@
         <p>
           <strong>Video Tutorials:</strong>
           <br>
-          <a href="https://vimeo.com/245028587">Classroom Creation</a><br>
+          <a href="https://vimeo.com/245028587">Classroom Creation</a> (<a href="{% url 'classrooms-guide' %}">Text-Only Guide</a>)<br>
           <a href="https://vimeo.com/245421557">Classroom Administration</a><br>
           <a href="https://vimeo.com/245421728">How Students Will Use Classrooms</a>
         </p>
