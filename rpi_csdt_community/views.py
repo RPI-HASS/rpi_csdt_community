@@ -49,6 +49,10 @@ class About(TemplateView):
     template_name = "rpi_csdt_community/about.html"
 
 
+class ClassroomsGuide(TemplateView):
+    template_name = "rpi_csdt_community/classrooms_guide.html"
+
+
 class Publications(TemplateView):
     template_name = "rpi_csdt_community/publications.html"
 
