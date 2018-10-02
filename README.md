@@ -3,13 +3,13 @@
 [![Build Status](https://travis-ci.org/RPI-HASS/rpi_csdt_community.svg?branch=master)](https://travis-ci.org/RPI-HASS/rpi_csdt_community) [![Updates](https://pyup.io/repos/github/RPI-HASS/rpi_csdt_community/shield.svg)](https://pyup.io/repos/github/RPI-HASS/rpi_csdt_community/) [![Coverage Status](https://coveralls.io/repos/github/RPI-HASS/rpi_csdt_community/badge.svg?branch=master)](https://coveralls.io/github/RPI-HASS/rpi_csdt_community?branch=master)
 
 
-This project is sponsered by Rensselaer Polytechnic Institute's GK-12 fellowship under Dr. Ron Eglash. The goal is the create a web platform for students to share projects, community, and in general create a community around the pCSDT's. More information about the pCSDT's (also serving as a demo) can be found here: https://community.csdt.rpi.edu/
+This project is sponsored by Rensselaer Polytechnic Institute's GK-12 fellowship under Dr. Ron Eglash. The goal is to create a web platform for students to share projects, community, and create a community in general around the pCSDT's. More information about the pCSDT's (also serving as a demo) can be found [on our website](https://csdt.rpi.edu/)
 
 ## Contributing
 
-If you just want to install the server locally, you can follow the instructions at [https://github.com/RPI-HASS/rpi_csdt_community/wiki/Setting-up-for-Development](https://github.com/RPI-HASS/rpi_csdt_community/wiki/Setting-up-for-Development)
+If you just want to install the server locally, you can follow the instructions at [Setting Up for Development](https://github.com/RPI-HASS/rpi_csdt_community/wiki/Setting-up-for-Development)
 
-We encourage people to contribute; to do so, please follow the instructions at [https://github.com/RPI-HASS/rpi_csdt_community/wiki/Development-Workflow](https://github.com/RPI-HASS/rpi_csdt_community/wiki/Development-Workflow).
+We encourage people to contribute; to do so, please follow the instructions on the [Development Workflow](https://github.com/RPI-HASS/rpi_csdt_community/wiki/Development-Workflow) page.
 
 
 ## Related Projects
