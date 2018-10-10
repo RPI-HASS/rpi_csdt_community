@@ -91,7 +91,7 @@ class tests(LiveServerTestCase):
         self.assertTrue(response.status_code == 404,
                         msg="Got code %s on %s" % (response.status_code, url))
         self.post = Post.objects.create(user=self.user, title="example5", slug="example5", content="example5",
-                                        publish="2018-10-08")
+                                        publish="9999-01-01")
         self.assertTrue(self.client.login(username='test', password='test'))
         url = '/news/example5/'
         response = self.client.post(url, {})
