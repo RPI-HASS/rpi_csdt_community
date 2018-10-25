@@ -103,11 +103,11 @@ class post_list(SearchableListMixin, SortableListMixin, ListView):
         query = self.request.GET.get("q")
         if query:
             queryset = queryset.filter(
-                                       Q(title__icontains=query) # noqa E126
-                                       | Q(content__icontains=query)
-                                       | Q(user__first_name__icontains=query)
-                                       | Q(user__last_name__icontains=query)
-                                       | Q(tags__name__icontains=query)).distinct()
+                                       Q(title__icontains=query) | # noqa E126,W504
+                                       Q(content__icontains=query) | # noqa W504
+                                       Q(user__first_name__icontains=query) | # noqa W504
+                                       Q(user__last_name__icontains=query) | # noqa W504
+                                       Q(tags__name__icontains=query)).distinct()
         tags = self.request.GET.get('tag')
         if tags:
             queryset = queryset.filter(tags__name__in=[tags])
