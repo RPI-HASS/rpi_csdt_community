@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+CSDT Classroom Guide
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1" style="font-size: 1.3em;">
+            <h1>CSDT Classroom Creation Guide</h1>
+            <p>
+                Thank you for your interest in signing your classroom up to use our software, Culturally Situated Design Tools. We have programmed a "classrooms" app on our website to facilitate teachers who are running a classroom of students, to address their needs as facilitators. CSDTs are set up to simulate a cloud computing experience. Each user can save their program to the cloud, which shows up under their profile even if they're not in a classroom. The purpose of classrooms is to organize this cloud computing into a sort of gallery or boutique for all the members of the classroom. With a classroom, students can create and save their programs, then submit them for approval by the teacher or teachers. The teacher approves projects using a visual representation of the program, to verify that it is school appropriate, and then all approved projects are added to the pool of works created by the classroom. This pool of shaorange works can be viewed by other students, commented on, and even remixed by other students using the other's person's source code. Classrooms allow for sharing between students and at-a-glance observation of who is creating what, providing motivation and teamwork. For the teacher, it permits an easy source to view who is keeping up with their work, who is struggling, who is completing assignments, and who is creating genuinely interesting works of art.
+            </p>
+            <p><img src="{% static 'img/tut1.png' %}" style="border: 1px solid orange;"></p>
+            <p>
+                To create a classroom, first log in to your CSDT account. Any account can make a classroom. Click classrooms at the top and then find "Create Your Own" at the upper right, just below "Log Out". Here you can name your classroom and provide a short description. The name is important because, other than your username, it is the only identifier with which your students can find your classroom. If you would like your classroom to be private (not viewable by visitors), please click "Private?" After you click "create class" you will be taken to your classroom page. Notice the number of your classroom in the URL. This number is your classroom number. You can tell your students when they register with CSDT your classroom number, which is a registration question, and they can automatically be added to your classroom when registering. Otherwise, your students will have to find your classroom in the classroom list and click "join".  Classrooms are sorted alphabetically by name.
+            </p>
+            <p><img src="{% static 'img/tut2.png'%}" style="border: 1px solid orange;" width="400">&nbsp;&nbsp;&nbsp;&nbsp;<img src="{% static 'img/tut3.png' %}" style="border: 1px solid orange;" width="500"></p>
+            <p>
+                When a student requests to join your class, a request notification will be sent to your administration panel. To go to your administration panel, go to the classrooms page. Your own classrooms will be at the top of the list. Click "Admin" to the right of your classroom title. Under the member-request panel, all people who have asked to join your classroom await approval. To approve students, click the checkmark above their icon, then under the "action" dropdown choose "Approve" and click "Submit all changes". They will promoted to the "students" panel. As a student, when they save their project, there will be a bar where they can choose whether to save to their classroom. They will always want to use this option, which requires them to highlight the name of their classroom. Teach them how to use this feature to prevent projects being saved to the public pool instead of your classroom pool.
+            </p>
+            <p><img src="{% static 'img/tut4.png' %}" width="500" style="border: 1px solid orange;">&nbsp;&nbsp;&nbsp;&nbsp;<img src="{% static 'img/tut5.png' %}" style="border: 1px solid orange;"></p>
+            <p>
+                After a student saves a project and it is still unapproved, they are free to modify it as much as they like. When they are done working on it, they will have to go to their "My Profile" page and scroll down to the bottom where "Projects pending approval" are. There they click on the project, where a setting panel pops up. Here they can add a description, ensure that it is saving to your classroom, and so forth. Then they click "publish" at the very bottom. 
+            </p>
+            <p><img src="{% static 'img/tut6.png' %}" style="border: 1px solid orange;"></p>
+            <p>
+                After a student publishes a project to their classroom, it will show up under the "Approval-requests" panel of the classroom administration page. It is not visible to the students yet. Here you can see a screenshot, or click to view the project as a whole, to deem whether it is classroom appropriate or not. If it is, you can check it and then under the "action" dropbox choose "approve". Click "Submit" when you are done with your selection of projects. This will promote it to the "approved-objects" pool, where it will be visible to other students in the classroom. It will display their name underneath the project as well as a description, if the student inputs one. This allows you to curate the presentation of projects, so that what is seen by your students is verified appropriate. We at CSDT do not approve projects, so it will be your responsibility to check in to approve new projects if you do not want them to languish in the approval queue. 
+            </p>
+            <p>
+                As you work in CSDT, students will submit more and more projects to the approval queue. In time, your classroom will have a large oeuvre of work that students can scroll through and analyze. They can comment on other's projects, as well as open them to remix them or use them as a template for their own extrapolations. It is very easy to learn from other's projects just as much as it is to learn from doing tutorials. The more students engage with other people's code and try and reverse engineer what other's code is doing, the more literate they will be with control flow, programming logic, branching statements, and design patterns. We hope classrooms will provide a bank of example programs that students can use as they explore how coding works and how programs are designed. If they have questions about what's happening in a program, they can ask their classmate who designed it!
+            </p>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+{% endblock %}
