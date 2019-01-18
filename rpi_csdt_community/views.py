@@ -59,3 +59,9 @@ class Publications(TemplateView):
 
 class Guides(TemplateView):
     template_name = "rpi_csdt_community/guides.html"
+
+
+# Tutorial added by Chinedu on 01/18/2019
+class Tutorial(TemplateView):
+    # model = Application
+    template_name = "rpi_csdt_community/tutorial.html"
