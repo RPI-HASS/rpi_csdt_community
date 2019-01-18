@@ -17,8 +17,6 @@ ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
 
-ALLOWED_HOSTS = ['0.0.0.0']
-
 MANAGERS = ADMINS
 if 'TRAVIS' in os.environ:
     DATABASES = {
