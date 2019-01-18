@@ -12,7 +12,7 @@ from project_share.models import Project, Application
 def comment_post_wrapper(request):
     """Clean the request to prevent form spoofing."""
     if request.user.is_authenticated:
-        if not (request.user.get_full_name() == request.POST['name'] or
+        if not (request.user.get_full_name() == request.POST['name'] or  # noqa W504
                 request.user.email == request.POST['email']):
             return HttpResponse("Error 403: You're an evil hacker")
         return post_comment(request)
