@@ -7,7 +7,7 @@ from django.views import static
 from django.views.generic import TemplateView
 from rest_framework import routers
 
-from rpi_csdt_community.views import About, Publications, ReactAppList, ClassroomsGuide
+from rpi_csdt_community.views import About, Publications, ReactAppList, ClassroomsGuide, Tutorial
 from rpi_csdt_community.viewsets import (ApplicationCategoryViewSet,
                                          ApplicationThemeViewSet,
                                          ApplicationViewSet, CurrentUserView,
@@ -52,6 +52,7 @@ urlpatterns = [
     url(r'^api/user', CurrentUserView.as_view(), name='user-api-detail'),
     url(r'^cms/', include('cms.urls')),
     url(r'^__debug__/', include(debug_toolbar.urls)),
+    url(r'^tutorial/', Tutorial.as_view(), name="tutorial")
 ]
 
 if settings.ENABLE_GIS:
