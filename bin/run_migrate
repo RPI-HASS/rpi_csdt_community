@@ -16,10 +16,7 @@ echo "SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')" >> local_se
 echo "ALLOWED_HOSTS = ['*']" >> local_settings.py
 
 
-# This step will have to be done manually via:
-#  heroku pg:reset HEROKU_POSTGRESQL_AMBER_URL --confirm csdt-community-site
-#echo "-----> Clearing database"
-#python $MANAGE_FILE sqlflush --verbosity=0 | python $MANAGE_FILE dbshell
+
 echo "-----> Migrating database"
 python $MANAGE_FILE migrate --noinput | indent
 echo "-----> Loading intial data"

@@ -17,6 +17,10 @@ ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
 
+
+ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '*']
+
+
 MANAGERS = ADMINS
 if 'TRAVIS' in os.environ:
     DATABASES = {
@@ -33,10 +37,11 @@ else:
     DATABASES = {
         'default': {
             'ENGINE': 'django.contrib.gis.db.backends.postgis',
-            'NAME': 'rpi_csdt_community',
+            'NAME': 'postgres',
             'USER': 'postgres',
-            'PASSWORD': 'postgres',
-            'HOST': 'localhost',
+            'PASSWORD': 'password',
+            'HOST': 'db',
+            'PORT': '5432',
         }
     }
 
