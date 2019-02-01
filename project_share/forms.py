@@ -58,24 +58,24 @@ class ExtendedSignupForm(forms.Form):
                                widget=forms.TextInput(attrs={'placeholder': 'username (no spaces)'}), required=False)
     email = forms.CharField(max_length=100, label='email',
                             widget=forms.TextInput(attrs={'placeholder': 'email address'}), required=False)
-    gender = forms.CharField(max_length=100, label='gender',
-                             widget=forms.TextInput(attrs={'placeholder': 'gender (optional)'}), required=False)
-    race = forms.CharField(max_length=100, label='race',
-                           widget=forms.TextInput(attrs={'placeholder': 'race (optional)'}), required=False)
-    age = forms.IntegerField(label='age', widget=forms.TextInput(attrs={'placeholder': 'age (optional)'}),
-                             required=False)
+    # gender = forms.CharField(max_length=100, label='gender',
+    #                          widget=forms.TextInput(attrs={'placeholder': 'gender (optional)'}), required=False)
+    # race = forms.CharField(max_length=100, label='race',
+    #                        widget=forms.TextInput(attrs={'placeholder': 'race (optional)'}), required=False)
+    # age = forms.IntegerField(label='age', widget=forms.TextInput(attrs={'placeholder': 'age (optional)'}),
+    #                          required=False)
     classroom = forms.IntegerField(label='classroom',
                                    widget=forms.TextInput(attrs={'placeholder': 'classroom # (optional)'}),
                                    required=False)
     captcha = ReCaptchaField(widget=ReCaptchaWidget())
 
-    field_order = ['username', 'email', 'password1', 'password2', 'gender', 'race', 'age', 'classroom', 'captcha']
+    field_order = ['username', 'email', 'password1', 'password2', 'classroom', 'captcha']
 
     def signup(self, request, n_user):
         """specify where to put race / gender data, and signup for classroom"""
-        n_user.gender = self.cleaned_data['gender']
-        n_user.race = self.cleaned_data['race']
-        n_user.age = self.cleaned_data['age']
+        # n_user.gender = self.cleaned_data['gender']
+        # n_user.race = self.cleaned_data['race']
+        # n_user.age = self.cleaned_data['age']
         n_user.save()
         team = self.cleaned_data['classroom']
         if team is not None:
@@ -99,7 +99,7 @@ class ApplicationAdminForm(ModelForm):
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = ExtendedUser
-        fields = ['email', 'username', 'display_name', 'avatar', 'bio', 'gender', 'race', 'age']
+        fields = ['email', 'username', 'display_name', 'avatar', 'bio']
         widgets = {
             'bio': forms.Textarea(attrs={'rows': 4, 'cols': 15}),
         }

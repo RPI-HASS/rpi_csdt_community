@@ -310,9 +310,9 @@ class ExtendedUser(AbstractUser):
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     # from CSDT:
-    gender = models.CharField(max_length=100, null=True, blank=True)
-    race = models.CharField(max_length=100, null=True, blank=True)
-    age = models.PositiveIntegerField(null=True, blank=True)
+    # gender = models.CharField(max_length=100, null=True, blank=True)
+    # race = models.CharField(max_length=100, null=True, blank=True)
+    # age = models.PositiveIntegerField(null=True, blank=True)
     objects = UserManager()
 
     USERNAME_FIELD = "username"

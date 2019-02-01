@@ -48,7 +48,7 @@ class ApplicationAdmin(admin.ModelAdmin):
         return super(ApplicationAdmin, self).get_form(request, obj)
 
 
-UserAdmin.list_display = ('username', 'email', 'gender', 'race', 'age', 'date_joined', 'is_staff')
+UserAdmin.list_display = ('username', 'email', 'date_joined', 'is_staff')
 
 
 class ClassListFilter(admin.SimpleListFilter):
