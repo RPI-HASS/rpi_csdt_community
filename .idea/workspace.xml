@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="5292e4fe-bca0-4beb-9336-1db0d170c332" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rpi_csdt_community/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/rpi_csdt_community/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/applications/CSnap-Modules" beforeDir="false" afterPath="$PROJECT_DIR$/static/applications/CSnap-Modules" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/applications/CSnap-Modules/Bead Loom/blocks.json" beforeDir="false" afterPath="$PROJECT_DIR$/static/applications/CSnap-Modules/Bead Loom/blocks.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/applications/CSnap-Modules/Bead Loom/blocks/changeCostumeColor.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/applications/CSnap-Modules/Bead Loom/blocks/changeCostumeColor.js" afterDir="false" />
@@ -47,8 +45,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/rpi_csdt_community/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="390">
-              <caret line="26" column="28" lean-forward="true" selection-start-line="26" selection-start-column="28" selection-end-line="26" selection-end-column="28" />
+            <state relative-caret-position="285">
+              <caret line="19" column="9" selection-start-line="19" selection-end-line="20" />
               <folding>
                 <element signature="e#54#63#0" expanded="true" />
               </folding>
@@ -64,8 +62,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="14" selection-start-line="14" selection-end-line="14" />
+            <state relative-caret-position="225">
+              <caret line="15" column="5" selection-start-line="15" selection-start-column="5" selection-end-line="15" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -304,12 +302,13 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="64783000" />
+    <option name="totallyTimeSpent" value="65042000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="776" height="959" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.4427793" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.4427793" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -323,7 +322,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5006536" side_tool="true" weight="0.37139562" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" sideWeight="0.4993464" visible="true" weight="0.37139562" />
+      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.4993464" visible="true" weight="0.37139562" />
       <window_info anchor="bottom" id="Python Console" order="12" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -622,23 +621,23 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/.gitmodules">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/rpi_csdt_community/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="26" column="28" lean-forward="true" selection-start-line="26" selection-start-column="28" selection-end-line="26" selection-end-column="28" />
+        <state relative-caret-position="285">
+          <caret line="19" column="9" selection-start-line="19" selection-end-line="20" />
           <folding>
             <element signature="e#54#63#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitmodules">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="14" selection-start-line="14" selection-end-line="14" />
+        <state relative-caret-position="225">
+          <caret line="15" column="5" selection-start-line="15" selection-start-column="5" selection-end-line="15" selection-end-column="5" />
         </state>
       </provider>
     </entry>
