@@ -12,6 +12,7 @@ media/
 collected_static/
 local_settings.py
 static/website/
+.idea/workspace.xml
 
 # Vagrant stuff
 .vagrant
