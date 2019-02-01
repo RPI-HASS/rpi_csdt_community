@@ -17,7 +17,7 @@ ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
 
-# ALLOWED_HOSTS = ['0.0.0.0']
+# ALLOWED_HOSTS = ['0.0.0.0', 'localhost']
 
 MANAGERS = ADMINS
 if 'TRAVIS' in os.environ:
@@ -48,7 +48,6 @@ EMAIL_HOST_USER = 'CSDTRPI@gmail.com'
 EMAIL_HOST_PASSWORD = 'not a real password'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -191,7 +190,6 @@ INSTALLED_APPS = (
     'twitter_bootstrap',
     'jquery',
 
-
     'easy_thumbnails',
     'filer',
 
@@ -254,7 +252,6 @@ TEMPLATES = [
     },
 ]
 
-
 AUTHENTICATION_BACKENDS = (
     "django.contrib.auth.backends.ModelBackend",
     "allauth.account.auth_backends.AuthenticationBackend",
@@ -298,7 +295,6 @@ THUMBNAIL_PROCESSORS = (
 )
 
 TEXT_HTML_SANITIZE = False
-
 
 LOGIN_REDIRECT_URL = '/'
 
