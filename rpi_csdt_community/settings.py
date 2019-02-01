@@ -17,7 +17,7 @@ ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
 
-ALLOWED_HOSTS = ['0.0.0.0', 'locahost']
+# ALLOWED_HOSTS = ['0.0.0.0', 'locahost']
 
 MANAGERS = ADMINS
 if 'TRAVIS' in os.environ:

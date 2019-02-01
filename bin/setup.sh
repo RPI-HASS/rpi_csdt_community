@@ -11,7 +11,7 @@ sudo apt-get update
 sudo apt-get upgrade
 
 # Install python
-sudo apt-get install python3-pip python3-dev
+sudo apt-get install python-pip python-dev
 # Install postgis
 sudo apt-get install -y libpq-dev libcurl4-openssl-dev postgresql postgis
 
