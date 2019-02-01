@@ -16,7 +16,7 @@ python:
 services: postgresql
 
 env:
-  - DJANGO=1.9.5
+  - DJANGO=1.11.18
 
 before_install:
   - export DJANGO_SETTINGS_MODULE="rpi_csdt_community.settings"
