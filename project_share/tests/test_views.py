@@ -74,8 +74,7 @@ class ProjectTests(LiveServerTestCase):
         self.user = User.objects.get(username="test")
         with open('project_share/fixtures/test.jpg') as file:
             data = {u'username': [u'test'], u'bio': [u'I am the best.'],
-                    u'display_name': [u'test'], u'gender': [u'test'], u'age': [u'1'],
-                    u'race': [u'test'], u'avatar': file, u'email': [u'test@test.com']}
+                    u'display_name': [u'test'], u'avatar': file, u'email': [u'test@test.com']}
             response = self.client.post(url, data)
             self.assertTrue(response.status_code == 302,
                             msg="Got code %s on %s" % (response.status_code, url))

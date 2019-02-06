@@ -342,9 +342,9 @@ class ProfileUpdate(LoginRequiredMixin, DetailView, FormView):
                 'display_name': self.request.user.display_name,
                 'avatar': self.request.user.avatar,
                 'bio': self.request.user.bio,
-                'age': self.request.user.age,
-                'race': self.request.user.race,
-                'gender': self.request.user.gender,
+                # 'age': self.request.user.age,
+                # 'race': self.request.user.race,
+                # 'gender': self.request.user.gender,
                 }
 
     success_url = reverse_lazy('home')
@@ -370,4 +370,4 @@ class MyUserChangeForm(UserChangeForm):
 
     class Meta:
         model = User
-        fields = ('email', 'username', 'display_name', 'avatar', 'bio', 'gender', 'race', 'age')
+        fields = ('email', 'username', 'display_name', 'avatar', 'bio')

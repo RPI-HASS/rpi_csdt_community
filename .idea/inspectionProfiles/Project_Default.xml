@@ -1,6 +1,7 @@
 <component name="InspectionProjectProfileManager">
   <profile version="1.0">
     <option name="myName" value="Project Default" />
+<<<<<<< HEAD
     <inspection_tool class="PyCompatibilityInspection" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="ourVersions">
         <value>
@@ -16,6 +17,15 @@
         <value>
           <list size="1">
             <item index="0" class="java.lang.String" itemvalue="BeautifulSoup" />
+=======
+    <inspection_tool class="PyPackageRequirementsInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredPackages">
+        <value>
+          <list size="3">
+            <item index="0" class="java.lang.String" itemvalue="django-filer" />
+            <item index="1" class="java.lang.String" itemvalue="django-likes" />
+            <item index="2" class="java.lang.String" itemvalue="BeautifulSoup" />
+>>>>>>> master
           </list>
         </value>
       </option>
