@@ -17,13 +17,10 @@ ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
 
-<<<<<<< HEAD
 
 ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '*']
 
-=======
 # ALLOWED_HOSTS = ['0.0.0.0', 'localhost']
->>>>>>> master
 
 MANAGERS = ADMINS
 if 'TRAVIS' in os.environ:
