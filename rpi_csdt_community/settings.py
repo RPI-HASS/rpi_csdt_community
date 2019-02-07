@@ -18,7 +18,7 @@ ADMINS = (
 )
 
 
-ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '*']
+# ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '*']
 
 # ALLOWED_HOSTS = ['0.0.0.0', 'localhost']
 
@@ -40,8 +40,8 @@ else:
             'ENGINE': 'django.contrib.gis.db.backends.postgis',
             'NAME': 'postgres',
             'USER': 'postgres',
-            'PASSWORD': 'password',
-            'HOST': 'db',
+            'PASSWORD': '',
+            'HOST': '35.193.241.102',
             'PORT': '5432',
         }
     }

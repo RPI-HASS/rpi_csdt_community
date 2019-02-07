@@ -22,5 +22,8 @@ RUN pip install -r requirements.txt
 RUN pip install Django
 RUN pip install psycopg2-binary
 
-COPY entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
+
+EXPOSE 8000
+
+CMD ["python", "manage.py", "migrate"]
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
