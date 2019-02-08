@@ -1,0 +1,199 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-10-01 16:12+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: danielastreuli <daniela.streuli@divio.ch>, 2016\n"
+"Language-Team: German (https://www.transifex.com/divio/teams/58664/de/)\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Image"
+msgstr "Bild"
+
+msgid "Advanced settings"
+msgstr "Erweiterte Einstellungen"
+
+msgid "Link settings"
+msgstr "Link-Einstellungen"
+
+msgid "Cropping settings"
+msgstr "Zuschneiden-Einstellungen"
+
+msgid "Align left"
+msgstr "Links ausrichten"
+
+msgid "Align right"
+msgstr "Rechts ausrichten"
+
+msgid "Align center"
+msgstr "Zentriert ausrichten"
+
+msgid "Open in new window"
+msgstr "In neuem Fenster öffnen"
+
+msgid "Open in same window"
+msgstr "Im gleichen Fenster öffnen"
+
+msgid "Delegate to parent"
+msgstr "Zum nächsten Fenster delegieren"
+
+msgid "Delegate to top"
+msgstr "Zum obersten Fenster delegieren"
+
+msgid "Default"
+msgstr "Standard"
+
+msgid "Let settings.DJANGOCMS_PICTURE_RESPONSIVE_IMAGES decide"
+msgstr ""
+
+msgid "Yes"
+msgstr ""
+
+msgid "No"
+msgstr ""
+
+msgid "Template"
+msgstr "Template"
+
+msgid "External image"
+msgstr "Externes Bild"
+
+msgid ""
+"If provided, overrides the embedded image. Certain options such as cropping "
+"are not applicable to external images."
+msgstr ""
+"Überschreibt das vorhandene Bild, falls gegeben. Manche Optionen wie "
+"Zuschneiden sind für externe Bilder nicht verfügbar."
+
+msgid "Width"
+msgstr "Breite"
+
+msgid ""
+"The image width as number in pixels. Example: \"720\" and not \"720px\"."
+msgstr ""
+"Die Bildbreite als Zahl in Pixel. Beispiel: \"720\" und nicht \"720px\""
+
+msgid "Height"
+msgstr "Höhe"
+
+msgid ""
+"The image height as number in pixels. Example: \"720\" and not \"720px\"."
+msgstr "Die Bildhöhe als Zahl in Pixel. Beispiel: \"720\" und nicht \"720px\"."
+
+msgid "Alignment"
+msgstr "Ausrichtung"
+
+msgid "Aligns the image according to the selected option."
+msgstr "Richtet das Bild an der ausgewählten Option aus."
+
+msgid "Caption text"
+msgstr "Legendentext"
+
+msgid "Provide a description, attribution, copyright or other information."
+msgstr ""
+"Angaben wie Beschreibung, Zuschreibung, Copyright oder andere Informationen."
+
+msgid "Attributes"
+msgstr "Attribute"
+
+msgid "External URL"
+msgstr "Externe URL"
+
+msgid "Wraps the image in a link to an external URL."
+msgstr "Umschliesst das Bild mit einem Link zu einer externen URL."
+
+msgid "Internal URL"
+msgstr "Interne URL"
+
+msgid "Wraps the image in a link to an internal (page) URL."
+msgstr "Umschliesst das Bild mit einem Link zu einer internen (Seiten-) URL."
+
+msgid "Link target"
+msgstr "Linkverweis"
+
+msgid "Link attributes"
+msgstr "Linkattribute"
+
+msgid "Automatic scaling"
+msgstr "Automatische Skalierung"
+
+msgid "Uses the placeholder dimenstions to automatically calculate the size."
+msgstr ""
+"Nutzt die \"placeholder\" Dimensionen, um die Grösse automatisch zu "
+"berechnen."
+
+msgid "Use original image"
+msgstr "Originalgrösse verwenden"
+
+msgid "Outputs the raw image without cropping."
+msgstr "Gibt das RAW-Bild aus, ohne dieses zuzuschneiden."
+
+msgid "Crop image"
+msgstr "Bild zuschneiden"
+
+msgid ""
+"Crops the image according to the thumbnail settings provided in the template."
+msgstr ""
+"Schneidet das Bild entsprechend der Grösse der Thumbnail-Einstellungen in "
+"der Vorlage zu."
+
+msgid "Upscale image"
+msgstr "Bild skalieren"
+
+msgid ""
+"Upscales the image to the size of the thumbnail settings in the template."
+msgstr ""
+"Skaliert das Bild entsprechend der Grösse der Thumbnail-Einstellungen in der "
+"Vorlage."
+
+msgid "Use responsive image"
+msgstr ""
+
+msgid ""
+"Uses responsive image technique to choose better image to display based upon "
+"screen viewport. This configuration only applies to uploaded images "
+"(external pictures will not be affected). "
+msgstr ""
+
+msgid "Thumbnail options"
+msgstr "Thumbnail-Optionen"
+
+msgid ""
+"Overrides width, height, and crop; scales up to the provided preset "
+"dimensions."
+msgstr ""
+"Überschreibt Breite, Höhe, Zuschneiden und Skalierung mit den gegebenen "
+"Voreinstellungen."
+
+msgid "<file is missing>"
+msgstr "<datei nicht vorhanden>"
+
+msgid ""
+"You have given both external and internal links. Only one option is allowed."
+msgstr ""
+"Es wurden ein externer und interner Link definiert. Nur eine Option ist "
+"möglich."
+
+msgid "You need to add either an image, or a URL linking to an external image."
+msgstr ""
+"Es muss entweder ein Bild oder ein externer Link zu einem Bild hinzugefügt "
+"werden."
+
+#, python-brace-format
+msgid ""
+"Invalid cropping settings. You cannot combine \"{field_a}\" with "
+"\"{field_b}\"."
+msgstr ""
+"Die Zuschnitts Auswahl ist nicht erlaubt. \"{field_a}\" und \"{field_b}\" "
+"können nicht kombiniert werden."

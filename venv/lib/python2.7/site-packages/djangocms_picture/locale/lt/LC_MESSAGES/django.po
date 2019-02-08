@@ -1,0 +1,195 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-10-01 16:12+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Matas Dailyda <matas@dailyda.com>, 2017\n"
+"Language-Team: Lithuanian (https://www.transifex.com/divio/teams/58664/lt/)\n"
+"Language: lt\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n"
+"%100<10 || n%100>=20) ? 1 : 2);\n"
+
+msgid "Image"
+msgstr "Paveiksliukas"
+
+msgid "Advanced settings"
+msgstr "Išplėstiniai nustatymai"
+
+msgid "Link settings"
+msgstr "Nuorodos nustatymai"
+
+msgid "Cropping settings"
+msgstr "Apkirpimo nustatymai"
+
+msgid "Align left"
+msgstr "Lygiuoti į kairę"
+
+msgid "Align right"
+msgstr "Lygiuoti į dešinę"
+
+msgid "Align center"
+msgstr "Lygiuoti į centrą"
+
+msgid "Open in new window"
+msgstr "Atidaryti naujame lange"
+
+msgid "Open in same window"
+msgstr "Atidaryti tame pačiame lange"
+
+msgid "Delegate to parent"
+msgstr "Nukreipti į tėvinį elementą"
+
+msgid "Delegate to top"
+msgstr "Nukreipti į viršų"
+
+msgid "Default"
+msgstr "Numatytasis"
+
+msgid "Let settings.DJANGOCMS_PICTURE_RESPONSIVE_IMAGES decide"
+msgstr ""
+
+msgid "Yes"
+msgstr ""
+
+msgid "No"
+msgstr ""
+
+msgid "Template"
+msgstr "Šablonas"
+
+msgid "External image"
+msgstr "Išorinis paveikslėlis"
+
+msgid ""
+"If provided, overrides the embedded image. Certain options such as cropping "
+"are not applicable to external images."
+msgstr ""
+"Jei suvesta, pakeičia prisegtą paveikslėlį. Kai kurie nustatymai kaip "
+"apkirpimas neveikia su išoriniais paveikslėliais."
+
+msgid "Width"
+msgstr "Plotis"
+
+msgid ""
+"The image width as number in pixels. Example: \"720\" and not \"720px\"."
+msgstr ""
+"Paveikslėlio plotis pikseliais kaip numeris. Pavyzdžiui: \"720\" o ne \"720px"
+"\"."
+
+msgid "Height"
+msgstr "Aukštis"
+
+msgid ""
+"The image height as number in pixels. Example: \"720\" and not \"720px\"."
+msgstr ""
+"Paveikslėlio aukštis pikseliais kaip numeris. Pavyzdžiui: \"720\" o ne "
+"\"720px\"."
+
+msgid "Alignment"
+msgstr "Lygiavimas"
+
+msgid "Aligns the image according to the selected option."
+msgstr "Lygiuoją paveikslėlį pagal pasirinktą nustatymą."
+
+msgid "Caption text"
+msgstr "Antraštės tekstas"
+
+msgid "Provide a description, attribution, copyright or other information."
+msgstr "Įrašykite apibūdinimą, teisės turėtojo ar kitą informaciją."
+
+msgid "Attributes"
+msgstr "Atributai"
+
+msgid "External URL"
+msgstr "Išorinis URL"
+
+msgid "Wraps the image in a link to an external URL."
+msgstr "Apgaubia paveikslėlį nuoroda į išorinį URL."
+
+msgid "Internal URL"
+msgstr "Vidinis URL"
+
+msgid "Wraps the image in a link to an internal (page) URL."
+msgstr "Apgaubia paveikslėlį nuoroda į vidinį (puslapį) URL."
+
+msgid "Link target"
+msgstr "Nuorodos langas"
+
+msgid "Link attributes"
+msgstr "Nuorodos atributai"
+
+msgid "Automatic scaling"
+msgstr "Automatinis mastelis"
+
+msgid "Uses the placeholder dimenstions to automatically calculate the size."
+msgstr ""
+"Naudoja rezervuotos vietos išmatavimus kad automatiškai apskaičiuoti dydį."
+
+msgid "Use original image"
+msgstr "Naudoti originalų paveikslėlį"
+
+msgid "Outputs the raw image without cropping."
+msgstr "Atvaizduoją gryną paveikslėlį, be apkirpimo."
+
+msgid "Crop image"
+msgstr "Apkirpti paveikslėlį"
+
+msgid ""
+"Crops the image according to the thumbnail settings provided in the template."
+msgstr "Apkerpa paveikslėli pagal miniatiūros nustatymus suvestus šablone."
+
+msgid "Upscale image"
+msgstr "Išdidinti paveikslėlį"
+
+msgid ""
+"Upscales the image to the size of the thumbnail settings in the template."
+msgstr ""
+"Išdidina paveikslėli tokiu dydžiu koks nurodytas miniatiūros nustatymuose "
+"suvestuose šablone."
+
+msgid "Use responsive image"
+msgstr ""
+
+msgid ""
+"Uses responsive image technique to choose better image to display based upon "
+"screen viewport. This configuration only applies to uploaded images "
+"(external pictures will not be affected). "
+msgstr ""
+
+msgid "Thumbnail options"
+msgstr "Miniatiūros nustatymai"
+
+msgid ""
+"Overrides width, height, and crop; scales up to the provided preset "
+"dimensions."
+msgstr ""
+"Perrašo plotį, aukštį ir apkerpa, išdidina pagal pateiktus išmatavimus."
+
+msgid "<file is missing>"
+msgstr "<byla nerasta>"
+
+msgid ""
+"You have given both external and internal links. Only one option is allowed."
+msgstr ""
+"Jūs pateikėte ir išorinę ir vidinę nuorodas. Galimas tik vienas pasirinkimas."
+
+msgid "You need to add either an image, or a URL linking to an external image."
+msgstr "Turite pridėti arba paveikslėli, arba nuorodą į išorinį paveikslėlį."
+
+#, python-brace-format
+msgid ""
+"Invalid cropping settings. You cannot combine \"{field_a}\" with "
+"\"{field_b}\"."
+msgstr ""
+"Netinkami apkirpimo nustatymai. Negalite sujungti \"{field_a}\" su "
+"\"{field_b}\"."

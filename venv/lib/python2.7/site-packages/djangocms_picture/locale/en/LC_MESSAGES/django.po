@@ -1,0 +1,192 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-10-01 16:12+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Image"
+msgstr "Image"
+
+msgid "Advanced settings"
+msgstr "Advanced settings"
+
+msgid "Link settings"
+msgstr "Link settings"
+
+msgid "Cropping settings"
+msgstr "Cropping settings"
+
+msgid "Align left"
+msgstr "Align left"
+
+msgid "Align right"
+msgstr "Align right"
+
+msgid "Align center"
+msgstr "Align center"
+
+msgid "Open in new window"
+msgstr "Open in new window"
+
+msgid "Open in same window"
+msgstr "Open in same window"
+
+msgid "Delegate to parent"
+msgstr "Delegate to parent"
+
+msgid "Delegate to top"
+msgstr "Delegate to top"
+
+msgid "Default"
+msgstr "Default"
+
+msgid "Let settings.DJANGOCMS_PICTURE_RESPONSIVE_IMAGES decide"
+msgstr ""
+
+msgid "Yes"
+msgstr ""
+
+msgid "No"
+msgstr ""
+
+msgid "Template"
+msgstr "Template"
+
+msgid "External image"
+msgstr "External image"
+
+msgid ""
+"If provided, overrides the embedded image. Certain options such as cropping "
+"are not applicable to external images."
+msgstr ""
+"If provided, overrides the embedded image. Certain options such as cropping "
+"are not applicable to external images."
+
+msgid "Width"
+msgstr "Width"
+
+msgid ""
+"The image width as number in pixels. Example: \"720\" and not \"720px\"."
+msgstr ""
+"The image width as number in pixels. Example: \"720\" and not \"720px\"."
+
+msgid "Height"
+msgstr "Height"
+
+msgid ""
+"The image height as number in pixels. Example: \"720\" and not \"720px\"."
+msgstr ""
+"The image height as number in pixels. Example: \"720\" and not \"720px\"."
+
+msgid "Alignment"
+msgstr "Alignment"
+
+msgid "Aligns the image according to the selected option."
+msgstr "Aligns the image according to the selected option."
+
+msgid "Caption text"
+msgstr "Caption text"
+
+msgid "Provide a description, attribution, copyright or other information."
+msgstr "Provide a description, attribution, copyright or other information."
+
+msgid "Attributes"
+msgstr "Attributes"
+
+msgid "External URL"
+msgstr "External URL"
+
+msgid "Wraps the image in a link to an external URL."
+msgstr "Wraps the image in a link to an external URL."
+
+msgid "Internal URL"
+msgstr "Internal URL"
+
+msgid "Wraps the image in a link to an internal (page) URL."
+msgstr "Wraps the image in a link to an internal (page) URL."
+
+msgid "Link target"
+msgstr "Link target"
+
+msgid "Link attributes"
+msgstr "Link attributes"
+
+msgid "Automatic scaling"
+msgstr "Automatic scaling"
+
+msgid "Uses the placeholder dimenstions to automatically calculate the size."
+msgstr "Uses the placeholder dimenstions to automatically calculate the size."
+
+msgid "Use original image"
+msgstr "Use original image"
+
+msgid "Outputs the raw image without cropping."
+msgstr "Outputs the raw image without cropping."
+
+msgid "Crop image"
+msgstr "Crop image"
+
+msgid ""
+"Crops the image according to the thumbnail settings provided in the template."
+msgstr ""
+"Crops the image according to the thumbnail settings provided in the template."
+
+msgid "Upscale image"
+msgstr "Upscale image"
+
+msgid ""
+"Upscales the image to the size of the thumbnail settings in the template."
+msgstr ""
+"Upscales the image to the size of the thumbnail settings in the template."
+
+msgid "Use responsive image"
+msgstr ""
+
+msgid ""
+"Uses responsive image technique to choose better image to display based upon "
+"screen viewport. This configuration only applies to uploaded images "
+"(external pictures will not be affected). "
+msgstr ""
+
+msgid "Thumbnail options"
+msgstr "Thumbnail options"
+
+msgid ""
+"Overrides width, height, and crop; scales up to the provided preset "
+"dimensions."
+msgstr ""
+"Overrides width, height, and crop; scales up to the provided preset "
+"dimensions."
+
+msgid "<file is missing>"
+msgstr "<file is missing>"
+
+msgid ""
+"You have given both external and internal links. Only one option is allowed."
+msgstr ""
+"You have given both external and internal links. Only one option is allowed."
+
+msgid "You need to add either an image, or a URL linking to an external image."
+msgstr ""
+"You need to add either an image, or a URL linking to an external image."
+
+#, python-brace-format
+msgid ""
+"Invalid cropping settings. You cannot combine \"{field_a}\" with "
+"\"{field_b}\"."
+msgstr ""
+"Invalid cropping settings. You cannot combine \"{field_a}\" with "
+"\"{field_b}\"."

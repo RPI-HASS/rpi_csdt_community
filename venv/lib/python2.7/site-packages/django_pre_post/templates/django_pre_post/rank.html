@@ -1,0 +1,14 @@
+<tr>
+  <td class="col-md-9">
+    {{object.content}}
+  </td>
+  <td class="col-md-3">
+    {%for i in '12345'%}
+      <div class='col-xs-2'>
+        <label>
+          {{i}}
+          <input type='radio' name='{{object.id}}' value='{{i}}'/>
+        </label>
+      </div>
+    {% endfor %}
+  </td>

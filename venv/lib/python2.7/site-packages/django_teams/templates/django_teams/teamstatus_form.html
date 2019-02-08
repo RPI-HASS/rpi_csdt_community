@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block page-header %}
+<h1>Join Team <small>{{ team }}</small></h1>
+{% endblock %}
+
+{% block content %}
+
+    <form class="form-horizontal" method="post" action="{% url 'teamstatus-create' team_pk=team.pk %}">
+        <tr><th><label for="id_comment">Comment:</label></th><td><input id="id_comment" maxlength="255" name="comment" type="text" /></td></tr>
+
+        <p>Your request will be reviewed by the teachers; {% for owner in team.owners %}
+            {{ owner }}{% if not forloop.last %},{% endif %}{% endfor %}</p>
+
+        <button type="submit" class="btn btn-primary">Request access</button>
+        {% csrf_token %}
+    </form>
+
+{% endblock %}

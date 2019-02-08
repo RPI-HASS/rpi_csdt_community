@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block page-header %}
+<h1>Create classroom</h1>
+{% endblock %}
+
+{% block content %}
+    <form class="form-horizontal" method="post" action="{% url 'team-create' %}" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="id_{{ form.name.html_name }}">{{ form.name.label }}</label>
+            <input type="text" class="form-control" id="name" name="name" placeholder="Classroom name...">
+            <b style="color: red">{{ form.name.errors }}</b>
+        </div>
+        <div class="form-group">
+            <label for="id_{{ form.description.html_description }}">{{ form.description.label }}</label><br />
+            <textarea cols="40" id="id_description" name="description" rows="10"></textarea>
+            <b style="color: red">{{ form.description.errors }}</b>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-12">
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" name="private"> Private?
+                        <b style="color: red">{{ form.name.errors }}</b>
+                    </label>
+                </div>
+            </div>
+        </div>
+        {% csrf_token %}
+        <button type="submit" class="btn btn-primary">Create Classroom</button>
+    </form>
+{% endblock %}

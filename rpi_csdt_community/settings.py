@@ -17,6 +17,8 @@ ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
 
+ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '*']
+
 # ALLOWED_HOSTS = ['0.0.0.0', 'localhost']
 
 MANAGERS = ADMINS
@@ -35,10 +37,12 @@ else:
     DATABASES = {
         'default': {
             'ENGINE': 'django.contrib.gis.db.backends.postgis',
-            'NAME': 'rpi_csdt_community',
+            'NAME': 'postgres',
             'USER': 'postgres',
-            'PASSWORD': 'postgres',
-            'HOST': 'localhost',
+            # Removed Connection Info Due to sensitivity
+            'PASSWORD': '',
+            'HOST': '',
+            'PORT': '5432',
         }
     }
 
@@ -123,8 +127,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.locale.LocaleMiddleware',
-    # Uncomment the next line for simple clickjacking protection:
-    # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'cms.middleware.user.CurrentUserMiddleware',
     'cms.middleware.page.CurrentPageMiddleware',
     'cms.middleware.toolbar.ToolbarMiddleware',
@@ -187,7 +189,6 @@ INSTALLED_APPS = (
     'django_extensions',
     'project_share',
     'rpi_csdt_community',
-    'twitter_bootstrap',
     'jquery',
 
     'easy_thumbnails',
@@ -227,9 +228,8 @@ INSTALLED_APPS = (
     'comments',
     'markdown_deux',
     'crispy_forms',
-    'bootstrap3',
+    'bootstrap4',
     'django_pre_post',
-    'gis_csdt',
     'django.contrib.gis',
     'oral_history',
 )
@@ -315,7 +315,7 @@ COMPRESS_PRECOMPILERS = (
     ('stylesheet/less', COMPRESS_LESSC_COMMAND),
 )
 
-CRISPY_TEMPLATE_PACK = 'bootstrap3'
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to

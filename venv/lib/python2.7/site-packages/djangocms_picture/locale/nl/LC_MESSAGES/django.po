@@ -1,0 +1,203 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-10-01 16:12+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Jasper Bok <jasper@fluxility.com>, 2016\n"
+"Language-Team: Dutch (https://www.transifex.com/divio/teams/58664/nl/)\n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Image"
+msgstr "Afbeelding"
+
+msgid "Advanced settings"
+msgstr "Geavanceerde instellingen"
+
+msgid "Link settings"
+msgstr "Linkinstellingen"
+
+msgid "Cropping settings"
+msgstr "Instellingen voor bijsnijden"
+
+msgid "Align left"
+msgstr "Links uitlijnen"
+
+msgid "Align right"
+msgstr "Rechts uitlijnen"
+
+msgid "Align center"
+msgstr "Centreren"
+
+msgid "Open in new window"
+msgstr "Open in nieuw venster"
+
+msgid "Open in same window"
+msgstr "Open in huidig venster"
+
+msgid "Delegate to parent"
+msgstr "Delegeren aan bovenliggend venster"
+
+msgid "Delegate to top"
+msgstr "Delegeren aan hoogste venster"
+
+msgid "Default"
+msgstr "Standaard"
+
+msgid "Let settings.DJANGOCMS_PICTURE_RESPONSIVE_IMAGES decide"
+msgstr ""
+
+msgid "Yes"
+msgstr ""
+
+msgid "No"
+msgstr ""
+
+msgid "Template"
+msgstr "Sjabloon"
+
+msgid "External image"
+msgstr "Externe afbeelding"
+
+msgid ""
+"If provided, overrides the embedded image. Certain options such as cropping "
+"are not applicable to external images."
+msgstr ""
+"Indien ingevuld wordt de externe afbeelding gebruikt in plaats van de "
+"ingevoegde afbeelding. Bepaalde opties, zoals bijsnijden, zijn niet van "
+"toepassing op externe afbeeldingen."
+
+msgid "Width"
+msgstr "Breedte"
+
+msgid ""
+"The image width as number in pixels. Example: \"720\" and not \"720px\"."
+msgstr ""
+"De breedte van de afbeelding in pixels. Bijvoorbeeld: \"720\" en niet \"720px"
+"\"."
+
+msgid "Height"
+msgstr "Hoogte"
+
+msgid ""
+"The image height as number in pixels. Example: \"720\" and not \"720px\"."
+msgstr ""
+"De hoogte van de afbeelding in pixels. Bijvoorbeeld: \"720\" en niet \"720px"
+"\"."
+
+msgid "Alignment"
+msgstr "Uitlijning"
+
+msgid "Aligns the image according to the selected option."
+msgstr "Lijnt de afbeelding uit afhankelijk van de geselecteerde optie."
+
+msgid "Caption text"
+msgstr "Onderschrift"
+
+msgid "Provide a description, attribution, copyright or other information."
+msgstr ""
+"Voeg een beschrijving, auteursrechtinformatie, bronvermelding of andere "
+"informatie toe."
+
+msgid "Attributes"
+msgstr "Attributen"
+
+msgid "External URL"
+msgstr "Externe URL"
+
+msgid "Wraps the image in a link to an external URL."
+msgstr "Laat de afbeelding linken naar een externe URL."
+
+msgid "Internal URL"
+msgstr "Interne URL"
+
+msgid "Wraps the image in a link to an internal (page) URL."
+msgstr "Laat de afbeelding linken naar een interne URL."
+
+msgid "Link target"
+msgstr "Venster"
+
+msgid "Link attributes"
+msgstr "Linkattributen"
+
+msgid "Automatic scaling"
+msgstr "Automatisch schalen"
+
+msgid "Uses the placeholder dimenstions to automatically calculate the size."
+msgstr ""
+"Maak gebruik van de placeholder-afmetingen om automatisch de grootte te "
+"bepalen."
+
+msgid "Use original image"
+msgstr "Gebruik originele afbeelding"
+
+msgid "Outputs the raw image without cropping."
+msgstr "Gebruik de originele afbeelding zonder deze bij te snijden."
+
+msgid "Crop image"
+msgstr "Snij afbeelding bij"
+
+msgid ""
+"Crops the image according to the thumbnail settings provided in the template."
+msgstr ""
+"Snij de afbeelding bij aan de hand van de thumbnail-instellingen in het "
+"sjabloon."
+
+msgid "Upscale image"
+msgstr "Schaal afbeelding op"
+
+msgid ""
+"Upscales the image to the size of the thumbnail settings in the template."
+msgstr ""
+"Schaal de afdbeelding op aan de hand van thumbnail-instellingen in het "
+"sjabloon."
+
+msgid "Use responsive image"
+msgstr ""
+
+msgid ""
+"Uses responsive image technique to choose better image to display based upon "
+"screen viewport. This configuration only applies to uploaded images "
+"(external pictures will not be affected). "
+msgstr ""
+
+msgid "Thumbnail options"
+msgstr "Thumbnail-opties"
+
+msgid ""
+"Overrides width, height, and crop; scales up to the provided preset "
+"dimensions."
+msgstr ""
+"Overschrijf breedte, hoogte en bijsnijden; Schaalt op tot de vooraf-"
+"opgegeven afmetingen."
+
+msgid "<file is missing>"
+msgstr "<bestand ontbreekt>"
+
+msgid ""
+"You have given both external and internal links. Only one option is allowed."
+msgstr ""
+"U heeft zowel een interne als een externe link opgegeven. U kunt echter "
+"slechts één van beide gebruiken."
+
+msgid "You need to add either an image, or a URL linking to an external image."
+msgstr ""
+"U moet een afbeelding óf een URL naar een externe afbeelding toevoegen."
+
+#, python-brace-format
+msgid ""
+"Invalid cropping settings. You cannot combine \"{field_a}\" with "
+"\"{field_b}\"."
+msgstr ""
+"Ongeldige instellingen voor bijsnijden. \"{field_a}\" en \"{field_b}\" "
+"kunnen niet samen worden gebruikt."

@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load teams %}
+
+{% block page-header %}
+{% endblock %}
+
+{% block content %}
+<div class="row" align="right">
+    {% if user.is_authenticated %}
+        <h4><a href="{% url 'team-create' %}">Create your own</a></h4>
+    {% endif %}
+</div>
+
+
+
+<div class="row">
+    <h2>Classrooms: </h2>
+</div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Classroom Name</th>
+                <th>Classroom Description</th>
+                <th>Classroom Owners</th>
+                <th># of members</th>
+                <th>Your status</th>
+            </tr>
+        </thead>
+        {% for team in list %}
+              {% include "django_teams/_table.html" %}
+            
+        {% endfor %}
+    </table>
+{% endblock %}

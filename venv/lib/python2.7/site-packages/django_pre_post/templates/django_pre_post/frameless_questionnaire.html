@@ -1,0 +1,82 @@
+{% load bootstrap3 %}
+{% bootstrap_css %}
+
+{% block page-header %}
+<h1>{{ object.name }}</h1>
+{% endblock %}
+{% block content %}
+    <form class="form-horizontal" method="post" action="{% url 'fill-out-questionnaire' pk=object.pk %}">
+          {% for question in questions %}
+            {% if question.get_type_display == 'Rank'%}
+              {% if not doingRankings.value %}
+              <div class='row' align="center">
+                <b>
+                  1= Strongly Disagree &emsp;  &ensp;
+                  2= Disagree &emsp;  &ensp;
+                  3= Neutral &emsp;  &ensp;
+                  4= Agree &emsp;  &ensp;
+                  5= Strongly Agree &emsp;  &ensp;
+                </b>
+              </div>
+              <div class='row'>
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>Statement</th>
+                    <th>
+                      <div class=col-xs-2>
+                        SD
+                      </div>
+                      <div class=col-xs-6></div>
+                      <div class=col-xs-2>
+                        SA
+                      </div>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+              {% endif %}
+              {{ doingRankings.true }}
+              {%include 'django_pre_post/rank.html' with object=question %}
+            {% else %}
+              {% if doingRankings.value %}
+                  </tbody>
+                </table>
+              </div>
+              {% endif %}
+              <div class='row'>
+              {{ doingRankings.false }}
+              {% autoescape off %}
+                {% if not question.get_type_display == 'Info' %}
+                  {{ forloop.counter }}.
+                {% endif %}
+                {{question.content}}
+              {% endautoescape %}
+              </div>
+              <div class='row'>
+                {% if question.get_type_display == 'Fill In The Blank' %}
+                  {%include 'django_pre_post/fill_in_the_blank.html' with object=question %}
+                {% elif question.get_type_display == 'Multiple Choice' %}
+                  {%include 'django_pre_post/multiple_choice.html' with object=question %}
+                {% elif question.get_type_display == 'Numeric' %}
+                  {%include 'django_pre_post/numeric.html' with object=question %}
+                {% elif question.get_type_display == 'Open Ended' %}
+                  {%include 'django_pre_post/open_ended.html' with object=question %}
+                {% endif %}
+              </div>
+              <br/>
+            {% endif %}
+          {% endfor %}
+          {% if doingRankings.value %}
+                </tbody>
+              </table>
+            </div>
+          {% endif %}
+
+          <div class='row'>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+        {% csrf_token %}
+    </form>
+
+{% endblock %}

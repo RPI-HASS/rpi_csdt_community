@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load teams %}
+
+{% block page-header %}
+<h1>{{ object }} <small>admin page, <a href="{% url 'team-info-edit' pk=object.pk %}">change name</a></small></h1>
+<p class="lead">{% if object.description %}{{ object.description }}{% endif %}</p>
+{% endblock %}
+
+{% block extra_head %}
+    <style>
+        .user-list select {
+            display: none;
+        }
+        .selected {
+            background-color: red;
+        }
+    </style>
+{% endblock %}
+
+{% block js %}
+{{ block.super }}
+    <script>
+        var toggleSelected = function(selectId, objectId) {
+            var selectObject = $('#'+selectId+'_'+objectId);
+            var values = $("#"+selectId).val();
+            if(values == null || values == "")
+                values = [];
+            if(values.indexOf(objectId) > -1) {
+                values.splice(values.indexOf(objectId), 1);
+            } else {
+                values.push(objectId);
+            }
+
+            $("#"+selectId).val(values);
+        };
+    </script>
+{% endblock %}
+
+{% block content %}
+
+    <form class="form-horizontal" method="post" action="{% url 'team-edit' pk=object.pk %}">
+    
+    {% for group in form %}
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">{{ group.prefix|capfirst }}</h3>
+        </div>
+        <div class="panel-body">
+            <div class="form-group">
+                <label class="col-sm-1 control-label">Action</label>
+                <div class="col-sm-11">
+                    {{ group.action }}
+                </div>
+            </div>
+            <div class="user-list row">
+                {% for object in group.queryset %}
+                    <div class="col-xs-6 col-sm-4 col-md-2">
+                      <input type="checkbox"  style="width:30px; height:30px" id="{{ group.items.id_for_label }}_{{ object.id }}" name="{{ object.id }}" value="newsletter" onclick="toggleSelected('{{ group.items.id_for_label }}', '{{ object.id }}')">{% include object|load_fragment_template %}
+                    </div>
+                {% endfor %}
+                {{ group.items }}
+            </div>
+            <!-- This get updated with JS when an object is clicked-->
+            <button type="submit" class="btn btn-primary">Submit all changes</button>
+        </div>
+    </div>
+    {% endfor %}
+
+    {% csrf_token %}
+        <button type="submit" class="btn btn-primary">Submit all changes</button>
+    </form>
+{% endblock %}

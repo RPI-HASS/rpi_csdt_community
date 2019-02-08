@@ -1,0 +1,6 @@
+[console_scripts]
+caniusepython3 = caniusepython3.__main__:main
+
+[distutils.commands]
+caniusepython3 = caniusepython3.command:Command
+

@@ -1,11 +1,12 @@
 """Test the entire site by going through and testing all links."""
-from BeautifulSoup import BeautifulSoup, SoupStrainer
+from bs4 import BeautifulSoup, SoupStrainer
 from django.conf import settings
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from django.test.client import Client
 
 try:
     from django.contrib.auth import get_user_model
+
     User = get_user_model()
 except ImportError:
     from django.contrib.auth.models import User
@@ -31,8 +32,8 @@ class UrlTests(StaticLiveServerTestCase):
         self.visited[url] = True
 
         # Ignore URL's that point elsewhere
-        if url.startswith('http://') or url.startswith('http://') or url.startswith('https://') or\
-           url.startswith('//'):
+        if url.startswith('http://') or url.startswith('http://') or url.startswith('https://') or \
+                url.startswith('//'):
             return
 
         # Ignore mailto links
@@ -53,8 +54,8 @@ class UrlTests(StaticLiveServerTestCase):
         self.assertTrue(response.status_code == 200 or response.status_code == 302,
                         msg="Got code %s on %s" % (response.status_code, url))
         if hasattr(response, 'content'):
-            for link in BeautifulSoup(response.content, parseOnlyThese=SoupStrainer('a')):
-                if any('href' in el for el in link.attrs):
+            for link in BeautifulSoup(response.content, 'html.parser', parse_only=SoupStrainer("a")):
+                if 'href' in getattr(link, 'attrs', {}):
                     self.test_all_site_links(link['href'])
 
     def test_API(self):
@@ -85,7 +86,7 @@ class UrlTests(StaticLiveServerTestCase):
         self.assertEqual(response.status_code, 200)
 
         soup = BeautifulSoup(response.content)
-        images = soup.findAll(attrs={'class': 'captcha'})
+        images = soup.find_all(attrs={'class': 'captcha'})
 
         for image in images:
             import sys
