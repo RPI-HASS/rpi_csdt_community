@@ -37,12 +37,10 @@ else:
     DATABASES = {
         'default': {
             'ENGINE': 'django.contrib.gis.db.backends.postgis',
-            'NAME': 'postgres',
+            'NAME': 'rpi_csdt_community',
             'USER': 'postgres',
-            # Removed Connection Info Due to sensitivity
-            'PASSWORD': '',
-            'HOST': '',
-            'PORT': '5432',
+            'PASSWORD': 'postgres',
+            'HOST': 'localhost',
         }
     }
 
