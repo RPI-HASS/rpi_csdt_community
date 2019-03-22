@@ -3,21 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="b6c7ff2b-d29a-4559-a102-48568ac7520a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project_share/templates/project_share/application_list_react.html" beforeDir="false" afterPath="$PROJECT_DIR$/project_share/templates/project_share/application_list_react.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rpi_csdt_community/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/rpi_csdt_community/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rpi_csdt_community/templates/rpi_csdt_community/tutorial.html" beforeDir="false" afterPath="$PROJECT_DIR$/rpi_csdt_community/templates/rpi_csdt_community/starting.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rpi_csdt_community/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/rpi_csdt_community/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rpi_csdt_community/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/rpi_csdt_community/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/applications/CSnap-Modules" beforeDir="false" afterPath="$PROJECT_DIR$/static/applications/CSnap-Modules" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/applications/CSnap-Modules/Bead Loom/blocks.json" beforeDir="false" afterPath="$PROJECT_DIR$/static/applications/CSnap-Modules/Bead Loom/blocks.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/applications/CSnap-Modules/Bead Loom/blocks/changeCostumeColor.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/applications/CSnap-Modules/Bead Loom/blocks/changeCostumeColor.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/applications/CSnap-Modules/Bead Loom/blocks/changeCostumeShade.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/applications/CSnap-Modules/Bead Loom/blocks/changeCostumeShade.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/applications/CSnap-Modules/Bead Loom/blocks/getCoordinateScale.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/applications/CSnap-Modules/Bead Loom/blocks/getCoordinateScale.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/applications/CSnap-Modules/Bead Loom/blocks/setCoordinateScale.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/applications/CSnap-Modules/Bead Loom/blocks/setCoordinateScale.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/applications/CSnap-Modules/Bead Loom/blocks/setCostumeShade.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/applications/CSnap-Modules/Bead Loom/blocks/setCostumeShade.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/applications/CSnap-Modules/Bead Loom/blocks/translate_percent.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/applications/CSnap-Modules/Bead Loom/blocks/translate_percent.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/applications/CSnap-Modules/Bead Loom/code.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/applications/CSnap-Modules/Bead Loom/code.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/applications/CSnap-Modules/Bead Loom/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/static/applications/CSnap-Modules/Bead Loom/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/setup.sh" beforeDir="false" afterPath="$PROJECT_DIR$/bin/setup.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -27,56 +14,58 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/project_share/templates/project_share/application_list_react.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="730">
-              <caret line="81" lean-forward="true" selection-start-line="81" selection-end-line="81" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/rpi_csdt_community/urls.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="478">
-              <caret line="54" column="13" selection-start-line="54" selection-start-column="13" selection-end-line="54" selection-end-column="13" />
-              <folding>
-                <element signature="e#64#84#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/rpi_csdt_community/views.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="658">
-              <caret line="64" column="22" selection-start-line="64" selection-start-column="22" selection-end-line="64" selection-end-column="22" />
-              <folding>
-                <element signature="e#63#119#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/rpi_csdt_community/templates/rpi_csdt_community/starting.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="570">
-              <caret line="38" column="10" selection-start-line="38" selection-start-column="10" selection-end-line="38" selection-end-column="10" />
-              <folding>
-                <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/rpi_csdt_community/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="19" selection-start-line="19" selection-end-line="19" />
+            <state relative-caret-position="131">
+              <caret line="355" column="13" selection-start-line="355" selection-start-column="6" selection-end-line="355" selection-end-column="13" />
+              <folding>
+                <element signature="e#54#63#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/project_share/forms.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="230">
+              <caret line="69" column="54" lean-forward="true" selection-start-line="69" selection-start-column="54" selection-end-line="69" selection-end-column="54" />
+              <folding>
+                <element signature="e#83#107#0" expanded="true" />
+                <element signature="e#2273#2331#0" />
+                <element signature="e#3260#3305#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/account/signup.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="135">
+              <caret line="9" column="48" lean-forward="true" selection-start-line="9" selection-start-column="48" selection-end-line="9" selection-end-column="48" />
+              <folding>
+                <element signature="e#1484#1491#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/bin/setup.sh">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="660">
+              <caret line="44" column="20" lean-forward="true" selection-start-line="44" selection-start-column="20" selection-end-line="44" selection-end-column="20" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/requirements.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="165">
+              <caret line="11" column="28" lean-forward="true" selection-start-line="11" selection-start-column="28" selection-end-line="11" selection-end-column="28" />
             </state>
           </provider>
         </entry>
@@ -94,6 +83,12 @@
     <findStrings>
       <find>text-box</find>
       <find>application_list</find>
+      <find>twitter</find>
+      <find>local_Sett</find>
+      <find>snow</find>
+      <find>recapt</find>
+      <find>signup</find>
+      <find>captcha</find>
     </findStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$</dir>
@@ -109,17 +104,19 @@
         <option value="$PROJECT_DIR$/templates/home.html" />
         <option value="$PROJECT_DIR$/project_share/templates/project_share/tutorialA.html" />
         <option value="$PROJECT_DIR$/rpi_csdt_community/templates/rpi_csdt_community/tutorial.html" />
-        <option value="$PROJECT_DIR$/rpi_csdt_community/settings.py" />
         <option value="$PROJECT_DIR$/rpi_csdt_community/views.py" />
         <option value="$PROJECT_DIR$/rpi_csdt_community/urls.py" />
         <option value="$PROJECT_DIR$/project_share/templates/project_share/application_list_react.html" />
+        <option value="$PROJECT_DIR$/bin/setup.sh" />
+        <option value="$PROJECT_DIR$/requirements.txt" />
+        <option value="$PROJECT_DIR$/rpi_csdt_community/settings.py" />
+        <option value="$PROJECT_DIR$/templates/account/signup.html" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="42" />
-    <option name="y" value="23" />
-    <option name="width" value="1518" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="3227" />
+    <option name="width" value="1200" />
     <option name="height" value="959" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -135,6 +132,11 @@
             <path>
               <item name="rpi_csdt_community" type="b2602c69:ProjectViewProjectNode" />
               <item name="rpi_csdt_community" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="rpi_csdt_community" type="b2602c69:ProjectViewProjectNode" />
+              <item name="rpi_csdt_community" type="462c0819:PsiDirectoryNode" />
+              <item name="bin" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="rpi_csdt_community" type="b2602c69:ProjectViewProjectNode" />
@@ -241,16 +243,19 @@
       <workItem from="1547850126749" duration="256000" />
       <workItem from="1548089899618" duration="538000" />
       <workItem from="1548096643373" duration="313000" />
+      <workItem from="1553271430064" duration="2705000" />
+      <workItem from="1553274284260" duration="3343000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="8663000" />
+    <option name="totallyTimeSpent" value="14711000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="42" y="23" width="1518" height="959" extended-state="0" />
+    <frame x="3120" y="0" width="1920" height="1200" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1910569" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15421557" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Database Changes" order="0" />
@@ -262,8 +267,8 @@
       <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="7" />
       <window_info anchor="bottom" id="Version Control" order="8" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="9" sideWeight="0.4989518" visible="true" weight="0.28604382" />
-      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5010482" side_tool="true" weight="0.3290398" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="9" sideWeight="0.49740034" visible="true" weight="0.5211665" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50259966" side_tool="true" weight="0.31548974" />
       <window_info anchor="bottom" id="Python Console" order="11" weight="0.3290398" />
       <window_info anchor="bottom" id="Docker" order="12" show_stripe_button="false" />
       <window_info anchor="right" id="SciView" order="0" />
@@ -279,20 +284,6 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/static/about/tutorial.css">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/static/about/williambabbitt.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-835" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/_login.html">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/_paginate.html">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/rpi_csdt_community/templates/rpi_csdt_community/guides.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-2574" />
@@ -336,9 +327,6 @@
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/_cms_placeholder.html">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/account/signup.html">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/django_comments_xtd/reply.html">
@@ -449,13 +437,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/project_share/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2">
-          <caret line="105" column="6" selection-start-line="105" selection-start-column="6" selection-end-line="105" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/project_share/templatetags/project_share_tags.py">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -518,14 +499,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/project_share/templates/project_share/application_list_react.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="730">
-          <caret line="81" lean-forward="true" selection-start-line="81" selection-end-line="81" />
+        <state relative-caret-position="1215">
+          <caret line="81" selection-start-line="81" selection-end-line="81" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/rpi_csdt_community/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="478">
+        <state relative-caret-position="600">
           <caret line="54" column="13" selection-start-line="54" selection-start-column="13" selection-end-line="54" selection-end-column="13" />
           <folding>
             <element signature="e#64#84#0" expanded="true" />
@@ -535,7 +516,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/rpi_csdt_community/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="658">
+        <state relative-caret-position="855">
           <caret line="64" column="22" selection-start-line="64" selection-start-column="22" selection-end-line="64" selection-end-column="22" />
           <folding>
             <element signature="e#63#119#0" expanded="true" />
@@ -553,10 +534,63 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/requirements.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" column="28" lean-forward="true" selection-start-line="11" selection-start-column="28" selection-end-line="11" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bin/setup.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="660">
+          <caret line="44" column="20" lean-forward="true" selection-start-line="44" selection-start-column="20" selection-end-line="44" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/lib/platform-impl.jar!/resources/html5-schema/html5/common.rnc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="123" column="18" selection-start-line="123" selection-start-column="18" selection-end-line="123" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/account/signup.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="48" lean-forward="true" selection-start-line="9" selection-start-column="48" selection-end-line="9" selection-end-column="48" />
+          <folding>
+            <element signature="e#1484#1491#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project_share/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="106">
+          <caret line="332" column="20" lean-forward="true" selection-start-line="332" selection-start-column="20" selection-end-line="332" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project_share/forms.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="230">
+          <caret line="69" column="54" lean-forward="true" selection-start-line="69" selection-start-column="54" selection-end-line="69" selection-end-column="54" />
+          <folding>
+            <element signature="e#83#107#0" expanded="true" />
+            <element signature="e#2273#2331#0" />
+            <element signature="e#3260#3305#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/rpi_csdt_community/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="19" selection-start-line="19" selection-end-line="19" />
+        <state relative-caret-position="131">
+          <caret line="355" column="13" selection-start-line="355" selection-start-column="6" selection-end-line="355" selection-end-column="13" />
+          <folding>
+            <element signature="e#54#63#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

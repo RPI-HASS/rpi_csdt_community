@@ -29,10 +29,15 @@ sudo apt-get install -y nodejs build-essential
 
 sudo npm install -g less
 
+
+sudo apt-get install -y python-setuptools
+
+sudo easy_install pip
+
+
 # Install libraries for the community site
 sudo apt-get install -y  libpq-dev libcurl4-openssl-dev
-pip3 install --upgrade pip3
-pip3 install --upgrade -r /vagrant/requirements.txt
+pip install --upgrade -r /vagrant/requirements.txt
 
 # Install the git submodules
 cd /vagrant/
