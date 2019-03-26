@@ -1,0 +1,165 @@
+{% load static %}
+
+<html>
+  <head>
+    {% if project %}
+      <title>{{ project.name }}</title>
+    {% else %}
+      <title>{{ application.name }}</title>
+    {% endif %}
+	{% if GOOGLE_ANALYTICS_PROPERTY_ID %}
+      <script type="text/javascript" src="{% static 'js/ga.js'%}"></script>
+    {% endif %}
+
+  </head>
+  <body>
+    <canvas id="world" tabindex="1" style="position: absolute; top: 64px; left: 0px; width:100%; height: 100%" />
+    <script type="text/javascript">
+        var config = {
+          'modules': {
+		    {% if applicationdemo %}'module': '{{ applicationdemo.application.name }}',
+            'stage': '{{ applicationdemo.application.application_file.url }}',
+			{% else %}'module': '{{ application.name }}',
+            'stage': '{% static "applications/CSnap-Modules/" %}',
+			{% endif %}
+          },
+          {% if user.is_authenticated %}
+          'user': '{{ user }}',
+          'user_id': {{ user.id }},
+          {% endif %}
+          'urls': {
+            'user_api_detail_url': '{% url 'user-api-detail'%}',
+			'applications_root': '{% static "applications/CSnap-Modules/" %}',
+            {% if applicationdemo %}'demos_url': '{% url 'api-demos-list' %}?format=json&application={{ applicationdemo.application }}',
+            {% else %}'demos_url': '{% url 'api-demos-list' %}?format=json&application={{ application }}',
+            {% endif %}'demo_detail_url': '{% url 'demo-list' %}',
+            {% if applicationdemo %}'goals_url': '{% url 'api-goals-list' %}?format=json&application={{ applicationdemo.application }}',
+            {% else %}'goals_url': '{% url 'api-goals-list' %}?format=json&application={{ application }}',
+            {% endif %}'create_project_url': '{% url 'api-projects-list' %}',
+            'list_project_url': '{% url 'api-projects-list' %}',
+            'create_file_url': '{% url 'file-create' %}',
+            'login_url': '{% url 'account_login' %}',
+            'project_url_root': '{% url 'project-list' %}',
+            'module_api': '{% url 'api-modules-list' %}',
+			'signup_url': '{% url 'account_signup' %}',
+            {% if user.is_authenticated %}'user_detail_url': '{% url 'extendeduser-detail' pk=user.id %}',
+            {% endif %}
+          },
+          'asset_path': '{% static "csnap/" %}',
+          'lib_path': '/media/modules/libraries/',
+          {% if present %}'presentation': true,
+          {% endif %}
+          {% if project %}'application_id': {{ application.id }},
+          'project': {
+            'id': {{ project.id }},
+            'name': '{{ project.name }}',
+            'application': {{ project.application.id }},
+            'approved': {{ project.approved|lower }},
+            'project_url': '{{ project.project.file_path.url }}'
+          }
+          {% elif applicationdemo %}'application_id': {{ applicationdemo.application.id }},
+          'demo': {
+            'id': {{ applicationdemo.id }},
+            'name': '{{ applicationdemo.name }}',
+            'application': {{ applicationdemo.application.id }},
+            'project_url': '{{ applicationdemo.zipfile.url }}'
+          }
+          {% elif application %}'application_id': '{{ application.id }}',
+          {% endif %}
+        };
+    </script>
+
+    <script type="text/javascript" src="{% static 'csnap/jquery-1.11.0.js'%}"></script>
+
+    <script type="text/javascript" src="{% static 'csnap/lib/jszip.js'%}"></script>
+    <script type="text/javascript" src="{% static 'csnap/lib/jszip-load.js'%}"></script>
+    <script type="text/javascript" src="{% static 'csnap/lib/jszip-deflate.js'%}"></script>
+    <script type="text/javascript" src="{% static 'csnap/lib/jszip-inflate.js'%}"></script>
+    <script type="text/javascript" src="{% static 'csnap/lib/jszip-utils.js'%}"></script>
+    <script type="text/javascript" src="{% static 'csnap/module-loader.js'%}"></script>
+
+    <script type="text/javascript" src="{% static 'csnap/morphic.js'%}"></script>
+    <script type="text/javascript" src="{% static 'csnap/widgets.js'%}"></script>
+    <script type="text/javascript" src="{% static 'csnap/blocks.js'%}"></script>
+    <script type="text/javascript" src="{% static 'csnap/threads.js'%}"></script>
+    <script type="text/javascript" src="{% static 'csnap/objects.js'%}"></script>
+    <script type="text/javascript" src="{% static 'csnap/gui.js'%}"></script>
+    <script type="text/javascript" src="{% static 'csnap/paint.js'%}"></script>
+    <script type="text/javascript" src="{% static 'csnap/lists.js'%}"></script>
+    <script type="text/javascript" src="{% static 'csnap/byob.js'%}"></script>
+    <script type="text/javascript" src="{% static 'csnap/xml.js'%}"></script>
+    <script type="text/javascript" src="{% static 'csnap/store.js'%}"></script>
+    <script type="text/javascript" src="{% static 'csnap/locale.js'%}"></script>
+    <script type="text/javascript" src="{% static 'csnap/cloud.js'%}"></script>
+    <script type="text/javascript" src="{% static 'csnap/sha512.js'%}"></script>
+  	<script type="text/javascript" src="{% static 'csnap/threejs/three.js'%}"></script>
+  	<script type="text/javascript" src="{% static 'csnap/threejs/helvetiker_regular.typeface.js'%}"></script>
+    <script type="text/javascript" src="{% static 'csnap/Charles_Changes_To_IDE_Morph.js'%}"></script>
+    <script type="text/javascript" src="{% static 'csnap/FileSaver.min.js'%}"></script>
+
+    <script type="text/javascript">
+        var world;
+        window.onload = function () {
+            world = new WorldMorph(document.getElementById('world'));
+            new IDE_Morph().openIn(world);
+            setInterval(loop, 1);
+        };
+        function loop() {
+            world.doOneCycle();
+        };
+    </script>
+
+    // CSRF token just in case
+    {% csrf_token %}
+    <script>
+$(function() {
+    // Helper function to get CSRF tokens, if present
+    function getCookie(name) {
+        var cookieValue = null;
+        if (document.cookie && document.cookie != '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = jQuery.trim(cookies[i]);
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+    var csrftoken = getCookie('csrftoken');
+
+    function csrfSafeMethod(method) {
+        // these HTTP methods do not require CSRF protection
+        return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+    }
+    function sameOrigin(url) {
+        // test that a given url is a same-origin URL
+        // url could be relative or scheme relative or absolute
+        var host = document.location.host; // host + port
+        var protocol = document.location.protocol;
+        var sr_origin = '//' + host;
+        var origin = protocol + sr_origin;
+        // Allow absolute or scheme relative URLs to same origin
+        return (url == origin || url.slice(0, origin.length + 1) == origin + '/') ||
+            (url == sr_origin || url.slice(0, sr_origin.length + 1) == sr_origin + '/') ||
+            // or any other URL that isn't scheme relative or absolute i.e relative.
+            !(/^(\/\/|http:|https:).*/.test(url));
+    }
+
+    $.ajaxSetup({
+        beforeSend: function(xhr, settings) {
+            if (!csrfSafeMethod(settings.type) && sameOrigin(settings.url)) {
+                // Send the token to same-origin, relative URLs only.
+                // Send the token only if the method warrants CSRF protection
+                // Using the CSRFToken value acquired earlier
+                xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            }
+        }
+    });
+});
+    </script>
+  </body>
+</html>
