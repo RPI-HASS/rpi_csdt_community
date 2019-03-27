@@ -43,6 +43,7 @@ pip install --upgrade -r /vagrant/requirements.txt
 cd /vagrant/
 git submodule init
 git submodule update
+git submodule add
 
 
 # Run migrations to init db
