@@ -13,7 +13,6 @@
 
   </head>
   <body>
-    <canvas id="world" tabindex="1" style="position: absolute; top: 64px; left: 0px; width:100%; height: 100%" />
     <script type="text/javascript">
         var config = {
           'modules': {
@@ -68,98 +67,61 @@
           {% endif %}
         };
     </script>
+    <script type="text/javascript" src="{% static 'bblocks/beetleblocks/three.js'%}"></script>
+    <script type="text/javascript" src="{% static 'bblocks/beetleblocks/OrbitControls.js'%}"></script>
+    <script type="text/javascript" src="{% static 'bblocks/beetleblocks/OBJLoader.js'%}"></script>
+    <script type="text/javascript" src="{% static 'bblocks/beetleblocks/OBJExporter.js'%}"></script>
+    <script type="text/javascript" src="{% static 'bblocks/beetleblocks/STLExporter.js'%}"></script>
+    <script type="text/javascript" src="{% static 'bblocks/beetleblocks/STLBinaryExporter.js'%}"></script>
+    <script type="text/javascript" src="{% static 'bblocks/beetleblocks/ThreeCSG.js'%}"></script>
+    <script type="text/javascript" src="{% static 'bblocks/beetleblocks/TextGeometry.js'%}"></script>
+    <script type="text/javascript" src="{% static 'bblocks/morphic.js'%}"></script>
+    <script type="text/javascript" src="{% static 'bblocks/beetleblocks/morphic.js'%}"></script>
+    <script type="text/javascript" src="{% static 'bblocks/widjets.js'%}"></script>
+    <script type="text/javascript" src="{% static 'bblocks/beetleblocks/widjets.js'%}"></script>
+    <script type="text/javascript" src="{% static 'bblocks/blocks.js'%}"></script>
+    <script type="text/javascript" src="{% static 'bblocks/threads.js'%}"></script>
+    <script type="text/javascript" src="{% static 'bblocks/beetleblocks/threads.js'%}"></script>
+    <script type="text/javascript" src="{% static 'bblocks/ovjects.js'%}"></script>
+    <script type="text/javascript" src="{% static 'bblocks/beetleblocks/objects.js'%}"></script>
+    <script type="text/javascript" src="{% static 'bblocks/cloud.js'%}"></script>
+    <script type="text/javascript" src="{% static 'bblocks/beetleblocks/beetlecloud.js'%}"></script>
+    <script type="text/javascript" src="{% static 'bblocks/gui.js'%}"></script>
+    <script type="text/javascript" src="{% static 'bblocks/beetleblocks/gui.js'%}"></script>
+    <script type="text/javascript" src="{% static 'bblocks/beetleblocks/tutorial.js'%}"></script>
+    <script type="text/javascript" src="{% static 'bblocks/lists.js'%}"></script>
+    <script type="text/javascript" src="{% static 'bblocks/byob.js'%}"></script>
+    <script type="text/javascript" src="{% static 'bblocks/beetleblocks/byob.js'%}"></script>
+    <script type="text/javascript" src="{% static 'bblocks/tables.js'%}"></script>
+    <script type="text/javascript" src="{% static 'bblocks/symbols.js?version=2018-06-21'%}"></script>
+    <script type="text/javascript" src="{% static 'bblocks/xml.js'%}"></script>
+    <script type="text/javascript" src="{% static 'bblocks/beetleblocks/blocks.js'%}"></script>
+    <script type="text/javascript" src="{% static 'bblocks/store.js'%}"></script>
+    <script type="text/javascript" src="{% static 'bblocks/beetleblocks/store.js'%}"></script>
+    <script type="text/javascript" src="{% static 'bblocks/locale.js'%}"></script>
+    <script type="text/javascript" src="{% static 'bblocks/sha512.js'%}"></script>
+    <script type="text/javascript" src="{% static 'bblocks/FileSaver.min.js'%}"></script>
 
-    <script type="text/javascript" src="{% static 'csnap/jquery-1.11.0.js'%}"></script>
-
-    <script type="text/javascript" src="{% static 'csnap/lib/jszip.js'%}"></script>
-    <script type="text/javascript" src="{% static 'csnap/lib/jszip-load.js'%}"></script>
-    <script type="text/javascript" src="{% static 'csnap/lib/jszip-deflate.js'%}"></script>
-    <script type="text/javascript" src="{% static 'csnap/lib/jszip-inflate.js'%}"></script>
-    <script type="text/javascript" src="{% static 'csnap/lib/jszip-utils.js'%}"></script>
-    <script type="text/javascript" src="{% static 'csnap/module-loader.js'%}"></script>
-
-    <script type="text/javascript" src="{% static 'csnap/morphic.js'%}"></script>
-    <script type="text/javascript" src="{% static 'csnap/widgets.js'%}"></script>
-    <script type="text/javascript" src="{% static 'csnap/blocks.js'%}"></script>
-    <script type="text/javascript" src="{% static 'csnap/threads.js'%}"></script>
-    <script type="text/javascript" src="{% static 'csnap/objects.js'%}"></script>
-    <script type="text/javascript" src="{% static 'csnap/gui.js'%}"></script>
-    <script type="text/javascript" src="{% static 'csnap/paint.js'%}"></script>
-    <script type="text/javascript" src="{% static 'csnap/lists.js'%}"></script>
-    <script type="text/javascript" src="{% static 'csnap/byob.js'%}"></script>
-    <script type="text/javascript" src="{% static 'csnap/xml.js'%}"></script>
-    <script type="text/javascript" src="{% static 'csnap/store.js'%}"></script>
-    <script type="text/javascript" src="{% static 'csnap/locale.js'%}"></script>
-    <script type="text/javascript" src="{% static 'csnap/cloud.js'%}"></script>
-    <script type="text/javascript" src="{% static 'csnap/sha512.js'%}"></script>
-  	<script type="text/javascript" src="{% static 'csnap/threejs/three.js'%}"></script>
-  	<script type="text/javascript" src="{% static 'csnap/threejs/helvetiker_regular.typeface.js'%}"></script>
-    <script type="text/javascript" src="{% static 'csnap/Charles_Changes_To_IDE_Morph.js'%}"></script>
-    <script type="text/javascript" src="{% static 'csnap/FileSaver.min.js'%}"></script>
 
     <script type="text/javascript">
-        var world;
+    var world,
+            ide;
+
         window.onload = function () {
+            disableRetinaSupport();
             world = new WorldMorph(document.getElementById('world'));
-            new IDE_Morph().openIn(world);
-            setInterval(loop, 1);
+            world.worldCanvas.focus();
+            ide = new IDE_Morph();
+            ide.openIn(world);
+            loop();
         };
+
         function loop() {
+            requestAnimationFrame(loop);
             world.doOneCycle();
-        };
-    </script>
-
-    // CSRF token just in case
-    {% csrf_token %}
-    <script>
-$(function() {
-    // Helper function to get CSRF tokens, if present
-    function getCookie(name) {
-        var cookieValue = null;
-        if (document.cookie && document.cookie != '') {
-            var cookies = document.cookie.split(';');
-            for (var i = 0; i < cookies.length; i++) {
-                var cookie = jQuery.trim(cookies[i]);
-                // Does this cookie string begin with the name we want?
-                if (cookie.substring(0, name.length + 1) == (name + '=')) {
-                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                    break;
-                }
-            }
         }
-        return cookieValue;
-    }
-    var csrftoken = getCookie('csrftoken');
-
-    function csrfSafeMethod(method) {
-        // these HTTP methods do not require CSRF protection
-        return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
-    }
-    function sameOrigin(url) {
-        // test that a given url is a same-origin URL
-        // url could be relative or scheme relative or absolute
-        var host = document.location.host; // host + port
-        var protocol = document.location.protocol;
-        var sr_origin = '//' + host;
-        var origin = protocol + sr_origin;
-        // Allow absolute or scheme relative URLs to same origin
-        return (url == origin || url.slice(0, origin.length + 1) == origin + '/') ||
-            (url == sr_origin || url.slice(0, sr_origin.length + 1) == sr_origin + '/') ||
-            // or any other URL that isn't scheme relative or absolute i.e relative.
-            !(/^(\/\/|http:|https:).*/.test(url));
-    }
-
-    $.ajaxSetup({
-        beforeSend: function(xhr, settings) {
-            if (!csrfSafeMethod(settings.type) && sameOrigin(settings.url)) {
-                // Send the token to same-origin, relative URLs only.
-                // Send the token only if the method warrants CSRF protection
-                // Using the CSRFToken value acquired earlier
-                xhr.setRequestHeader("X-CSRFToken", csrftoken);
-            }
-        }
-    });
-});
     </script>
-  </body>
+        <canvas id="world" tabindex="1" style="position: absolute;" />
+    </body>
+</body>
 </html>
