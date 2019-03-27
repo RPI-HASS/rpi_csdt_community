@@ -12,6 +12,10 @@
 	path = static/applications/CScratch-Modules
 	url = https://github.com/CSDTs/CScratch-Modules
 	branch = master
+[submodule "static/applications/bblocks"]
+    path = static/applications/bblocks
+    url = https://github.com/CSDTs/CBeetleBlocks
+    branch = master
 [submodule "static/fracexpl"]
 	path = static/fracexpl
 	url = https://github.com/CSDTs/fracexpl
