@@ -43,7 +43,7 @@ pip install --upgrade -r /vagrant/requirements.txt
 cd /vagrant/
 git submodule init
 git submodule update
-git submodule add
+git submodule add https://github.com/CSDTs/CBeetle ../static/bblocks
 
 
 # Run migrations to init db
