@@ -44,7 +44,7 @@
             {% if user.is_authenticated %}'user_detail_url': '{% url 'extendeduser-detail' pk=user.id %}',
             {% endif %}
           },
-          'asset_path': '{% static "bblocks/" %}',
+          'asset_path': '{% static "bblocks/beetleblocks/assets/" %}',
           'lib_path': '/media/modules/libraries/',
           {% if present %}'presentation': true,
           {% endif %}
