@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="b6c7ff2b-d29a-4559-a102-48568ac7520a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rpi_csdt_community/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/rpi_csdt_community/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_share/templates/project_share/application_bb.html" beforeDir="false" afterPath="$PROJECT_DIR$/project_share/templates/project_share/application_bb.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/applications/CSnap-Modules" beforeDir="false" afterPath="$PROJECT_DIR$/static/applications/CSnap-Modules" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/applications/CSnap-Modules/Bead Loom/blocks/changeCostumeColor.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/applications/CSnap-Modules/Bead Loom/blocks/changeCostumeColor.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/applications/CSnap-Modules/Bead Loom/blocks/changeCostumeShade.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/applications/CSnap-Modules/Bead Loom/blocks/changeCostumeShade.js" afterDir="false" />
@@ -18,20 +18,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/project_share/templates/project_share/application_bb.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1751">
-              <caret line="103" selection-start-line="103" selection-end-line="103" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/project_share/templates/project_share/application_csnap.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="175">
-              <caret line="31" column="38" selection-start-line="31" selection-start-column="38" selection-end-line="31" selection-end-column="38" />
+            <state relative-caret-position="476">
+              <caret line="46" column="42" selection-start-line="46" selection-start-column="42" selection-end-line="46" selection-end-column="42" />
               <folding>
                 <element signature="n#style#0;n#canvas#0;n#body#0;n#html#0;n#!!top" expanded="true" />
               </folding>
@@ -39,14 +30,23 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/project_share/templates/project_share/application_csnap.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="799">
+              <caret line="47" column="21" lean-forward="true" selection-start-line="47" selection-start-column="21" selection-end-line="47" selection-end-column="21" />
+              <folding>
+                <element signature="n#style#0;n#canvas#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/rpi_csdt_community/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="595">
-              <caret line="35" column="20" lean-forward="true" selection-start-line="35" selection-start-column="20" selection-end-line="35" selection-end-column="20" />
-              <folding>
-                <element signature="e#54#63#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="51">
+              <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
             </state>
           </provider>
         </entry>
@@ -83,6 +83,7 @@
       <find>../stat</find>
       <find>static</find>
       <find>bblocks</find>
+      <find>csnap</find>
     </findStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$</dir>
@@ -110,6 +111,7 @@
         <option value="$PROJECT_DIR$/bin/setup.sh" />
         <option value="$PROJECT_DIR$/static/bblocks/beetleblocks/beetlecloud.js" />
         <option value="$PROJECT_DIR$/rpi_csdt_community/settings.py" />
+        <option value="$PROJECT_DIR$/project_share/templates/project_share/application_bb.html" />
       </list>
     </option>
   </component>
@@ -198,6 +200,14 @@
               <item name="bblocks" type="462c0819:PsiDirectoryNode" />
               <item name="beetleblocks" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="rpi_csdt_community" type="b2602c69:ProjectViewProjectNode" />
+              <item name="rpi_csdt_community" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+              <item name="bblocks" type="462c0819:PsiDirectoryNode" />
+              <item name="beetleblocks" type="462c0819:PsiDirectoryNode" />
+              <item name="assets" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -252,18 +262,17 @@
       <workItem from="1553717007667" duration="3017000" />
       <workItem from="1553721951391" duration="470000" />
       <workItem from="1553781547015" duration="150000" />
-      <workItem from="1553808882726" duration="1458000" />
+      <workItem from="1553808882726" duration="3206000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="29867000" />
+    <option name="totallyTimeSpent" value="31615000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="0" width="1560" height="1407" extended-state="0" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17333333" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17333333" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Database Changes" order="0" />
@@ -275,7 +284,7 @@
       <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="7" />
       <window_info anchor="bottom" id="Version Control" order="8" />
-      <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.4956822" visible="true" weight="0.3767661" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="9" sideWeight="0.4956822" visible="true" weight="0.3767661" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50431776" side_tool="true" weight="0.2857143" />
       <window_info anchor="bottom" id="Python Console" order="11" weight="0.32828283" />
       <window_info anchor="bottom" id="Docker" order="12" show_stripe_button="false" />
@@ -559,13 +568,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/project_share/templates/project_share/application_bb.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1751">
-          <caret line="103" selection-start-line="103" selection-end-line="103" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/project_share/templates/project_share/project_unpublish.html">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -581,16 +583,6 @@
     <entry file="file://$PROJECT_DIR$/project_share/templates/project_share/user_update.html">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/project_share/templates/project_share/application_csnap.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="175">
-          <caret line="31" column="38" selection-start-line="31" selection-start-column="38" selection-end-line="31" selection-end-column="38" />
-          <folding>
-            <element signature="n#style#0;n#canvas#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/bin/setup.sh">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="799">
@@ -600,10 +592,27 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/rpi_csdt_community/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="595">
-          <caret line="35" column="20" lean-forward="true" selection-start-line="35" selection-start-column="20" selection-end-line="35" selection-end-column="20" />
+        <state relative-caret-position="51">
+          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project_share/templates/project_share/application_csnap.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="799">
+          <caret line="47" column="21" lean-forward="true" selection-start-line="47" selection-start-column="21" selection-end-line="47" selection-end-column="21" />
           <folding>
-            <element signature="e#54#63#0" expanded="true" />
+            <element signature="n#style#0;n#canvas#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project_share/templates/project_share/application_bb.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="46" column="42" selection-start-line="46" selection-start-column="42" selection-end-line="46" selection-end-column="42" />
+          <folding>
+            <element signature="n#style#0;n#canvas#0;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
