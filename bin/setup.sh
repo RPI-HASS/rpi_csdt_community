@@ -29,16 +29,24 @@ sudo apt-get install -y nodejs build-essential
 
 sudo npm install -g less
 
+
+sudo apt-get install -y python-setuptools
+
+sudo easy_install pip
+
+
 # Install libraries for the community site
 sudo apt-get install -y  libpq-dev libcurl4-openssl-dev
-pip3 install --upgrade pip3
-pip3 install --upgrade -r /vagrant/requirements.txt
+pip install --upgrade -r /vagrant/requirements.txt
 
 # Install the git submodules
 cd /vagrant/
 git submodule init
 git submodule update
+git submodule add https://github.com/CSDTs/CBeetle ../static/bblocks
 
+# Collecting static
+python manage.py collectstatic
 
 # Run migrations to init db
 python manage.py migrate
