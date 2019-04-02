@@ -2,22 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b6c7ff2b-d29a-4559-a102-48568ac7520a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project_share/templates/project_share/application_list_react.html" beforeDir="false" afterPath="$PROJECT_DIR$/project_share/templates/project_share/application_list_react.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rpi_csdt_community/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/rpi_csdt_community/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rpi_csdt_community/templates/rpi_csdt_community/tutorial.html" beforeDir="false" afterPath="$PROJECT_DIR$/rpi_csdt_community/templates/rpi_csdt_community/starting.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rpi_csdt_community/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/rpi_csdt_community/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rpi_csdt_community/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/rpi_csdt_community/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/applications/CSnap-Modules" beforeDir="false" afterPath="$PROJECT_DIR$/static/applications/CSnap-Modules" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/applications/CSnap-Modules/Bead Loom/blocks.json" beforeDir="false" afterPath="$PROJECT_DIR$/static/applications/CSnap-Modules/Bead Loom/blocks.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/applications/CSnap-Modules/Bead Loom/blocks/changeCostumeColor.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/applications/CSnap-Modules/Bead Loom/blocks/changeCostumeColor.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/applications/CSnap-Modules/Bead Loom/blocks/changeCostumeShade.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/applications/CSnap-Modules/Bead Loom/blocks/changeCostumeShade.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/applications/CSnap-Modules/Bead Loom/blocks/getCoordinateScale.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/applications/CSnap-Modules/Bead Loom/blocks/getCoordinateScale.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/applications/CSnap-Modules/Bead Loom/blocks/setCoordinateScale.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/applications/CSnap-Modules/Bead Loom/blocks/setCoordinateScale.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/applications/CSnap-Modules/Bead Loom/blocks/setCostumeShade.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/applications/CSnap-Modules/Bead Loom/blocks/setCostumeShade.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/applications/CSnap-Modules/Bead Loom/blocks/translate_percent.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/applications/CSnap-Modules/Bead Loom/blocks/translate_percent.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/applications/CSnap-Modules/Bead Loom/code.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/applications/CSnap-Modules/Bead Loom/code.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/applications/CSnap-Modules/Bead Loom/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/static/applications/CSnap-Modules/Bead Loom/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/setup.sh" beforeDir="false" afterPath="$PROJECT_DIR$/bin/setup.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/fracexpl" beforeDir="false" afterPath="$PROJECT_DIR$/static/fracexpl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/fracexpl/src/example.html" beforeDir="false" afterPath="$PROJECT_DIR$/static/fracexpl/src/example.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -28,57 +15,65 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/project_share/templates/project_share/application_list_react.html">
+        <entry file="file://$PROJECT_DIR$/project_share/templates/project_share/application_block.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="730">
-              <caret line="81" lean-forward="true" selection-start-line="81" selection-end-line="81" />
+            <state relative-caret-position="315">
+              <caret line="21" lean-forward="true" selection-start-line="21" selection-end-line="21" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/rpi_csdt_community/urls.py">
+        <entry file="file://$PROJECT_DIR$/project_share/forms.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="478">
-              <caret line="54" column="13" selection-start-line="54" selection-start-column="13" selection-end-line="54" selection-end-column="13" />
-              <folding>
-                <element signature="e#64#84#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="-682">
+              <caret line="5" column="57" lean-forward="true" selection-start-line="5" selection-start-column="57" selection-end-line="5" selection-end-column="57" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/rpi_csdt_community/views.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="658">
-              <caret line="64" column="22" selection-start-line="64" selection-start-column="22" selection-end-line="64" selection-end-column="22" />
-              <folding>
-                <element signature="e#63#119#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/rpi_csdt_community/templates/rpi_csdt_community/starting.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="570">
-              <caret line="38" column="10" selection-start-line="38" selection-start-column="10" selection-end-line="38" selection-end-column="10" />
-              <folding>
-                <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-              </folding>
-            </state>
-          </provider>
+        <entry file="file://$PROJECT_DIR$/templates/account/signup.html">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/rpi_csdt_community/settings.py">
+        <entry file="file://$PROJECT_DIR$/bin/setup.sh">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="19" selection-start-line="19" selection-end-line="19" />
+            <state relative-caret-position="377">
+              <caret line="30" selection-start-line="30" selection-end-line="30" />
             </state>
           </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/bin/run_collectstatic">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/bin/post_compile">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/bin/install_yuglify">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/bin/install_nodejs">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/bin/install_less">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/bin/run_migrate">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
     </leaf>
@@ -113,6 +108,7 @@
         <option value="$PROJECT_DIR$/rpi_csdt_community/views.py" />
         <option value="$PROJECT_DIR$/rpi_csdt_community/urls.py" />
         <option value="$PROJECT_DIR$/project_share/templates/project_share/application_list_react.html" />
+        <option value="$PROJECT_DIR$/bin/setup.sh" />
       </list>
     </option>
   </component>
@@ -128,7 +124,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -139,12 +134,17 @@
             <path>
               <item name="rpi_csdt_community" type="b2602c69:ProjectViewProjectNode" />
               <item name="rpi_csdt_community" type="462c0819:PsiDirectoryNode" />
-              <item name="project_share" type="462c0819:PsiDirectoryNode" />
+              <item name="bin" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="rpi_csdt_community" type="b2602c69:ProjectViewProjectNode" />
               <item name="rpi_csdt_community" type="462c0819:PsiDirectoryNode" />
               <item name="project_share" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="rpi_csdt_community" type="b2602c69:ProjectViewProjectNode" />
+              <item name="rpi_csdt_community" type="462c0819:PsiDirectoryNode" />
+              <item name="project_share" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -153,31 +153,6 @@
               <item name="project_share" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
               <item name="project_share" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="rpi_csdt_community" type="b2602c69:ProjectViewProjectNode" />
-              <item name="rpi_csdt_community" type="462c0819:PsiDirectoryNode" />
-              <item name="rpi_csdt_community" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="rpi_csdt_community" type="b2602c69:ProjectViewProjectNode" />
-              <item name="rpi_csdt_community" type="462c0819:PsiDirectoryNode" />
-              <item name="rpi_csdt_community" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="rpi_csdt_community" type="b2602c69:ProjectViewProjectNode" />
-              <item name="rpi_csdt_community" type="462c0819:PsiDirectoryNode" />
-              <item name="rpi_csdt_community" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="menu" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="rpi_csdt_community" type="b2602c69:ProjectViewProjectNode" />
-              <item name="rpi_csdt_community" type="462c0819:PsiDirectoryNode" />
-              <item name="rpi_csdt_community" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="rpi_csdt_community" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="rpi_csdt_community" type="b2602c69:ProjectViewProjectNode" />
@@ -193,13 +168,25 @@
             <path>
               <item name="rpi_csdt_community" type="b2602c69:ProjectViewProjectNode" />
               <item name="rpi_csdt_community" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
-              <item name="img" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="rpi_csdt_community" type="b2602c69:ProjectViewProjectNode" />
+              <item name="rpi_csdt_community" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="account" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="rpi_csdt_community" type="b2602c69:ProjectViewProjectNode" />
+              <item name="rpi_csdt_community" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="registration" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -246,12 +233,12 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="8663000" />
+    <option name="totallyTimeSpent" value="9008000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="42" y="23" width="1518" height="959" extended-state="0" />
+    <frame x="1958" y="38" width="1478" height="1080" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1910569" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.29818437" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Database Changes" order="0" />
@@ -263,7 +250,7 @@
       <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="7" />
       <window_info anchor="bottom" id="Version Control" order="8" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="9" sideWeight="0.4989518" visible="true" weight="0.28604382" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="9" sideWeight="0.49511173" visible="true" weight="0.23753977" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5010482" side_tool="true" weight="0.3290398" />
       <window_info anchor="bottom" id="Python Console" order="11" weight="0.3290398" />
       <window_info anchor="bottom" id="Docker" order="12" show_stripe_button="false" />

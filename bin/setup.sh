@@ -29,7 +29,6 @@ sudo apt-get install -y nodejs build-essential
 
 sudo npm install -g less
 
-
 # Install libraries for the community site
 sudo apt-get install -y  libpq-dev libcurl4-openssl-dev
 pip3 install --upgrade pip3
