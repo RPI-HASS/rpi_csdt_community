@@ -31,7 +31,7 @@
                 <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
                 {% endif %}
                 {% recaptcha_init 'en' %}
-                <button type="submit" class="btn btn-primary">{% trans "Sign Up" %} &raquo;</button>
+                {% recaptcha_invisible_button submit_label='Submit' %}
             </form>
         </div>
         <div class="column-right">
