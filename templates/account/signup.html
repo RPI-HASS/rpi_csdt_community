@@ -11,6 +11,7 @@
     <div class="two-column-8-4">
 
         <div class="column-left">
+
             <form class="login-form" id="signup_form" method="post" action="{% url 'account_signup' %}">
                 {% for field in form.visible_fields %}
                     <div class="text-input">
@@ -26,13 +27,17 @@
                         {% endif %}
                     </div>
                 {% endfor %}
+
                 {% csrf_token %}
+
                 {% if redirect_field_value %}
                 <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
                 {% endif %}
+
                 {% recaptcha_init 'en' %}
-                <button type="submit" class="btn btn-primary">{% trans "Sign Up" %} &raquo;</button>
+                {% recaptcha_invisible_button submit_label='Submit' form_id='signup_form' %}
             </form>
+
         </div>
         <div class="column-right">
             <h3>Or using a social network...</h3>
