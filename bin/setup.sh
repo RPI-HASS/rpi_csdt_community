@@ -42,8 +42,6 @@ pip install --upgrade -r /vagrant/requirements.txt
 # Install the git submodules
 cd /vagrant/
 git submodule init
-git submodule update
-# git submodule add https://github.com/CSDTs/CBeetle ../static/bblocks
 
 # Collecting static
 python manage.py collectstatic

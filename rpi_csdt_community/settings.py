@@ -1,6 +1,6 @@
 """Django settings for rpi_csdt_community project."""
 import os
-import twitter_bootstrap
+# import twitter_bootstrap
 import warnings
 
 PROJECT_ROOT = os.path.dirname(os.path.dirname(__file__))
@@ -187,7 +187,7 @@ INSTALLED_APPS = (
     'django_extensions',
     'project_share',
     'rpi_csdt_community',
-    'twitter_bootstrap',
+    # 'twitter_bootstrap',
     'jquery',
 
     'easy_thumbnails',
@@ -304,7 +304,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 MY_LESS_APP = os.path.join(BASE_DIR, 'static', 'less')
 
 # For apps outside of your project, it's simpler to import them to find their root folders
-BOOTSTRAP_LESS = os.path.join(os.path.dirname(twitter_bootstrap.__file__), 'static', 'twitter_bootstrap', 'less')
+BOOTSTRAP_LESS = os.path.join('static', 'less')
 
 COMPRESS_ENABLED = False
 COMPRESS_LESSC_COMMAND = 'lessc --include-path={}'.format(os.pathsep.join([BOOTSTRAP_LESS, MY_LESS_APP]))
