@@ -37,14 +37,15 @@ sudo easy_install pip
 
 # Install libraries for the community site
 sudo apt-get install -y  libpq-dev libcurl4-openssl-dev
-pip install --upgrade -r /vagrant/requirements.txt
+pip install -r /vagrant/requirements.txt
+
 
 # Install the git submodules
 cd /vagrant/
 git submodule init
 
 # Collecting static
-python manage.py collectstatic
+#python manage.py collectstatic
 
 # Run migrations to init db
 python manage.py migrate

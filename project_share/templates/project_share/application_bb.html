@@ -1,127 +1,127 @@
-{% load static %}
+<!--{% load static %}-->
 
-<html>
-  <head>
-    {% if project %}
-      <title>{{ project.name }}</title>
-    {% else %}
-      <title>{{ application.name }}</title>
-    {% endif %}
-	{% if GOOGLE_ANALYTICS_PROPERTY_ID %}
-      <script type="text/javascript" src="{% static 'js/ga.js'%}"></script>
-    {% endif %}
+<!--<html>-->
+<!--  <head>-->
+<!--    {% if project %}-->
+<!--      <title>{{ project.name }}</title>-->
+<!--    {% else %}-->
+<!--      <title>{{ application.name }}</title>-->
+<!--    {% endif %}-->
+<!--	{% if GOOGLE_ANALYTICS_PROPERTY_ID %}-->
+<!--      <script type="text/javascript" src="{% static 'js/ga.js'%}"></script>-->
+<!--    {% endif %}-->
 
-  </head>
-  <body>
-    <script type="text/javascript">
-        var config = {
-          'modules': {
-		    {% if applicationdemo %}'module': '{{ applicationdemo.application.name }}',
-            'stage': '{{ applicationdemo.application.application_file.url }}',
-			{% else %}'module': '{{ application.name }}',
-            'stage': '{% static "applications/CSnap-Modules/" %}',
-			{% endif %}
-          },
-          {% if user.is_authenticated %}
-          'user': '{{ user }}',
-          'user_id': {{ user.id }},
-          {% endif %}
-          'urls': {
-            'user_api_detail_url': '{% url 'user-api-detail'%}',
-			'applications_root': '{% static "applications/CSnap-Modules/" %}',
-            {% if applicationdemo %}'demos_url': '{% url 'api-demos-list' %}?format=json&application={{ applicationdemo.application }}',
-            {% else %}'demos_url': '{% url 'api-demos-list' %}?format=json&application={{ application }}',
-            {% endif %}'demo_detail_url': '{% url 'demo-list' %}',
-            {% if applicationdemo %}'goals_url': '{% url 'api-goals-list' %}?format=json&application={{ applicationdemo.application }}',
-            {% else %}'goals_url': '{% url 'api-goals-list' %}?format=json&application={{ application }}',
-            {% endif %}'create_project_url': '{% url 'api-projects-list' %}',
-            'list_project_url': '{% url 'api-projects-list' %}',
-            'create_file_url': '{% url 'file-create' %}',
-            'login_url': '{% url 'account_login' %}',
-            'project_url_root': '{% url 'project-list' %}',
-            'module_api': '{% url 'api-modules-list' %}',
-			'signup_url': '{% url 'account_signup' %}',
-            {% if user.is_authenticated %}'user_detail_url': '{% url 'extendeduser-detail' pk=user.id %}',
-            {% endif %}
-          },
-          'asset_path': '{% static "csnap/" %}',
-          'lib_path': '/media/modules/libraries/',
-          {% if present %}'presentation': true,
-          {% endif %}
-          {% if project %}'application_id': {{ application.id }},
-          'project': {
-            'id': {{ project.id }},
-            'name': '{{ project.name }}',
-            'application': {{ project.application.id }},
-            'approved': {{ project.approved|lower }},
-            'project_url': '{{ project.project.file_path.url }}'
-          }
-          {% elif applicationdemo %}'application_id': {{ applicationdemo.application.id }},
-          'demo': {
-            'id': {{ applicationdemo.id }},
-            'name': '{{ applicationdemo.name }}',
-            'application': {{ applicationdemo.application.id }},
-            'project_url': '{{ applicationdemo.zipfile.url }}'
-          }
-          {% elif application %}'application_id': '{{ application.id }}',
-          {% endif %}
-        };
-    </script>
-    <script type="text/javascript" src="{% static 'bblocks/beetleblocks/three.js'%}"></script>
-    <script type="text/javascript" src="{% static 'bblocks/beetleblocks/OrbitControls.js'%}"></script>
-    <script type="text/javascript" src="{% static 'bblocks/beetleblocks/OBJLoader.js'%}"></script>
-    <script type="text/javascript" src="{% static 'bblocks/beetleblocks/OBJExporter.js'%}"></script>
-    <script type="text/javascript" src="{% static 'bblocks/beetleblocks/STLExporter.js'%}"></script>
-    <script type="text/javascript" src="{% static 'bblocks/beetleblocks/STLBinaryExporter.js'%}"></script>
-    <script type="text/javascript" src="{% static 'bblocks/beetleblocks/ThreeCSG.js'%}"></script>
-    <script type="text/javascript" src="{% static 'bblocks/beetleblocks/TextGeometry.js'%}"></script>
-    <script type="text/javascript" src="{% static 'bblocks/morphic.js'%}"></script>
-    <script type="text/javascript" src="{% static 'bblocks/beetleblocks/morphic.js'%}"></script>
-    <script type="text/javascript" src="{% static 'bblocks/widgets.js'%}"></script>
-    <script type="text/javascript" src="{% static 'bblocks/beetleblocks/widgets.js'%}"></script>
-    <script type="text/javascript" src="{% static 'bblocks/blocks.js'%}"></script>
-    <script type="text/javascript" src="{% static 'bblocks/threads.js'%}"></script>
-    <script type="text/javascript" src="{% static 'bblocks/beetleblocks/threads.js'%}"></script>
-    <script type="text/javascript" src="{% static 'bblocks/objects.js'%}"></script>
-    <script type="text/javascript" src="{% static 'bblocks/beetleblocks/objects.js'%}"></script>
-    <script type="text/javascript" src="{% static 'bblocks/cloud.js'%}"></script>
-    <script type="text/javascript" src="{% static 'bblocks/beetleblocks/beetlecloud.js'%}"></script>
-    <script type="text/javascript" src="{% static 'bblocks/gui.js'%}"></script>
-    <script type="text/javascript" src="{% static 'bblocks/beetleblocks/gui.js'%}"></script>
-    <script type="text/javascript" src="{% static 'bblocks/beetleblocks/tutorial.js'%}"></script>
-    <script type="text/javascript" src="{% static 'bblocks/lists.js'%}"></script>
-    <script type="text/javascript" src="{% static 'bblocks/byob.js'%}"></script>
-    <script type="text/javascript" src="{% static 'bblocks/beetleblocks/byob.js'%}"></script>
-    <script type="text/javascript" src="{% static 'bblocks/tables.js'%}"></script>
-    <script type="text/javascript" src="{% static 'bblocks/symbols.js'%}"></script>
-    <script type="text/javascript" src="{% static 'bblocks/xml.js'%}"></script>
-    <script type="text/javascript" src="{% static 'bblocks/beetleblocks/blocks.js'%}"></script>
-    <script type="text/javascript" src="{% static 'bblocks/store.js'%}"></script>
-    <script type="text/javascript" src="{% static 'bblocks/beetleblocks/store.js'%}"></script>
-    <script type="text/javascript" src="{% static 'bblocks/locale.js'%}"></script>
-    <script type="text/javascript" src="{% static 'bblocks/sha512.js'%}"></script>
-    <script type="text/javascript" src="{% static 'bblocks/FileSaver.min.js'%}"></script>
+<!--  </head>-->
+<!--  <body>-->
+<!--    <script type="text/javascript">-->
+<!--        var config = {-->
+<!--          'modules': {-->
+<!--		    {% if applicationdemo %}'module': '{{ applicationdemo.application.name }}',-->
+<!--            'stage': '{{ applicationdemo.application.application_file.url }}',-->
+<!--			{% else %}'module': '{{ application.name }}',-->
+<!--            'stage': '{% static "applications/CSnap-Modules/" %}',-->
+<!--			{% endif %}-->
+<!--          },-->
+<!--          {% if user.is_authenticated %}-->
+<!--          'user': '{{ user }}',-->
+<!--          'user_id': {{ user.id }},-->
+<!--          {% endif %}-->
+<!--          'urls': {-->
+<!--            'user_api_detail_url': '{% url 'user-api-detail'%}',-->
+<!--			'applications_root': '{% static "applications/CSnap-Modules/" %}',-->
+<!--            {% if applicationdemo %}'demos_url': '{% url 'api-demos-list' %}?format=json&application={{ applicationdemo.application }}',-->
+<!--            {% else %}'demos_url': '{% url 'api-demos-list' %}?format=json&application={{ application }}',-->
+<!--            {% endif %}'demo_detail_url': '{% url 'demo-list' %}',-->
+<!--            {% if applicationdemo %}'goals_url': '{% url 'api-goals-list' %}?format=json&application={{ applicationdemo.application }}',-->
+<!--            {% else %}'goals_url': '{% url 'api-goals-list' %}?format=json&application={{ application }}',-->
+<!--            {% endif %}'create_project_url': '{% url 'api-projects-list' %}',-->
+<!--            'list_project_url': '{% url 'api-projects-list' %}',-->
+<!--            'create_file_url': '{% url 'file-create' %}',-->
+<!--            'login_url': '{% url 'account_login' %}',-->
+<!--            'project_url_root': '{% url 'project-list' %}',-->
+<!--            'module_api': '{% url 'api-modules-list' %}',-->
+<!--			'signup_url': '{% url 'account_signup' %}',-->
+<!--            {% if user.is_authenticated %}'user_detail_url': '{% url 'extendeduser-detail' pk=user.id %}',-->
+<!--            {% endif %}-->
+<!--          },-->
+<!--          'asset_path': '{% static "bblocks/" %}',-->
+<!--          'lib_path': '/media/modules/libraries/',-->
+<!--          {% if present %}'presentation': true,-->
+<!--          {% endif %}-->
+<!--          {% if project %}'application_id': {{ application.id }},-->
+<!--          'project': {-->
+<!--            'id': {{ project.id }},-->
+<!--            'name': '{{ project.name }}',-->
+<!--            'application': {{ project.application.id }},-->
+<!--            'approved': {{ project.approved|lower }},-->
+<!--            'project_url': '{{ project.project.file_path.url }}'-->
+<!--          }-->
+<!--          {% elif applicationdemo %}'application_id': {{ applicationdemo.application.id }},-->
+<!--          'demo': {-->
+<!--            'id': {{ applicationdemo.id }},-->
+<!--            'name': '{{ applicationdemo.name }}',-->
+<!--            'application': {{ applicationdemo.application.id }},-->
+<!--            'project_url': '{{ applicationdemo.zipfile.url }}'-->
+<!--          }-->
+<!--          {% elif application %}'application_id': '{{ application.id }}',-->
+<!--          {% endif %}-->
+<!--        };-->
+<!--    </script>-->
+<!--    <script type="text/javascript" src="{% static 'bblocks/beetleblocks/three.js'%}"></script>-->
+<!--    <script type="text/javascript" src="{% static 'bblocks/beetleblocks/OrbitControls.js'%}"></script>-->
+<!--    <script type="text/javascript" src="{% static 'bblocks/beetleblocks/OBJLoader.js'%}"></script>-->
+<!--    <script type="text/javascript" src="{% static 'bblocks/beetleblocks/OBJExporter.js'%}"></script>-->
+<!--    <script type="text/javascript" src="{% static 'bblocks/beetleblocks/STLExporter.js'%}"></script>-->
+<!--    <script type="text/javascript" src="{% static 'bblocks/beetleblocks/STLBinaryExporter.js'%}"></script>-->
+<!--    <script type="text/javascript" src="{% static 'bblocks/beetleblocks/ThreeCSG.js'%}"></script>-->
+<!--    <script type="text/javascript" src="{% static 'bblocks/beetleblocks/TextGeometry.js'%}"></script>-->
+<!--    <script type="text/javascript" src="{% static 'bblocks/morphic.js'%}"></script>-->
+<!--    <script type="text/javascript" src="{% static 'bblocks/beetleblocks/morphic.js'%}"></script>-->
+<!--    <script type="text/javascript" src="{% static 'bblocks/widgets.js'%}"></script>-->
+<!--    <script type="text/javascript" src="{% static 'bblocks/beetleblocks/widgets.js'%}"></script>-->
+<!--    <script type="text/javascript" src="{% static 'bblocks/blocks.js'%}"></script>-->
+<!--    <script type="text/javascript" src="{% static 'bblocks/threads.js'%}"></script>-->
+<!--    <script type="text/javascript" src="{% static 'bblocks/beetleblocks/threads.js'%}"></script>-->
+<!--    <script type="text/javascript" src="{% static 'bblocks/objects.js'%}"></script>-->
+<!--    <script type="text/javascript" src="{% static 'bblocks/beetleblocks/objects.js'%}"></script>-->
+<!--    <script type="text/javascript" src="{% static 'bblocks/cloud.js'%}"></script>-->
+<!--    <script type="text/javascript" src="{% static 'bblocks/beetleblocks/beetlecloud.js'%}"></script>-->
+<!--    <script type="text/javascript" src="{% static 'bblocks/gui.js'%}"></script>-->
+<!--    <script type="text/javascript" src="{% static 'bblocks/beetleblocks/gui.js'%}"></script>-->
+<!--    <script type="text/javascript" src="{% static 'bblocks/beetleblocks/tutorial.js'%}"></script>-->
+<!--    <script type="text/javascript" src="{% static 'bblocks/lists.js'%}"></script>-->
+<!--    <script type="text/javascript" src="{% static 'bblocks/byob.js'%}"></script>-->
+<!--    <script type="text/javascript" src="{% static 'bblocks/beetleblocks/byob.js'%}"></script>-->
+<!--    <script type="text/javascript" src="{% static 'bblocks/tables.js'%}"></script>-->
+<!--    <script type="text/javascript" src="{% static 'bblocks/symbols.js'%}"></script>-->
+<!--    <script type="text/javascript" src="{% static 'bblocks/xml.js'%}"></script>-->
+<!--    <script type="text/javascript" src="{% static 'bblocks/beetleblocks/blocks.js'%}"></script>-->
+<!--    <script type="text/javascript" src="{% static 'bblocks/store.js'%}"></script>-->
+<!--    <script type="text/javascript" src="{% static 'bblocks/beetleblocks/store.js'%}"></script>-->
+<!--    <script type="text/javascript" src="{% static 'bblocks/locale.js'%}"></script>-->
+<!--    <script type="text/javascript" src="{% static 'bblocks/sha512.js'%}"></script>-->
+<!--    <script type="text/javascript" src="{% static 'bblocks/FileSaver.min.js'%}"></script>-->
 
 
-    <script type="text/javascript">
-    var world,
-            ide;
+<!--    <script type="text/javascript">-->
+<!--    var world,-->
+<!--            ide;-->
 
-        window.onload = function () {
-            disableRetinaSupport();
-            world = new WorldMorph(document.getElementById('world'));
-            world.worldCanvas.focus();
-            ide = new IDE_Morph();
-            ide.openIn(world);
-            loop();
-        };
+<!--        window.onload = function () {-->
+<!--            disableRetinaSupport();-->
+<!--            world = new WorldMorph(document.getElementById('world'));-->
+<!--            world.worldCanvas.focus();-->
+<!--            ide = new IDE_Morph();-->
+<!--            ide.openIn(world);-->
+<!--            loop();-->
+<!--        };-->
 
-        function loop() {
-            requestAnimationFrame(loop);
-            world.doOneCycle();
-        }
-    </script>
-        <canvas id="world" tabindex="1" style="position: absolute;" />
-    </body>
-</body>
-</html>
+<!--        function loop() {-->
+<!--            requestAnimationFrame(loop);-->
+<!--            world.doOneCycle();-->
+<!--        }-->
+<!--    </script>-->
+<!--        <canvas id="world" tabindex="1" style="position: absolute;" />-->
+<!--    </body>-->
+<!--</body>-->
+<!--</html>-->
