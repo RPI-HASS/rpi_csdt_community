@@ -37,7 +37,8 @@ sudo easy_install pip
 
 # Install libraries for the community site
 sudo apt-get install -y  libpq-dev libcurl4-openssl-dev
-pip install --upgrade -r /vagrant/requirements.txt
+pip install --upgrade pip
+pip install -r /vagrant/requirements.txt
 
 # Install the git submodules
 cd /vagrant/
