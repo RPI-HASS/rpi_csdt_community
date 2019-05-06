@@ -30,7 +30,7 @@ install:
   - $(type -P npm) install -g less
   - $(type -P npm) install -g yuglify
   - pip install setuptools --upgrade
-  - pip install --upgrade -r requirements.txt
+  - pip install -r requirements.txt
   - pip install coveralls
   - pip install flake8
   - sudo apt-get install -y postgresql-9.6-postgis-2.3
