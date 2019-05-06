@@ -30,7 +30,7 @@ install:
   - $(type -P npm) install -g less
   - $(type -P npm) install -g yuglify
   - pip install setuptools --upgrade
-  - pip install -r requirements.txt
+  - pip install --upgrade -r requirements.txt
   - pip install coveralls
   - pip install flake8
   - sudo apt-get install -y postgresql-9.6-postgis-2.3
@@ -41,8 +41,8 @@ before_script:
 
 script:
   - flake8 --ignore=E722 . 
-  #- python manage.py migrate --fake
-  #- coverage run --source="." manage.py test
+  - python manage.py migrate
+  - coverage run --source="." manage.py test
 
 after_success:
   - pip freeze
