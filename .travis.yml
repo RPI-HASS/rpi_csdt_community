@@ -41,8 +41,8 @@ before_script:
 
 script:
   - flake8 --ignore=E722 . 
-  - python manage.py migrate --fake
-  - coverage run --source="." manage.py test
+  #- python manage.py migrate --fake
+  #- coverage run --source="." manage.py test
 
 after_success:
   - pip freeze
