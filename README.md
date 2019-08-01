@@ -23,4 +23,4 @@ There are several related projects that we develop and maintain, including:
  - [Slamscience](https://github.com/CSDTs/slamscience)
  - [Basketball Heat Map Maker](https://github.com/CSDTs/Open-Source-Basketball-Heat-Map-Maker)
 
-And of course, projects created in our programming environment and hosted on our site [https://community.csdt.rpi.edu/](https://community.csdt.rpi.edu/)
+And of course, projects created in our programming environment and hosted on our site [https://csdt.rpi.edu/](https://csdt.rpi.edu/)
