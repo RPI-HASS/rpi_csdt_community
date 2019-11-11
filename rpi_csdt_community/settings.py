@@ -5,7 +5,7 @@ import warnings
 
 PROJECT_ROOT = os.path.dirname(os.path.dirname(__file__))
 
-DEBUG = False
+DEBUG = True
 if not DEBUG:
     GOOGLE_ANALYTICS_PROPERTY_ID = 'UA-1314478-4'
     GOOGLE_ANALYTICS_DOMAIN = 'rpi.edu'
