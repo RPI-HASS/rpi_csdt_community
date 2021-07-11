@@ -60,7 +60,20 @@
     {% else %}
         <p>Please <a  href="{% url 'account_login' %}">log in</a> to leave a comment.</p>
     {% endif %}
-  </div>
+    </div>
     {% render_comment_list for object %}
 
+    {% if object.children.count > 0 %}
+    <div class="row">
+      <div class="span10">
+        <h2>Derived Projects</h2>
+
+        <div class="row">
+          {% for object in object.children.all %}
+          {% include "_project_thumbnail.html" %}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    {% endif %}
 {% endblock %}
